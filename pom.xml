@@ -131,6 +131,24 @@
             <version>2.0.43</version>
         </dependency>
 
+        <!-- https://mvnrepository.com/artifact/org.telegram/telegrambots -->
+<!--        <dependency>-->
+<!--            <groupId>org.telegram</groupId>-->
+<!--            <artifactId>telegrambots</artifactId>-->
+<!--            <version>6.8.0</version>-->
+<!--        </dependency>-->
+
+        <dependency>
+            <groupId>org.telegram</groupId>
+            <artifactId>telegrambots-springboot-longpolling-starter</artifactId>
+            <version>7.0.0</version>
+        </dependency>
+        <dependency>
+            <groupId>org.telegram</groupId>
+            <artifactId>telegrambots-client</artifactId>
+            <version>7.0.0</version>
+        </dependency>
+
     </dependencies>
 
 </project>

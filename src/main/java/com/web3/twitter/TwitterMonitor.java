@@ -2,6 +2,8 @@ package com.web3.twitter;
 
 import com.alibaba.fastjson2.JSON;
 import com.alibaba.fastjson2.JSONObject;
+import com.alibaba.fastjson2.JSONReader;
+import com.web3.twitter.monitor.CustomDateDeserializer;
 import com.web3.twitter.utils.LogUtils;
 import com.web3.twitter.twitterBeans.*;
 import org.springframework.http.*;
@@ -15,18 +17,21 @@ import java.util.List;
 public class TwitterMonitor {
 
     private final RestTemplate restTemplate;
+    private static final String DATE_FORMAT = "EEE MMM dd HH:mm:ss Z yyyy";
 
     public TwitterMonitor(RestTemplate restTemplate) {
         this.restTemplate = restTemplate;
     }
 
-    private void aa(){
-        String url = String.format("https://dev.mi.com/uiueapi/app/detailsPage?namespaceValue=0&appId=%s&mideveloper_ph=M6XZrnGAvuML88axdreDzQ==&userId=2895450891");
+    public void startMonitor(){
+        String url = String.format("https://twitter-x.p.rapidapi.com/lists/tweets?list_id=1649315100527046658&count=2");
         String cookies = "";
         // 创建请求头并添加 cookies
         HttpHeaders headers = new HttpHeaders();
         headers.setContentType(MediaType.APPLICATION_JSON);
-        headers.add(HttpHeaders.COOKIE, cookies);
+//        headers.add(HttpHeaders.COOKIE, cookies);
+        headers.add("x-rapidapi-host", "twitter-x.p.rapidapi.com");
+        headers.add("x-rapidapi-key", "c7d7d10b34msh8a76b09b95a1e87p1ff1dcjsn0d20ab44ecb6");
 
         // 创建请求实体
         HttpEntity<String> entity = new HttpEntity<>(headers);
@@ -44,6 +49,7 @@ public class TwitterMonitor {
             // 获取应用列表
             JSONObject data = jsonObject.getJSONObject("data");
             if(data.containsKey("list")){
+
                 //解析推特列表对象
                 TwitterList twitterList = JSON.parseObject(data.getString("list"), TwitterList.class);
                 if(twitterList!=null){
@@ -71,7 +77,7 @@ public class TwitterMonitor {
                                 }
                             }
                         }
-                    } catch (RuntimeException e){
+                    } catch (Exception e){
                         LogUtils.error("解析推特列表数据异常-请求地址: {}.", url, e);
                     }
                 }

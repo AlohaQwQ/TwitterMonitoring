@@ -2,6 +2,9 @@
   * Copyright 2024 bejson.com 
   */
 package com.web3.twitter.twitterBeans;
+
+import com.alibaba.fastjson2.annotation.JSONField;
+
 import java.util.Date;
 import java.util.List;
 
@@ -15,7 +18,10 @@ public class Legacy {
 
     private int bookmark_count;
     private boolean bookmarked;
+
+    @JSONField(format = "yy MM dd HH:mm:ss +ZZZZ yyyy")
     private Date created_at;
+
     private String conversation_id_str;
     private List<Integer> display_text_range;
     private Entities entities;
