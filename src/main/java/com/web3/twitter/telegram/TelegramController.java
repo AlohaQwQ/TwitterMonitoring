@@ -22,7 +22,7 @@ public class TelegramController {
 
     @GetMapping("/start")
     public String start() {
-        telegramBot.sendText();
+//        telegramBot.sendText();
         return "0";
     }
 
