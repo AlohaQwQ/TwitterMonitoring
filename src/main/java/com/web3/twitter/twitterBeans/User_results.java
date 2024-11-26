@@ -11,11 +11,11 @@ package com.web3.twitter.twitterBeans;
  */
 public class User_results {
 
-    private Result result;
-    public void setResult(Result result) {
+    private Core_Result result;
+    public void setResult(Core_Result result) {
          this.result = result;
      }
-     public Result getResult() {
+     public Core_Result getResult() {
          return result;
      }
 
