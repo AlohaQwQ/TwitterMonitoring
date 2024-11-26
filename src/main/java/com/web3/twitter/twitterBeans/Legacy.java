@@ -19,11 +19,13 @@ public class Legacy {
     private int bookmark_count;
     private boolean bookmarked;
 
-    @JSONField(format = "yy MM dd HH:mm:ss +ZZZZ yyyy")
-    private Date created_at;
+//    @JSONField(format = "yy MM dd HH:mm:ss +ZZZZ yyyy")
+    private String created_at;
 
     private String conversation_id_str;
     private List<Integer> display_text_range;
+
+    @JSONField(name = "entities")
     private Entities entities;
     private int favorite_count;
     private boolean favorited;
@@ -54,10 +56,10 @@ public class Legacy {
          return bookmarked;
      }
 
-    public void setCreated_at(Date created_at) {
+    public void setCreated_at(String created_at) {
          this.created_at = created_at;
      }
-     public Date getCreated_at() {
+     public String getCreated_at() {
          return created_at;
      }
 

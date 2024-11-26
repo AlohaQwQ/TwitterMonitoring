@@ -24,65 +24,85 @@ public class TwitterMonitor {
     }
 
     public void startMonitor(){
-        String url = String.format("https://twitter-x.p.rapidapi.com/lists/tweets?list_id=1649315100527046658&count=2");
-        String cookies = "";
-        // 创建请求头并添加 cookies
+        String url = "https://twitter-x.p.rapidapi.com/lists/tweets?list_id=1771221106613187071&count=2";
+        // 创建请求头
         HttpHeaders headers = new HttpHeaders();
         headers.setContentType(MediaType.APPLICATION_JSON);
-//        headers.add(HttpHeaders.COOKIE, cookies);
         headers.add("x-rapidapi-host", "twitter-x.p.rapidapi.com");
         headers.add("x-rapidapi-key", "c7d7d10b34msh8a76b09b95a1e87p1ff1dcjsn0d20ab44ecb6");
-
+        ResponseEntity<String> response = null;
         // 创建请求实体
         HttpEntity<String> entity = new HttpEntity<>(headers);
-
-        // 发送 GET 请求
-        ResponseEntity<String> response = restTemplate.exchange(url, HttpMethod.GET, entity, String.class);
+        try {
+            // 发送 GET 请求
+            response = restTemplate.exchange(url, HttpMethod.GET, entity, String.class);
+        } catch (Exception e){
+            LogUtils.error("请求聚合api异常-请求地址: {}.", url, e);
+        }
 
         // 处理响应数据
-        if (response.getStatusCode() == HttpStatus.OK) {
-            // 解析响应数据
-            JSONObject jsonObject = JSONObject.parseObject(response.getBody());
-            if(jsonObject==null){
-                LogUtils.error("监控数据返回异常 | url:", url);
-            }
-            // 获取应用列表
-            JSONObject data = jsonObject.getJSONObject("data");
-            if(data.containsKey("list")){
+        if (response != null && response.getStatusCode() == HttpStatus.OK) {
+            try {
+                // 解析响应数据
+                JSONObject jsonObject = JSONObject.parseObject(response.getBody());
+                if (jsonObject == null) {
+                    LogUtils.error("推特数据返回异常 | url:", url);
+                }
+                // 获取应用列表
+                JSONObject data = jsonObject.getJSONObject("data");
+                if (data.containsKey("list")) {
+                    //解析推特列表对象
+                    TwitterList twitterList = JSON.parseObject(data.getString("list"), TwitterList.class);
+                    if (twitterList != null) {
 
-                //解析推特列表对象
-                TwitterList twitterList = JSON.parseObject(data.getString("list"), TwitterList.class);
-                if(twitterList!=null){
-                    try {
-                        if(twitterList.getTweets_timeline().getTimeline().getInstructions()!=null &&
-                                !twitterList.getTweets_timeline().getTimeline().getInstructions().isEmpty()){
+                        if (twitterList.getTweets_timeline().getTimeline().getInstructions() != null &&
+                                !twitterList.getTweets_timeline().getTimeline().getInstructions().isEmpty()) {
                             List<Instructions> instructionsList = twitterList.getTweets_timeline().getTimeline().getInstructions();
                             for (Instructions instruction : instructionsList) {
                                 List<Entries> entriesList = instruction.getEntries();
-                                if(entriesList!=null && !entriesList.isEmpty()){
+                                if (entriesList != null && !entriesList.isEmpty()) {
                                     for (Entries entries : entriesList) {
-                                        Result result = entries.getContent().getItemContent().getTweet_results().getResult();
-                                        String restId = result.getRest_id();
-                                        LogUtils.info("解析推特列表-推特restId: {}.", restId);
-                                        User_results userResults = result.getCore().getUser_results();
-                                        LogUtils.info("解析推特列表-userResults: {}.", userResults);
-                                        LogUtils.info("解析推特列表-用户restId: {}.", userResults.getResult().getRest_id());
-                                        Quoted_status_result quoted_status_result = result.getQuoted_status_result();
-                                        Result quoted_status_result_result = quoted_status_result.getResult();
-                                        Legacy legacy = quoted_status_result_result.getLegacy();
-                                        Date createdDate = legacy.getCreated_at();
-                                        String fullText = legacy.getFull_text();
-                                        //解析用户推文
+                                        Content content = entries.getContent();
+                                        if (content != null) {
+                                            ItemContent itemContent = content.getItemContent();
+                                            if (itemContent != null) {
+                                                Tweet_results tweet_results = itemContent.getTweet_results();
+                                                if (tweet_results != null) {
+                                                    Result result = tweet_results.getResult();
+                                                    if (result != null) {
+                                                        String restId = result.getRest_id();
+                                                        LogUtils.info("解析推特列表-推特restId: {}.", restId);
+                                                        //解析用户相关
+                                                        User_results userResults = result.getCore().getUser_results();
+                                                        if (userResults != null) {
+                                                            LogUtils.info("解析推特列表-userResults: {}.", userResults);
+                                                            LogUtils.info("解析推特列表-用户restId: {}.", userResults.getResult().getRest_id());
+                                                            //拼接推特链接 https://x.com/VT_BNB/status/1861334062021185655
+                                                            String userName = userResults.getResult().getLegacy().getScreen_name();
+                                                            String tweetUrl = String.format("https://x.com/%s/status/%s", userName, restId);
+                                                            LogUtils.info("解析推特列表-推特链接: {}.", tweetUrl);
+                                                        }
+
+                                                        Legacy legacy = result.getLegacy();
+                                                        String createdDate = legacy.getCreated_at();
+                                                        LogUtils.info("解析推特列表-createdDate: {}.", createdDate);
+                                                        String fullText = legacy.getFull_text();
+                                                        LogUtils.info("解析推特列表-推文: {}.", fullText);
+                                                    }
+                                                }
+                                            }
+                                        }
+
                                     }
                                 }
                             }
                         }
-                    } catch (Exception e){
-                        LogUtils.error("解析推特列表数据异常-请求地址: {}.", url, e);
+
                     }
                 }
+            } catch (Exception e) {
+                LogUtils.error("解析推特列表数据异常-请求地址: {}.", url, e);
             }
         }
-
     }
 }
