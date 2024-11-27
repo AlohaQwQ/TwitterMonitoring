@@ -54,14 +54,14 @@ public class TelegramBot implements SpringLongPollingBot, LongPollingSingleThrea
 
     public void sendText(String text) {
         log.info("发送消息参数: {}.", text);
-        SendMessage method = new SendMessage("1002270508207", text);
+        SendMessage method = new SendMessage("-1002270508207", text);
         Message responseMessage = new Message();
         responseMessage.setChat(GROUP_CHAT);
         responseMessage.setFrom(TEST_USER);
         responseMessage.setText(text);
         Message parsedMessage = new Message();
         try {
-            parsedMessage = telegramClient.execute(method); // Sending our message object to user
+            telegramClient.execute(method); // Sending our message object to user
         } catch (TelegramApiException e) {
             log.error("发送消息异常: {}.", parsedMessage,e);
             e.printStackTrace();
