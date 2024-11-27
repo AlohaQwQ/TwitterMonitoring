@@ -19,8 +19,8 @@ public class TwitterController {
 
     @GetMapping("/start")
     public String start() {
-        twitterMonitor.startMonitor();
-        return "0";
+        String ms = twitterMonitor.startMonitor();
+        return ms;
     }
 
 

@@ -90,15 +90,15 @@ public class TwitterMonitor {
                                                             LogUtils.info("解析推特列表-推特链接: {}.", tweetUrl);
 
                                                             //存储用户信息
-//                                                            if(!redisCache.hasKey(userID)){
-//                                                                MonitorUser user = new MonitorUser();
-//                                                                user.setUserID(userID);
-//                                                                user.setUserName(userName);
-//                                                                user.setFansNumber("100");
-//                                                                user.setIsCertified("0");
-//                                                                String jsonUser = JSON.toJSONString(user);
-//                                                                redisCache.setCacheObject(userID, jsonUser);
-//                                                            }
+                                                            if(!redisCache.hasKey(userID)){
+                                                                MonitorUser user = new MonitorUser();
+                                                                user.setUserID(userID);
+                                                                user.setUserName(userName);
+                                                                user.setFansNumber("100");
+                                                                user.setIsCertified("0");
+                                                                String jsonUser = JSON.toJSONString(user);
+                                                                redisCache.setCacheObject(userID, jsonUser);
+                                                            }
 
                                                         }
 
