@@ -4,8 +4,11 @@ import com.alibaba.fastjson2.JSON;
 import com.alibaba.fastjson2.JSONObject;
 import com.alibaba.fastjson2.JSONReader;
 import com.web3.twitter.monitor.CustomDateDeserializer;
+import com.web3.twitter.monitorBeans.MonitorUser;
+import com.web3.twitter.redis.RedisCache;
 import com.web3.twitter.utils.LogUtils;
 import com.web3.twitter.twitterBeans.*;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.*;
 import org.springframework.stereotype.Component;
 import org.springframework.web.client.RestTemplate;
@@ -15,6 +18,9 @@ import java.util.List;
 
 @Component
 public class TwitterMonitor {
+
+    @Autowired
+    private RedisCache redisCache;
 
     private final RestTemplate restTemplate;
     private static final String DATE_FORMAT = "EEE MMM dd HH:mm:ss Z yyyy";
@@ -76,11 +82,24 @@ public class TwitterMonitor {
                                                         User_results userResults = result.getCore().getUser_results();
                                                         if (userResults != null) {
                                                             LogUtils.info("解析推特列表-userResults: {}.", userResults);
-                                                            LogUtils.info("解析推特列表-用户restId: {}.", userResults.getResult().getRest_id());
+                                                            String userID = userResults.getResult().getRest_id();
+                                                            LogUtils.info("解析推特列表-用户restId: {}.", userID);
                                                             //拼接推特链接 https://x.com/VT_BNB/status/1861334062021185655
                                                             String userName = userResults.getResult().getLegacy().getScreen_name();
                                                             String tweetUrl = String.format("https://x.com/%s/status/%s", userName, restId);
                                                             LogUtils.info("解析推特列表-推特链接: {}.", tweetUrl);
+
+                                                            //存储用户信息
+                                                            if(!redisCache.hasKey(userID)){
+                                                                MonitorUser user = new MonitorUser();
+                                                                user.setUserID(userID);
+                                                                user.setUserName(userName);
+                                                                user.setFansNumber("100");
+                                                                user.setIsCertified("0");
+                                                                String jsonUser = JSON.toJSONString(user);
+                                                                redisCache.setCacheObject(userID, jsonUser);
+                                                            }
+
                                                         }
 
                                                         Legacy legacy = result.getLegacy();

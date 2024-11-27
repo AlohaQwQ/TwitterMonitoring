@@ -2,9 +2,9 @@ package com.web3.twitter.monitorBeans;
 
 
 /**
- * 监控来源Bean
+ * 监控任务Bean
  */
-public class MonitorOrigin {
+public class MonitorTask {
 
     /**
      * 名称
@@ -12,9 +12,14 @@ public class MonitorOrigin {
     private String name;
 
     /**
-     * 监控列表id
+     * 监控列表地址
      */
-    private String listId;
+    private String listUrl;
+
+    /**
+     * 任务类型
+     */
+    private String taskType;
 
     /**
      * 创建时间
@@ -29,12 +34,20 @@ public class MonitorOrigin {
         this.name = name;
     }
 
-    public String getListId() {
-        return listId;
+    public String getListUrl() {
+        return listUrl;
     }
 
-    public void setListId(String listId) {
-        this.listId = listId;
+    public void setListUrl(String listUrl) {
+        this.listUrl = listUrl;
+    }
+
+    public String getTaskType() {
+        return taskType;
+    }
+
+    public void setTaskType(String taskType) {
+        this.taskType = taskType;
     }
 
     public String getCreateDate() {
@@ -47,9 +60,10 @@ public class MonitorOrigin {
 
     @Override
     public String toString() {
-        return "MonitorOrigin{" +
+        return "MonitorTask{" +
                 "name='" + name + '\'' +
-                ", listId='" + listId + '\'' +
+                ", listUrl='" + listUrl + '\'' +
+                ", taskType='" + taskType + '\'' +
                 ", createDate='" + createDate + '\'' +
                 '}';
     }
