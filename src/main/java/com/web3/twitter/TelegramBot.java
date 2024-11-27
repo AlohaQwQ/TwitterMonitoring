@@ -1,5 +1,8 @@
 package com.web3.twitter;
 
+import com.web3.twitter.utils.LogUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
 import org.telegram.telegrambots.client.okhttp.OkHttpTelegramClient;
 import org.telegram.telegrambots.longpolling.BotSession;
@@ -17,6 +20,8 @@ import org.telegram.telegrambots.meta.generics.TelegramClient;
 
 @Component
 public class TelegramBot implements SpringLongPollingBot, LongPollingSingleThreadUpdateConsumer {
+
+    private static final Logger log = LoggerFactory.getLogger(TelegramBot.class);
 
     private final TelegramClient telegramClient;
 
@@ -57,9 +62,10 @@ public class TelegramBot implements SpringLongPollingBot, LongPollingSingleThrea
         try {
             parsedMessage = telegramClient.execute(method); // Sending our message object to user
         } catch (TelegramApiException e) {
+            log.error("发送消息异常: {}.", parsedMessage,e);
             e.printStackTrace();
         }
-        System.out.println("parsedMessage: " + parsedMessage);
+        log.info("发送消息参数: {}.", parsedMessage);
     }
 
 
@@ -81,7 +87,7 @@ public class TelegramBot implements SpringLongPollingBot, LongPollingSingleThrea
             String message_text = update.getMessage().getText();
             long chat_id = update.getMessage().getChatId();
 
-            System.out.println("message_text: " + message_text + " chat_id: " + chat_id);
+            log.info("message_text={},chat_id={}",message_text,chat_id);
 
             SendMessage message = SendMessage // Create a message object
                     .builder()
@@ -91,6 +97,7 @@ public class TelegramBot implements SpringLongPollingBot, LongPollingSingleThrea
             try {
                 telegramClient.execute(message); // Sending our message object to user
             } catch (TelegramApiException e) {
+                log.error("回复消息失败：{}",message,e);
                 e.printStackTrace();
             }
         }
@@ -99,5 +106,6 @@ public class TelegramBot implements SpringLongPollingBot, LongPollingSingleThrea
     @AfterBotRegistration
     public void afterRegistration(BotSession botSession) {
         System.out.println("Registered bot running state is: " + botSession.isRunning());
+        log.info("机器人注册成功！Registered bot running state is={} ",botSession.isRunning());
     }
 }
