@@ -53,7 +53,8 @@ public class TelegramBot implements SpringLongPollingBot, LongPollingSingleThrea
     }
 
     public void sendText(String text) {
-        SendMessage method = new SendMessage("someChatId", text);
+        log.info("发送消息参数: {}.", text);
+        SendMessage method = new SendMessage("1002270508207", text);
         Message responseMessage = new Message();
         responseMessage.setChat(GROUP_CHAT);
         responseMessage.setFrom(TEST_USER);
@@ -65,7 +66,7 @@ public class TelegramBot implements SpringLongPollingBot, LongPollingSingleThrea
             log.error("发送消息异常: {}.", parsedMessage,e);
             e.printStackTrace();
         }
-        log.info("发送消息参数: {}.", parsedMessage);
+        log.info("返回消息: {}.", parsedMessage);
     }
 
 

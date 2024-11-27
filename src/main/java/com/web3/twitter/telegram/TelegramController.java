@@ -20,9 +20,13 @@ public class TelegramController {
     @Autowired
     private TelegramBot telegramBot;
 
-    @GetMapping("/start")
-    public String start() {
-        telegramBot.sendText("测试发消息");
+    @Autowired
+    private TwitterMonitor twitterMonitor;
+
+    @GetMapping("/sendMessage")
+    public String sendMessage() {
+        String ms = twitterMonitor.startMonitor();
+        telegramBot.sendText(ms);
         return "0";
     }
 

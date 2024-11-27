@@ -29,7 +29,7 @@ public class TwitterMonitor {
         this.restTemplate = restTemplate;
     }
 
-    public void startMonitor(){
+    public String startMonitor(){
         String url = "https://twitter-x.p.rapidapi.com/lists/tweets?list_id=1771221106613187071&count=2";
         // 创建请求头
         HttpHeaders headers = new HttpHeaders();
@@ -45,7 +45,7 @@ public class TwitterMonitor {
         } catch (Exception e){
             LogUtils.error("请求聚合api异常-请求地址: {}.", url, e);
         }
-
+        String fullText = "";
         // 处理响应数据
         if (response != null && response.getStatusCode() == HttpStatus.OK) {
             try {
@@ -90,22 +90,22 @@ public class TwitterMonitor {
                                                             LogUtils.info("解析推特列表-推特链接: {}.", tweetUrl);
 
                                                             //存储用户信息
-                                                            if(!redisCache.hasKey(userID)){
-                                                                MonitorUser user = new MonitorUser();
-                                                                user.setUserID(userID);
-                                                                user.setUserName(userName);
-                                                                user.setFansNumber("100");
-                                                                user.setIsCertified("0");
-                                                                String jsonUser = JSON.toJSONString(user);
-                                                                redisCache.setCacheObject(userID, jsonUser);
-                                                            }
+//                                                            if(!redisCache.hasKey(userID)){
+//                                                                MonitorUser user = new MonitorUser();
+//                                                                user.setUserID(userID);
+//                                                                user.setUserName(userName);
+//                                                                user.setFansNumber("100");
+//                                                                user.setIsCertified("0");
+//                                                                String jsonUser = JSON.toJSONString(user);
+//                                                                redisCache.setCacheObject(userID, jsonUser);
+//                                                            }
 
                                                         }
 
                                                         Legacy legacy = result.getLegacy();
                                                         String createdDate = legacy.getCreated_at();
                                                         LogUtils.info("解析推特列表-createdDate: {}.", createdDate);
-                                                        String fullText = legacy.getFull_text();
+                                                        fullText = legacy.getFull_text();
                                                         LogUtils.info("解析推特列表-推文: {}.", fullText);
                                                     }
                                                 }
@@ -123,5 +123,6 @@ public class TwitterMonitor {
                 LogUtils.error("解析推特列表数据异常-请求地址: {}.", url, e);
             }
         }
+        return fullText;
     }
 }
