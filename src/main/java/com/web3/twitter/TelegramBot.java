@@ -47,12 +47,12 @@ public class TelegramBot implements SpringLongPollingBot, LongPollingSingleThrea
         telegramClient = new OkHttpTelegramClient(getBotToken());
     }
 
-    public void sendText() {
-        SendMessage method = new SendMessage("someChatId", "someText");
+    public void sendText(String text) {
+        SendMessage method = new SendMessage("someChatId", text);
         Message responseMessage = new Message();
         responseMessage.setChat(GROUP_CHAT);
         responseMessage.setFrom(TEST_USER);
-        responseMessage.setText("shaoye");
+        responseMessage.setText(text);
         Message parsedMessage = new Message();
         try {
             parsedMessage = telegramClient.execute(method); // Sending our message object to user
