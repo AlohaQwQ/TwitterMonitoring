@@ -9,14 +9,14 @@ package com.web3.twitter.twitterBeans;
  * @author bejson.com (i@bejson.com)
  * @website http://www.bejson.com/java2pojo/
  */
-public class JsonRootBean {
+public class Ext_media_availability {
 
-    private Data data;
-    public void setData(Data data) {
-         this.data = data;
+    private String status;
+    public void setStatus(String status) {
+         this.status = status;
      }
-     public Data getData() {
-         return data;
+     public String getStatus() {
+         return status;
      }
 
 }

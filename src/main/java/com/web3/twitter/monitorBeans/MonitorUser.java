@@ -36,6 +36,10 @@ public class MonitorUser {
      */
     private String compareAccount;
 
+    /**
+     * 用户备注
+     */
+    private String userRemark;
 
     public String getUserID() {
         return userID;
@@ -85,6 +89,14 @@ public class MonitorUser {
         this.compareAccount = compareAccount;
     }
 
+    public String getUserRemark() {
+        return userRemark;
+    }
+
+    public void setUserRemark(String userRemark) {
+        this.userRemark = userRemark;
+    }
+
     @Override
     public String toString() {
         return "MonitorUser{" +
@@ -94,6 +106,7 @@ public class MonitorUser {
                 ", fansNumber='" + fansNumber + '\'' +
                 ", isCertified='" + isCertified + '\'' +
                 ", compareAccount='" + compareAccount + '\'' +
+                ", userRemark='" + userRemark + '\'' +
                 '}';
     }
 }

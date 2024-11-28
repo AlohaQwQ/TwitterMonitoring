@@ -4,24 +4,16 @@
 package com.web3.twitter.twitterBeans;
 
 /**
- * Auto-generated: 2024-11-24 18:56:43
+ * Auto-generated: 2024-11-29 3:31:45
  *
  * @author bejson.com (i@bejson.com)
  * @website http://www.bejson.com/java2pojo/
  */
 public class Content {
 
-    private String entryType;
     private String __typename;
-    private ItemContent itemContent;
-    private ClientEventInfo clientEventInfo;
-    public void setEntryType(String entryType) {
-         this.entryType = entryType;
-     }
-     public String getEntryType() {
-         return entryType;
-     }
-
+    private Client_event_info client_event_info;
+    private ItemContent content;
     public void set__typename(String __typename) {
          this.__typename = __typename;
      }
@@ -29,18 +21,18 @@ public class Content {
          return __typename;
      }
 
-    public void setItemContent(ItemContent itemContent) {
-         this.itemContent = itemContent;
+    public void setClient_event_info(Client_event_info client_event_info) {
+         this.client_event_info = client_event_info;
      }
-     public ItemContent getItemContent() {
-         return itemContent;
+     public Client_event_info getClient_event_info() {
+         return client_event_info;
      }
 
-    public void setClientEventInfo(ClientEventInfo clientEventInfo) {
-         this.clientEventInfo = clientEventInfo;
+    public void setContent(ItemContent content) {
+         this.content = content;
      }
-     public ClientEventInfo getClientEventInfo() {
-         return clientEventInfo;
+     public ItemContent getContent() {
+         return content;
      }
 
 }

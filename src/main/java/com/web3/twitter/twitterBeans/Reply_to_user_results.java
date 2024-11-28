@@ -9,10 +9,10 @@ package com.web3.twitter.twitterBeans;
  * @author bejson.com (i@bejson.com)
  * @website http://www.bejson.com/java2pojo/
  */
-public class User_results {
+public class Reply_to_user_results {
 
     private String rest_id;
-    private UserResultResult result;
+    private TwitterResultResult twitterResultResult;
     public void setRest_id(String rest_id) {
          this.rest_id = rest_id;
      }
@@ -20,11 +20,11 @@ public class User_results {
          return rest_id;
      }
 
-    public UserResultResult getResult() {
-        return result;
-    }
+    public void setResult(TwitterResultResult twitterResultResult) {
+         this.twitterResultResult = twitterResultResult;
+     }
+     public TwitterResultResult getResult() {
+         return twitterResultResult;
+     }
 
-    public void setResult(UserResultResult result) {
-        this.result = result;
-    }
 }

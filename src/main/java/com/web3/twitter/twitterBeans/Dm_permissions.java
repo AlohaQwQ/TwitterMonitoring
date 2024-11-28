@@ -9,14 +9,14 @@ package com.web3.twitter.twitterBeans;
  * @author bejson.com (i@bejson.com)
  * @website http://www.bejson.com/java2pojo/
  */
-public class JsonRootBean {
+public class Dm_permissions {
 
-    private Data data;
-    public void setData(Data data) {
-         this.data = data;
+    private boolean can_dm;
+    public void setCan_dm(boolean can_dm) {
+         this.can_dm = can_dm;
      }
-     public Data getData() {
-         return data;
+     public boolean getCan_dm() {
+         return can_dm;
      }
 
 }

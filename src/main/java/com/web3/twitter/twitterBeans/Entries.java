@@ -4,35 +4,35 @@
 package com.web3.twitter.twitterBeans;
 
 /**
- * Auto-generated: 2024-11-24 18:56:43
+ * Auto-generated: 2024-11-29 3:31:45
  *
  * @author bejson.com (i@bejson.com)
  * @website http://www.bejson.com/java2pojo/
  */
 public class Entries {
 
-    private String entryId;
-    private String sortIndex;
     private Content content;
-    public void setEntryId(String entryId) {
-         this.entryId = entryId;
-     }
-     public String getEntryId() {
-         return entryId;
-     }
-
-    public void setSortIndex(String sortIndex) {
-         this.sortIndex = sortIndex;
-     }
-     public String getSortIndex() {
-         return sortIndex;
-     }
-
+    private String entry_id;
+    private String sort_index;
     public void setContent(Content content) {
          this.content = content;
      }
      public Content getContent() {
          return content;
+     }
+
+    public void setEntry_id(String entry_id) {
+         this.entry_id = entry_id;
+     }
+     public String getEntry_id() {
+         return entry_id;
+     }
+
+    public void setSort_index(String sort_index) {
+         this.sort_index = sort_index;
+     }
+     public String getSort_index() {
+         return sort_index;
      }
 
 }

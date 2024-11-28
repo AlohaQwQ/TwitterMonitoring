@@ -5,20 +5,20 @@ package com.web3.twitter.twitterBeans;
 import java.util.List;
 
 /**
- * Auto-generated: 2024-11-24 18:56:43
+ * Auto-generated: 2024-11-29 3:31:45
  *
  * @author bejson.com (i@bejson.com)
  * @website http://www.bejson.com/java2pojo/
  */
 public class Instructions {
 
-    private String type;
+    private String __typename;
     private List<Entries> entries;
-    public void setType(String type) {
-         this.type = type;
+    public void set__typename(String __typename) {
+         this.__typename = __typename;
      }
-     public String getType() {
-         return type;
+     public String get__typename() {
+         return __typename;
      }
 
     public void setEntries(List<Entries> entries) {

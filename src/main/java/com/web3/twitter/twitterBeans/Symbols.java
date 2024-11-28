@@ -5,7 +5,7 @@ package com.web3.twitter.twitterBeans;
 import java.util.List;
 
 /**
- * Auto-generated: 2024-11-24 18:56:43
+ * Auto-generated: 2024-11-29 3:31:45
  *
  * @author bejson.com (i@bejson.com)
  * @website http://www.bejson.com/java2pojo/

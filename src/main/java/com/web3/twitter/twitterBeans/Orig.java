@@ -2,6 +2,7 @@
   * Copyright 2024 bejson.com 
   */
 package com.web3.twitter.twitterBeans;
+import java.util.List;
 
 /**
  * Auto-generated: 2024-11-29 3:31:45
@@ -9,14 +10,14 @@ package com.web3.twitter.twitterBeans;
  * @author bejson.com (i@bejson.com)
  * @website http://www.bejson.com/java2pojo/
  */
-public class JsonRootBean {
+public class Orig {
 
-    private Data data;
-    public void setData(Data data) {
-         this.data = data;
+    private List<Faces> faces;
+    public void setFaces(List<Faces> faces) {
+         this.faces = faces;
      }
-     public Data getData() {
-         return data;
+     public List<Faces> getFaces() {
+         return faces;
      }
 
 }

@@ -5,17 +5,25 @@ package com.web3.twitter.twitterBeans;
 import java.util.List;
 
 /**
- * Auto-generated: 2024-11-24 18:56:43
+ * Auto-generated: 2024-11-29 3:31:45
  *
  * @author bejson.com (i@bejson.com)
  * @website http://www.bejson.com/java2pojo/
  */
 public class Edit_control {
 
+    private String __typename;
     private List<String> edit_tweet_ids;
     private String editable_until_msecs;
     private boolean is_edit_eligible;
     private String edits_remaining;
+    public void set__typename(String __typename) {
+         this.__typename = __typename;
+     }
+     public String get__typename() {
+         return __typename;
+     }
+
     public void setEdit_tweet_ids(List<String> edit_tweet_ids) {
          this.edit_tweet_ids = edit_tweet_ids;
      }

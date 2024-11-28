@@ -4,19 +4,27 @@
 package com.web3.twitter.twitterBeans;
 
 /**
- * Auto-generated: 2024-11-24 18:56:43
+ * Auto-generated: 2024-11-29 3:31:45
  *
  * @author bejson.com (i@bejson.com)
  * @website http://www.bejson.com/java2pojo/
  */
 public class Tweet_results {
 
-    private Result result;
-    public void setResult(Result result) {
-         this.result = result;
+    private String rest_id;
+    private TwitterResultResult result;
+    public void setRest_id(String rest_id) {
+         this.rest_id = rest_id;
      }
-     public Result getResult() {
-         return result;
+     public String getRest_id() {
+         return rest_id;
      }
 
+    public TwitterResultResult getResult() {
+        return result;
+    }
+
+    public void setResult(TwitterResultResult result) {
+        this.result = result;
+    }
 }

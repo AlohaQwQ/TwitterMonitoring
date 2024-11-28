@@ -9,14 +9,22 @@ package com.web3.twitter.twitterBeans;
  * @author bejson.com (i@bejson.com)
  * @website http://www.bejson.com/java2pojo/
  */
-public class Unmention_data {
+public class Search_timeline {
 
     private String id;
+    private Timeline timeline;
     public void setId(String id) {
          this.id = id;
      }
      public String getId() {
          return id;
+     }
+
+    public void setTimeline(Timeline timeline) {
+         this.timeline = timeline;
+     }
+     public Timeline getTimeline() {
+         return timeline;
      }
 
 }

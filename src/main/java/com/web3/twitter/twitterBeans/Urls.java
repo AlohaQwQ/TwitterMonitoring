@@ -5,7 +5,7 @@ package com.web3.twitter.twitterBeans;
 import java.util.List;
 
 /**
- * Auto-generated: 2024-11-24 18:56:43
+ * Auto-generated: 2024-11-29 3:31:45
  *
  * @author bejson.com (i@bejson.com)
  * @website http://www.bejson.com/java2pojo/
@@ -14,8 +14,8 @@ public class Urls {
 
     private String display_url;
     private String expanded_url;
-    private String url;
     private List<Integer> indices;
+    private String url;
     public void setDisplay_url(String display_url) {
          this.display_url = display_url;
      }
@@ -30,18 +30,18 @@ public class Urls {
          return expanded_url;
      }
 
-    public void setUrl(String url) {
-         this.url = url;
-     }
-     public String getUrl() {
-         return url;
-     }
-
     public void setIndices(List<Integer> indices) {
          this.indices = indices;
      }
      public List<Integer> getIndices() {
          return indices;
+     }
+
+    public void setUrl(String url) {
+         this.url = url;
+     }
+     public String getUrl() {
+         return url;
      }
 
 }

@@ -4,19 +4,19 @@
 package com.web3.twitter.twitterBeans;
 
 /**
- * Auto-generated: 2024-11-24 18:56:43
+ * Auto-generated: 2024-11-29 3:31:45
  *
  * @author bejson.com (i@bejson.com)
  * @website http://www.bejson.com/java2pojo/
  */
 public class Details {
 
-    private TimelinesDetails timelinesDetails;
-    public void setTimelinesDetails(TimelinesDetails timelinesDetails) {
-         this.timelinesDetails = timelinesDetails;
+    private Timelines_details timelines_details;
+    public void setTimelines_details(Timelines_details timelines_details) {
+         this.timelines_details = timelines_details;
      }
-     public TimelinesDetails getTimelinesDetails() {
-         return timelinesDetails;
+     public Timelines_details getTimelines_details() {
+         return timelines_details;
      }
 
 }

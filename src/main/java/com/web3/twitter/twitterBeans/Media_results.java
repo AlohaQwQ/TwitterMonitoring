@@ -9,14 +9,22 @@ package com.web3.twitter.twitterBeans;
  * @author bejson.com (i@bejson.com)
  * @website http://www.bejson.com/java2pojo/
  */
-public class Unmention_data {
+public class Media_results {
 
     private String id;
+    private TwitterResultResult twitterResultResult;
     public void setId(String id) {
          this.id = id;
      }
      public String getId() {
          return id;
+     }
+
+    public void setResult(TwitterResultResult twitterResultResult) {
+         this.twitterResultResult = twitterResultResult;
+     }
+     public TwitterResultResult getResult() {
+         return twitterResultResult;
      }
 
 }

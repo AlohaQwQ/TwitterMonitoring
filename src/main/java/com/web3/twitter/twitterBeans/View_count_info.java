@@ -9,14 +9,14 @@ package com.web3.twitter.twitterBeans;
  * @author bejson.com (i@bejson.com)
  * @website http://www.bejson.com/java2pojo/
  */
-public class JsonRootBean {
+public class View_count_info {
 
-    private Data data;
-    public void setData(Data data) {
-         this.data = data;
+    private String state;
+    public void setState(String state) {
+         this.state = state;
      }
-     public Data getData() {
-         return data;
+     public String getState() {
+         return state;
      }
 
 }

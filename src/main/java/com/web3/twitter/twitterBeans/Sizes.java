@@ -9,14 +9,14 @@ package com.web3.twitter.twitterBeans;
  * @author bejson.com (i@bejson.com)
  * @website http://www.bejson.com/java2pojo/
  */
-public class JsonRootBean {
+public class Sizes {
 
-    private Data data;
-    public void setData(Data data) {
-         this.data = data;
+    private Large large;
+    public void setLarge(Large large) {
+         this.large = large;
      }
-     public Data getData() {
-         return data;
+     public Large getLarge() {
+         return large;
      }
 
 }

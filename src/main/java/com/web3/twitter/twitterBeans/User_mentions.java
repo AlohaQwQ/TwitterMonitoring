@@ -2,24 +2,32 @@
   * Copyright 2024 bejson.com 
   */
 package com.web3.twitter.twitterBeans;
-import java.util.Date;
+import java.util.List;
 
 /**
- * Auto-generated: 2024-11-29 4:2:55
+ * Auto-generated: 2024-11-29 3:31:45
  *
  * @author bejson.com (i@bejson.com)
  * @website http://www.bejson.com/java2pojo/
  */
-public class Core {
+public class User_mentions {
 
-    private Date created_at;
+    private String id_str;
+    private List<Integer> indices;
     private String name;
     private String screen_name;
-    public void setCreated_at(Date created_at) {
-         this.created_at = created_at;
+    public void setId_str(String id_str) {
+         this.id_str = id_str;
      }
-     public Date getCreated_at() {
-         return created_at;
+     public String getId_str() {
+         return id_str;
+     }
+
+    public void setIndices(List<Integer> indices) {
+         this.indices = indices;
+     }
+     public List<Integer> getIndices() {
+         return indices;
      }
 
     public void setName(String name) {

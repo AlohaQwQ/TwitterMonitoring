@@ -1,0 +1,30 @@
+/**
+  * Copyright 2024 bejson.com 
+  */
+package com.web3.twitter.twitterBeans;
+
+/**
+ * Auto-generated: 2024-11-29 3:31:45
+ *
+ * @author bejson.com (i@bejson.com)
+ * @website http://www.bejson.com/java2pojo/
+ */
+public class Relationship_counts {
+
+    private int followers;
+    private int following;
+    public void setFollowers(int followers) {
+         this.followers = followers;
+     }
+     public int getFollowers() {
+         return followers;
+     }
+
+    public void setFollowing(int following) {
+         this.following = following;
+     }
+     public int getFollowing() {
+         return following;
+     }
+
+}
