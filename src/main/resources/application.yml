@@ -60,7 +60,7 @@ logging:
         root: INFO
         com.web3.twitter: DEBUG
     file:
-        name: logs/app.log
+        name: logs/TwitterMonitoring.log
         path: logs
 #    pattern:
 #        console: "%d{yyyy-MM-dd HH:mm:ss} - %msg%n"

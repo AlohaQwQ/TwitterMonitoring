@@ -104,6 +104,7 @@ public class TelegramBot implements SpringLongPollingBot, LongPollingSingleThrea
             // Set variables
             String message_text = update.getMessage().getText();
             long chat_id = update.getMessage().getChatId();
+            LogUtils.info("consume回调chatID: {}", chat_id);
             //把群聊id放入redis
             if (!redisCache.hasKey("chatID")){
                 String chatIds = redisCache.getCacheObject("chatID");
@@ -113,7 +114,7 @@ public class TelegramBot implements SpringLongPollingBot, LongPollingSingleThrea
                     String jsonString = JSON.toJSONString(strings);
                     redisCache.setCacheObject("chatID", jsonString);
                 }
-            }else {
+            } else {
                 List<String> chatIds = new ArrayList<>();
                 chatIds.add(String.valueOf(chatIds));
                 String jsonString = JSON.toJSONString(chatIds);

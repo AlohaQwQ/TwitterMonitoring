@@ -12,6 +12,16 @@ package com.web3.twitter.twitterBeans;
 public class TimelinesDetails {
 
     private String injectionType;
+    private String controllerData;
+
+    public String getControllerData() {
+        return controllerData;
+    }
+
+    public void setControllerData(String controllerData) {
+        this.controllerData = controllerData;
+    }
+
     public void setInjectionType(String injectionType) {
          this.injectionType = injectionType;
      }
