@@ -10,17 +10,26 @@ import com.web3.twitter.utils.LogUtils;
 import com.web3.twitter.twitterBeans.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.*;
+import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Component;
 import org.springframework.web.client.RestTemplate;
 
 import java.util.Date;
 import java.util.List;
+import java.util.concurrent.ScheduledExecutorService;
+import java.util.concurrent.TimeUnit;
 
 @Component
 public class TwitterMonitor {
 
     @Autowired
     private RedisCache redisCache;
+
+    @Autowired
+    private ScheduledExecutorService scheduledExecutorService;
+
+    @Autowired
+    private TelegramBot telegramBot;
 
     private final RestTemplate restTemplate;
     private static final String DATE_FORMAT = "EEE MMM dd HH:mm:ss Z yyyy";
@@ -29,7 +38,15 @@ public class TwitterMonitor {
         this.restTemplate = restTemplate;
     }
 
-    public String startMonitor(){
+
+    // 每 5 秒执行一次的任务
+    public void scheduleMonitorTask() {
+        scheduledExecutorService.scheduleAtFixedRate(
+                this::startMonitor, 0, 5, TimeUnit.SECONDS);
+    }
+
+    @Async("threadPoolTaskExecutor")
+    public void startMonitor(){
         String url = "https://twitter-x.p.rapidapi.com/lists/tweets?list_id=1771221106613187071&count=2";
         // 创建请求头
         HttpHeaders headers = new HttpHeaders();
@@ -106,6 +123,7 @@ public class TwitterMonitor {
                                                         String createdDate = legacy.getCreated_at();
                                                         LogUtils.info("解析推特列表-createdDate: {}.", createdDate);
                                                         fullText = legacy.getFull_text();
+                                                        telegramBot.sendText(fullText);
                                                         LogUtils.info("解析推特列表-推文: {}.", fullText);
                                                     }
                                                 }
@@ -123,6 +141,5 @@ public class TwitterMonitor {
                 LogUtils.error("解析推特列表数据异常-请求地址: {}.", url, e);
             }
         }
-        return fullText;
     }
 }
