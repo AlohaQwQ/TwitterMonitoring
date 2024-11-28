@@ -62,9 +62,9 @@ public class TelegramBot implements SpringLongPollingBot, LongPollingSingleThrea
     }
 
     public void sendText(String text) {
-        log.info("发送消息参数: {}.", text);
+//        log.info("发送消息参数: {}.", text);
         if (!redisCache.hasKey("chatID")){
-            log.info("没有获取到chatID，发送失败");
+            LogUtils.error("没有获取到chatID: {}.", text);
             return;
         }
         String chatJson = redisCache.getCacheObject("chatID");
@@ -79,7 +79,7 @@ public class TelegramBot implements SpringLongPollingBot, LongPollingSingleThrea
             try {
                 telegramClient.execute(method); // Sending our message object to user
             } catch (TelegramApiException e) {
-                log.error("发送消息异常: {}.", parsedMessage,e);
+                LogUtils.error("发送消息异常: {}.", parsedMessage, e);
                 e.printStackTrace();
             }
         });
@@ -120,8 +120,7 @@ public class TelegramBot implements SpringLongPollingBot, LongPollingSingleThrea
                 redisCache.setCacheObject("chatID", jsonString);
             }
 
-            log.info("message_text={},chat_id={}",message_text,chat_id);
-
+            //LogUtils.info("message_text=" + message_text + " | chat_id=" + chat_id);
             SendMessage message = SendMessage // Create a message object
                     .builder()
                     .chatId(chat_id)
@@ -130,7 +129,7 @@ public class TelegramBot implements SpringLongPollingBot, LongPollingSingleThrea
             try {
                 telegramClient.execute(message); // Sending our message object to user
             } catch (TelegramApiException e) {
-                log.error("回复消息失败：{}",message,e);
+                LogUtils.error("回复消息失败: {}.", message, e);
                 e.printStackTrace();
             }
         }
@@ -138,7 +137,6 @@ public class TelegramBot implements SpringLongPollingBot, LongPollingSingleThrea
 
     @AfterBotRegistration
     public void afterRegistration(BotSession botSession) {
-        System.out.println("Registered bot running state is: " + botSession.isRunning());
-        log.info("机器人注册成功！Registered bot running state is={} ",botSession.isRunning());
+        LogUtils.info("机器人注册成功: {}.", botSession.toString());
     }
 }
