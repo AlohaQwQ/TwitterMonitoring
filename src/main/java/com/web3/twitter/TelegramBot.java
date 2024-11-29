@@ -63,13 +63,15 @@ public class TelegramBot implements SpringLongPollingBot, LongPollingSingleThrea
 
     public void sendText(String text) {
 //        log.info("发送消息参数: {}.", text);
-        if (!redisCache.hasKey("chatID")){
+        if (!redisCache.hasKey("chat_id")){
             LogUtils.error("没有获取到chatID: {}.", text);
-            return;
+            //设置默认聊天Id
+            List<String> chatIds = new ArrayList<>();
+            chatIds.add("-1002270508207");
+            redisCache.setCacheList("chat_id", chatIds);
         }
-        String chatJson = redisCache.getCacheObject("chatID");
-        List<String> chatIDs = JSON.parseArray(chatJson, String.class);
-        chatIDs.forEach(chatID -> {
+        List<String> chatIdList = redisCache.getCacheList("chat_id");
+        chatIdList.forEach(chatID -> {
             SendMessage method = new SendMessage(chatID, text);
             Message responseMessage = new Message();
             responseMessage.setChat(GROUP_CHAT);
@@ -77,7 +79,7 @@ public class TelegramBot implements SpringLongPollingBot, LongPollingSingleThrea
             responseMessage.setText(text);
             Message parsedMessage = new Message();
             try {
-                telegramClient.execute(method); // Sending our message object to user
+                telegramClient.execute(method);
             } catch (TelegramApiException e) {
                 LogUtils.error("发送消息异常: {}.", parsedMessage, e);
                 e.printStackTrace();
@@ -107,23 +109,19 @@ public class TelegramBot implements SpringLongPollingBot, LongPollingSingleThrea
             LogUtils.info("consume回调message_text: {}", message_text);
             LogUtils.info("consume回调chatID: {}", chat_id);
             //把群聊id放入redis
-            if (!redisCache.hasKey("chatID")){
+            if (!redisCache.hasKey("chat_id")){
                 LogUtils.info("redis不存在聊天id");
-                List<String> chatIds = new ArrayList<>();
-                chatIds.add(String.valueOf(chatIds));
-                String jsonString = JSON.toJSONString(chatIds);
-                redisCache.setCacheObject("chatID", jsonString);
+                List<String> chatIdList = new ArrayList<>();
+                chatIdList.add(String.valueOf(chat_id));
+                redisCache.setCacheList("chat_id", chatIdList);
                 LogUtils.info("添加成功！！");
             } else {
                 LogUtils.info("redis存在聊天id");
-                String chatIds = redisCache.getCacheObject("chatID");
-                LogUtils.info("chatIds列表: {}", chatIds);
-                List<String> strings = JSON.parseArray(chatIds, String.class);
-                LogUtils.info("chatIds解析列表: {}", strings);
-                if (!strings.contains(String.valueOf(chat_id))){
-                    strings.add(String.valueOf(chat_id));
-                    String jsonString = JSON.toJSONString(strings);
-                    redisCache.setCacheObject("chatID", jsonString);
+                List<String> chatIdList = redisCache.getCacheList("chat_id");
+                LogUtils.info("chatIds列表: {}", chatIdList);
+                if (!chatIdList.contains(String.valueOf(chat_id))){
+                    chatIdList.add(String.valueOf(chat_id));
+                    redisCache.setCacheList("chat_id", chatIdList);
                 }
             }
             LogUtils.info("发送消息....");
