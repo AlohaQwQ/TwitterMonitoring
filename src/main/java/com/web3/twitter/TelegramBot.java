@@ -115,9 +115,11 @@ public class TelegramBot implements SpringLongPollingBot, LongPollingSingleThrea
                 redisCache.setCacheObject("chatID", jsonString);
                 LogUtils.info("添加成功！！");
             } else {
+                LogUtils.info("redis存在聊天id");
                 String chatIds = redisCache.getCacheObject("chatID");
-                LogUtils.info("chatIds: {}", chatIds);
+                LogUtils.info("chatIds列表: {}", chatIds);
                 List<String> strings = JSON.parseArray(chatIds, String.class);
+                LogUtils.info("chatIds解析列表: {}", strings);
                 if (!strings.contains(String.valueOf(chat_id))){
                     strings.add(String.valueOf(chat_id));
                     String jsonString = JSON.toJSONString(strings);
