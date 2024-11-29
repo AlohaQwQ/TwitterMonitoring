@@ -29,6 +29,12 @@ public class TelegramBot implements SpringLongPollingBot, LongPollingSingleThrea
 
     private static final Logger log = LoggerFactory.getLogger(TelegramBot.class);
 
+    private static final List<String> CHAT_ID_LIST = new ArrayList<>();
+
+    static {
+        CHAT_ID_LIST.add("-1002270508207");
+    }
+
     @Autowired
     private RedisCache redisCache;
 
@@ -63,15 +69,15 @@ public class TelegramBot implements SpringLongPollingBot, LongPollingSingleThrea
 
     public void sendText(String text) {
 //        log.info("发送消息参数: {}.", text);
-        if (!redisCache.hasKey("chat_id")){
-            LogUtils.error("没有获取到chatID: {}.", text);
-            //设置默认聊天Id
-            List<String> chatIds = new ArrayList<>();
-            chatIds.add("-1002270508207");
-            redisCache.setCacheList("chat_id", chatIds);
-        }
-        List<String> chatIdList = redisCache.getCacheList("chat_id");
-        chatIdList.forEach(chatID -> {
+//        if (!redisCache.hasKey("chat_id")){
+//            LogUtils.error("没有获取到chatID: {}.", text);
+//            //设置默认聊天Id
+//            List<String> chatIds = new ArrayList<>();
+//            chatIds.add("-1002270508207");
+//            redisCache.setCacheList("chat_id", chatIds);
+//        }
+        //List<String> chatIdList = redisCache.getCacheList("chat_id");
+        CHAT_ID_LIST.forEach(chatID -> {
             SendMessage method = new SendMessage(chatID, text);
             Message responseMessage = new Message();
             responseMessage.setChat(GROUP_CHAT);
@@ -109,21 +115,21 @@ public class TelegramBot implements SpringLongPollingBot, LongPollingSingleThrea
             LogUtils.info("consume回调message_text: {}", message_text);
             LogUtils.info("consume回调chatID: {}", chat_id);
             //把群聊id放入redis
-            if (!redisCache.hasKey("chat_id")){
-                LogUtils.info("redis不存在聊天id");
-                List<String> chatIdList = new ArrayList<>();
-                chatIdList.add(String.valueOf(chat_id));
-                redisCache.setCacheList("chat_id", chatIdList);
-                LogUtils.info("添加成功！！");
-            } else {
-                LogUtils.info("redis存在聊天id");
-                List<String> chatIdList = redisCache.getCacheList("chat_id");
-                LogUtils.info("chatIds列表: {}", chatIdList);
-                if (!chatIdList.contains(String.valueOf(chat_id))){
-                    chatIdList.add(String.valueOf(chat_id));
-                    redisCache.setCacheList("chat_id", chatIdList);
-                }
-            }
+//            if (!redisCache.hasKey("chat_id")){
+//                LogUtils.info("redis不存在聊天id");
+//                List<String> chatIdList = new ArrayList<>();
+//                chatIdList.add(String.valueOf(chat_id));
+//                redisCache.setCacheList("chat_id", chatIdList);
+//                LogUtils.info("添加成功！！");
+//            } else {
+//                LogUtils.info("redis存在聊天id");
+//                List<String> chatIdList = redisCache.getCacheList("chat_id");
+//                LogUtils.info("chatIds列表: {}", chatIdList);
+//                if (!chatIdList.contains(String.valueOf(chat_id))){
+//                    chatIdList.add(String.valueOf(chat_id));
+//                    redisCache.setCacheList("chat_id", chatIdList);
+//                }
+//            }
             LogUtils.info("发送消息....");
             //LogUtils.info("message_text=" + message_text + " | chat_id=" + chat_id);
             SendMessage message = SendMessage // Create a message object
