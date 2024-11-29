@@ -104,23 +104,27 @@ public class TelegramBot implements SpringLongPollingBot, LongPollingSingleThrea
             // Set variables
             String message_text = update.getMessage().getText();
             long chat_id = update.getMessage().getChatId();
+            LogUtils.info("consume回调message_text: {}", message_text);
             LogUtils.info("consume回调chatID: {}", chat_id);
             //把群聊id放入redis
             if (!redisCache.hasKey("chatID")){
+                LogUtils.info("redis不存在聊天id");
+                List<String> chatIds = new ArrayList<>();
+                chatIds.add(String.valueOf(chatIds));
+                String jsonString = JSON.toJSONString(chatIds);
+                redisCache.setCacheObject("chatID", jsonString);
+                LogUtils.info("添加成功！！");
+            } else {
                 String chatIds = redisCache.getCacheObject("chatID");
+                LogUtils.info("chatIds: {}", chatIds);
                 List<String> strings = JSON.parseArray(chatIds, String.class);
                 if (!strings.contains(String.valueOf(chat_id))){
                     strings.add(String.valueOf(chat_id));
                     String jsonString = JSON.toJSONString(strings);
                     redisCache.setCacheObject("chatID", jsonString);
                 }
-            } else {
-                List<String> chatIds = new ArrayList<>();
-                chatIds.add(String.valueOf(chatIds));
-                String jsonString = JSON.toJSONString(chatIds);
-                redisCache.setCacheObject("chatID", jsonString);
             }
-
+            LogUtils.info("发送消息....");
             //LogUtils.info("message_text=" + message_text + " | chat_id=" + chat_id);
             SendMessage message = SendMessage // Create a message object
                     .builder()
