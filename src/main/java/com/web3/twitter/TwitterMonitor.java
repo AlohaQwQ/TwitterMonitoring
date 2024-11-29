@@ -43,12 +43,12 @@ public class TwitterMonitor {
         this.restTemplate = restTemplate;
     }
 
-    @Scheduled(fixedRate = 8000) // 每1.5秒执行一次,每天消耗约57600条
+    //@Scheduled(fixedRate = 8000) // 每1.5秒执行一次,每天消耗约57600条
     public void scheduleMonitorTask() {
         startMonitor();
     }
 
-    @Async("threadPoolTaskExecutor")
+    //@Async("threadPoolTaskExecutor")
     public void startMonitor(){
         String nowTime = DateUtils.getTime();
         LogUtils.info("startMonitor-异步执行: {}", nowTime);
