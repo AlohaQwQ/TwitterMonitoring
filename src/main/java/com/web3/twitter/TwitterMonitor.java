@@ -43,7 +43,7 @@ public class TwitterMonitor {
         this.restTemplate = restTemplate;
     }
 
-    @Scheduled(fixedRate = 3000) // 每1.5秒执行一次,每天消耗约57600条
+    @Scheduled(fixedRate = 8000) // 每1.5秒执行一次,每天消耗约57600条
     public void scheduleMonitorTask() {
         startMonitor();
     }
@@ -52,7 +52,7 @@ public class TwitterMonitor {
     public void startMonitor(){
         String nowTime = DateUtils.getTime();
         LogUtils.info("startMonitor-异步执行: {}", nowTime);
-        String url = "https://twitter283.p.rapidapi.com/Search?q=pump.fun&type=Latest&count=20&safe_search=true";
+        String url = "https://twitter283.p.rapidapi.com/Search?q=pump.fun&type=Latest&count=10&safe_search=true";
         // 创建请求头
         HttpHeaders headers = new HttpHeaders();
         headers.setContentType(MediaType.APPLICATION_JSON);
@@ -146,41 +146,63 @@ public class TwitterMonitor {
                                                                             //LogUtils.info("解析推特列表-createdDate: {}", createdDate);
                                                                             fullText[0] = legacy.getFull_text();
 
-                                                                            //fullText[0] = "Merci TK!\n" +
-                                                                            //        "Je penses a un gros sell the news en janvier vis à vis de trump qu'en penses-tu? https://pump.fun/coin/HhNbVY35YVRBeUfHXbSxgKzK87pPQErpsGqsXuuZpump8934jkz";
-
-                                                                            //推文解析
-                                                                            if(fullText[0].contains("https://t.co/")){
-                                                                                // 正则表达式查找短链接
-                                                                                Pattern pattern = Pattern.compile("https://t\\.co/[\\w]+");
-                                                                                Matcher matcher = pattern.matcher(fullText[0]);
-
-                                                                                while (matcher.find()) {
-                                                                                    String shortLink = matcher.group();
-                                                                                    LogUtils.info("发现短链接: {}", shortLink);
-                                                                                    if(!StringUtils.isEmpty(shortLink)){
-                                                                                        // 使用 ShortLinkResolver 解析短链接
-                                                                                        resolveShortLink(shortLink).thenAccept(originalLink -> {
-                                                                                            if(StringUtils.isEmpty(originalLink)) {
-                                                                                                LogUtils.error("解析短链接异常: {}", legacy.getFull_text());
-                                                                                            } else {
-                                                                                                fullText[0] = originalLink;
-                                                                                                int parseResult = parsingTweets(user, tweetUrl, createdDate, nowTime, fullText);
-                                                                                                if(parseResult<0){
-                                                                                                    LogUtils.error("短链接发送推文异常: {}", legacy.getFull_text());
-                                                                                                }
-                                                                                            }
-                                                                                        }).exceptionally(ex -> {
-                                                                                            LogUtils.error("解析短链接失败: {}", legacy.getFull_text(), ex);
-                                                                                            return null; // 可处理异常或返回默认值
-                                                                                        });
+                                                                            //判断推特对象urls中是否包含pump 链接
+                                                                            boolean hasPump = false;
+                                                                            Entities entities = legacy.getEntities();
+                                                                            if(entities!=null){
+                                                                                if(entities.getUrls()!=null && !entities.getUrls().isEmpty()){
+                                                                                    for (Urls entitiesUrl : entities.getUrls()) {
+                                                                                        String match = "pump.fun/coin";
+                                                                                        if(entitiesUrl.getExpanded_url().contains(match)){
+                                                                                            fullText[0] = entitiesUrl.getExpanded_url();
+                                                                                            hasPump = true;
+                                                                                            break;
+                                                                                        }
                                                                                     }
                                                                                 }
-                                                                            } else if(fullText[0].contains("https://pump.fun/coin")){
+                                                                            }
+
+                                                                            if(hasPump){
                                                                                 int parseResult = parsingTweets(user, tweetUrl, createdDate, nowTime, fullText);
                                                                                 if(parseResult<0){
-                                                                                    LogUtils.error("长链接发送推文异常: {}", legacy.getFull_text());
-                                                                                    continue;
+                                                                                    LogUtils.error("legacy url包含ca发送推文异常: {}", legacy.getFull_text());
+                                                                                }
+                                                                            } else {
+                                                                                //fullText[0] = "Merci TK!\n" +
+                                                                                //        "Je penses a un gros sell the news en janvier vis à vis de trump qu'en penses-tu? https://pump.fun/coin/HhNbVY35YVRBeUfHXbSxgKzK87pPQErpsGqsXuuZpump8934jkz";
+                                                                                //推文解析
+                                                                                if(fullText[0].contains("https://t.co/")){
+                                                                                    // 正则表达式查找短链接
+                                                                                    Pattern pattern = Pattern.compile("https://t\\.co/[\\w]+");
+                                                                                    Matcher matcher = pattern.matcher(fullText[0]);
+
+                                                                                    while (matcher.find()) {
+                                                                                        String shortLink = matcher.group();
+                                                                                        LogUtils.info("发现短链接: {}", shortLink);
+                                                                                        if(!StringUtils.isEmpty(shortLink)){
+                                                                                            // 使用 ShortLinkResolver 解析短链接
+                                                                                            resolveShortLink(shortLink).thenAccept(originalLink -> {
+                                                                                                if(StringUtils.isEmpty(originalLink)) {
+                                                                                                    LogUtils.error("解析短链接异常: {}", legacy.getFull_text());
+                                                                                                } else {
+                                                                                                    fullText[0] = originalLink;
+                                                                                                    int parseResult = parsingTweets(user, tweetUrl, createdDate, nowTime, fullText);
+                                                                                                    if(parseResult<0){
+                                                                                                        LogUtils.error("短链接发送推文异常: {}", legacy.getFull_text());
+                                                                                                    }
+                                                                                                }
+                                                                                            }).exceptionally(ex -> {
+                                                                                                LogUtils.error("解析短链接失败: {}", legacy.getFull_text(), ex);
+                                                                                                return null; // 可处理异常或返回默认值
+                                                                                            });
+                                                                                        }
+                                                                                    }
+                                                                                } else if(fullText[0].contains("https://pump.fun/coin")){
+                                                                                    int parseResult = parsingTweets(user, tweetUrl, createdDate, nowTime, fullText);
+                                                                                    if(parseResult<0){
+                                                                                        LogUtils.error("长链接发送推文异常: {}", legacy.getFull_text());
+                                                                                        //continue;
+                                                                                    }
                                                                                 }
                                                                             }
                                                                         }
