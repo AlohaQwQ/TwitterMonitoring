@@ -1,6 +1,8 @@
 package com.web3.twitter.monitorBeans;
 
 
+import java.util.List;
+
 /**
  * 推特数据解析bean
  */
@@ -17,9 +19,9 @@ public class MonitorCoin {
     private String coinCa;
 
     /**
-     * 代币被提及次数
+     * 代币被用户提及列表
      */
-    private String mentionNums;
+    private List<String> mentionUserList;
 
     /**
      * 代币创建时间
@@ -47,12 +49,12 @@ public class MonitorCoin {
         this.coinCa = coinCa;
     }
 
-    public String getMentionNums() {
-        return mentionNums;
+    public List<String> getMentionUserList() {
+        return mentionUserList;
     }
 
-    public void setMentionNums(String mentionNums) {
-        this.mentionNums = mentionNums;
+    public void setMentionUserList(List<String> mentionUserList) {
+        this.mentionUserList = mentionUserList;
     }
 
     public String getCreateDate() {
@@ -76,7 +78,7 @@ public class MonitorCoin {
         return "MonitorCoin{" +
                 "coinName='" + coinName + '\'' +
                 ", coinCa='" + coinCa + '\'' +
-                ", mentionNums='" + mentionNums + '\'' +
+                ", mentionUserList=" + mentionUserList +
                 ", createDate='" + createDate + '\'' +
                 ", coinDetail='" + coinDetail + '\'' +
                 '}';

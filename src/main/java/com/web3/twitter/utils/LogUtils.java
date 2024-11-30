@@ -42,8 +42,16 @@ public class LogUtils {
         log.error(var1, var2, var3);
     }
 
+    public static void error(String var1, Object... arguments) {
+        log.error(var1, arguments);
+    }
+
     public static void info(String label,Object msg) {
         log.info(getFormattedMessage("INFO", label, msg));
+    }
+
+    public static void info(String label, Object... arguments) {
+        log.info(getFormattedMessage("INFO", label, arguments));
     }
 
     public static void error(Object msg) {
