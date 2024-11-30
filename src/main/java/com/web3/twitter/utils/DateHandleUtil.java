@@ -115,7 +115,24 @@ public class DateHandleUtil {
         String result = s[s.length - 1] + "-" +
                 convertToChineseMonth(s[1]) + "-" +
                 s[2] + " " + s[3];
-        return result;
+        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        try {
+            Date dateTime = formatter.parse(result);
+            // 获取Calendar实例并设置日期时间
+            Calendar calendar = Calendar.getInstance();
+            calendar.setTime(dateTime);
+
+            // 加上八个小时
+            calendar.add(Calendar.HOUR_OF_DAY, 8);
+
+            // 获取新的日期对象
+            Date newDateTime = calendar.getTime();
+
+            // 将新的日期对象格式化为字符串
+            return formatter.format(newDateTime);
+        } catch (ParseException e) {
+            throw new RuntimeException(e);
+        }
     }
 
     private static String convertToChineseMonth(String englishMonth) {
