@@ -368,31 +368,31 @@ public class TwitterMonitor {
                 StringBuilder messageBuilder = new StringBuilder(); // 使用 StringBuilder 进行拼接
                 //提及次数大于1
                 if(coin.getMentionUserList().size()>1){
-                    messageBuilder.append("\uD83D\uDEA8 ca提及次数:").append(coin.getMentionUserList().size()).append("\n");
+                    messageBuilder.append("\uD83D\uDEA8 ca提及次数：").append(coin.getMentionUserList().size()).append("\n");
                     messageBuilder.append("— — — — — — — — — — — — — — — — — — — — — —").append("\n");
                 }
-                messageBuilder.append("ca:").append(coin.getCoinCa()).append("\n");
-                messageBuilder.append("pump:").append("https://pump.fun/coin/").append(coin.getCoinCa()).append("\n");
-                //messageBuilder.append("ca名称:").append(pumpCa).append("\n");
-                //messageBuilder.append("ca创建时间:").append(pumpCa).append("\n");
+                messageBuilder.append("ca：").append(coin.getCoinCa()).append("\n");
+                messageBuilder.append("pump：").append("https://pump.fun/coin/").append(coin.getCoinCa()).append("\n");
+                //messageBuilder.append("ca名称：").append(pumpCa).append("\n");
+                //messageBuilder.append("ca创建时间：").append(pumpCa).append("\n");
 
                 messageBuilder.append("— — — — — — — — — — — — — — — — — — — — — —").append("\n");
-                messageBuilder.append("twitter:").append(tweetUrl).append("\n");
-                messageBuilder.append("作者:").append(user.getUserName()).append("\n");
-                messageBuilder.append("粉丝数:").append(user.getFansNumber()).append("\n");
-                messageBuilder.append("是否认证:").append(user.getIsCertified()).append("\n");
+                messageBuilder.append("twitter：").append(tweetUrl).append("\n");
+                messageBuilder.append("作者：").append(user.getUserName()).append("\n");
+                messageBuilder.append("粉丝数：").append(user.getFansNumber()).append("\n");
+                messageBuilder.append("是否认证：").append(user.getIsCertified()).append("\n");
                 if(!StringUtils.isEmpty(user.getUserRemark())){
                     JSONArray remarksArray = JSON.parseArray(user.getUserRemark());
                     for (int i = 0; i < remarksArray.size(); i++) {
                         String remark = remarksArray.getString(i);
-                        messageBuilder.append("备注:").append(remark).append("\n");
+                        messageBuilder.append("备注：").append(remark).append("\n");
                     }
                 }
 
                 messageBuilder.append("— — — — — — — — — — — — — — — — — — — — — —").append("\n");
-                messageBuilder.append("发布时间:").append(DateHandleUtil.formatDate(DateHandleUtil.convertToDate2(createdDate))).append("\n");
+                messageBuilder.append("发布时间：").append(DateHandleUtil.formatDate(DateHandleUtil.convertToDate2(createdDate))).append("\n");
                 //messageBuilder.append("搜索时间:").append(nowTime).append("\n");
-                messageBuilder.append("推送时间:").append(DateUtils.getTime()).append("\n");
+                messageBuilder.append("推送时间：").append(DateUtils.getTime()).append("\n");
                 telegramBot.sendText(messageBuilder.toString());
                 result = 1;
             } else {
@@ -486,12 +486,17 @@ public class TwitterMonitor {
                         if(userDetails.containsKey("tag")){
                             String userString = redisCache.getCacheObject(userNameKey);
                             user = JSON.parseObject(userString, MonitorUser.class);
-                            JSONArray remarksArray = JSON.parseArray(user.getUserRemark());
-                            //增加新备注
-                            remarksArray.add(userDetails.getString("tag"));
-                            String remarksString = JSON.toJSONString(remarksArray);
-                            user.setUserRemark(remarksString);
-                            user.setUpdateTime(String.valueOf(System.currentTimeMillis()));
+                            if(!StringUtils.isEmpty(user.getUserRemark())){
+                                JSONArray remarksArray = JSON.parseArray(user.getUserRemark());
+                                if(remarksArray!=null){
+                                    //增加新备注
+                                    remarksArray.add(userDetails.getString("tag"));
+                                    String remarksString = JSON.toJSONString(remarksArray);
+                                    user.setUserRemark(remarksString);
+                                    user.setUpdateTime(String.valueOf(System.currentTimeMillis()));
+                                }
+                            }
+
                         }
                     }
                     if(user!=null){
