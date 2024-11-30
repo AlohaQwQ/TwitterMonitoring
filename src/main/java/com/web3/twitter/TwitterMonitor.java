@@ -69,8 +69,10 @@ public class TwitterMonitor {
         preParseUserRemakes();
     }
 
-    @Scheduled(fixedRate = 12000) // 每1.5秒执行一次,每天消耗约57600条
+    @Scheduled(fixedRate = 2000) // 每1.5秒执行一次,每天消耗约57600条
     public void scheduleMonitorTask() {
+        //https://t.co/FxZZt9AZYf
+        //resolveShortLink("https://t.co/FxZZt9AZYf");
         startMonitor();
     }
 
@@ -218,7 +220,7 @@ public class TwitterMonitor {
 
                                                                                     while (matcher.find()) {
                                                                                         String shortLink = matcher.group();
-                                                                                        //LogUtils.info("发现短链接: {}", shortLink);
+                                                                                        LogUtils.info("发现短链接: {}", shortLink);
                                                                                         if(!StringUtils.isEmpty(shortLink)){
                                                                                             // 使用 ShortLinkResolver 解析短链接
                                                                                             resolveShortLink(shortLink).thenAccept(originalLink -> {
@@ -366,15 +368,16 @@ public class TwitterMonitor {
                 StringBuilder messageBuilder = new StringBuilder(); // 使用 StringBuilder 进行拼接
                 //提及次数大于1
                 if(coin.getMentionUserList().size()>1){
-                    messageBuilder.append("ca提及次数:").append(coin.getMentionUserList().size()).append("\n");
-                    messageBuilder.append("— — — — — — — — — — — — — — — — — — — — ").append("\n");
+                    messageBuilder.append("\uD83D\uDEA8 ca提及次数:").append(coin.getMentionUserList().size()).append("\n");
+                    messageBuilder.append("— — — — — — — — — — — — — — — — — — — — — —").append("\n");
                 }
                 messageBuilder.append("ca:").append(coin.getCoinCa()).append("\n");
+                messageBuilder.append("pump:").append("https://pump.fun/coin/").append(coin.getCoinCa()).append("\n");
                 //messageBuilder.append("ca名称:").append(pumpCa).append("\n");
                 //messageBuilder.append("ca创建时间:").append(pumpCa).append("\n");
 
-                messageBuilder.append("— — — — — — — — — — — — — — — — — — — — ").append("\n");
-                messageBuilder.append("twitter链接:").append(tweetUrl).append("\n");
+                messageBuilder.append("— — — — — — — — — — — — — — — — — — — — — —").append("\n");
+                messageBuilder.append("twitter:").append(tweetUrl).append("\n");
                 messageBuilder.append("作者:").append(user.getUserName()).append("\n");
                 messageBuilder.append("粉丝数:").append(user.getFansNumber()).append("\n");
                 messageBuilder.append("是否认证:").append(user.getIsCertified()).append("\n");
@@ -386,8 +389,8 @@ public class TwitterMonitor {
                     }
                 }
 
-                messageBuilder.append("— — — — — — — — — — — — — — — — — — — — ").append("\n");
-                messageBuilder.append("twitter发布时间:").append(DateHandleUtil.formatDate(DateHandleUtil.convertToDate2(createdDate))).append("\n");
+                messageBuilder.append("— — — — — — — — — — — — — — — — — — — — — —").append("\n");
+                messageBuilder.append("发布时间:").append(DateHandleUtil.formatDate(DateHandleUtil.convertToDate2(createdDate))).append("\n");
                 //messageBuilder.append("搜索时间:").append(nowTime).append("\n");
                 messageBuilder.append("推送时间:").append(DateUtils.getTime()).append("\n");
                 telegramBot.sendText(messageBuilder.toString());

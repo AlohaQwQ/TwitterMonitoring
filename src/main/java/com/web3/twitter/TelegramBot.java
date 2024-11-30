@@ -33,6 +33,9 @@ public class TelegramBot implements SpringLongPollingBot, LongPollingSingleThrea
 
     static {
         CHAT_ID_LIST.add("-1002270508207");
+        CHAT_ID_LIST.add("-1002358331062");
+        CHAT_ID_LIST.add("7146351054");
+//        CHAT_ID_LIST.add("-4517558084");
     }
 
     @Autowired
