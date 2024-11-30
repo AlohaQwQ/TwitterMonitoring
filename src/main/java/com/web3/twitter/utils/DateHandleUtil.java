@@ -10,8 +10,7 @@ import java.time.ZoneId;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeFormatterBuilder;
 import java.time.format.DateTimeParseException;
-import java.util.Date;
-import java.util.Locale;
+import java.util.*;
 import java.time.ZonedDateTime;
 
 /**
@@ -106,6 +105,35 @@ public class DateHandleUtil {
             e.printStackTrace();
             return dateStr; // 如果解析失败，返回原始字符串
         }
+    }
+
+    public static String formatDate(String date) {
+        if (date == null) {
+            return null;
+        }
+        String[] s = date.split(" ");
+        String result = s[s.length - 1] + "-" +
+                convertToChineseMonth(s[1]) + "-" +
+                s[2] + " " + s[3];
+        return result;
+    }
+
+    private static String convertToChineseMonth(String englishMonth) {
+        Map<String, String> monthMap = new HashMap<>();
+        monthMap.put("Jan", "01");
+        monthMap.put("Feb", "02");
+        monthMap.put("Mar", "03");
+        monthMap.put("Apr", "04");
+        monthMap.put("May", "05");
+        monthMap.put("Jun", "06");
+        monthMap.put("Jul", "07");
+        monthMap.put("Aug", "08");
+        monthMap.put("Sep", "09");
+        monthMap.put("Oct", "10");
+        monthMap.put("Nov", "11");
+        monthMap.put("Dec", "12");
+
+        return monthMap.getOrDefault(englishMonth, "未知月份");
     }
 
     /**
