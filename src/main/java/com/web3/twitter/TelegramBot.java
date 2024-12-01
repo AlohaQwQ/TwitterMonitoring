@@ -134,19 +134,19 @@ public class TelegramBot implements SpringLongPollingBot, LongPollingSingleThrea
 //                    redisCache.setCacheList("chat_id", chatIdList);
 //                }
 //            }
-            LogUtils.info("发送消息....");
+            LogUtils.info("收到消息....");
             //LogUtils.info("message_text=" + message_text + " | chat_id=" + chat_id);
             SendMessage message = SendMessage // Create a message object
                     .builder()
                     .chatId(chat_id)
                     .text(message_text)
                     .build();
-            try {
-                telegramClient.execute(message); // Sending our message object to user
-            } catch (TelegramApiException e) {
-                LogUtils.error("回复消息失败: {}.", message, e);
-                e.printStackTrace();
-            }
+//            try {
+//                telegramClient.execute(message); // Sending our message object to user
+//            } catch (TelegramApiException e) {
+//                LogUtils.error("回复消息失败: {}.", message, e);
+//                e.printStackTrace();
+//            }
         }
     }
 

@@ -307,6 +307,35 @@ public class TwitterMonitor {
         return CompletableFuture.completedFuture("");
     }
 
+    public CompletableFuture<MonitorCoin> getMonitorCoinInfo(String ca) {
+        LogUtils.info("resolveShortLink-异步执行: {}", ca);
+        String url = "https://api.geckoterminal.com/api/v2/networks/solana/tokens/"+ca;
+        MonitorCoin coin;
+        ResponseEntity<String> response = null;
+        try {
+            response = restTemplate.exchange(url, HttpMethod.GET, null, String.class);
+            if (response != null){
+                String responseBody = response.getBody();
+                LogUtils.info("获取代币信息成功: {}", responseBody);
+//                if(!StringUtils.isEmpty(responseBody)){
+//                    String coinName = HtmlParserUtil.extractOgImage(responseBody, "meta[name=twitter:title]");
+//                    String ogImageUrl = HtmlParserUtil.extractOgImage(responseBody, "meta[property=og:image]");
+//                    LogUtils.info("解析后的链接: {}", coinName + " | "+ogImageUrl);
+//                    return CompletableFuture.completedFuture(ogImageUrl);
+//                }
+            } else {
+                LogUtils.error("获取代币信息失败: {}", ca);
+            }
+        } catch (Exception e) {
+            LogUtils.error("获取代币信息失败: {}", ca, e);
+            if (response != null){
+                LogUtils.error("response: {}", response.getBody(), e);
+            }
+        }
+        return CompletableFuture.completedFuture(null);
+    }
+
+
     /**
      * 推文解析
      * @param fullText
