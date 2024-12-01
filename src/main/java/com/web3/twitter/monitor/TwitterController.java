@@ -24,6 +24,12 @@ public class TwitterController {
     }
 
 
+    @GetMapping("/getCaInfo")
+    public String getCaInfo() {
+        twitterMonitor.getMonitorCoinInfo("4JWXK53NHxJWdZPAwdnZFNsRL7G1ewpoUpxT7WTppump");
+        return "0";
+    }
+
 
 
 }

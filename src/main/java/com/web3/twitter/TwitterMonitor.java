@@ -302,6 +302,37 @@ public class TwitterMonitor {
         return CompletableFuture.completedFuture("");
     }
 
+    public CompletableFuture<MonitorCoin> getMonitorCoinInfo(String ca) {
+        LogUtils.info("resolveShortLink-异步执行: {}", ca);
+        String url = "https://api.geckoterminal.com/api/v2/networks/solana/tokens/"+ca;
+        ResponseEntity<MonitorCoin> response = null;
+        try {
+            response = restTemplate.exchange(url, HttpMethod.GET, null, MonitorCoin.class);
+            if (response != null){
+                MonitorCoin responseBody = response.getBody();
+                LogUtils.info("获取代币信息成功: {}", responseBody);
+                // <meta name="twitter:title" content="Bitconnect (BCC) - Pump"/>
+                // <meta property="og:image" content="https://pump.fun/coin/4vrWMCgiMHS8Md1sckFPRQdhvviqf8PBVTX1hQ1Npump/opengraph-image-1aq19n?a797fa226007c33d"/>
+                // 使用 HtmlParserUtil 解析 og:image
+//                if(!StringUtils.isEmpty(responseBody)){
+//                    String coinName = HtmlParserUtil.extractOgImage(responseBody, "meta[name=twitter:title]");
+//                    String ogImageUrl = HtmlParserUtil.extractOgImage(responseBody, "meta[property=og:image]");
+//                    LogUtils.info("解析后的链接: {}", coinName + " | "+ogImageUrl);
+//                    return CompletableFuture.completedFuture(ogImageUrl);
+//                }
+            } else {
+                LogUtils.error("获取代币信息失败: {}", ca);
+            }
+        } catch (Exception e) {
+            LogUtils.error("获取代币信息失败: {}", ca, e);
+            if (response != null){
+                LogUtils.error("response: {}", response.getBody(), e);
+            }
+        }
+        return CompletableFuture.completedFuture(null);
+    }
+
+
     /**
      * 推文解析
      * @param fullText
