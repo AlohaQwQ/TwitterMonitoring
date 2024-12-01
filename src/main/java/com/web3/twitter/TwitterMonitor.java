@@ -137,13 +137,18 @@ public class TwitterMonitor {
                                                                     if (userResults != null) {
                                                                         //粉丝数
                                                                         long fans = userResults.getResult().getRelationship_counts().getFollowers();
+                                                                        String userName = userResults.getResult().getCore().getScreen_name();
+                                                                        //测试账号
+                                                                        if(userName.contains("daxigua_qwq")){
+                                                                            fans = 5000;
+                                                                        }
                                                                         //粉丝数大于3000
                                                                         if(fans>3000){
                                                                             //LogUtils.info("解析推特列表-userResults: {}", userResults);
                                                                             String userID = userResults.getResult().getRest_id();
                                                                             //LogUtils.info("解析推特列表-用户restId: {}", userID);
                                                                             //拼接推特链接 https://x.com/VT_BNB/status/1861334062021185655
-                                                                            String userName = userResults.getResult().getCore().getScreen_name();
+                                                                            userName = userResults.getResult().getCore().getScreen_name();
                                                                             //黑名单用户
                                                                             if(banArray!=null && banArray.contains(userName)){
                                                                                 LogUtils.info("跳过预置黑名单用户推文", userName);
