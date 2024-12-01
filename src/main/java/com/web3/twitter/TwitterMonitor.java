@@ -305,15 +305,13 @@ public class TwitterMonitor {
     public CompletableFuture<MonitorCoin> getMonitorCoinInfo(String ca) {
         LogUtils.info("resolveShortLink-异步执行: {}", ca);
         String url = "https://api.geckoterminal.com/api/v2/networks/solana/tokens/"+ca;
-        ResponseEntity<MonitorCoin> response = null;
+        MonitorCoin coin;
+        ResponseEntity<String> response = null;
         try {
-            response = restTemplate.exchange(url, HttpMethod.GET, null, MonitorCoin.class);
+            response = restTemplate.exchange(url, HttpMethod.GET, null, String.class);
             if (response != null){
-                MonitorCoin responseBody = response.getBody();
+                String responseBody = response.getBody();
                 LogUtils.info("获取代币信息成功: {}", responseBody);
-                // <meta name="twitter:title" content="Bitconnect (BCC) - Pump"/>
-                // <meta property="og:image" content="https://pump.fun/coin/4vrWMCgiMHS8Md1sckFPRQdhvviqf8PBVTX1hQ1Npump/opengraph-image-1aq19n?a797fa226007c33d"/>
-                // 使用 HtmlParserUtil 解析 og:image
 //                if(!StringUtils.isEmpty(responseBody)){
 //                    String coinName = HtmlParserUtil.extractOgImage(responseBody, "meta[name=twitter:title]");
 //                    String ogImageUrl = HtmlParserUtil.extractOgImage(responseBody, "meta[property=og:image]");
