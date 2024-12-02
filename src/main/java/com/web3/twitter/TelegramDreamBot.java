@@ -79,6 +79,7 @@ public class TelegramDreamBot implements SpringLongPollingBot, LongPollingSingle
         //List<String> chatIdList = redisCache.getCacheList("chat_id");
         CHAT_ID_LIST.forEach(chatID -> {
             SendMessage method = new SendMessage(chatID, text);
+            method.setParseMode("HTML");
             Message responseMessage = new Message();
             responseMessage.setChat(GROUP_CHAT);
             responseMessage.setFrom(TEST_USER);
@@ -87,7 +88,7 @@ public class TelegramDreamBot implements SpringLongPollingBot, LongPollingSingle
             try {
                 telegramClient.execute(method);
             } catch (TelegramApiException e) {
-                LogUtils.error("发送消息异常: {}.", parsedMessage, e);
+                LogUtils.error("DreamBot发送消息异常: {}.", parsedMessage, e);
                 e.printStackTrace();
             }
         });
@@ -148,6 +149,6 @@ public class TelegramDreamBot implements SpringLongPollingBot, LongPollingSingle
 
     @AfterBotRegistration
     public void afterRegistration(BotSession botSession) {
-        LogUtils.info("机器人注册成功: {}.", botSession.toString());
+        LogUtils.info("Dream机器人注册成功: {}.", botSession.toString());
     }
 }

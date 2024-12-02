@@ -34,8 +34,8 @@ public class TelegramBot implements SpringLongPollingBot, LongPollingSingleThrea
     static {
         CHAT_ID_LIST.add("-1002270508207");
         CHAT_ID_LIST.add("-1002358331062");
+        CHAT_ID_LIST.add("-1002190498173");
 //        CHAT_ID_LIST.add("7146351054");
-//        CHAT_ID_LIST.add("-1002190498173");
 //        CHAT_ID_LIST.add("-4517558084");
     }
 
@@ -83,6 +83,7 @@ public class TelegramBot implements SpringLongPollingBot, LongPollingSingleThrea
         //List<String> chatIdList = redisCache.getCacheList("chat_id");
         CHAT_ID_LIST.forEach(chatID -> {
             SendMessage method = new SendMessage(chatID, text);
+            method.setParseMode("HTML");
             Message responseMessage = new Message();
             responseMessage.setChat(GROUP_CHAT);
             responseMessage.setFrom(TEST_USER);
@@ -91,7 +92,7 @@ public class TelegramBot implements SpringLongPollingBot, LongPollingSingleThrea
             try {
                 telegramClient.execute(method);
             } catch (TelegramApiException e) {
-                LogUtils.error("发送消息异常: {}.", parsedMessage, e);
+                LogUtils.error("Shiyi发送消息异常: {}.", parsedMessage, e);
                 e.printStackTrace();
             }
         });
@@ -152,6 +153,6 @@ public class TelegramBot implements SpringLongPollingBot, LongPollingSingleThrea
 
     @AfterBotRegistration
     public void afterRegistration(BotSession botSession) {
-        LogUtils.info("机器人注册成功: {}.", botSession.toString());
+        LogUtils.info("Shiyi机器人注册成功: {}.", botSession.toString());
     }
 }

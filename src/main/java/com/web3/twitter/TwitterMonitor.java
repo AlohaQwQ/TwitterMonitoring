@@ -150,10 +150,10 @@ public class TwitterMonitor {
                                                                         String userName = userResults.getResult().getCore().getScreen_name();
                                                                         //测试账号
                                                                         if(userName.contains("daxigua_qwq")){
-                                                                            fans = 5000;
+                                                                            fans = 6000;
                                                                         }
                                                                         //粉丝数大于3000
-                                                                        if(fans>3000){
+                                                                        if(fans>5000){
                                                                             //LogUtils.info("解析推特列表-userResults: {}", userResults);
                                                                             String userID = userResults.getResult().getRest_id();
                                                                             //LogUtils.info("解析推特列表-用户restId: {}", userID);
@@ -449,10 +449,11 @@ public class TwitterMonitor {
                     messageBuilder.append("\uD83D\uDEA8 ca提及次数: ").append(coin.getMentionUserList().size()).append("\n");
                     messageBuilder.append("— — — — — — — — — — — — — — — — — — — — — —").append("\n");
                 }
-                messageBuilder.append("ca: ").append("<code>").append(coin.getCoinCa()).append("</code>").append("\n");
-                messageBuilder.append("pump: ").append("https://pump.fun/coin/").append(coin.getCoinCa()).append("\n");
                 //https://gmgn.ai/sol/token/3GD2FWYkG2QGXCkN1nEf9TB1jsvt2zvUUEKEmFfgpump
+                messageBuilder.append("ca: ").append("<code>").append(coin.getCoinCa()).append("</code>").append("\n");
                 messageBuilder.append("gmgn: ").append("https://gmgn.ai/sol/token/").append(coin.getCoinCa()).append("\n");
+                messageBuilder.append("pump: ").append("https://pump.fun/coin/").append(coin.getCoinCa()).append("\n");
+
                 //messageBuilder.append("ca名称: ").append(pumpCa).append("\n");
                 //messageBuilder.append("ca创建时间: ").append(pumpCa).append("\n");
 
