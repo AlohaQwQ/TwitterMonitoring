@@ -471,7 +471,7 @@ public class TwitterMonitor {
                 }
 
                 messageBuilder.append("— — — — — — — — — — — — — — — — — — — — — —").append("\n");
-                messageBuilder.append("发布时间: ").append(DateHandleUtil.formatDate(DateHandleUtil.convertToDate2(createdDate))).append("\n");
+                messageBuilder.append("发布时间: ").append(DateHandleUtil.formatDate(createdDate)).append("\n");
                 //messageBuilder.append("搜索时间: ").append(nowTime).append("\n");
                 messageBuilder.append("推送时间: ").append(DateUtils.getTime()).append("\n");
 
