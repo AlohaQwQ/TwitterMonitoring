@@ -49,6 +49,9 @@ public class TwitterMonitor {
     private TelegramBot telegramBot;
 
     @Autowired
+    private TelegramDreamBot telegramDreamBot;
+
+    @Autowired
     private ResourceLoader resourceLoader;
 
     private final RestTemplate restTemplate;
@@ -56,7 +59,12 @@ public class TwitterMonitor {
     /**
      * 用户预置黑名单
      */
-    private JSONArray banArray;
+    private static JSONArray banArray;
+
+    /**
+     * Redis备注列表用户key缓存List
+     */
+    //private static List<String> remarkUserKeyList;
 
     public TwitterMonitor(RestTemplate restTemplate) {
         this.restTemplate = restTemplate;
@@ -67,6 +75,8 @@ public class TwitterMonitor {
         preParseUserBan();
         //初始化预置解析用户备注列表信息
         preParseUserRemakes();
+        //缓存所有备注用户key
+        //remarkUserKeyList = redisCache.scanAllUserKeys();
     }
 
     @Scheduled(fixedRate = 1800) // 每1.5秒执行一次,每天消耗约57600条
@@ -402,11 +412,44 @@ public class TwitterMonitor {
 
                 StringBuilder messageBuilder = new StringBuilder(); // 使用 StringBuilder 进行拼接
                 //提及次数大于1
+
+                //todo 增加用户关注者轮询是否存在备注列表中
+                //命中备注列表
+                if(!StringUtils.isEmpty(user.getUserRemark())){
+                    messageBuilder.append("❗\uFE0F 备注列表: ").append(user.getUserShowName()).append("\n");
+                    messageBuilder.append("— — — — — — — — — — — — — — — — — — — — — —").append("\n");
+                }
+                //粉丝数阶梯提示
+                if(Long.parseLong(user.getFansNumber()) >10000){
+                    messageBuilder.append("❗ 粉丝数大于1w").append("\n");
+                    messageBuilder.append("— — — — — — — — — — — — — — — — — — — — — —").append("\n");
+                }
+                if(Long.parseLong(user.getFansNumber()) >20000){
+                    messageBuilder.append("❗❗ 粉丝数大于2w").append("\n");
+                    messageBuilder.append("— — — — — — — — — — — — — — — — — — — — — —").append("\n");
+                }
+                if(Long.parseLong(user.getFansNumber()) >50000){
+                    messageBuilder.append("❗❗❗ 粉丝数大于5w").append("\n");
+                    messageBuilder.append("— — — — — — — — — — — — — — — — — — — — — —").append("\n");
+                }
+                if(Long.parseLong(user.getFansNumber()) >100000){
+                    messageBuilder.append("❗❗❗❗ 粉丝数大于10w").append("\n");
+                    messageBuilder.append("— — — — — — — — — — — — — — — — — — — — — —").append("\n");
+                }
+                if(Long.parseLong(user.getFansNumber()) >150000){
+                    messageBuilder.append("❗❗❗❗❗ 粉丝数大于15w").append("\n");
+                    messageBuilder.append("— — — — — — — — — — — — — — — — — — — — — —").append("\n");
+                }
+                if(Long.parseLong(user.getFansNumber()) >200000){
+                    messageBuilder.append("❗❗❗❗❗❗ 粉丝数大于20w").append("\n");
+                    messageBuilder.append("— — — — — — — — — — — — — — — — — — — — — —").append("\n");
+                }
+
                 if(coin.getMentionUserList().size()>1){
                     messageBuilder.append("\uD83D\uDEA8 ca提及次数: ").append(coin.getMentionUserList().size()).append("\n");
                     messageBuilder.append("— — — — — — — — — — — — — — — — — — — — — —").append("\n");
                 }
-                messageBuilder.append("ca: ").append(coin.getCoinCa()).append("\n");
+                messageBuilder.append("ca: ").append("<code>").append(coin.getCoinCa()).append("</code>").append("\n");
                 messageBuilder.append("pump: ").append("https://pump.fun/coin/").append(coin.getCoinCa()).append("\n");
                 //https://gmgn.ai/sol/token/3GD2FWYkG2QGXCkN1nEf9TB1jsvt2zvUUEKEmFfgpump
                 messageBuilder.append("gmgn: ").append("https://gmgn.ai/sol/token/").append(coin.getCoinCa()).append("\n");
@@ -418,6 +461,7 @@ public class TwitterMonitor {
                 messageBuilder.append("作者: ").append(user.getUserName()).append("\n");
                 messageBuilder.append("粉丝数: ").append(user.getFansNumber()).append("\n");
                 messageBuilder.append("是否认证: ").append(user.getIsCertified()).append("\n");
+
                 if(!StringUtils.isEmpty(user.getUserRemark())){
                     JSONArray remarksArray = JSON.parseArray(user.getUserRemark());
                     for (int i = 0; i < remarksArray.size(); i++) {
@@ -430,6 +474,9 @@ public class TwitterMonitor {
                 messageBuilder.append("发布时间: ").append(DateHandleUtil.formatDate(DateHandleUtil.convertToDate2(createdDate))).append("\n");
                 //messageBuilder.append("搜索时间: ").append(nowTime).append("\n");
                 messageBuilder.append("推送时间: ").append(DateUtils.getTime()).append("\n");
+
+                //增加dream-bot机器人
+                telegramDreamBot.sendText(messageBuilder.toString());
                 telegramBot.sendText(messageBuilder.toString());
                 result = 1;
             } else {

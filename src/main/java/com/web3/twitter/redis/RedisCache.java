@@ -1,16 +1,12 @@
 package com.web3.twitter.redis;
 
-import java.util.Collection;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
+import java.util.*;
 import java.util.concurrent.TimeUnit;
+
+import com.web3.twitter.utils.SolanaContractValidator;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.redis.core.BoundSetOperations;
-import org.springframework.data.redis.core.HashOperations;
-import org.springframework.data.redis.core.RedisTemplate;
-import org.springframework.data.redis.core.ValueOperations;
+import org.springframework.data.redis.core.*;
 import org.springframework.stereotype.Component;
 
 /**
@@ -264,5 +260,29 @@ public class RedisCache
     public Collection<String> keys(final String pattern)
     {
         return redisTemplate.keys(pattern);
+    }
+
+
+    /**
+     * 使用 scan 方法获取 Redis 中所有的缓存键
+     *
+     * @return 所有缓存键
+     */
+    public List<String> scanAllUserKeys() {
+        List<String> keys = (List<String>) redisTemplate.execute((RedisCallback<List<String>>) connection -> {
+             List<String> keysTmp = new ArrayList<>();
+             Cursor<byte[]> cursor = connection.scan(new ScanOptions.ScanOptionsBuilder().match("*").count(1000).build());
+             while (cursor.hasNext()) {
+                     String key = new String(cursor.next());
+                     // 检查这个键是否是一个 Solana 合约或以 "pump" 结尾
+                     if (!StringUtils.isEmpty(key) &&
+                             !SolanaContractValidator.isSolanaContract(key)) {
+                         //只筛选为用户名的key
+                         keysTmp.add(key);
+                     }
+                 }
+             return keysTmp;
+        });
+        return keys;
     }
 }

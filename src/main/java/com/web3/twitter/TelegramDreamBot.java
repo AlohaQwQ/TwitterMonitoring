@@ -1,6 +1,5 @@
 package com.web3.twitter;
 
-import com.alibaba.fastjson2.JSON;
 import com.web3.twitter.redis.RedisCache;
 import com.web3.twitter.utils.LogUtils;
 import org.slf4j.Logger;
@@ -25,17 +24,14 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Component
-public class TelegramBot implements SpringLongPollingBot, LongPollingSingleThreadUpdateConsumer {
+public class TelegramDreamBot implements SpringLongPollingBot, LongPollingSingleThreadUpdateConsumer {
 
-    private static final Logger log = LoggerFactory.getLogger(TelegramBot.class);
+    private static final Logger log = LoggerFactory.getLogger(TelegramDreamBot.class);
 
     private static final List<String> CHAT_ID_LIST = new ArrayList<>();
 
     static {
-        CHAT_ID_LIST.add("-1002270508207");
-        CHAT_ID_LIST.add("-1002358331062");
-//        CHAT_ID_LIST.add("7146351054");
-//        CHAT_ID_LIST.add("-1002190498173");
+        CHAT_ID_LIST.add("-1002190498173");
 //        CHAT_ID_LIST.add("-4517558084");
     }
 
@@ -67,7 +63,7 @@ public class TelegramBot implements SpringLongPollingBot, LongPollingSingleThrea
             false
     );
 
-    public TelegramBot() {
+    public TelegramDreamBot() {
         telegramClient = new OkHttpTelegramClient(getBotToken());
     }
 
