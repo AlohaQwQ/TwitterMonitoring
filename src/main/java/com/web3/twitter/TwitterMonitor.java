@@ -303,7 +303,13 @@ public class TwitterMonitor {
                 // 使用 HtmlParserUtil 解析 og:image
                 if(!StringUtils.isEmpty(responseBody)){
                     String coinName = HtmlParserUtil.extractOgImage(responseBody, "meta[name=twitter:title]");
-                    String ogImageUrl = HtmlParserUtil.extractOgImage(responseBody, "meta[property=og:image]");
+                    if(StringUtils.isEmpty(coinName)){
+                        coinName = HtmlParserUtil.extractOgImage(responseBody, "meta[property=og:title]");
+                    }
+                    String ogImageUrl = HtmlParserUtil.extractOgImage(responseBody, "meta[name=twitter:image]");
+                    if(StringUtils.isEmpty(ogImageUrl)){
+                        ogImageUrl = HtmlParserUtil.extractOgImage(responseBody, "meta[property=og:image]");
+                    }
                     LogUtils.info("解析后的链接: {}", coinName + " | "+ogImageUrl);
                     return CompletableFuture.completedFuture(ogImageUrl);
                 }
@@ -505,18 +511,18 @@ public class TwitterMonitor {
                 messageBuilder.append("pump: ").append("https://pump.fun/coin/").append(coin.getCoinCa()).append("\n");
                 messageBuilder.append("— — — — — — — — — — — — — — — — — — — — — —").append("\n");
 
-                MonitorCoin monitorCoinInfo = getMonitorCoinInfo(coin.getCoinCa());
-                LogUtils.info("代币信息：{}",monitorCoinInfo);
-                if (Objects.nonNull(monitorCoinInfo)){
-                    messageBuilder.append("ca名称: ").append(monitorCoinInfo.getCoinName()).append("\n");
-                    messageBuilder.append("市值: ").append(monitorCoinInfo.getMarketValue()).append("\n");
-                    messageBuilder.append("进度: ").append(monitorCoinInfo.getCoinLaunchpad()).append("\n");
-                }
+//                MonitorCoin monitorCoinInfo = getMonitorCoinInfo(coin.getCoinCa());
+//                LogUtils.info("代币信息：{}",monitorCoinInfo);
+//                if (Objects.nonNull(monitorCoinInfo)){
+//                    messageBuilder.append("ca名称: ").append(monitorCoinInfo.getCoinName()).append("\n");
+//                    messageBuilder.append("市值: ").append(monitorCoinInfo.getMarketValue()).append("\n");
+//                    messageBuilder.append("进度: ").append(monitorCoinInfo.getCoinLaunchpad()).append("\n");
+//                }
 
                 //messageBuilder.append("ca名称: ").append(pumpCa).append("\n");
                 //messageBuilder.append("ca创建时间: ").append(pumpCa).append("\n");
 
-                messageBuilder.append("— — — — — — — — — — — — — — — — — — — — — —").append("\n");
+//                messageBuilder.append("— — — — — — — — — — — — — — — — — — — — — —").append("\n");
                 messageBuilder.append("twitter: ").append(tweetUrl).append("\n");
                 messageBuilder.append("作者: ").append(user.getUserName()).append("\n");
                 messageBuilder.append("粉丝数: ").append(user.getFansNumber()).append("\n");

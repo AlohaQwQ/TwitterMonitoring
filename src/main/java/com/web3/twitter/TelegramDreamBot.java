@@ -92,13 +92,12 @@ public class TelegramDreamBot implements SpringLongPollingBot, LongPollingSingle
                 e.printStackTrace();
             }
         });
-
     }
 
 
     @Override
     public String getBotToken() {
-        return "7907041466:AAF3wj6mI5-XH00a2k75lfBIAEmLIdSNOeQ";
+        return "7816953388:AAFDf_a2OgsWIAWgPjWc54P8eHtZYMJdQb4";
     }
 
     @Override
