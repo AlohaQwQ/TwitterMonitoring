@@ -28,8 +28,10 @@ import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
@@ -317,22 +319,31 @@ public class TwitterMonitor {
         return CompletableFuture.completedFuture("");
     }
 
-    public CompletableFuture<MonitorCoin> getMonitorCoinInfo(String ca) {
-        LogUtils.info("resolveShortLink-异步执行: {}", ca);
-        String url = "https://api.geckoterminal.com/api/v2/networks/solana/tokens/"+ca;
-        MonitorCoin coin;
+    public MonitorCoin getMonitorCoinInfo(String ca) {
+        LogUtils.info("getMonitorCoinInfo-异步执行: {}", ca);
+        String marketValueUrl = "https://gmgn.ai/defi/quotation/v1/sol/tokens/realtime_token_price?address="+ca+"&decimals="+ca;
+        String launchpadUrl = "https://gmgn.ai/api/v1/token_launchpad_info/sol/"+ca;
+        String coinNameUrl = "https://gmgn.ai/api/v1/token_info/sol/"+ca;
+        // 创建HttpHeaders对象
+        HttpHeaders headers = new HttpHeaders();
+        // 添加请求头
+        headers.add("Referer", "https://gmgn.ai/sol/token/"+ca);
+
+        HttpEntity<String> entity = new HttpEntity<>(null, headers);
+        MonitorCoin coin = new MonitorCoin();
         ResponseEntity<String> response = null;
         try {
-            response = restTemplate.exchange(url, HttpMethod.GET, null, String.class);
+            response = restTemplate.exchange(marketValueUrl, HttpMethod.GET, entity, String.class);
             if (response != null){
                 String responseBody = response.getBody();
-                LogUtils.info("获取代币信息成功: {}", responseBody);
-//                if(!StringUtils.isEmpty(responseBody)){
-//                    String coinName = HtmlParserUtil.extractOgImage(responseBody, "meta[name=twitter:title]");
-//                    String ogImageUrl = HtmlParserUtil.extractOgImage(responseBody, "meta[property=og:image]");
-//                    LogUtils.info("解析后的链接: {}", coinName + " | "+ogImageUrl);
-//                    return CompletableFuture.completedFuture(ogImageUrl);
-//                }
+                LogUtils.info("获取代币市值信息成功: {}", responseBody);
+                org.json.JSONObject jsonObject = new org.json.JSONObject(responseBody);
+                double aDouble = jsonObject.getJSONObject("data").getDouble("usd_price");
+                double convertedYuan = aDouble * 1000000000;
+                // 设置格式化规则，保留两位小数
+                DecimalFormat df = new DecimalFormat("#,##0.00");
+                String formattedYuan = df.format(convertedYuan);
+                coin.setMarketValue("$"+formattedYuan);
             } else {
                 LogUtils.error("获取代币信息失败: {}", ca);
             }
@@ -342,7 +353,46 @@ public class TwitterMonitor {
                 LogUtils.error("response: {}", response.getBody(), e);
             }
         }
-        return CompletableFuture.completedFuture(null);
+
+        try {
+            response = restTemplate.exchange(launchpadUrl, HttpMethod.GET, entity, String.class);
+            if (response != null){
+                String responseBody = response.getBody();
+                LogUtils.info("获取代币进度信息成功: {}", responseBody);
+                org.json.JSONObject jsonObject = new org.json.JSONObject(responseBody);
+                String progress = jsonObject.getJSONObject("data").getString("launchpad_progress");
+                double value = Double.parseDouble(progress);
+                int percentage = (int) Math.round(value * 100);
+                coin.setCoinLaunchpad(percentage+"%");
+            } else {
+                LogUtils.error("获取代币进度信息失败: {}", ca);
+            }
+        } catch (Exception e) {
+            LogUtils.error("获取代币进度信息失败: {}", ca, e);
+            if (response != null){
+                LogUtils.error("response: {}", response.getBody(), e);
+            }
+        }
+
+        try {
+            response = restTemplate.exchange(coinNameUrl, HttpMethod.GET, entity, String.class);
+            if (response != null){
+                String responseBody = response.getBody();
+                LogUtils.info("获取代币名称信息成功: {}", responseBody);
+                org.json.JSONObject jsonObject = new org.json.JSONObject(responseBody);
+                String name = jsonObject.getJSONObject("data").getString("name");
+                coin.setCoinName(name);
+            } else {
+                LogUtils.error("获取代币名称信息失败: {}", ca);
+            }
+        } catch (Exception e) {
+            LogUtils.error("获取代币名称信息失败: {}", ca, e);
+            if (response != null){
+                LogUtils.error("response: {}", response.getBody(), e);
+            }
+        }
+
+        return coin;
     }
 
 
@@ -452,6 +502,13 @@ public class TwitterMonitor {
                 //https://gmgn.ai/sol/token/3GD2FWYkG2QGXCkN1nEf9TB1jsvt2zvUUEKEmFfgpump
                 messageBuilder.append("ca: ").append("<code>").append(coin.getCoinCa()).append("</code>").append("\n");
                 messageBuilder.append("gmgn: ").append("https://gmgn.ai/sol/token/").append(coin.getCoinCa()).append("\n");
+                MonitorCoin monitorCoinInfo = getMonitorCoinInfo(coin.getCoinCa());
+                LogUtils.info("代币信息：{}",monitorCoinInfo);
+                if (Objects.nonNull(monitorCoinInfo)){
+                    messageBuilder.append("ca名称: ").append(monitorCoinInfo.getCoinName()).append("\n");
+                    messageBuilder.append("市值: ").append(monitorCoinInfo.getMarketValue()).append("\n");
+                    messageBuilder.append("进度: ").append(monitorCoinInfo.getCoinLaunchpad()).append("\n");
+                }
                 messageBuilder.append("pump: ").append("https://pump.fun/coin/").append(coin.getCoinCa()).append("\n");
 
                 //messageBuilder.append("ca名称: ").append(pumpCa).append("\n");

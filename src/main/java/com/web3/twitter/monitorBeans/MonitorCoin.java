@@ -29,6 +29,21 @@ public class MonitorCoin {
     private String createDate;
 
     /**
+     * 代币全称
+     */
+    private String coinFullName;
+
+    /**
+     * 代币市值
+     */
+    private String marketValue;
+
+    /**
+     * 代币进度
+     */
+    private String coinLaunchpad;
+
+    /**
      * 代币信息
      */
     private String coinDetail;
@@ -65,6 +80,30 @@ public class MonitorCoin {
         this.createDate = createDate;
     }
 
+    public String getCoinFullName() {
+        return coinFullName;
+    }
+
+    public void setCoinFullName(String coinFullName) {
+        this.coinFullName = coinFullName;
+    }
+
+    public String getMarketValue() {
+        return marketValue;
+    }
+
+    public void setMarketValue(String marketValue) {
+        this.marketValue = marketValue;
+    }
+
+    public String getCoinLaunchpad() {
+        return coinLaunchpad;
+    }
+
+    public void setCoinLaunchpad(String coinLaunchpad) {
+        this.coinLaunchpad = coinLaunchpad;
+    }
+
     public String getCoinDetail() {
         return coinDetail;
     }
@@ -80,6 +119,9 @@ public class MonitorCoin {
                 ", coinCa='" + coinCa + '\'' +
                 ", mentionUserList=" + mentionUserList +
                 ", createDate='" + createDate + '\'' +
+                ", coinFullName='" + coinFullName + '\'' +
+                ", marketValue='" + marketValue + '\'' +
+                ", coinLaunchpad='" + coinLaunchpad + '\'' +
                 ", coinDetail='" + coinDetail + '\'' +
                 '}';
     }
