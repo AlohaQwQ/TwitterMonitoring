@@ -502,6 +502,9 @@ public class TwitterMonitor {
                 //https://gmgn.ai/sol/token/3GD2FWYkG2QGXCkN1nEf9TB1jsvt2zvUUEKEmFfgpump
                 messageBuilder.append("ca: ").append("<code>").append(coin.getCoinCa()).append("</code>").append("\n");
                 messageBuilder.append("gmgn: ").append("https://gmgn.ai/sol/token/").append(coin.getCoinCa()).append("\n");
+                messageBuilder.append("pump: ").append("https://pump.fun/coin/").append(coin.getCoinCa()).append("\n");
+                messageBuilder.append("— — — — — — — — — — — — — — — — — — — — — —").append("\n");
+
                 MonitorCoin monitorCoinInfo = getMonitorCoinInfo(coin.getCoinCa());
                 LogUtils.info("代币信息：{}",monitorCoinInfo);
                 if (Objects.nonNull(monitorCoinInfo)){
@@ -509,7 +512,6 @@ public class TwitterMonitor {
                     messageBuilder.append("市值: ").append(monitorCoinInfo.getMarketValue()).append("\n");
                     messageBuilder.append("进度: ").append(monitorCoinInfo.getCoinLaunchpad()).append("\n");
                 }
-                messageBuilder.append("pump: ").append("https://pump.fun/coin/").append(coin.getCoinCa()).append("\n");
 
                 //messageBuilder.append("ca名称: ").append(pumpCa).append("\n");
                 //messageBuilder.append("ca创建时间: ").append(pumpCa).append("\n");
