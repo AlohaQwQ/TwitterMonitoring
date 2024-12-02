@@ -155,7 +155,7 @@ public class TwitterMonitor {
                                                                             fans = 6000;
                                                                         }
                                                                         //粉丝数大于3000
-                                                                        if(fans>5000){
+                                                                        if(fans>3000){
                                                                             //LogUtils.info("解析推特列表-userResults: {}", userResults);
                                                                             String userID = userResults.getResult().getRest_id();
                                                                             //LogUtils.info("解析推特列表-用户restId: {}", userID);
