@@ -20,6 +20,7 @@ import org.springframework.scheduling.annotation.Async;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 import org.springframework.web.client.RestTemplate;
+import org.springframework.web.util.UriComponentsBuilder;
 
 import javax.annotation.PostConstruct;
 import java.io.BufferedReader;
@@ -29,14 +30,13 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.text.DecimalFormat;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Objects;
+import java.util.*;
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+import java.util.stream.Collectors;
 
 @Component
 public class TwitterMonitor {
@@ -66,7 +66,7 @@ public class TwitterMonitor {
     /**
      * Redis备注列表用户key缓存List
      */
-    //private static List<String> remarkUserKeyList;
+    private static List<String> remarkUserKeyList;
 
     public TwitterMonitor(RestTemplate restTemplate) {
         this.restTemplate = restTemplate;
@@ -78,7 +78,7 @@ public class TwitterMonitor {
         //初始化预置解析用户备注列表信息
         preParseUserRemakes();
         //缓存所有备注用户key
-        //remarkUserKeyList = redisCache.scanAllUserKeys();
+        remarkUserKeyList = redisCache.scanAllUserKeys();
     }
 
     @Scheduled(fixedRate = 1800) // 每1.5秒执行一次,每天消耗约57600条
@@ -148,11 +148,13 @@ public class TwitterMonitor {
                                                                     User_results userResults = tweetTwitterResultResult.getCore().getUser_results();
                                                                     if (userResults != null) {
                                                                         //粉丝数
-                                                                        long fans = userResults.getResult().getRelationship_counts().getFollowers();
+                                                                        long fans;
                                                                         String userName = userResults.getResult().getCore().getScreen_name();
                                                                         //测试账号
                                                                         if(userName.contains("daxigua_qwq")){
                                                                             fans = 6000;
+                                                                        } else {
+                                                                            fans = userResults.getResult().getRelationship_counts().getFollowers();
                                                                         }
                                                                         //粉丝数大于3000
                                                                         if(fans>3000){
@@ -192,9 +194,23 @@ public class TwitterMonitor {
                                                                                 long updateTimeStamp = Long.parseLong(user.getUpdateTime());
                                                                                 long difference = currentTimeStamp - updateTimeStamp;
                                                                                 isGreaterThanTwoDays = difference > 2 * 24 * 60 * 60 * 1000;
-                                                                                //大于2天才需要更新用户信息
-                                                                                if (isGreaterThanTwoDays) {
-                                                                                    updateUserInfo(user, userID, userNameUtf8, userShowName, fans, verified);
+                                                                                //大于2天才需要更新用户信息和共同关注列表
+                                                                                //共同关注命中备注列表为空时更新
+                                                                                if (user.getFollowersYouKnowRemarkSet()==null ||
+                                                                                        user.getFollowersYouKnowRemarkSet().isEmpty() || isGreaterThanTwoDays) {
+                                                                                    // 异步更新用户共同关注列表
+                                                                                    updateUserFollowersYouKnow(user).thenAccept(monitorUser -> {
+                                                                                        if(monitorUser == null) {
+                                                                                            LogUtils.error("更新用户共同关注列表异常: {}", tweetUrl);
+                                                                                        } else {
+                                                                                            //更新用户信息
+                                                                                            updateUserInfo(user, userID, userNameUtf8, userShowName, fans, verified);
+                                                                                        }
+                                                                                    }).exceptionally(ex -> {
+                                                                                        LogUtils.error("更新用户共同关注列表失败: {}", tweetUrl, ex);
+                                                                                        updateUserInfo(user, userID, userNameUtf8, userShowName, fans, verified);
+                                                                                        return null; // 可处理异常或返回默认值
+                                                                                    });
                                                                                 }
                                                                             }
 
@@ -323,6 +339,126 @@ public class TwitterMonitor {
             }
         }
         return CompletableFuture.completedFuture("");
+    }
+
+    /**
+     * 异步获取共同关注者列表，需要authtoken。 获取共同关注者并缓存3天
+     * @param monitorUser
+     * @return
+     */
+    @Async("threadPoolTaskExecutor")
+    public CompletableFuture<MonitorUser> updateUserFollowersYouKnow(MonitorUser monitorUser) {
+        ResponseEntity<String> response = null;
+        String url = null;
+        try {
+            String nowTime = DateUtils.getTime();
+            LogUtils.info("updateUserFollowersYouKnow-异步执行: {}", nowTime);
+
+            if(!redisCache.hasKey("TwitterToken")){
+                LogUtils.error("获取推特共同关注者接口异常-推特token不存在");
+                return CompletableFuture.completedFuture(monitorUser);
+            }
+            String twitterToken = redisCache.getCacheObject("TwitterToken");
+            //twitterToken = "ed7f8aa5c2c0c6e8dad045db601955924c5a2d72";
+            if(StringUtils.isEmpty(twitterToken)){
+                LogUtils.error("获取推特共同关注者接口异常-推特token为空");
+                return CompletableFuture.completedFuture(monitorUser);
+            }
+
+            String variables = "{\"userId\": \"" + monitorUser.getUserID() + "\", \"count\": 20, \"includePromotedContent\": false}";
+
+            url = UriComponentsBuilder.fromHttpUrl("https://api.apidance.pro/graphql/FollowersYouKnow")
+                    .queryParam("variables", variables)
+                    .toUriString(); // 不使用 .encode()，避免不必要的编码
+
+
+            // 创建请求头
+            HttpHeaders headers = new HttpHeaders();
+            headers.setContentType(MediaType.APPLICATION_JSON);
+            headers.add("apikey", "u8gkbegljnrd8f9bz3ncpn206l68xw");
+            //headers.add("Host", "api.apidance.pro");
+            headers.add("AuthToken", twitterToken);
+
+            // 创建请求实体
+            HttpEntity<String> entity = new HttpEntity<>(headers);
+            // 发送 GET 请求
+            response = restTemplate.exchange(url, HttpMethod.GET, entity, String.class);
+            if (response != null && response.getStatusCode() == HttpStatus.OK) {
+                // 解析响应数据
+                JSONObject jsonObject = JSONObject.parseObject(response.getBody());
+                if (jsonObject == null) {
+                    LogUtils.error("获取推特共同关注者接口数据返回异常 | response:", response.getBody());
+                    return CompletableFuture.completedFuture(monitorUser);
+                }
+                // 获取应用列表
+                JSONObject data = jsonObject.getJSONObject("data");
+                if(data!=null) {
+                    JSONObject userJsonObject = data.getJSONObject("user");
+                    if (userJsonObject != null) {
+                        JSONObject timelineJsonObject = userJsonObject.getJSONObject("result").getJSONObject("timeline");
+                        if (timelineJsonObject.containsKey("timeline")) {
+                            //解析推特列表对象
+                            JSONObject timeline2JsonObject = timelineJsonObject.getJSONObject("timeline");
+                            if (timeline2JsonObject.containsKey("instructions")) {
+                                JSONArray instructionsArray = timeline2JsonObject.getJSONArray("instructions");
+                                String userEntries = null;
+                                for (int i = 0; i < instructionsArray.size(); i++) {
+                                    JSONObject arrayJSONObject = instructionsArray.getJSONObject(i);
+                                    if(arrayJSONObject.containsKey("entries")){
+                                        userEntries = arrayJSONObject.getString("entries");
+                                        break;
+                                    }
+                                }
+                                if(StringUtils.isEmpty(userEntries)){
+                                    LogUtils.error("获取推特共同关注者接口entries数据解析异常 | response:", response.getBody());
+                                    return CompletableFuture.completedFuture(monitorUser);
+                                }
+
+                                //解析共同关注者列表
+                                FollowerEntries followerEntries = JSON.parseObject(userEntries, FollowerEntries.class);
+                                if(followerEntries == null || followerEntries.getEntries() == null || followerEntries.getEntries().isEmpty()){
+                                    LogUtils.error("获取推特共同关注者接口 FollowerEntries数据解析异常 | response:", response.getBody());
+                                    return CompletableFuture.completedFuture(monitorUser);
+                                }
+                                //提取列表中所有用户名
+                                List<String> followersYouKnowList = new ArrayList<>();
+                                for (FollowerInfo followerInfo : followerEntries.getEntries()) {
+                                    FollowerLegacy followerLegacy = followerInfo.getContent().getItemContent().getUser_results().getResult().getLegacy();
+                                    if(followerLegacy!=null){
+                                        followersYouKnowList.add(followerLegacy.getScreenName());
+                                    }
+                                }
+                                monitorUser.setFollowersYouKnowList(followersYouKnowList);
+                                if(followersYouKnowList.isEmpty()){
+                                    LogUtils.error("获取推特共同关注者接口 提取共同关注列表异常 | response:", response.getBody());
+                                    return CompletableFuture.completedFuture(monitorUser);
+                                }
+                                Set<String> remarkUserKeySet = new HashSet<>(remarkUserKeyList); // 将 List 转换为 HashSet
+
+                                List<String> resultList = new ArrayList<>(followersYouKnowList);
+                                //仅保留共同关注者列表中包含备注列表中的元素
+                                resultList.retainAll(remarkUserKeyList);
+
+                                Set<String> matchedSet = followersYouKnowList.parallelStream()
+                                        .filter(remarkUserKeySet::contains)
+                                        .collect(Collectors.toSet());
+
+                                Set<String> intersectSet = followersYouKnowList.parallelStream().filter(
+                                        item-> remarkUserKeySet.contains(item)).collect(Collectors.toSet());
+
+                                monitorUser.setFollowersYouKnowRemarkSet(matchedSet);
+                            }
+                        }
+                    }
+                }
+            }
+        } catch (Exception e){
+            LogUtils.error("获取推特共同关注者接口异常-请求地址: {}", url, e);
+            if (response != null){
+                LogUtils.error("response: {}", response.getBody(), e);
+            }
+        }
+        return CompletableFuture.completedFuture(monitorUser);
     }
 
     public MonitorCoin getMonitorCoinInfo(String ca) {
@@ -469,47 +605,40 @@ public class TwitterMonitor {
                 StringBuilder messageBuilder = new StringBuilder(); // 使用 StringBuilder 进行拼接
                 //提及次数大于1
 
-                //todo 增加用户关注者轮询是否存在备注列表中
                 //命中备注列表
                 if(!StringUtils.isEmpty(user.getUserRemark())){
-                    messageBuilder.append("❗\uFE0F 备注列表: ").append(user.getUserShowName()).append("\n");
-                    messageBuilder.append("— — — — — — — — — — — — — — — — — — — — — —").append("\n");
+                    messageBuilder.append("⚡\uFE0F 命中备注列表: ").append(user.getUserShowName()).append("\n");
+                    messageBuilder.append("\n");
                 }
                 //粉丝数阶梯提示
                 if(Long.parseLong(user.getFansNumber()) >10000){
-                    messageBuilder.append("❗ 粉丝数大于1w").append("\n");
-                    messageBuilder.append("— — — — — — — — — — — — — — — — — — — — — —").append("\n");
+                    messageBuilder.append("┌ ❗ 粉丝数大于1w").append("\n");
                 }
                 if(Long.parseLong(user.getFansNumber()) >20000){
-                    messageBuilder.append("❗❗ 粉丝数大于2w").append("\n");
-                    messageBuilder.append("— — — — — — — — — — — — — — — — — — — — — —").append("\n");
+                    messageBuilder.append("├ ❗❗ 粉丝数大于2w").append("\n");
                 }
                 if(Long.parseLong(user.getFansNumber()) >50000){
-                    messageBuilder.append("❗❗❗ 粉丝数大于5w").append("\n");
-                    messageBuilder.append("— — — — — — — — — — — — — — — — — — — — — —").append("\n");
+                    messageBuilder.append("├ ❗❗❗ 粉丝数大于5w").append("\n");
                 }
                 if(Long.parseLong(user.getFansNumber()) >100000){
-                    messageBuilder.append("❗❗❗❗ 粉丝数大于10w").append("\n");
-                    messageBuilder.append("— — — — — — — — — — — — — — — — — — — — — —").append("\n");
+                    messageBuilder.append("├ ❗❗❗❗ 粉丝数大于10w").append("\n");
                 }
                 if(Long.parseLong(user.getFansNumber()) >150000){
-                    messageBuilder.append("❗❗❗❗❗ 粉丝数大于15w").append("\n");
-                    messageBuilder.append("— — — — — — — — — — — — — — — — — — — — — —").append("\n");
+                    messageBuilder.append("├ ❗❗❗❗❗ 粉丝数大于15w").append("\n");
                 }
                 if(Long.parseLong(user.getFansNumber()) >200000){
-                    messageBuilder.append("❗❗❗❗❗❗ 粉丝数大于20w").append("\n");
-                    messageBuilder.append("— — — — — — — — — — — — — — — — — — — — — —").append("\n");
+                    messageBuilder.append("└ ❗❗❗❗❗❗ 粉丝数大于20w").append("\n");
                 }
-
                 if(coin.getMentionUserList().size()>1){
-                    messageBuilder.append("\uD83D\uDEA8 ca提及次数: ").append(coin.getMentionUserList().size()).append("\n");
-                    messageBuilder.append("— — — — — — — — — — — — — — — — — — — — — —").append("\n");
+                    messageBuilder.append("\uD83D\uDD25 ca提及次数: ").append(coin.getMentionUserList().size()).append("\n");
                 }
+                messageBuilder.append("\n");
+
                 //https://gmgn.ai/sol/token/3GD2FWYkG2QGXCkN1nEf9TB1jsvt2zvUUEKEmFfgpump
-                messageBuilder.append("ca: ").append("<code>").append(coin.getCoinCa()).append("</code>").append("\n");
-                messageBuilder.append("gmgn: ").append("https://gmgn.ai/sol/token/").append(coin.getCoinCa()).append("\n");
-                messageBuilder.append("pump: ").append("https://pump.fun/coin/").append(coin.getCoinCa()).append("\n");
-                messageBuilder.append("— — — — — — — — — — — — — — — — — — — — — —").append("\n");
+                messageBuilder.append("┌ ca: ").append("<code>").append(coin.getCoinCa()).append("</code>").append("\n");
+                messageBuilder.append("├ gmgn: ").append("https://gmgn.ai/sol/token/").append(coin.getCoinCa()).append("\n");
+                messageBuilder.append("└ pump: ").append("https://pump.fun/coin/").append(coin.getCoinCa()).append("\n");
+                messageBuilder.append("\n");
 
 //                MonitorCoin monitorCoinInfo = getMonitorCoinInfo(coin.getCoinCa());
 //                LogUtils.info("代币信息：{}",monitorCoinInfo);
@@ -522,24 +651,63 @@ public class TwitterMonitor {
                 //messageBuilder.append("ca名称: ").append(pumpCa).append("\n");
                 //messageBuilder.append("ca创建时间: ").append(pumpCa).append("\n");
 
-//                messageBuilder.append("— — — — — — — — — — — — — — — — — — — — — —").append("\n");
-                messageBuilder.append("twitter: ").append(tweetUrl).append("\n");
-                messageBuilder.append("作者: ").append(user.getUserName()).append("\n");
-                messageBuilder.append("粉丝数: ").append(user.getFansNumber()).append("\n");
-                messageBuilder.append("是否认证: ").append(user.getIsCertified()).append("\n");
+                messageBuilder.append("┌ twitter: ").append(tweetUrl).append("\n");
+                messageBuilder.append("├ 作者: ").append(user.getUserName()).append("\n");
+                messageBuilder.append("├ 粉丝数: ").append(user.getFansNumber()).append("\n");
+                messageBuilder.append("└ 是否认证: ").append(user.getIsCertified()).append("\n");
+                messageBuilder.append("\n");
 
-                if(!StringUtils.isEmpty(user.getUserRemark())){
+                if (StringUtils.isNotEmpty(user.getUserRemark())) {
                     JSONArray remarksArray = JSON.parseArray(user.getUserRemark());
-                    for (int i = 0; i < remarksArray.size(); i++) {
-                        String remark = remarksArray.getString(i);
-                        messageBuilder.append("备注: ").append(remark).append("\n");
-                    }
+                    messageBuilder.append(remarksArray.stream()
+                            .map(remark -> {
+                                String symbol;
+                                int index = remarksArray.indexOf(remark);
+                                 if (index == remarksArray.size() - 1) {
+                                    symbol = "└ ";
+                                } else if (index == 0) {
+                                    symbol = "┌ ";
+                                }  else {
+                                    symbol = "├ ";
+                                }
+                                return symbol + "用户备注: " + remark;
+                            })
+                            .collect(Collectors.joining("\n")));
+                    messageBuilder.append("\n");
                 }
 
-                messageBuilder.append("— — — — — — — — — — — — — — — — — — — — — —").append("\n");
-                messageBuilder.append("发布时间: ").append(DateHandleUtil.formatDate(createdDate)).append("\n");
+                //拼接共同关注者命中备注列表信息
+                if (user.getFollowersYouKnowRemarkSet()!=null && !user.getFollowersYouKnowRemarkSet().isEmpty()) {
+                    user.getFollowersYouKnowRemarkSet().parallelStream()
+                            .filter(redisCache::hasKey) // 仅保留在缓存中的键
+                            .map(redisCache::getCacheObject) // 获取用户字符串
+                            .map(Object::toString) // 转换为字符串
+                            .map(userString -> JSON.parseObject(userString, MonitorUser.class)) // 转换为 MonitorUser 对象
+                            .filter(remarkUser -> !StringUtils.isEmpty(remarkUser.getUserRemark())) // 过滤掉没有备注的用户
+                            .flatMap(remarkUser -> {
+                                JSONArray remarksArray = JSON.parseArray(remarkUser.getUserRemark());
+                                return remarksArray.stream()
+                                        .map(userRemark -> {
+                                            String symbol;
+                                            int index = remarksArray.indexOf(userRemark);
+                                            if (index == remarksArray.size() - 1) {
+                                                symbol = "└ ";
+                                            } else if (index == 0) {
+                                                symbol = "┌ ";
+                                            } else {
+                                                symbol = "├ ";
+                                            }
+                                            return symbol + "关注者备注: " + userRemark + "\n";
+                                        });
+                            })
+                            .forEach(messageBuilder::append); // 将结果添加到 messageBuilder
+                }
+
+                messageBuilder.append("\n");
+
+                messageBuilder.append("┌发布时间: ").append(DateHandleUtil.formatDate(createdDate)).append("\n");
                 //messageBuilder.append("搜索时间: ").append(nowTime).append("\n");
-                messageBuilder.append("推送时间: ").append(DateUtils.getTime()).append("\n");
+                messageBuilder.append("└ 推送时间: ").append(DateUtils.getTime()).append("\n");
 
                 //增加dream-bot机器人
                 telegramDreamBot.sendText(messageBuilder.toString());

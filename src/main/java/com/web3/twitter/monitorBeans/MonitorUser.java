@@ -1,6 +1,9 @@
 package com.web3.twitter.monitorBeans;
 
 
+import java.util.List;
+import java.util.Set;
+
 /**
  * 推特用户数据解析bean
  */
@@ -50,6 +53,21 @@ public class MonitorUser {
      * 用户分组
      */
     private String userGroup;
+
+    /**
+     * 用户等级
+     */
+    private String userLevel;
+
+    /**
+     * 共同关注用户名集合List
+     */
+    private List<String> followersYouKnowList;
+
+    /**
+     * 共同关注用户名命中备注列表集合List
+     */
+    private Set<String> followersYouKnowRemarkSet;
 
     /**
      * 黑名单
@@ -146,6 +164,30 @@ public class MonitorUser {
         this.isBan = isBan;
     }
 
+    public String getUserLevel() {
+        return userLevel;
+    }
+
+    public void setUserLevel(String userLevel) {
+        this.userLevel = userLevel;
+    }
+
+    public List<String> getFollowersYouKnowList() {
+        return followersYouKnowList;
+    }
+
+    public void setFollowersYouKnowList(List<String> followersYouKnowList) {
+        this.followersYouKnowList = followersYouKnowList;
+    }
+
+    public Set<String> getFollowersYouKnowRemarkSet() {
+        return followersYouKnowRemarkSet;
+    }
+
+    public void setFollowersYouKnowRemarkSet(Set<String> followersYouKnowRemarkSet) {
+        this.followersYouKnowRemarkSet = followersYouKnowRemarkSet;
+    }
+
     public String getUpdateTime() {
         return updateTime;
     }
@@ -174,6 +216,9 @@ public class MonitorUser {
                 ", compareAccount='" + compareAccount + '\'' +
                 ", userRemark='" + userRemark + '\'' +
                 ", userGroup='" + userGroup + '\'' +
+                ", userLevel='" + userLevel + '\'' +
+                ", followersYouKnowList=" + followersYouKnowList +
+                ", followersYouKnowRemarkSet=" + followersYouKnowRemarkSet +
                 ", isBan='" + isBan + '\'' +
                 ", updateTime='" + updateTime + '\'' +
                 ", createTime='" + createTime + '\'' +
