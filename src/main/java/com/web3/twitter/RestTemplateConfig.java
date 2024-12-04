@@ -28,6 +28,7 @@ public class RestTemplateConfig {
 //        httpRequestFactory.setConnectTimeout(35000);
 //
 //        if(enableProxy){
+
 //            SocketAddress address = new InetSocketAddress(host, port);
 //            Proxy proxy = new Proxy(Proxy.Type.HTTP, address);
 //            httpRequestFactory.setProxy(proxy);

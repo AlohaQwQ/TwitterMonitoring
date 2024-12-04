@@ -181,6 +181,20 @@ public class TwitterMonitor {
                                                                             if (!redisCache.hasKey(userNameUtf8)) {
                                                                                 user = new MonitorUser();
                                                                                 user.setCreateTime(String.valueOf(System.currentTimeMillis()));
+                                                                                user.setUserID(userID);
+                                                                                // 异步更新用户共同关注列表
+                                                                                updateUserFollowersYouKnow(user).thenAccept(monitorUser -> {
+                                                                                    if(monitorUser == null) {
+                                                                                        LogUtils.error("更新用户共同关注列表异常: {}", tweetUrl);
+                                                                                    } else {
+                                                                                        //更新用户信息
+                                                                                        updateUserInfo(user, userID, userNameUtf8, userShowName, fans, verified);
+                                                                                    }
+                                                                                }).exceptionally(ex -> {
+                                                                                    LogUtils.error("更新用户共同关注列表失败: {}", tweetUrl, ex);
+                                                                                    updateUserInfo(user, userID, userNameUtf8, userShowName, fans, verified);
+                                                                                    return null; // 可处理异常或返回默认值
+                                                                                });
                                                                                 updateUserInfo(user, userID, userNameUtf8, userShowName, fans, verified);
                                                                             } else {
                                                                                 String userString = redisCache.getCacheObject(userNameUtf8);
@@ -364,11 +378,15 @@ public class TwitterMonitor {
                 LogUtils.error("获取推特共同关注者接口异常-推特token为空");
                 return CompletableFuture.completedFuture(monitorUser);
             }
-
-            String variables = "{\"userId\": \"" + monitorUser.getUserID() + "\", \"count\": 20, \"includePromotedContent\": false}";
+            if(StringUtils.isEmpty(monitorUser.getUserID())){
+                LogUtils.error("获取推特共同关注者接口异常-userId为空");
+                return CompletableFuture.completedFuture(monitorUser);
+            }
+            String variables = "{\"count\": 20, \"userId\": \"" + monitorUser.getUserID() + "\",\"includePromotedContent\": false}";
 
             url = UriComponentsBuilder.fromHttpUrl("https://api.apidance.pro/graphql/FollowersYouKnow")
                     .queryParam("variables", variables)
+                    .encode()
                     .toUriString(); // 不使用 .encode()，避免不必要的编码
 
 
@@ -565,7 +583,7 @@ public class TwitterMonitor {
                     // 裁剪ca字符串
                     startIndex += coinText.length();
                     pumpCa = fullText[0].substring(startIndex);
-                    LogUtils.error("解析推文-裁剪至末尾字符串: {}", pumpCa);
+                    LogUtils.info("解析推文-裁剪至末尾字符串: {}", pumpCa);
                     //return result;
                 }
                 if(StringUtils.isEmpty(pumpCa)){
