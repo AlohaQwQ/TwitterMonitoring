@@ -13,79 +13,79 @@ import java.util.List;
  */
 public class FollowerLegacy {
 
-    private boolean canDm;
-    private boolean canMediaTag;
-    private String createdAt;
-    private boolean defaultProfile;
-    private boolean defaultProfileImage;
+    private boolean can_dm;
+    private boolean can_media_tag;
+    private String created_at;
+    private boolean default_profile;
+    private boolean default_profile_image;
     private String description;
-    private int fastFollowersCount;
-    private int favouritesCount;
-    private int followersCount;
+    private int fast_followers_count;
+    private int favourites_count;
+    private int followers_count;
     private boolean following;
-    private int friendsCount;
-    private boolean hasCustomTimelines;
-    private boolean isTranslator;
-    private int listedCount;
+    private int friends_count;
+    private boolean has_custom_timelines;
+    private boolean is_translator;
+    private int listed_count;
     private String location;
-    private int mediaCount;
+    private int media_count;
     private String name;
-    private int normalFollowersCount;
-    private List<String> pinnedTweetIdsStr;
-    private boolean possiblySensitive;
-    private String profileBannerUrl;
-    private String profileImageUrlHttps;
-    private String profileInterstitialType;
+    private int normal_followers_count;
+    private List<String> pinned_tweet_ids_str;
+    private boolean possibly_sensitive;
+    private String profile_banner_url;
+    private String profile_image_url_https;
+    private String profile_interstitial_type;
 
     /**
      * 用户名
      */
-    private String screenName;
-    private int statusesCount;
-    private String translatorType;
+    private String screen_name;
+    private int statuses_count;
+    private String translator_type;
     private String url;
     private boolean verified;
-    private boolean wantRetweets;
-    private List<String> withheldInCountries;
+    private boolean want_retweets;
+    private List<String> withheld_in_countries;
 
-    public boolean isCanDm() {
-        return canDm;
+    public boolean isCan_dm() {
+        return can_dm;
     }
 
-    public void setCanDm(boolean canDm) {
-        this.canDm = canDm;
+    public void setCan_dm(boolean can_dm) {
+        this.can_dm = can_dm;
     }
 
-    public boolean isCanMediaTag() {
-        return canMediaTag;
+    public boolean isCan_media_tag() {
+        return can_media_tag;
     }
 
-    public void setCanMediaTag(boolean canMediaTag) {
-        this.canMediaTag = canMediaTag;
+    public void setCan_media_tag(boolean can_media_tag) {
+        this.can_media_tag = can_media_tag;
     }
 
-    public String getCreatedAt() {
-        return createdAt;
+    public String getCreated_at() {
+        return created_at;
     }
 
-    public void setCreatedAt(String createdAt) {
-        this.createdAt = createdAt;
+    public void setCreated_at(String created_at) {
+        this.created_at = created_at;
     }
 
-    public boolean isDefaultProfile() {
-        return defaultProfile;
+    public boolean isDefault_profile() {
+        return default_profile;
     }
 
-    public void setDefaultProfile(boolean defaultProfile) {
-        this.defaultProfile = defaultProfile;
+    public void setDefault_profile(boolean default_profile) {
+        this.default_profile = default_profile;
     }
 
-    public boolean isDefaultProfileImage() {
-        return defaultProfileImage;
+    public boolean isDefault_profile_image() {
+        return default_profile_image;
     }
 
-    public void setDefaultProfileImage(boolean defaultProfileImage) {
-        this.defaultProfileImage = defaultProfileImage;
+    public void setDefault_profile_image(boolean default_profile_image) {
+        this.default_profile_image = default_profile_image;
     }
 
     public String getDescription() {
@@ -96,28 +96,28 @@ public class FollowerLegacy {
         this.description = description;
     }
 
-    public int getFastFollowersCount() {
-        return fastFollowersCount;
+    public int getFast_followers_count() {
+        return fast_followers_count;
     }
 
-    public void setFastFollowersCount(int fastFollowersCount) {
-        this.fastFollowersCount = fastFollowersCount;
+    public void setFast_followers_count(int fast_followers_count) {
+        this.fast_followers_count = fast_followers_count;
     }
 
-    public int getFavouritesCount() {
-        return favouritesCount;
+    public int getFavourites_count() {
+        return favourites_count;
     }
 
-    public void setFavouritesCount(int favouritesCount) {
-        this.favouritesCount = favouritesCount;
+    public void setFavourites_count(int favourites_count) {
+        this.favourites_count = favourites_count;
     }
 
-    public int getFollowersCount() {
-        return followersCount;
+    public int getFollowers_count() {
+        return followers_count;
     }
 
-    public void setFollowersCount(int followersCount) {
-        this.followersCount = followersCount;
+    public void setFollowers_count(int followers_count) {
+        this.followers_count = followers_count;
     }
 
     public boolean isFollowing() {
@@ -128,36 +128,36 @@ public class FollowerLegacy {
         this.following = following;
     }
 
-    public int getFriendsCount() {
-        return friendsCount;
+    public int getFriends_count() {
+        return friends_count;
     }
 
-    public void setFriendsCount(int friendsCount) {
-        this.friendsCount = friendsCount;
+    public void setFriends_count(int friends_count) {
+        this.friends_count = friends_count;
     }
 
-    public boolean isHasCustomTimelines() {
-        return hasCustomTimelines;
+    public boolean isHas_custom_timelines() {
+        return has_custom_timelines;
     }
 
-    public void setHasCustomTimelines(boolean hasCustomTimelines) {
-        this.hasCustomTimelines = hasCustomTimelines;
+    public void setHas_custom_timelines(boolean has_custom_timelines) {
+        this.has_custom_timelines = has_custom_timelines;
     }
 
-    public boolean isTranslator() {
-        return isTranslator;
+    public boolean isIs_translator() {
+        return is_translator;
     }
 
-    public void setTranslator(boolean translator) {
-        isTranslator = translator;
+    public void setIs_translator(boolean is_translator) {
+        this.is_translator = is_translator;
     }
 
-    public int getListedCount() {
-        return listedCount;
+    public int getListed_count() {
+        return listed_count;
     }
 
-    public void setListedCount(int listedCount) {
-        this.listedCount = listedCount;
+    public void setListed_count(int listed_count) {
+        this.listed_count = listed_count;
     }
 
     public String getLocation() {
@@ -168,12 +168,12 @@ public class FollowerLegacy {
         this.location = location;
     }
 
-    public int getMediaCount() {
-        return mediaCount;
+    public int getMedia_count() {
+        return media_count;
     }
 
-    public void setMediaCount(int mediaCount) {
-        this.mediaCount = mediaCount;
+    public void setMedia_count(int media_count) {
+        this.media_count = media_count;
     }
 
     public String getName() {
@@ -184,76 +184,76 @@ public class FollowerLegacy {
         this.name = name;
     }
 
-    public int getNormalFollowersCount() {
-        return normalFollowersCount;
+    public int getNormal_followers_count() {
+        return normal_followers_count;
     }
 
-    public void setNormalFollowersCount(int normalFollowersCount) {
-        this.normalFollowersCount = normalFollowersCount;
+    public void setNormal_followers_count(int normal_followers_count) {
+        this.normal_followers_count = normal_followers_count;
     }
 
-    public List<String> getPinnedTweetIdsStr() {
-        return pinnedTweetIdsStr;
+    public List<String> getPinned_tweet_ids_str() {
+        return pinned_tweet_ids_str;
     }
 
-    public void setPinnedTweetIdsStr(List<String> pinnedTweetIdsStr) {
-        this.pinnedTweetIdsStr = pinnedTweetIdsStr;
+    public void setPinned_tweet_ids_str(List<String> pinned_tweet_ids_str) {
+        this.pinned_tweet_ids_str = pinned_tweet_ids_str;
     }
 
-    public boolean isPossiblySensitive() {
-        return possiblySensitive;
+    public boolean isPossibly_sensitive() {
+        return possibly_sensitive;
     }
 
-    public void setPossiblySensitive(boolean possiblySensitive) {
-        this.possiblySensitive = possiblySensitive;
+    public void setPossibly_sensitive(boolean possibly_sensitive) {
+        this.possibly_sensitive = possibly_sensitive;
     }
 
-    public String getProfileBannerUrl() {
-        return profileBannerUrl;
+    public String getProfile_banner_url() {
+        return profile_banner_url;
     }
 
-    public void setProfileBannerUrl(String profileBannerUrl) {
-        this.profileBannerUrl = profileBannerUrl;
+    public void setProfile_banner_url(String profile_banner_url) {
+        this.profile_banner_url = profile_banner_url;
     }
 
-    public String getProfileImageUrlHttps() {
-        return profileImageUrlHttps;
+    public String getProfile_image_url_https() {
+        return profile_image_url_https;
     }
 
-    public void setProfileImageUrlHttps(String profileImageUrlHttps) {
-        this.profileImageUrlHttps = profileImageUrlHttps;
+    public void setProfile_image_url_https(String profile_image_url_https) {
+        this.profile_image_url_https = profile_image_url_https;
     }
 
-    public String getProfileInterstitialType() {
-        return profileInterstitialType;
+    public String getProfile_interstitial_type() {
+        return profile_interstitial_type;
     }
 
-    public void setProfileInterstitialType(String profileInterstitialType) {
-        this.profileInterstitialType = profileInterstitialType;
+    public void setProfile_interstitial_type(String profile_interstitial_type) {
+        this.profile_interstitial_type = profile_interstitial_type;
     }
 
-    public String getScreenName() {
-        return screenName;
+    public String getScreen_name() {
+        return screen_name;
     }
 
-    public void setScreenName(String screenName) {
-        this.screenName = screenName;
+    public void setScreen_name(String screen_name) {
+        this.screen_name = screen_name;
     }
 
-    public int getStatusesCount() {
-        return statusesCount;
+    public int getStatuses_count() {
+        return statuses_count;
     }
 
-    public void setStatusesCount(int statusesCount) {
-        this.statusesCount = statusesCount;
+    public void setStatuses_count(int statuses_count) {
+        this.statuses_count = statuses_count;
     }
 
-    public String getTranslatorType() {
-        return translatorType;
+    public String getTranslator_type() {
+        return translator_type;
     }
 
-    public void setTranslatorType(String translatorType) {
-        this.translatorType = translatorType;
+    public void setTranslator_type(String translator_type) {
+        this.translator_type = translator_type;
     }
 
     public String getUrl() {
@@ -272,55 +272,55 @@ public class FollowerLegacy {
         this.verified = verified;
     }
 
-    public boolean isWantRetweets() {
-        return wantRetweets;
+    public boolean isWant_retweets() {
+        return want_retweets;
     }
 
-    public void setWantRetweets(boolean wantRetweets) {
-        this.wantRetweets = wantRetweets;
+    public void setWant_retweets(boolean want_retweets) {
+        this.want_retweets = want_retweets;
     }
 
-    public List<String> getWithheldInCountries() {
-        return withheldInCountries;
+    public List<String> getWithheld_in_countries() {
+        return withheld_in_countries;
     }
 
-    public void setWithheldInCountries(List<String> withheldInCountries) {
-        this.withheldInCountries = withheldInCountries;
+    public void setWithheld_in_countries(List<String> withheld_in_countries) {
+        this.withheld_in_countries = withheld_in_countries;
     }
 
     @Override
     public String toString() {
         return "FollowerLegacy{" +
-                "canDm=" + canDm +
-                ", canMediaTag=" + canMediaTag +
-                ", createdAt='" + createdAt + '\'' +
-                ", defaultProfile=" + defaultProfile +
-                ", defaultProfileImage=" + defaultProfileImage +
+                "can_dm=" + can_dm +
+                ", can_media_tag=" + can_media_tag +
+                ", created_at='" + created_at + '\'' +
+                ", default_profile=" + default_profile +
+                ", default_profile_image=" + default_profile_image +
                 ", description='" + description + '\'' +
-                ", fastFollowersCount=" + fastFollowersCount +
-                ", favouritesCount=" + favouritesCount +
-                ", followersCount=" + followersCount +
+                ", fast_followers_count=" + fast_followers_count +
+                ", favourites_count=" + favourites_count +
+                ", followers_count=" + followers_count +
                 ", following=" + following +
-                ", friendsCount=" + friendsCount +
-                ", hasCustomTimelines=" + hasCustomTimelines +
-                ", isTranslator=" + isTranslator +
-                ", listedCount=" + listedCount +
+                ", friends_count=" + friends_count +
+                ", has_custom_timelines=" + has_custom_timelines +
+                ", is_translator=" + is_translator +
+                ", listed_count=" + listed_count +
                 ", location='" + location + '\'' +
-                ", mediaCount=" + mediaCount +
+                ", media_count=" + media_count +
                 ", name='" + name + '\'' +
-                ", normalFollowersCount=" + normalFollowersCount +
-                ", pinnedTweetIdsStr=" + pinnedTweetIdsStr +
-                ", possiblySensitive=" + possiblySensitive +
-                ", profileBannerUrl='" + profileBannerUrl + '\'' +
-                ", profileImageUrlHttps='" + profileImageUrlHttps + '\'' +
-                ", profileInterstitialType='" + profileInterstitialType + '\'' +
-                ", screenName='" + screenName + '\'' +
-                ", statusesCount=" + statusesCount +
-                ", translatorType='" + translatorType + '\'' +
+                ", normal_followers_count=" + normal_followers_count +
+                ", pinned_tweet_ids_str=" + pinned_tweet_ids_str +
+                ", possibly_sensitive=" + possibly_sensitive +
+                ", profile_banner_url='" + profile_banner_url + '\'' +
+                ", profile_image_url_https='" + profile_image_url_https + '\'' +
+                ", profile_interstitial_type='" + profile_interstitial_type + '\'' +
+                ", screen_name='" + screen_name + '\'' +
+                ", statuses_count=" + statuses_count +
+                ", translator_type='" + translator_type + '\'' +
                 ", url='" + url + '\'' +
                 ", verified=" + verified +
-                ", wantRetweets=" + wantRetweets +
-                ", withheldInCountries=" + withheldInCountries +
+                ", want_retweets=" + want_retweets +
+                ", withheld_in_countries=" + withheld_in_countries +
                 '}';
     }
 }

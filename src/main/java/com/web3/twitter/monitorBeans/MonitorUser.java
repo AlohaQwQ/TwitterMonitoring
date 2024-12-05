@@ -62,7 +62,7 @@ public class MonitorUser {
     /**
      * 共同关注用户名集合List
      */
-    private List<String> followersYouKnowList;
+    //private List<String> followersYouKnowList;
 
     /**
      * 共同关注用户名命中备注列表集合List
@@ -172,14 +172,6 @@ public class MonitorUser {
         this.userLevel = userLevel;
     }
 
-    public List<String> getFollowersYouKnowList() {
-        return followersYouKnowList;
-    }
-
-    public void setFollowersYouKnowList(List<String> followersYouKnowList) {
-        this.followersYouKnowList = followersYouKnowList;
-    }
-
     public Set<String> getFollowersYouKnowRemarkSet() {
         return followersYouKnowRemarkSet;
     }
@@ -217,7 +209,7 @@ public class MonitorUser {
                 ", userRemark='" + userRemark + '\'' +
                 ", userGroup='" + userGroup + '\'' +
                 ", userLevel='" + userLevel + '\'' +
-                ", followersYouKnowList=" + followersYouKnowList +
+//                ", followersYouKnowList=" + followersYouKnowList +
                 ", followersYouKnowRemarkSet=" + followersYouKnowRemarkSet +
                 ", isBan='" + isBan + '\'' +
                 ", updateTime='" + updateTime + '\'' +

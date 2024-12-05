@@ -4,6 +4,9 @@ public class FollowerContent {
 
     private String __typename;
     private String entryType;
+    private String cursorType;
+    private String value;
+
     private FollowerItemContent itemContent;
 
     public String get__typename() {
@@ -28,5 +31,21 @@ public class FollowerContent {
 
     public void setItemContent(FollowerItemContent itemContent) {
         this.itemContent = itemContent;
+    }
+
+    public String getCursorType() {
+        return cursorType;
+    }
+
+    public void setCursorType(String cursorType) {
+        this.cursorType = cursorType;
+    }
+
+    public String getValue() {
+        return value;
+    }
+
+    public void setValue(String value) {
+        this.value = value;
     }
 }

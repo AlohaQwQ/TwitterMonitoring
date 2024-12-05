@@ -18,6 +18,7 @@ import org.telegram.telegrambots.meta.api.objects.Update;
 import org.telegram.telegrambots.meta.api.objects.User;
 import org.telegram.telegrambots.meta.api.objects.chat.Chat;
 import org.telegram.telegrambots.meta.api.objects.message.Message;
+import org.telegram.telegrambots.meta.api.objects.replykeyboard.InlineKeyboardMarkup;
 import org.telegram.telegrambots.meta.exceptions.TelegramApiException;
 import org.telegram.telegrambots.meta.generics.TelegramClient;
 
@@ -71,7 +72,7 @@ public class TelegramBot implements SpringLongPollingBot, LongPollingSingleThrea
         telegramClient = new OkHttpTelegramClient(getBotToken());
     }
 
-    public void sendText(String text) {
+    public void sendText(String text, InlineKeyboardMarkup replyMarkup) {
 //        log.info("发送消息参数: {}.", text);
 //        if (!redisCache.hasKey("chat_id")){
 //            LogUtils.error("没有获取到chatID: {}.", text);
@@ -88,6 +89,7 @@ public class TelegramBot implements SpringLongPollingBot, LongPollingSingleThrea
             responseMessage.setChat(GROUP_CHAT);
             responseMessage.setFrom(TEST_USER);
             responseMessage.setText(text);
+            responseMessage.setReplyMarkup(replyMarkup);
             Message parsedMessage = new Message();
             try {
                 telegramClient.execute(method);
