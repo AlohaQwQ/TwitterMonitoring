@@ -167,7 +167,7 @@ public class TwitterMonitor {
                                                                             fans = userResults.getResult().getRelationship_counts().getFollowers();
                                                                         }
                                                                         //粉丝数大于3000
-                                                                        if(fans>3000){
+                                                                        if(fans>2000){
                                                                             //LogUtils.info("解析推特列表-userResults: {}", userResults);
                                                                             String userID = userResults.getResult().getRest_id();
                                                                             //LogUtils.info("解析推特列表-用户restId: {}", userID);
@@ -530,43 +530,43 @@ public class TwitterMonitor {
             }
         }
 
-        try {
-            response = restTemplate.exchange(launchpadUrl, HttpMethod.GET, entity, String.class);
-            if (response != null){
-                String responseBody = response.getBody();
-                LogUtils.info("获取代币进度信息成功: {}", responseBody);
-                org.json.JSONObject jsonObject = new org.json.JSONObject(responseBody);
-                String progress = jsonObject.getJSONObject("data").getString("launchpad_progress");
-                double value = Double.parseDouble(progress);
-                int percentage = (int) Math.round(value * 100);
-                coin.setCoinLaunchpad(percentage+"%");
-            } else {
-                LogUtils.error("获取代币进度信息失败: {}", ca);
-            }
-        } catch (Exception e) {
-            LogUtils.error("获取代币进度信息失败: {}", ca, e);
-            if (StringUtils.isNotEmpty(responseString)){
-                LogUtils.error("response: {}", responseString, e);
-            }
-        }
-
-        try {
-            response = restTemplate.exchange(coinNameUrl, HttpMethod.GET, entity, String.class);
-            if (response != null){
-                String responseBody = response.getBody();
-                LogUtils.info("获取代币名称信息成功: {}", responseBody);
-                org.json.JSONObject jsonObject = new org.json.JSONObject(responseBody);
-                String name = jsonObject.getJSONObject("data").getString("name");
-                coin.setCoinName(name);
-            } else {
-                LogUtils.error("获取代币名称信息失败: {}", ca);
-            }
-        } catch (Exception e) {
-            LogUtils.error("获取代币名称信息失败: {}", ca, e);
-            if (StringUtils.isNotEmpty(responseString)){
-                LogUtils.error("response: {}", responseString, e);
-            }
-        }
+//        try {
+//            response = restTemplate.exchange(launchpadUrl, HttpMethod.GET, entity, String.class);
+//            if (response != null){
+//                String responseBody = response.getBody();
+//                LogUtils.info("获取代币进度信息成功: {}", responseBody);
+//                org.json.JSONObject jsonObject = new org.json.JSONObject(responseBody);
+//                String progress = jsonObject.getJSONObject("data").getString("launchpad_progress");
+//                double value = Double.parseDouble(progress);
+//                int percentage = (int) Math.round(value * 100);
+//                coin.setCoinLaunchpad(percentage+"%");
+//            } else {
+//                LogUtils.error("获取代币进度信息失败: {}", ca);
+//            }
+//        } catch (Exception e) {
+//            LogUtils.error("获取代币进度信息失败: {}", ca, e);
+//            if (StringUtils.isNotEmpty(responseString)){
+//                LogUtils.error("response: {}", responseString, e);
+//            }
+//        }
+//
+//        try {
+//            response = restTemplate.exchange(coinNameUrl, HttpMethod.GET, entity, String.class);
+//            if (response != null){
+//                String responseBody = response.getBody();
+//                LogUtils.info("获取代币名称信息成功: {}", responseBody);
+//                org.json.JSONObject jsonObject = new org.json.JSONObject(responseBody);
+//                String name = jsonObject.getJSONObject("data").getString("name");
+//                coin.setCoinName(name);
+//            } else {
+//                LogUtils.error("获取代币名称信息失败: {}", ca);
+//            }
+//        } catch (Exception e) {
+//            LogUtils.error("获取代币名称信息失败: {}", ca, e);
+//            if (StringUtils.isNotEmpty(responseString)){
+//                LogUtils.error("response: {}", responseString, e);
+//            }
+//        }
 
         return coin;
     }
@@ -646,27 +646,30 @@ public class TwitterMonitor {
                 }
                 //粉丝数阶梯提示
                 if(Long.parseLong(user.getFansNumber()) >10000){
-                    messageBuilder.append("┌❗粉丝数大于1w").append("\n");
-                }
-                if(Long.parseLong(user.getFansNumber()) >20000){
-                    messageBuilder.append("├❗粉丝数大于2w").append("\n");
-                }
-                if(Long.parseLong(user.getFansNumber()) >50000){
-                    messageBuilder.append("├❗粉丝数大于5w").append("\n");
+                    messageBuilder.append("┌❗粉丝数大于1w");
+                    if(Long.parseLong(user.getFansNumber()) >20000){
+                        messageBuilder.append("->2w");
+                    }
+                    if(Long.parseLong(user.getFansNumber()) >50000){
+                        messageBuilder.append("->5w");
+                    }
+                    messageBuilder.append("\n\n");
                 }
                 if(Long.parseLong(user.getFansNumber()) >100000){
-                    messageBuilder.append("├❗粉丝数大于10w").append("\n");
+                    messageBuilder.append("└❗粉丝数大于10w");
+                    if(Long.parseLong(user.getFansNumber()) >150000){
+                        messageBuilder.append("->15w");
+                    }
+                    if(Long.parseLong(user.getFansNumber()) >200000){
+                        messageBuilder.append("->20w");
+                    }
+                    messageBuilder.append("\n\n");
                 }
-                if(Long.parseLong(user.getFansNumber()) >150000){
-                    messageBuilder.append("├❗粉丝数大于15w").append("\n");
-                }
-                if(Long.parseLong(user.getFansNumber()) >200000){
-                    messageBuilder.append("└❗粉丝数大于20w").append("\n");
-                }
+
                 if(coin.getMentionUserList().size()>1){
                     messageBuilder.append("\uD83D\uDD25 ca提及次数: ").append(coin.getMentionUserList().size()).append("\n");
+                    messageBuilder.append("\n");
                 }
-                messageBuilder.append("\n");
 
                 String gmgnUrl = "https://gmgn.ai/sol/token/" + coin.getCoinCa();
                 String pumpUrl = "https://pump.fun/coin/" + coin.getCoinCa();
@@ -788,7 +791,7 @@ public class TwitterMonitor {
             LogUtils.error("解析用户黑名单异常", e);
             e.printStackTrace();
         }
-        LogUtils.info("初始化解析用户黑名单完成");
+        LogUtils.info("初始化解析用户黑名单完成:{}", banArray.toArray());
     }
 
     /**
