@@ -479,38 +479,54 @@ public class TwitterMonitor {
         return CompletableFuture.completedFuture(monitorUser);
     }
 
+    /**
+     * 获取代币ca信息
+     * @param ca
+     * @return
+     */
     public MonitorCoin getMonitorCoinInfo(String ca) {
         LogUtils.info("getMonitorCoinInfo-异步执行: {}", ca);
         String marketValueUrl = "https://gmgn.ai/defi/quotation/v1/sol/tokens/realtime_token_price?address="+ca+"&decimals="+ca;
         String launchpadUrl = "https://gmgn.ai/api/v1/token_launchpad_info/sol/"+ca;
         String coinNameUrl = "https://gmgn.ai/api/v1/token_info/sol/"+ca;
-        // 创建HttpHeaders对象
-        HttpHeaders headers = new HttpHeaders();
-        // 添加请求头
-        headers.add("Referer", "https://gmgn.ai/sol/token/"+ca);
-
-        HttpEntity<String> entity = new HttpEntity<>(null, headers);
         MonitorCoin coin = new MonitorCoin();
-        ResponseEntity<String> response = null;
+        String responseString = "";
         try {
-            response = restTemplate.exchange(marketValueUrl, HttpMethod.GET, entity, String.class);
-            if (response != null){
-                String responseBody = response.getBody();
-                LogUtils.info("获取代币市值信息成功: {}", responseBody);
-                org.json.JSONObject jsonObject = new org.json.JSONObject(responseBody);
+            OkHttpClient client = new OkHttpClient().newBuilder().build();
+            // 构建请求
+            Request request = new Request.Builder()
+                    .url(marketValueUrl)
+                    .addHeader("Referer", "https://gmgn.ai/sol/token/"+ca) // 填入实际的 AuthToken
+                    .addHeader("Cookie", "_ga=GA1.1.195104565.1732183718; __cf_bm=mpaqTLEv5FxOKMzCdydn50D1O4PZIiCdvtFfTCtIY2U-1733135309-1.0.1.1-E1c4k21dbKqfEiHdAnEhFXvYYCj__0RDMPNygz2d1noXqlT1sN_NNcDIyzANjzn9VwuqubxjVbikJqw_CNHy6Q;" +
+                            " cf_clearance=50Lf9MRzkP4JaM_bmf8Y45CYQF9wRzFTOZXPzGgnSN4-1733135930-1.2.1.1-TxYMlESX9dDInD6PmA_NiDWswm1EtkY2l49A_mEhBX7vL.wEkqICd" +
+                            ".5FbkSfMEquagzbG6imqU41AUjFCsTbBsrn8DkqaBPbwW2Z.BsIn.koZaiGyL1BqM4V.JA.k1Yq7bszUbIsPBp8EBBVdrnJBBrK0vxei8DdT" +
+                            ".XMkIQzpOTygIgkDkUuCta0jmfgap0ZydFfZmlimPH5loZ1zwFMt5rpDnbD7l_lq7FC6eJ6XuQIRQWvFaYhPcbe6s.x5cSs4X2OwsuCRPIy04bDg3irV3OnYqckbzQ38Lv9JmsV" +
+                            ".9NEMcaL3wif5h7Wu0jLGktvzW5WBTcyKppQYLFfLen0GbHbripxj7zllj0hquZQJ254PEiSRlphG.Vu7roBOJdWIxKZvAtiwElw95C.XJaWvw;" +
+                            " _ga_0XM0LYXGC8=GS1.1.1733135156.5.1.1733135945.0.0.0") // 填入实际的 API key
+                    .get() // Post请求
+                    .build();
+            Response response1 = client.newCall(request).execute();
+            if (response1 != null && response1.isSuccessful()) {
+                responseString = response1.body().string();
+                LogUtils.info("获取代币市值信息成功: {}", responseString);
+                JSONObject jsonObject = JSONObject.parseObject(responseString);
                 double aDouble = jsonObject.getJSONObject("data").getDouble("usd_price");
                 double convertedYuan = aDouble * 1000000000;
                 // 设置格式化规则，保留两位小数
                 DecimalFormat df = new DecimalFormat("#,##0.00");
                 String formattedYuan = df.format(convertedYuan);
                 coin.setMarketValue("$"+formattedYuan);
+
+                if (jsonObject == null) {
+                    LogUtils.error("获取推特共同关注者接口数据返回异常 | response:", responseString);
+                }
             } else {
                 LogUtils.error("获取代币信息失败: {}", ca);
             }
         } catch (Exception e) {
             LogUtils.error("获取代币信息失败: {}", ca, e);
-            if (response != null){
-                LogUtils.error("response: {}", response.getBody(), e);
+            if (StringUtils.isNotEmpty(responseString)){
+                LogUtils.error("response: {}", responseString, e);
             }
         }
 
@@ -529,8 +545,8 @@ public class TwitterMonitor {
             }
         } catch (Exception e) {
             LogUtils.error("获取代币进度信息失败: {}", ca, e);
-            if (response != null){
-                LogUtils.error("response: {}", response.getBody(), e);
+            if (StringUtils.isNotEmpty(responseString)){
+                LogUtils.error("response: {}", responseString, e);
             }
         }
 
@@ -547,8 +563,8 @@ public class TwitterMonitor {
             }
         } catch (Exception e) {
             LogUtils.error("获取代币名称信息失败: {}", ca, e);
-            if (response != null){
-                LogUtils.error("response: {}", response.getBody(), e);
+            if (StringUtils.isNotEmpty(responseString)){
+                LogUtils.error("response: {}", responseString, e);
             }
         }
 
