@@ -659,7 +659,7 @@ public class TwitterMonitor {
                     if(Long.parseLong(user.getFansNumber()) >50000){
                         messageBuilder.append("->5w");
                     }
-                    messageBuilder.append("\n\n");
+                    messageBuilder.append("\n");
                 }
                 if(Long.parseLong(user.getFansNumber()) >100000){
                     messageBuilder.append("└❗粉丝数大于10w");
@@ -669,41 +669,41 @@ public class TwitterMonitor {
                     if(Long.parseLong(user.getFansNumber()) >200000){
                         messageBuilder.append("->20w");
                     }
-                    messageBuilder.append("\n\n");
+                    messageBuilder.append("\n");
                 }
+                messageBuilder.append("\n");
 
                 if(coin.getMentionUserList().size()>1){
                     messageBuilder.append("\uD83D\uDD25 ca提及次数: ").append(coin.getMentionUserList().size()).append("\n");
-                    messageBuilder.append("\n");
                 }
 
                 String gmgnUrl = "https://gmgn.ai/sol/token/" + coin.getCoinCa();
                 String pumpUrl = "https://pump.fun/coin/" + coin.getCoinCa();
                 //https://gmgn.ai/sol/token/3GD2FWYkG2QGXCkN1nEf9TB1jsvt2zvUUEKEmFfgpump
                 messageBuilder.append("┌ ca: ").append("<code>").append(coin.getCoinCa()).append("</code>").append("\n");
+                MonitorCoin monitorCoinInfo = getMonitorCoinInfo(coin.getCoinCa());
+                LogUtils.info("代币信息：{}",monitorCoinInfo);
+                if (StringUtils.isNotEmpty(monitorCoinInfo.getCoinName())) {
+                    messageBuilder.append("├ ca名称: ").append(monitorCoinInfo.getCoinName()).append("\n");
+                }
+                if (StringUtils.isNotEmpty(monitorCoinInfo.getMarketValue())){
+                    messageBuilder.append("├ 市值: ").append(monitorCoinInfo.getMarketValue()).append("\n");
+                }
+                if (StringUtils.isNotEmpty(monitorCoinInfo.getCoinLaunchpad())){
+                    messageBuilder.append("├ 进度: ").append(monitorCoinInfo.getCoinLaunchpad()).append("\n");
+                }
+
                 messageBuilder.append("├ gmgn: ").append(gmgnUrl).append("\n");
                 messageBuilder.append("└ pump: ").append(pumpUrl).append("\n");
                 messageBuilder.append("\n");
 
-                MonitorCoin monitorCoinInfo = getMonitorCoinInfo(coin.getCoinCa());
-                LogUtils.info("代币信息：{}",monitorCoinInfo);
-                if (StringUtils.isNotEmpty(monitorCoinInfo.getCoinName())) {
-                    messageBuilder.append("ca名称: ").append(monitorCoinInfo.getCoinName()).append("\n");
-                }
-                if (StringUtils.isNotEmpty(monitorCoinInfo.getMarketValue())){
-                    messageBuilder.append("市值: ").append(monitorCoinInfo.getMarketValue()).append("\n");
-                }
-                if (StringUtils.isNotEmpty(monitorCoinInfo.getCoinLaunchpad())){
-                    messageBuilder.append("进度: ").append(monitorCoinInfo.getCoinLaunchpad()).append("\n");
-                }
-
                 //messageBuilder.append("ca名称: ").append(pumpCa).append("\n");
                 //messageBuilder.append("ca创建时间: ").append(pumpCa).append("\n");
 
-                messageBuilder.append("┌ twitter: ").append(tweetUrl).append("\n");
-                messageBuilder.append("├ 作者: ").append(user.getUserName()).append("\n");
-                messageBuilder.append("├ 粉丝数: ").append(user.getFansNumber()).append("\n");
-                messageBuilder.append("└ 是否认证: ").append(user.getIsCertified()).append("\n");
+                messageBuilder.append("┌ <b>twitter: </b>").append(tweetUrl).append("\n");
+                messageBuilder.append("├ <b>作者: </b>").append(user.getUserName()).append("\n");
+                messageBuilder.append("├ <b>粉丝数: </b>").append(user.getFansNumber()).append("\n");
+                messageBuilder.append("└ <b>是否认证: </b>").append(user.getIsCertified()).append("\n");
                 messageBuilder.append("\n");
 
                 if (StringUtils.isNotEmpty(user.getUserRemark())) {
@@ -736,15 +736,15 @@ public class TwitterMonitor {
                             .flatMap(remarkUser -> {
                                 JSONArray remarksArray = JSON.parseArray(remarkUser.getUserRemark());
                                 return remarksArray.stream()
-                                        .map(userRemark -> "├关注者备注: " + remarkUser.getUserName() + " | " +userRemark + "\n");
+                                        .map(userRemark -> "├关注者备注: " + remarkUser.getUserName() + " | <b>" +userRemark + "</b>\n");
                             })
                             .forEach(messageBuilder::append); // 将结果添加到 messageBuilder
                     messageBuilder.append("\n");
                 }
 
-                messageBuilder.append("┌ 发布时间: ").append(DateHandleUtil.formatDate(createdDate)).append("\n");
+                messageBuilder.append("┌ <b>发布时间: </b>").append(DateHandleUtil.formatDate(createdDate)).append("\n");
                 //messageBuilder.append("搜索时间: ").append(nowTime).append("\n");
-                messageBuilder.append("└ 推送时间: ").append(DateUtils.getTime()).append("\n");
+                messageBuilder.append("└ <b>推送时间: </b>").append(DateUtils.getTime()).append("\n");
 
                 List<InlineKeyboardButton> inlineKeyboardButtonList = new ArrayList<>();
                 InlineKeyboardButton twitter = InlineKeyboardButton.builder().text("Twitter").url(tweetUrl).build();
@@ -797,11 +797,17 @@ public class TwitterMonitor {
             }
             reader.close();
             banArray = JSON.parseArray(jsonContent.toString());
+            //从redis中获取用户黑名单
+            if(redisCache.hasKey("UserBanList")){
+                String userBanList = redisCache.getCacheObject("UserBanList");
+                JSONArray userBanArray = JSON.parseArray(userBanList);
+                banArray.addAll(userBanArray);
+            }
         } catch (Exception e) {
             LogUtils.error("解析用户黑名单异常", e);
             e.printStackTrace();
         }
-        LogUtils.info("初始化解析用户黑名单完成:{}", banArray.toArray());
+        LogUtils.info("初始化解析用户黑名单完成:{}", banArray.toJSONString());
     }
 
     /**
