@@ -6,10 +6,7 @@ import com.alibaba.fastjson2.JSONObject;
 import com.web3.twitter.monitorBeans.MonitorCoin;
 import com.web3.twitter.monitorBeans.MonitorUser;
 import com.web3.twitter.redis.RedisCache;
-import com.web3.twitter.utils.DateHandleUtil;
-import com.web3.twitter.utils.DateUtils;
-import com.web3.twitter.utils.HtmlParserUtil;
-import com.web3.twitter.utils.LogUtils;
+import com.web3.twitter.utils.*;
 import com.web3.twitter.twitterBeans.*;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
@@ -486,6 +483,7 @@ public class TwitterMonitor {
      */
     public MonitorCoin getMonitorCoinInfo(String ca) {
         LogUtils.info("getMonitorCoinInfo-异步执行: {}", ca);
+        String cookie = "_ga=GA1.1.1489434127.1733035588; __cf_bm=3JqbJ.blZuCCd3J0.zxYe2ZRI4mZAEI9JdyVjgzoRPI-1733670916-1.0.1.1-jA9yDvGTzNN5SWc6t7YUpB9bETko5OE_oC19LKfHSaqkfExGdVe92EinCt1BgkVPh1D1og4AKvnAMOY0xIursg; cf_clearance=632SuyM18YMtOYqHHdfw29Ld2oingqb8Z3NLo9QKkIc-1733670922-1.2.1.1-kdR59Ykh.xBrP9hgeFZC_L85S5AmS8eLqY28Qy.toLYKxnF9OHXVm4fzccsBDuxCCmDrZWpEJSFXqPTJ6uXRuU8ysewNPqBunl0epXNt0WdaSy.K332EHOjplHnGXaqqEGryMKw824NVZKEn4oDsHJ8x9XMI0KkaW5lZSsV91UjuMnCBmbo4GXO_4jxZtTqIC5r47Ruo9v0OKVaPI82DFGkdixtCIbvW12T7YY1bvUNwZ0rvm8VJCiUyEpaLe12selxthFR9ZommeGVlmMZ.iUt69vluSUFlvpb4mEFIQQxL1Rd7JYOWy2bX8iGkcGhLF0qHL3RuzqRmArHodOdx0z0C7sGMzBis.Z.8TLxIG6LfIYIe9ad19NitgmmxZ6CdZ4E1nplMCNE8pYC.dg8FVeK.zmqOuKSBIf95hQ_pP8k; _ga_0XM0LYXGC8=GS1.1.1733670920.13.1.1733670933.0.0.0";
         String marketValueUrl = "https://gmgn.ai/defi/quotation/v1/sol/tokens/realtime_token_price?address="+ca+"&decimals="+ca;
         String launchpadUrl = "https://gmgn.ai/api/v1/token_launchpad_info/sol/"+ca;
         String coinNameUrl = "https://gmgn.ai/api/v1/token_info/sol/"+ca;
@@ -497,17 +495,12 @@ public class TwitterMonitor {
             Request request = new Request.Builder()
                     .url(marketValueUrl)
                     .addHeader("Referer", "https://gmgn.ai/sol/token/"+ca) // 填入实际的 AuthToken
-                    .addHeader("Cookie", "_ga=GA1.1.195104565.1732183718; __cf_bm=mpaqTLEv5FxOKMzCdydn50D1O4PZIiCdvtFfTCtIY2U-1733135309-1.0.1.1-E1c4k21dbKqfEiHdAnEhFXvYYCj__0RDMPNygz2d1noXqlT1sN_NNcDIyzANjzn9VwuqubxjVbikJqw_CNHy6Q;" +
-                            " cf_clearance=50Lf9MRzkP4JaM_bmf8Y45CYQF9wRzFTOZXPzGgnSN4-1733135930-1.2.1.1-TxYMlESX9dDInD6PmA_NiDWswm1EtkY2l49A_mEhBX7vL.wEkqICd" +
-                            ".5FbkSfMEquagzbG6imqU41AUjFCsTbBsrn8DkqaBPbwW2Z.BsIn.koZaiGyL1BqM4V.JA.k1Yq7bszUbIsPBp8EBBVdrnJBBrK0vxei8DdT" +
-                            ".XMkIQzpOTygIgkDkUuCta0jmfgap0ZydFfZmlimPH5loZ1zwFMt5rpDnbD7l_lq7FC6eJ6XuQIRQWvFaYhPcbe6s.x5cSs4X2OwsuCRPIy04bDg3irV3OnYqckbzQ38Lv9JmsV" +
-                            ".9NEMcaL3wif5h7Wu0jLGktvzW5WBTcyKppQYLFfLen0GbHbripxj7zllj0hquZQJ254PEiSRlphG.Vu7roBOJdWIxKZvAtiwElw95C.XJaWvw;" +
-                            " _ga_0XM0LYXGC8=GS1.1.1733135156.5.1.1733135945.0.0.0") // 填入实际的 API key
+                    .addHeader("Cookie", cookie) // 填入实际的 API key
                     .get() // Post请求
                     .build();
-            Response response1 = client.newCall(request).execute();
-            if (response1 != null && response1.isSuccessful()) {
-                responseString = response1.body().string();
+            Response response = client.newCall(request).execute();
+            if (response.isSuccessful()) {
+                responseString = response.body().string();
                 LogUtils.info("获取代币市值信息成功: {}", responseString);
                 JSONObject jsonObject = JSONObject.parseObject(responseString);
                 double aDouble = jsonObject.getJSONObject("data").getDouble("usd_price");
@@ -517,56 +510,69 @@ public class TwitterMonitor {
                 String formattedYuan = df.format(convertedYuan);
                 coin.setMarketValue("$"+formattedYuan);
 
-                if (jsonObject == null) {
-                    LogUtils.error("获取推特共同关注者接口数据返回异常 | response:", responseString);
-                }
             } else {
                 LogUtils.error("获取代币信息失败: {}", ca);
             }
         } catch (Exception e) {
-            LogUtils.error("获取代币信息失败: {}", ca, e);
+            LogUtils.error("获取代币市值信息失败: {}", ca, e);
             if (StringUtils.isNotEmpty(responseString)){
                 LogUtils.error("response: {}", responseString, e);
             }
         }
 
-//        try {
-//            response = restTemplate.exchange(launchpadUrl, HttpMethod.GET, entity, String.class);
-//            if (response != null){
-//                String responseBody = response.getBody();
-//                LogUtils.info("获取代币进度信息成功: {}", responseBody);
-//                org.json.JSONObject jsonObject = new org.json.JSONObject(responseBody);
-//                String progress = jsonObject.getJSONObject("data").getString("launchpad_progress");
-//                double value = Double.parseDouble(progress);
-//                int percentage = (int) Math.round(value * 100);
-//                coin.setCoinLaunchpad(percentage+"%");
-//            } else {
-//                LogUtils.error("获取代币进度信息失败: {}", ca);
-//            }
-//        } catch (Exception e) {
-//            LogUtils.error("获取代币进度信息失败: {}", ca, e);
-//            if (StringUtils.isNotEmpty(responseString)){
-//                LogUtils.error("response: {}", responseString, e);
-//            }
-//        }
-//
-//        try {
-//            response = restTemplate.exchange(coinNameUrl, HttpMethod.GET, entity, String.class);
-//            if (response != null){
-//                String responseBody = response.getBody();
-//                LogUtils.info("获取代币名称信息成功: {}", responseBody);
-//                org.json.JSONObject jsonObject = new org.json.JSONObject(responseBody);
-//                String name = jsonObject.getJSONObject("data").getString("name");
-//                coin.setCoinName(name);
-//            } else {
-//                LogUtils.error("获取代币名称信息失败: {}", ca);
-//            }
-//        } catch (Exception e) {
-//            LogUtils.error("获取代币名称信息失败: {}", ca, e);
-//            if (StringUtils.isNotEmpty(responseString)){
-//                LogUtils.error("response: {}", responseString, e);
-//            }
-//        }
+        try {
+            OkHttpClient client = new OkHttpClient().newBuilder().build();
+            // 构建请求
+            Request request = new Request.Builder()
+                    .url(launchpadUrl)
+                    .addHeader("Referer", "https://gmgn.ai/sol/token/"+ca) // 填入实际的 AuthToken
+                    .addHeader("Cookie", cookie) // 填入实际的 API key
+                    .get() // Post请求
+                    .build();
+            Response response = client.newCall(request).execute();
+            if (response.isSuccessful()) {
+                responseString = response.body().string();
+                LogUtils.info("获取代币进度信息成功: {}", responseString);
+                org.json.JSONObject jsonObject = new org.json.JSONObject(responseString);
+                String progress = jsonObject.getJSONObject("data").getString("launchpad_progress");
+                double value = Double.parseDouble(progress);
+                int percentage = (int) Math.round(value * 100);
+                coin.setCoinLaunchpad(percentage+"%");
+            } else {
+                LogUtils.error("获取代币进度信息失败: {}", ca);
+            }
+        } catch (Exception e) {
+            LogUtils.error("获取代币进度信息失败: {}", ca, e);
+            if (StringUtils.isNotEmpty(responseString)){
+                LogUtils.error("response: {}", responseString, e);
+            }
+        }
+
+        try {
+            OkHttpClient client = new OkHttpClient().newBuilder().build();
+            // 构建请求
+            Request request = new Request.Builder()
+                    .url(coinNameUrl)
+                    .addHeader("Referer", "https://gmgn.ai/sol/token/"+ca) // 填入实际的 AuthToken
+                    .addHeader("Cookie", cookie) // 填入实际的 API key
+                    .get() // Post请求
+                    .build();
+            Response response = client.newCall(request).execute();
+            if (response.isSuccessful()) {
+                responseString = response.body().string();
+                LogUtils.info("获取代币名称信息成功: {}", responseString);
+                org.json.JSONObject jsonObject = new org.json.JSONObject(responseString);
+                String name = jsonObject.getJSONObject("data").getString("name");
+                coin.setCoinName(name);
+            } else {
+                LogUtils.error("获取代币名称信息失败: {}", ca);
+            }
+        } catch (Exception e) {
+            LogUtils.error("获取代币名称信息失败: {}", ca, e);
+            if (StringUtils.isNotEmpty(responseString)){
+                LogUtils.error("response: {}", responseString, e);
+            }
+        }
 
         return coin;
     }
@@ -679,13 +685,17 @@ public class TwitterMonitor {
                 messageBuilder.append("└ pump: ").append(pumpUrl).append("\n");
                 messageBuilder.append("\n");
 
-//                MonitorCoin monitorCoinInfo = getMonitorCoinInfo(coin.getCoinCa());
-//                LogUtils.info("代币信息：{}",monitorCoinInfo);
-//                if (Objects.nonNull(monitorCoinInfo)){
-//                    messageBuilder.append("ca名称: ").append(monitorCoinInfo.getCoinName()).append("\n");
-//                    messageBuilder.append("市值: ").append(monitorCoinInfo.getMarketValue()).append("\n");
-//                    messageBuilder.append("进度: ").append(monitorCoinInfo.getCoinLaunchpad()).append("\n");
-//                }
+                MonitorCoin monitorCoinInfo = getMonitorCoinInfo(coin.getCoinCa());
+                LogUtils.info("代币信息：{}",monitorCoinInfo);
+                if (StringUtils.isNotEmpty(monitorCoinInfo.getCoinName())) {
+                    messageBuilder.append("ca名称: ").append(monitorCoinInfo.getCoinName()).append("\n");
+                }
+                if (StringUtils.isNotEmpty(monitorCoinInfo.getMarketValue())){
+                    messageBuilder.append("市值: ").append(monitorCoinInfo.getMarketValue()).append("\n");
+                }
+                if (StringUtils.isNotEmpty(monitorCoinInfo.getCoinLaunchpad())){
+                    messageBuilder.append("进度: ").append(monitorCoinInfo.getCoinLaunchpad()).append("\n");
+                }
 
                 //messageBuilder.append("ca名称: ").append(pumpCa).append("\n");
                 //messageBuilder.append("ca创建时间: ").append(pumpCa).append("\n");
