@@ -32,8 +32,8 @@ public class TwitterController {
 
     @GetMapping("/getCaInfo")
     public String getCaInfo() {
-        MonitorCoin monitorCoinInfo = twitterMonitor.getMonitorCoinInfo("FaBkQy6t1iuWt3ynEsUzFsa2mhpkLW7bGwR1id5Hpump");
-        System.out.println("monitorCoinInfo = " + monitorCoinInfo);
+        //MonitorCoin monitorCoinInfo = twitterMonitor.getMonitorCoinInfo("FaBkQy6t1iuWt3ynEsUzFsa2mhpkLW7bGwR1id5Hpump");
+        //System.out.println("monitorCoinInfo = " + monitorCoinInfo);
         return "0";
     }
 
