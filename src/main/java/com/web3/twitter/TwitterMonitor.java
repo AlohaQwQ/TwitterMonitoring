@@ -686,27 +686,30 @@ public class TwitterMonitor {
                 MonitorCoin monitorCoinInfo = getMonitorCoinInfo(coin.getCoinCa());
                 LogUtils.info("代币信息：{}",monitorCoinInfo);
                 if (StringUtils.isNotEmpty(monitorCoinInfo.getCoinName())) {
-                    messageBuilder.append("├ ca名称: ").append(monitorCoinInfo.getCoinName()).append("\n");
+                    messageBuilder.append("├ <b>ca名称: </b> ").append(monitorCoinInfo.getCoinName()).append("\n");
                 }
                 if (StringUtils.isNotEmpty(monitorCoinInfo.getMarketValue())){
-                    messageBuilder.append("├ 市值: ").append(monitorCoinInfo.getMarketValue()).append("\n");
+                    messageBuilder.append("├ <b>市值: </b> ").append(monitorCoinInfo.getMarketValue()).append("\n");
                 }
                 if (StringUtils.isNotEmpty(monitorCoinInfo.getCoinLaunchpad())){
-                    messageBuilder.append("├ 进度: ").append(monitorCoinInfo.getCoinLaunchpad()).append("\n");
+                    messageBuilder.append("├ <b>进度: </b> ").append(monitorCoinInfo.getCoinLaunchpad()).append("\n");
                 }
 
-                String aTag = String.format("<a href=\"%s\" target=\"_blank\">%s</a>", gmgnUrl, "gmgn");
+                String gmgnStr = String.format("<a href=\"%s\" target=\"_blank\">%s</a>", gmgnUrl, "气泡图");
+                String pumpStr = String.format("<a href=\"%s\" target=\"_blank\">%s</a>", pumpUrl, "Pump内盘K线");
+                String twitterStr = String.format("<a href=\"%s\" target=\"_blank\">%s</a>", tweetUrl, "推特搜索");
 
                 // 将<a>标签追加到StringBuilder中
-                //messageBuilder.append("├ gmgn: ").append("<html>").append(aTag).append("</html>").append("\n");
-                messageBuilder.append("├ gmgn: ").append(gmgnUrl).append("\n");
-                messageBuilder.append("└ pump: ").append(pumpUrl).append("\n");
+                messageBuilder.append("├ gmgn: ").append(gmgnStr).append("\n");
+                //messageBuilder.append("├ gmgn: ").append(gmgnUrl).append("\n");
+                //messageBuilder.append("└ pump: ").append(pumpUrl).append("\n");
+                messageBuilder.append("├ pump: ").append(pumpStr).append("\n");
                 messageBuilder.append("\n");
 
                 //messageBuilder.append("ca名称: ").append(pumpCa).append("\n");
                 //messageBuilder.append("ca创建时间: ").append(pumpCa).append("\n");
 
-                messageBuilder.append("┌ <b>twitter: </b>").append(tweetUrl).append("\n");
+                messageBuilder.append("┌ <b>twitter: </b>").append(twitterStr).append("\n");
                 messageBuilder.append("├ <b>作者: </b>").append(user.getUserName()).append("\n");
                 messageBuilder.append("├ <b>粉丝数: </b>").append(user.getFansNumber()).append("\n");
                 messageBuilder.append("└ <b>是否认证: </b>").append(user.getIsCertified()).append("\n");
