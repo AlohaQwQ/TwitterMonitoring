@@ -504,11 +504,11 @@ public class TwitterMonitor {
                 LogUtils.info("获取代币市值信息成功: {}", responseString);
                 JSONObject jsonObject = JSONObject.parseObject(responseString);
                 double aDouble = jsonObject.getJSONObject("data").getDouble("usd_price");
-                double convertedYuan = aDouble * 1000000000;
+                double convertedYuan = aDouble * 1000000;
                 // 设置格式化规则，保留两位小数
-                DecimalFormat df = new DecimalFormat("#,##0.00");
+                DecimalFormat df = new DecimalFormat("###0.0");
                 String formattedYuan = df.format(convertedYuan);
-                coin.setMarketValue("$"+formattedYuan);
+                coin.setMarketValue("$"+formattedYuan+"K");
 
             } else {
                 LogUtils.error("获取代币信息失败: {}", ca);
@@ -537,7 +537,9 @@ public class TwitterMonitor {
                 String progress = jsonObject.getJSONObject("data").getString("launchpad_progress");
                 double value = Double.parseDouble(progress);
                 int percentage = (int) Math.round(value * 100);
-                coin.setCoinLaunchpad(percentage+"%");
+                String percentageStr = percentage+"%";
+                String fillProgressBar = HtmlParserUtil.createFillProgressBar(percentageStr, 20);
+                coin.setCoinLaunchpad(fillProgressBar);
             } else {
                 LogUtils.error("获取代币进度信息失败: {}", ca);
             }
@@ -693,6 +695,10 @@ public class TwitterMonitor {
                     messageBuilder.append("├ 进度: ").append(monitorCoinInfo.getCoinLaunchpad()).append("\n");
                 }
 
+                String aTag = String.format("<a href=\"%s\" target=\"_blank\">%s</a>", gmgnUrl, "gmgn");
+
+                // 将<a>标签追加到StringBuilder中
+                //messageBuilder.append("├ gmgn: ").append("<html>").append(aTag).append("</html>").append("\n");
                 messageBuilder.append("├ gmgn: ").append(gmgnUrl).append("\n");
                 messageBuilder.append("└ pump: ").append(pumpUrl).append("\n");
                 messageBuilder.append("\n");
