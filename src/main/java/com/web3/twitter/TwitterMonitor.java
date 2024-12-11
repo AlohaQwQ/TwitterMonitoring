@@ -98,7 +98,7 @@ public class TwitterMonitor {
     @Async("threadPoolTaskExecutor")
     public void startMonitor(){
         String nowTime = DateUtils.getTime();
-        LogUtils.info("startMonitor-异步执行: {}", nowTime);
+        LogUtils.info("startMonitor-异步执行: {}", DateUtils.getTimeSSS());
         String url = "https://twitter283.p.rapidapi.com/Search?q=pump.fun&type=Latest&count=20&safe_search=true";
         // 创建请求头
         HttpHeaders headers = new HttpHeaders();
@@ -159,6 +159,11 @@ public class TwitterMonitor {
                                                                         //粉丝数
                                                                         long fans;
                                                                         String userName = userResults.getResult().getCore().getScreen_name();
+                                                                        //黑名单用户
+                                                                        if(banArray!=null && banArray.contains(userName)){
+                                                                            LogUtils.info("跳过预置黑名单用户推文", userName);
+                                                                            continue;
+                                                                        }
                                                                         //测试账号
                                                                         if(userName.contains("daxigua_qwq")){
                                                                             fans = 6000;
@@ -172,12 +177,6 @@ public class TwitterMonitor {
                                                                             String userID = userResults.getResult().getRest_id();
                                                                             //LogUtils.info("解析推特列表-用户restId: {}", userID);
                                                                             //拼接推特链接 https://x.com/VT_BNB/status/1861334062021185655
-                                                                            userName = userResults.getResult().getCore().getScreen_name();
-                                                                            //黑名单用户
-                                                                            if(banArray!=null && banArray.contains(userName)){
-                                                                                LogUtils.info("跳过预置黑名单用户推文", userName);
-                                                                                continue;
-                                                                            }
                                                                             String userShowName = userResults.getResult().getCore().getName();
                                                                             // 确保使用正确的字符编码
                                                                             String userNameUtf8 = new String(userName.getBytes(), StandardCharsets.UTF_8);
@@ -718,7 +717,7 @@ public class TwitterMonitor {
      */
     //@Async("threadPoolTaskExecutor")
     public MonitorCoin getMonitorCoinInfo(MonitorCoin coin) {
-        LogUtils.info("getMonitorCoinInfo-异步执行: {}", coin.toString());
+        LogUtils.info("getMonitorCoinInfo-异步执行: {}", DateUtils.getTimeSSS() + " | " +coin.toString());
         String ca = coin.getCoinCa();
         //"_ga=GA1.1.1489434127.1733035588; __cf_bm=3JqbJ.blZuCCd3J0.zxYe2ZRI4mZAEI9JdyVjgzoRPI-1733670916-1.0.1.1-jA9yDvGTzNN5SWc6t7YUpB9bETko5OE_oC19LKfHSaqkfExGdVe92EinCt1BgkVPh1D1og4AKvnAMOY0xIursg; cf_clearance=632SuyM18YMtOYqHHdfw29Ld2oingqb8Z3NLo9QKkIc-1733670922-1.2.1.1-kdR59Ykh.xBrP9hgeFZC_L85S5AmS8eLqY28Qy.toLYKxnF9OHXVm4fzccsBDuxCCmDrZWpEJSFXqPTJ6uXRuU8ysewNPqBunl0epXNt0WdaSy.K332EHOjplHnGXaqqEGryMKw824NVZKEn4oDsHJ8x9XMI0KkaW5lZSsV91UjuMnCBmbo4GXO_4jxZtTqIC5r47Ruo9v0OKVaPI82DFGkdixtCIbvW12T7YY1bvUNwZ0rvm8VJCiUyEpaLe12selxthFR9ZommeGVlmMZ.iUt69vluSUFlvpb4mEFIQQxL1Rd7JYOWy2bX8iGkcGhLF0qHL3RuzqRmArHodOdx0z0C7sGMzBis.Z.8TLxIG6LfIYIe9ad19NitgmmxZ6CdZ4E1nplMCNE8pYC.dg8FVeK.zmqOuKSBIf95hQ_pP8k; _ga_0XM0LYXGC8=GS1.1.1733670920.13.1.1733670933.0.0.0";
         String cookie = "";
