@@ -357,7 +357,7 @@ public class TwitterMonitor {
                     }
                     if(responseBody.contains("redirect")){
                         JSONObject redirectObject = JSONObject.parseObject(responseBody);
-                        if(redirectObject.containsKey("redirect")){
+                        if(redirectObject.containsKey("redirect") && redirectObject.containsKey("coin/")){
                             ogImageUrl = "https://pump.fun" + redirectObject.getString("redirect");
                         }
                     }
