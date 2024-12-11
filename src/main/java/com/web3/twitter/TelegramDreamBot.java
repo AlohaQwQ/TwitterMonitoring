@@ -1,6 +1,7 @@
 package com.web3.twitter;
 
 import com.web3.twitter.redis.RedisCache;
+import com.web3.twitter.utils.DateUtils;
 import com.web3.twitter.utils.LogUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -68,7 +69,7 @@ public class TelegramDreamBot implements SpringLongPollingBot, LongPollingSingle
         telegramClient = new OkHttpTelegramClient(getBotToken());
     }
 
-    public void sendText(String text, InlineKeyboardMarkup replyMarkup) {
+    public void sendText(String text) {
 //        log.info("发送消息参数: {}.", text);
 //        if (!redisCache.hasKey("chat_id")){
 //            LogUtils.error("没有获取到chatID: {}.", text);
@@ -85,7 +86,7 @@ public class TelegramDreamBot implements SpringLongPollingBot, LongPollingSingle
             responseMessage.setChat(GROUP_CHAT);
             responseMessage.setFrom(TEST_USER);
             responseMessage.setText(text);
-            responseMessage.setReplyMarkup(replyMarkup);
+            //responseMessage.setReplyMarkup(replyMarkup);
             Message parsedMessage = new Message();
             try {
                 telegramClient.execute(method);
@@ -94,6 +95,7 @@ public class TelegramDreamBot implements SpringLongPollingBot, LongPollingSingle
                 e.printStackTrace();
             }
         });
+        LogUtils.info("sendText-bot发送消息完成: {}", DateUtils.getTime());
     }
 
     @Override
