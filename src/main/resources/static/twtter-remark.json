@@ -1084,7 +1084,7 @@
     },
     "karan4d": {
       "tag": "A16z关注",
-      "name": "Reman Alessia Cyrodiil",
+      "name": "mephisto",
       "group": "default",
       "isExists": true,
       "isShow": true,
@@ -2735,7 +2735,7 @@
       "group": "default"
     },
     "nypost": {
-      "tag": "新闻",
+      "tag": "纽约邮报",
       "name": "New York Post",
       "group": "default"
     },
@@ -2786,7 +2786,7 @@
     },
     "slopfather": {
       "tag": "Slopfather  40M",
-      "name": "Slopfather",
+      "name": "Slopfather (Season 1)",
       "group": "default"
     },
     "lmrankhan": {
@@ -5351,7 +5351,7 @@
     },
     "alice_und_bob": {
       "tag": "Polkadot 协调专员",
-      "name": "Alice und Bob | AYE on 1322",
+      "name": "Alice und Bob",
       "group": "default"
     },
     "chainlinklabs": {
@@ -5468,7 +5468,287 @@
       "tag": "Magic Eden",
       "name": "Magic Eden",
       "group": "default"
+    },
+    "BelieveInLuce": {
+      "tag": "LUCE ✞ (Meme)",
+      "name": "LUCE ✞ (Meme)",
+      "group": "default"
+    },
+    "0x8i11i0n": {
+      "tag": "DNF",
+      "name": "Tsubasa (bluelock mode)",
+      "group": "default"
+    },
+    "ZeusInCrypto": {
+      "tag": "诈骗",
+      "name": "Zeus  Hamad",
+      "group": "default"
+    },
+    "EconiaLabs": {
+      "tag": "盗号 诈骗",
+      "name": "Econia Labs",
+      "group": "default"
+    },
+    "CleverNova_AI": {
+      "tag": "诈骗",
+      "name": "CleverNova",
+      "group": "default"
+    },
+    "Quarkless": {
+      "tag": "诈骗",
+      "name": "Quarkless",
+      "group": "default"
+    },
+    "memeisgame": {
+      "tag": "Game.com",
+      "name": "Game.com",
+      "group": "default"
+    },
+    "hawkeye0158": {
+      "tag": "诈骗",
+      "name": "Hawkeye",
+      "group": "default"
+    },
+    "notjohnlestudio": {
+      "tag": "盗号 诈骗",
+      "name": "John Lê",
+      "group": "default"
+    },
+    "Raiinmakerapp": {
+      "tag": "盗号 诈骗",
+      "name": "Raiinmaker",
+      "group": "default"
+    },
+    "sandbar_io": {
+      "tag": "盗号 诈骗",
+      "name": "sandbar",
+      "group": "default"
+    },
+    "mindofmxrco": {
+      "tag": "诈骗",
+      "name": "mxrco",
+      "group": "default"
+    },
+    "CryptoEnact": {
+      "tag": "诈骗",
+      "name": "Crypto  Enact",
+      "group": "default"
+    },
+    "pudgypenguins": {
+      "tag": "胖企鹅 21E",
+      "name": "Pudgy Penguins",
+      "group": "default"
+    },
+    "LucaNetz": {
+      "tag": "胖企鹅 CEO 地板21E",
+      "name": "Luca Netz",
+      "group": "default"
+    },
+    "0xLoMel": {
+      "tag": "胖企鹅 总裁 + CTO",
+      "name": "LORENZO",
+      "group": "default"
+    },
+    "chefgoyardi": {
+      "tag": "胖企鹅 首席创造官",
+      "name": "Chef",
+      "group": "default"
+    },
+    "FoxyPenguinApe": {
+      "tag": "胖企鹅 亚洲 业务主管",
+      "name": "FoxyPenguin",
+      "group": "default"
+    },
+    "TomatoBAYC": {
+      "tag": "无聊猿 开发人员",
+      "name": "EmperorTomatoKetchup (Kerem Atalay)",
+      "group": "default"
+    },
+    "Azuki": {
+      "tag": "Azuki 7.4E",
+      "name": "Azuki",
+      "group": "default"
+    },
+    "zagabond": {
+      "tag": "Azuki 创始人",
+      "name": "Zagabond",
+      "group": "default"
+    },
+    "steamboy33": {
+      "tag": "Azuki 联合创始人+艺术家",
+      "name": "steamboy",
+      "group": "default"
+    },
+    "hoshiboyzen": {
+      "tag": "Azuki 联合创始人+设计师",
+      "name": "hoshiboy",
+      "group": "default"
+    },
+    "locationtba": {
+      "tag": "Azuki 联合创始人+工程师",
+      "name": "location tba",
+      "group": "default"
+    },
+    "stevewchung": {
+      "tag": "Azuki 首席运营官",
+      "name": "stevechung.eth",
+      "group": "default"
+    },
+    "cryptopunksnfts": {
+      "tag": "朋克",
+      "name": "CryptoPunks",
+      "group": "default"
+    },
+    "pents90": {
+      "tag": "朋克创始人",
+      "name": "John Watkinson",
+      "group": "default"
+    },
+    "matthall2000": {
+      "tag": "朋克 联合创始人",
+      "name": "Matt Hall",
+      "group": "default"
+    },
+    "MiladyMaker333": {
+      "tag": "Milady Maker 6.5E",
+      "name": "Milady Maker",
+      "group": "default"
+    },
+    "Milady_Sonoro": {
+      "tag": "Milady 创意总监+艺术家",
+      "name": "Sprite Bonkler",
+      "group": "default"
+    },
+    "voidscizo": {
+      "tag": "诈骗",
+      "name": "Void",
+      "group": "default"
+    },
+    "NFTOdettes": {
+      "tag": "诈骗",
+      "name": "Odette",
+      "group": "default"
+    },
+    "NuBraveIN": {
+      "tag": "诈骗",
+      "name": "Nu Brave",
+      "group": "default"
+    },
+    "equacc": {
+      "tag": "A16Z 镭射猫 关注",
+      "name": "duck eng",
+      "group": "default"
+    },
+    "Polymarket": {
+      "tag": "Polymarket",
+      "name": "Polymarket",
+      "group": "default"
+    },
+    "degenharambe": {
+      "tag": "PEPE 作者",
+      "name": "雅罗斯拉夫z",
+      "group": "default"
+    },
+    "billpeeb": {
+      "tag": "OPEN AI lead",
+      "name": "Bill Peebles",
+      "group": "default"
+    },
+    "AGRIPPA___": {
+      "tag": "诈骗",
+      "name": "AGRIPPA █",
+      "group": "default"
+    },
+    "gabe_mohit": {
+      "tag": "很牛逼  X附属账号",
+      "name": "Gab",
+      "group": "default"
+    },
+    "BMW": {
+      "tag": "BMW",
+      "name": "BMW",
+      "group": "default"
+    },
+    "MercedesBenz": {
+      "tag": "奔驰",
+      "name": "Mercedes-Benz",
+      "group": "default"
+    },
+    "AudiOfficial": {
+      "tag": "奥迪",
+      "name": "Audi",
+      "group": "default"
+    },
+    "rollsroycecars": {
+      "tag": "劳斯莱斯",
+      "name": "Rolls-Royce Motor Cars",
+      "group": "default"
+    },
+    "Ferrari": {
+      "tag": "法拉利",
+      "name": "Ferrari",
+      "group": "default"
+    },
+    "DavidSolomon": {
+      "tag": "高盛 CEO 首席执行官",
+      "name": "David Solomon",
+      "group": "default"
+    },
+    "GoldmanSachs": {
+      "tag": "高盛",
+      "name": "Goldman Sachs",
+      "group": "default"
+    },
+    "saylor": {
+      "tag": "微软 创始人",
+      "name": "Michael Saylor",
+      "group": "default"
+    },
+    "churchofbald": {
+      "tag": "晚上20点 等CA",
+      "name": "Church of $bald",
+      "group": "default"
+    },
+    "VincentDecod3rs": {
+      "tag": "Decod3rs 主持人",
+      "name": "Vincent Decod3rs",
+      "group": "default"
+    },
+    "RuiHuang_art": {
+      "tag": "科幻艺术家",
+      "name": "Rui Huang",
+      "group": "default"
+    },
+    "Zagabond": {
+      "tag": "Azuiki 创始人",
+      "name": "Zagabond",
+      "group": "default"
+    },
+    "Nike": {
+      "tag": "Nike",
+      "name": "Nike",
+      "group": "default"
+    },
+    "alexadelman": {
+      "tag": "LOlli  创始人 首席执行官",
+      "name": "Alex Adelman",
+      "group": "default"
+    },
+    "getjonwithit": {
+      "tag": "计算科学、数学和物理学家",
+      "name": "Jonathan Gorard",
+      "group": "default"
+    },
+    "arcdotfun": {
+      "tag": "arc",
+      "name": "arc",
+      "group": "default"
+    },
+    "midroni": {
+      "tag": "DAO Web3 社区建设领域具有一定的影响力",
+      "name": "Cooper Midroni",
+      "group": "default"
     }
   },
-  "$myTwitterNoteTime": 1733559207845
+  "$myTwitterNoteTime": 1733926854360
 }

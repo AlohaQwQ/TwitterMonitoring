@@ -354,9 +354,9 @@ public class TwitterMonitor {
                     if(StringUtils.isEmpty(ogImageUrl)){
                         ogImageUrl = HtmlParserUtil.extractOgImage(responseBody, "meta[property=og:image]");
                     }
-                    if(responseBody.contains("redirect")){
+                    if(responseBody.contains("redirect") && responseBody.contains("coin/")){
                         JSONObject redirectObject = JSONObject.parseObject(responseBody);
-                        if(redirectObject.containsKey("redirect") && redirectObject.containsKey("coin/")){
+                        if(redirectObject.containsKey("redirect")){
                             ogImageUrl = "https://pump.fun" + redirectObject.getString("redirect");
                         }
                     }
