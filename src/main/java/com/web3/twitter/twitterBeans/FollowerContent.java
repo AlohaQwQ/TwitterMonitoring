@@ -48,4 +48,15 @@ public class FollowerContent {
     public void setValue(String value) {
         this.value = value;
     }
+
+    @Override
+    public String toString() {
+        return "FollowerContent{" +
+                "__typename='" + __typename + '\'' +
+                ", entryType='" + entryType + '\'' +
+                ", cursorType='" + cursorType + '\'' +
+                ", value='" + value + '\'' +
+                ", itemContent=" + itemContent +
+                '}';
+    }
 }

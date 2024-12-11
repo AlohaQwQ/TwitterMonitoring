@@ -95,7 +95,7 @@ public class TelegramDreamBot implements SpringLongPollingBot, LongPollingSingle
                 e.printStackTrace();
             }
         });
-        LogUtils.info("sendText-bot发送消息完成: {}", DateUtils.getTime());
+        LogUtils.info("sendText-bot发送消息完成: {}", DateUtils.getTimeSSS());
     }
 
     @Override

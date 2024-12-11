@@ -115,7 +115,7 @@ public class TwitterMonitor {
             LogUtils.error("请求聚合api异常-请求地址: {}", url, e);
         }
         final String[] fullText = {""};
-        LogUtils.info("startMonitor-聚合api数据返回: {}", DateUtils.getTime());
+        LogUtils.info("startMonitor-聚合api数据返回: {}", DateUtils.getTimeSSS());
         // 处理响应数据
         if (response != null && response.getStatusCode() == HttpStatus.OK) {
             try {
@@ -135,7 +135,7 @@ public class TwitterMonitor {
                             //解析推特列表对象
                             Timeline timeline = JSON.parseObject(searchTimeline.getString("timeline"), Timeline.class);
                             if (timeline != null) {
-                                LogUtils.info("startMonitor-Timeline Bean数据解析完成: {}", DateUtils.getTime());
+                                LogUtils.info("startMonitor-Timeline Bean数据解析完成: {}", DateUtils.getTimeSSS());
                                 if (timeline.getInstructions() != null && !timeline.getInstructions().isEmpty()) {
                                     List<Instructions> instructionsList = timeline.getInstructions();
                                     for (Instructions instruction : instructionsList) {
@@ -167,7 +167,7 @@ public class TwitterMonitor {
                                                                         }
                                                                         //粉丝数大于3000
                                                                         if(fans>2000){
-                                                                            LogUtils.info("startMonitor-粉丝数大于2000: {}", DateUtils.getTime());
+                                                                            LogUtils.info("startMonitor-粉丝数大于2000: {}", DateUtils.getTimeSSS());
                                                                             //LogUtils.info("解析推特列表-userResults: {}", userResults);
                                                                             String userID = userResults.getResult().getRest_id();
                                                                             //LogUtils.info("解析推特列表-用户restId: {}", userID);
@@ -187,7 +187,7 @@ public class TwitterMonitor {
                                                                             boolean verified = userResults.getResult().getVerification().getIs_blue_verified();
                                                                             boolean isGreaterThanTwoDays;
                                                                             MonitorUser user;
-                                                                            LogUtils.info("startMonitor-更新用户信息和共同关注列表: {}", DateUtils.getTime());
+                                                                            LogUtils.info("startMonitor-更新用户信息和共同关注列表: {}", DateUtils.getTimeSSS());
                                                                             //存储用户信息
                                                                             if (!redisCache.hasKey(userNameUtf8)) {
                                                                                 user = new MonitorUser();
@@ -238,7 +238,7 @@ public class TwitterMonitor {
                                                                                 }
                                                                             }
 
-                                                                            LogUtils.info("startMonitor-更新用户信息和共同关注列表完成: {}", DateUtils.getTime());
+                                                                            LogUtils.info("startMonitor-更新用户信息和共同关注列表完成: {}", DateUtils.getTimeSSS());
                                                                             //解析合约，https://pump.fun/coin/ftGk9Ykt4tXRGRkpRgAbULSUzrj4idzd3PcBCNopump
                                                                             //短链接 https://t.co/ah6z7Rf7qv
                                                                             Legacy legacy = tweetTwitterResultResult.getLegacy();
@@ -262,13 +262,13 @@ public class TwitterMonitor {
                                                                                 }
                                                                             }
                                                                             if(hasPump){
-                                                                                LogUtils.info("startMonitor-推文数据中包含ca链接: {}", DateUtils.getTime());
+                                                                                LogUtils.info("startMonitor-推文数据中包含ca链接: {}", DateUtils.getTimeSSS());
                                                                                 int parseResult = parsingTweets(user, tweetUrl, createdDate, nowTime, fullText);
                                                                                 if(parseResult<0){
                                                                                     LogUtils.error("legacy url包含ca发送推文异常: {}", legacy.getFull_text());
                                                                                 }
                                                                             } else {
-                                                                                LogUtils.info("startMonitor-推文数据中不包含ca链接: {}", DateUtils.getTime());
+                                                                                LogUtils.info("startMonitor-推文数据中不包含ca链接: {}", DateUtils.getTimeSSS());
                                                                                 //fullText[0] = "Merci TK!\n" +
                                                                                 //        "Je penses a un gros sell the news en janvier vis à vis de trump qu'en penses-tu? https://pump.fun/coin/HhNbVY35YVRBeUfHXbSxgKzK87pPQErpsGqsXuuZpump8934jkz";
                                                                                 //推文解析
@@ -279,17 +279,17 @@ public class TwitterMonitor {
 
                                                                                     while (matcher.find()) {
                                                                                         String shortLink = matcher.group();
-                                                                                        LogUtils.info("发现短链接: {}", shortLink + " | "+ DateUtils.getTime());
+                                                                                        LogUtils.info("发现短链接: {}", shortLink + " | "+ DateUtils.getTimeSSS());
                                                                                         if(!StringUtils.isEmpty(shortLink)){
                                                                                             // 使用 ShortLinkResolver 解析短链接
                                                                                             resolveShortLink(shortLink).thenAccept(originalLink -> {
                                                                                                 if(StringUtils.isEmpty(originalLink)) {
-                                                                                                    LogUtils.error("解析短链接异常: {}", DateUtils.getTime() + " | "+ legacy.getFull_text());
+                                                                                                    LogUtils.error("解析短链接异常: {}", DateUtils.getTimeSSS() + " | "+ legacy.getFull_text());
                                                                                                 } else {
                                                                                                     fullText[0] = originalLink;
                                                                                                     int parseResult = parsingTweets(user, tweetUrl, createdDate, nowTime, fullText);
                                                                                                     if(parseResult<0){
-                                                                                                        LogUtils.error("短链接发送推文异常: {}", legacy.getFull_text() + " | "+ DateUtils.getTime());
+                                                                                                        LogUtils.error("短链接发送推文异常: {}", DateUtils.getTimeSSS() + " | "+ legacy.getFull_text());
                                                                                                     }
                                                                                                 }
                                                                                             }).exceptionally(ex -> {
@@ -299,10 +299,10 @@ public class TwitterMonitor {
                                                                                         }
                                                                                     }
                                                                                 } else if(fullText[0].contains("https://pump.fun/coin")){
-                                                                                    LogUtils.info("startMonitor-推文内容中包含pump完整长链接: {}", DateUtils.getTime());
+                                                                                    LogUtils.info("startMonitor-推文内容中包含pump完整长链接: {}", DateUtils.getTimeSSS());
                                                                                     int parseResult = parsingTweets(user, tweetUrl, createdDate, nowTime, fullText);
                                                                                     if(parseResult<0){
-                                                                                        LogUtils.error("长链接发送推文异常: {}", legacy.getFull_text() + " | "+ DateUtils.getTime());
+                                                                                        LogUtils.error("长链接发送推文异常: {}", DateUtils.getTimeSSS() + " | " + legacy.getFull_text());
                                                                                         //continue;
                                                                                     }
                                                                                 }
@@ -335,16 +335,17 @@ public class TwitterMonitor {
 
     @Async("threadPoolTaskExecutor")
     public CompletableFuture<String> resolveShortLink(String shortUrl) {
-        LogUtils.info("resolveShortLink-异步执行: {}", shortUrl + " | "+ DateUtils.getTime());
+        LogUtils.info("resolveShortLink-异步执行: {}", shortUrl + " | "+ DateUtils.getTimeSSS());
         ResponseEntity<String> response = null;
         try {
             response = restTemplate.exchange(shortUrl, HttpMethod.GET, null, String.class);
-            LogUtils.info("resolveShortLink-短链数据返回: {}", DateUtils.getTime());
+            LogUtils.info("resolveShortLink-短链数据返回: {}", DateUtils.getTimeSSS());
             if (response != null){
                 String responseBody = response.getBody();
                 // <meta name="twitter:title" content="Bitconnect (BCC) - Pump"/>
                 // <meta property="og:image" content="https://pump.fun/coin/4vrWMCgiMHS8Md1sckFPRQdhvviqf8PBVTX1hQ1Npump/opengraph-image-1aq19n?a797fa226007c33d"/>
                 // 使用 HtmlParserUtil 解析 og:image
+                // [{"redirect": "/coin/EhshGdvVLtCDK3HGEaurbL8S9MBtgmK4qLdYSWTKpump", "status": "308"}
                 if(!StringUtils.isEmpty(responseBody)){
                     String coinName = HtmlParserUtil.extractOgImage(responseBody, "meta[name=twitter:title]");
                     if(StringUtils.isEmpty(coinName)){
@@ -354,7 +355,13 @@ public class TwitterMonitor {
                     if(StringUtils.isEmpty(ogImageUrl)){
                         ogImageUrl = HtmlParserUtil.extractOgImage(responseBody, "meta[property=og:image]");
                     }
-                    LogUtils.info("解析后的链接: {}", DateUtils.getTime() + " | " + coinName + " | "+ ogImageUrl);
+                    if(responseBody.contains("redirect")){
+                        JSONObject redirectObject = JSONObject.parseObject(responseBody);
+                        if(redirectObject.containsKey("redirect")){
+                            ogImageUrl = "https://pump.fun" + redirectObject.getString("redirect");
+                        }
+                    }
+                    LogUtils.info("解析后的链接: {}", DateUtils.getTimeSSS() + " | " + coinName + " | "+ ogImageUrl);
                     LogUtils.info("responseBody: {}", responseBody);
                     return CompletableFuture.completedFuture(ogImageUrl);
                 }
@@ -377,14 +384,11 @@ public class TwitterMonitor {
      */
     @Async("threadPoolTaskExecutor")
     public CompletableFuture<MonitorUser> updateUserFollowersYouKnow(MonitorUser monitorUser) {
-        LogUtils.info("updateUserFollowersYouKnow-异步执行: {}", DateUtils.getTime());
+        LogUtils.info("updateUserFollowersYouKnow-异步执行: {}", DateUtils.getTimeSSS());
         Response response;
         String responseString = "";
         String url = null;
         try {
-            String nowTime = DateUtils.getTime();
-            LogUtils.info("updateUserFollowersYouKnow-异步执行: {}", nowTime);
-
             if(!redisCache.hasKey("TwitterToken")){
                 LogUtils.error("获取推特共同关注者接口异常-推特token不存在");
                 return CompletableFuture.completedFuture(monitorUser);
@@ -410,7 +414,7 @@ public class TwitterMonitor {
                     .get() // Post请求
                     .build();
             response = client.newCall(request).execute();
-            LogUtils.info("updateUserFollowersYouKnow-聚合api数据返回: {}", DateUtils.getTime());
+            LogUtils.info("updateUserFollowersYouKnow-聚合api数据返回: {}", DateUtils.getTimeSSS());
             if (response != null && response.isSuccessful()) {
                 // 解析响应数据
                 responseString = response.body().string();
@@ -443,13 +447,14 @@ public class TwitterMonitor {
                                     monitorUser.setFollowersYouKnowRemarkSet(new HashSet<>());
                                     return CompletableFuture.completedFuture(monitorUser);
                                 }
-                                LogUtils.info("updateUserFollowersYouKnow-FollowerEntries Bean数据解析完成: {}", DateUtils.getTime());
+                                LogUtils.info("updateUserFollowersYouKnow-FollowerEntries Bean数据解析完成: {}", DateUtils.getTimeSSS());
                                 //提取列表中所有用户名
                                 List<String> followersYouKnowList = new ArrayList<>();
                                 for (FollowerInfo followerInfo : followerEntries.getEntries()) {
                                     FollowerItemContent followerItemContent = followerInfo.getContent().getItemContent();
                                     if(followerItemContent==null) {
-                                        LogUtils.error("获取推特共同关注者接口 解析itemContent为空 | followerEntries:", followerEntries.toString());
+                                        //LogUtils.error("获取推特共同关注者接口 解析itemContent为空 | followerEntries:", followerEntries.toString());
+                                        LogUtils.error("获取推特共同关注者接口 解析itemContent为空");
                                         continue;
                                     }
                                     FollowerLegacy followerLegacy = followerItemContent.getUser_results().getResult().getLegacy();
@@ -464,7 +469,7 @@ public class TwitterMonitor {
                                     monitorUser.setFollowersYouKnowRemarkSet(new HashSet<>());
                                     return CompletableFuture.completedFuture(monitorUser);
                                 }
-                                LogUtils.info("updateUserFollowersYouKnow-获取推特共同关注数据解析完成: {}", DateUtils.getTime());
+                                LogUtils.info("updateUserFollowersYouKnow-获取推特共同关注数据解析完成: {}", DateUtils.getTimeSSS());
                                 //monitorUser.setFollowersYouKnowList(followersYouKnowList);
                                 Set<String> remarkUserKeySet = new HashSet<>(remarkUserKeyList); // 将 List 转换为 HashSet
 
@@ -473,7 +478,7 @@ public class TwitterMonitor {
                                         .filter(remarkUserKeySet::contains)
                                         .collect(Collectors.toSet());
                                 monitorUser.setFollowersYouKnowRemarkSet(matchedSet);
-                                LogUtils.info("updateUserFollowersYouKnow-推特共同关注取交集完成: {}", DateUtils.getTime());
+                                LogUtils.info("updateUserFollowersYouKnow-推特共同关注取交集完成: {}", DateUtils.getTimeSSS());
                             }
                         }
                     }
@@ -496,7 +501,7 @@ public class TwitterMonitor {
      * @return
      */
     private int parsingTweets(MonitorUser user, String tweetUrl, String createdDate, String nowTime, String[] fullText){
-        LogUtils.info("parsingTweets-开始解析推文数据: {}", DateUtils.getTime());
+        LogUtils.info("parsingTweets-开始解析推文数据: {}", DateUtils.getTimeSSS());
         //pump ca链接
         String pumpCa = "";
         int result = -1;
@@ -525,7 +530,7 @@ public class TwitterMonitor {
                     LogUtils.error("解析ca异常: {}", fullText[0]);
                     return result;
                 }
-                LogUtils.info("parsingTweets-ca解析完成: {}", DateUtils.getTime());
+                LogUtils.info("parsingTweets-ca解析完成: {}", DateUtils.getTimeSSS());
                 //存储ca信息
                 if(!redisCache.hasKey(pumpCa)){
                     coin = new MonitorCoin();
@@ -551,7 +556,7 @@ public class TwitterMonitor {
                     //添加用户提及ca记录
                     mentionUserList.add(user.getUserID());
                 }
-                LogUtils.info("parsingTweets-ca信息匹配并存储完成: {}", DateUtils.getTime());
+                LogUtils.info("parsingTweets-ca信息匹配并存储完成: {}", DateUtils.getTimeSSS());
 
                 String coinJson = JSON.toJSONString(coin);
                 redisCache.setCacheObject(pumpCa, coinJson, 3, TimeUnit.DAYS);
@@ -613,22 +618,22 @@ public class TwitterMonitor {
                 String twitterStr = String.format("<a href=\"%s\" >%s</a>", tweetUrl, "推文链接");
 
                 // 将<a>标签追加到StringBuilder中
-                messageBuilder.append("├ gmgn: ").append(gmgnStr).append("\n");
+                messageBuilder.append("├ gmgn: ").append(gmgnUrl).append("\n");
                 //messageBuilder.append("├ gmgn: ").append(gmgnUrl).append("\n");
                 //messageBuilder.append("└ pump: ").append(pumpUrl).append("\n");
-                messageBuilder.append("├ pump: ").append(pumpStr).append("\n");
+                messageBuilder.append("├ pump: ").append(pumpUrl).append("\n");
                 messageBuilder.append("\n");
 
                 //messageBuilder.append("ca名称: ").append(pumpCa).append("\n");
                 //messageBuilder.append("ca创建时间: ").append(pumpCa).append("\n");
 
-                messageBuilder.append("┌ <b>twitter: </b>").append(twitterStr).append("\n");
+                messageBuilder.append("┌ <b>twitter: </b>").append(tweetUrl).append("\n");
                 messageBuilder.append("├ <b>作者: </b>").append(user.getUserName()).append("\n");
                 messageBuilder.append("├ <b>粉丝数: </b>").append(user.getFansNumber()).append("\n");
                 messageBuilder.append("└ <b>是否认证: </b>").append(user.getIsCertified()).append("\n");
                 messageBuilder.append("\n");
 
-                LogUtils.info("parsingTweets-判断用户备注并拼接: {}", DateUtils.getTime());
+                LogUtils.info("parsingTweets-判断用户备注并拼接: {}", DateUtils.getTimeSSS());
                 if (StringUtils.isNotEmpty(user.getUserRemark())) {
                     JSONArray remarksArray = JSON.parseArray(user.getUserRemark());
                     messageBuilder.append(remarksArray.stream()
@@ -645,10 +650,12 @@ public class TwitterMonitor {
                                 return symbol + "用户备注: " + remark;
                             })
                             .collect(Collectors.joining("\n")));
-                    messageBuilder.append("\n");
+                    if(!remarksArray.isEmpty()){
+                        messageBuilder.append("\n");
+                    }
                 }
 
-                LogUtils.info("parsingTweets-判断用户共同关注者备注并拼接: {}", DateUtils.getTime());
+                LogUtils.info("parsingTweets-判断用户共同关注者备注并拼接: {}", DateUtils.getTimeSSS());
                 //拼接共同关注者命中备注列表信息
                 if (user.getFollowersYouKnowRemarkSet()!=null && !user.getFollowersYouKnowRemarkSet().isEmpty()) {
                     user.getFollowersYouKnowRemarkSet().parallelStream()
@@ -664,6 +671,9 @@ public class TwitterMonitor {
                             })
                             .forEach(messageBuilder::append); // 将结果添加到 messageBuilder
                     messageBuilder.append("\n");
+                    if(!user.getFollowersYouKnowRemarkSet().isEmpty()){
+                        messageBuilder.append("\n");
+                    }
                 }
 
                 messageBuilder.append("┌ <b>发布时间: </b>").append(DateHandleUtil.formatDate(createdDate)).append("\n");
@@ -686,7 +696,7 @@ public class TwitterMonitor {
                         .keyboard(keyboardRows)
                         .build();*/
 
-                LogUtils.info("parsingTweets-调用bot发送消息: {}", DateUtils.getTime());
+                LogUtils.info("parsingTweets-调用bot发送消息: {}", DateUtils.getTimeSSS());
                 //增加dream-bot机器人
                 telegramBot.sendText(messageBuilder.toString());
                 telegramDreamBot.sendText(messageBuilder.toString());
@@ -958,6 +968,6 @@ public class TwitterMonitor {
         user.setUpdateTime(String.valueOf(System.currentTimeMillis()));
         String jsonUser = JSON.toJSONString(user);
         redisCache.setCacheObject(userNameUtf8, jsonUser);
-        LogUtils.info("startMonitor-updateUserInfo 更新redis用户信息完成: {}", DateUtils.getTime());
+        LogUtils.info("startMonitor-updateUserInfo 更新redis用户信息完成: {}", DateUtils.getTimeSSS());
     }
 }

@@ -16,9 +16,15 @@ public class RestTemplateConfig {
     private final String host = "127.0.0.1";
     private final int port = 7890;
 
+
     @Bean
     public RestTemplate restTemplate() {
-        return new RestTemplate();
+        SimpleClientHttpRequestFactory requestFactory = new SimpleClientHttpRequestFactory();
+        // 连接超时时间（毫秒）
+        requestFactory.setConnectTimeout(3000);
+        // 读取超时时间（毫秒）
+        requestFactory.setReadTimeout(3000);
+        return new RestTemplate(requestFactory);
     }
 
 //    @Bean
