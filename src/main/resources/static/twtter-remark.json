@@ -1084,7 +1084,7 @@
     },
     "karan4d": {
       "tag": "A16z关注",
-      "name": "mephisto",
+      "name": "meh feast oh",
       "group": "default",
       "isExists": true,
       "isShow": true,
@@ -1184,15 +1184,6 @@
     "kindgracekind": {
       "tag": "烧币",
       "name": "Grace",
-      "group": "default",
-      "isExists": true,
-      "isShow": true,
-      "isSelected": true,
-      "editable": false
-    },
-    "bullishseller": {
-      "tag": "1M",
-      "name": "H&ART BLOCK",
       "group": "default",
       "isExists": true,
       "isShow": true,
@@ -1361,15 +1352,6 @@
       "isSelected": true,
       "editable": false
     },
-    "0x440x46": {
-      "tag": "ai",
-      "name": "0x44 0x46",
-      "group": "default",
-      "isExists": true,
-      "isShow": true,
-      "isSelected": true,
-      "editable": false
-    },
     "SequoaiDAO": {
       "tag": "创世人关注的AI",
       "name": "Sequoai Capital",
@@ -1478,15 +1460,6 @@
       "isSelected": true,
       "editable": false
     },
-    "Minecraft": {
-      "tag": "我的世界",
-      "name": "Minecraft",
-      "group": "default",
-      "isExists": true,
-      "isShow": true,
-      "isSelected": true,
-      "editable": false
-    },
     "CatholicTV": {
       "tag": "天主教 新闻频道",
       "name": "CatholicTV",
@@ -1553,15 +1526,6 @@
     "0xMasonH": {
       "tag": "A16z工程师",
       "name": "Mason Hall",
-      "group": "default",
-      "isExists": true,
-      "isShow": true,
-      "isSelected": true,
-      "editable": false
-    },
-    "Sociama": {
-      "tag": "狗妈 矩阵",
-      "name": "ソシャマ｜ソーシャルマーケティング株式会社",
       "group": "default",
       "isExists": true,
       "isShow": true,
@@ -1948,7 +1912,7 @@
     },
     "shawmakesmagic": {
       "tag": "A16Z合作伙伴 程序员",
-      "name": "Shaw  (acc/ai16z)",
+      "name": "Shaw  */acc",
       "group": "default",
       "isExists": true,
       "isShow": true,
@@ -2225,27 +2189,9 @@
       "isSelected": true,
       "editable": false
     },
-    "pippinlovesyou": {
-      "tag": "pinpin",
-      "name": "pippinlovesyou",
-      "group": "default",
-      "isExists": true,
-      "isShow": true,
-      "isSelected": true,
-      "editable": false
-    },
     "Based3AZ": {
       "tag": "有点傻",
       "name": "Based3AZ Terminal",
-      "group": "default",
-      "isExists": true,
-      "isShow": true,
-      "isSelected": true,
-      "editable": false
-    },
-    "NousResearch": {
-      "tag": "已发币 AI",
-      "name": "Nous Research",
       "group": "default",
       "isExists": true,
       "isShow": true,
@@ -2312,11 +2258,6 @@
     "LFJ_gg": {
       "tag": "大哥",
       "name": "LFJ (prev. Trader Joe)",
-      "group": "default"
-    },
-    "something": {
-      "tag": "待跟进",
-      "name": "something",
       "group": "default"
     },
     "echodotxyz": {
@@ -2394,11 +2335,6 @@
       "name": "lior.eth (Lior Messika)",
       "group": "default"
     },
-    "Infinity_club01": {
-      "tag": "文 社区",
-      "name": "Infinity Club",
-      "group": "default"
-    },
     "LainCyberAngel": {
       "tag": "AI  等待发币",
       "name": "Lain",
@@ -2445,7 +2381,7 @@
       "group": "default"
     },
     "jiannanhuangnft": {
-      "tag": "艺术家 很牛 几E",
+      "tag": "黄建南 艺术家 很牛 几E",
       "name": "Jiannan Huang",
       "group": "default"
     },
@@ -2499,11 +2435,6 @@
       "name": "SolCex",
       "group": "default"
     },
-    "mew": {
-      "tag": "关注有东西",
-      "name": "MEW",
-      "group": "default"
-    },
     "mascot78969": {
       "tag": "莱特币 CTO",
       "name": "Lester - LTC Mascot",
@@ -2517,11 +2448,6 @@
     "memecoin": {
       "tag": "Memecoin",
       "name": "Memecoin",
-      "group": "default"
-    },
-    "cccccccccfk": {
-      "tag": "赚哥",
-      "name": "卖飞战神！",
       "group": "default"
     },
     "SOL_SNATCHER": {
@@ -2572,11 +2498,6 @@
     "AmieCS": {
       "tag": "AI 16Z 女孩",
       "name": "Amie-Bio/acc",
-      "group": "default"
-    },
-    "LBank_Exchange": {
-      "tag": "交易所换头像",
-      "name": "LBank.com",
       "group": "default"
     },
     "DomSchiener": {
@@ -2659,11 +2580,6 @@
       "name": "Cyber",
       "group": "default"
     },
-    "MightyDylanK": {
-      "tag": "等CA",
-      "name": "Dylan K",
-      "group": "default"
-    },
     "ai": {
       "tag": "Canonical 管理合伙人",
       "name": "anand iyer",
@@ -2682,11 +2598,6 @@
     "alvinfoo": {
       "tag": "前谷歌联合创始人",
       "name": "Alvin Foo",
-      "group": "default"
-    },
-    "doodles": {
-      "tag": "关注多",
-      "name": "doodles",
       "group": "default"
     },
     "LeePima": {
@@ -3024,11 +2935,6 @@
       "name": "sky53 ττ",
       "group": "default"
     },
-    "rocenger": {
-      "tag": "R哥",
-      "name": "Rocenge",
-      "group": "default"
-    },
     "botfunapp": {
       "tag": "新平台！等发币",
       "name": "bot.fun",
@@ -3039,24 +2945,14 @@
       "name": "CN Wire",
       "group": "default"
     },
-    "GoldenFishDAO": {
-      "tag": "等！",
-      "name": "Golden Fish DAO",
-      "group": "default"
-    },
     "daosdotfun": {
-      "tag": "新平台！",
+      "tag": "ai16z DAO组织",
       "name": "daos.fun",
       "group": "default"
     },
     "GameSwift_io": {
       "tag": "L2 发币两次 盗号",
       "name": "GameSwift AI",
-      "group": "default"
-    },
-    "ALFAinstitute": {
-      "tag": "马斯克转贴",
-      "name": "ALFA Institute",
       "group": "default"
     },
     "Xiaomi": {
@@ -3149,11 +3045,6 @@
       "name": "Joe Rogan",
       "group": "default"
     },
-    "mindbath": {
-      "tag": "等CA",
-      "name": "mindbath",
-      "group": "default"
-    },
     "gleb_crypto": {
       "tag": "BLUB首席执行官兼联合创始人 骗子！发6次",
       "name": "Gleb Kostarev",
@@ -3177,11 +3068,6 @@
     "kimberly": {
       "tag": "诈骗 1M",
       "name": "kim",
-      "group": "default"
-    },
-    "StrawberryAI_5": {
-      "tag": "5号发布",
-      "name": "StrawberryAI",
       "group": "default"
     },
     "mrpunkdoteth": {
@@ -3232,11 +3118,6 @@
     "shouldhaveanima": {
       "tag": "诈骗",
       "name": "why you should have an animal",
-      "group": "default"
-    },
-    "0xNoNo_1": {
-      "tag": "0xNoNo",
-      "name": "0xNoNo",
       "group": "default"
     },
     "cz_binance": {
@@ -3304,11 +3185,6 @@
       "name": "Coinbase",
       "group": "default"
     },
-    "DUANMEI11": {
-      "tag": "信息捕获手",
-      "name": "信息捕获手",
-      "group": "default"
-    },
     "solana": {
       "tag": "Solana",
       "name": "Solana",
@@ -3336,7 +3212,7 @@
     },
     "Web3WithBinance": {
       "tag": "Binance Web3",
-      "name": "Binance Web3",
+      "name": "Binance Wallet",
       "group": "default"
     },
     "binancezh": {
@@ -3377,11 +3253,6 @@
     "NASA": {
       "tag": "NASA",
       "name": "NASA",
-      "group": "default"
-    },
-    "0xGCB": {
-      "tag": "0x盖茨比",
-      "name": "0x盖茨比",
       "group": "default"
     },
     "W_Capital_Beta": {
@@ -3665,23 +3536,13 @@
       "group": "default"
     },
     "rajgokal": {
-      "tag": "raj",
+      "tag": "Solana 联合创始人",
       "name": "raj",
-      "group": "default"
-    },
-    "AntCaveClub": {
-      "tag": "----",
-      "name": "链求君",
       "group": "default"
     },
     "angel_0x13": {
       "tag": "小天使",
       "name": "小天使",
-      "group": "default"
-    },
-    "wen5888888": {
-      "tag": "文",
-      "name": "文",
       "group": "default"
     },
     "Binance_intern": {
@@ -3699,11 +3560,6 @@
       "name": "Microsoft",
       "group": "default"
     },
-    "useXXYYio": {
-      "tag": "XXYY",
-      "name": "XXYY",
-      "group": "default"
-    },
     "MajesticDrama": {
       "tag": "金/白金音乐制作人",
       "name": "MAJESTIC",
@@ -3717,11 +3573,6 @@
     "0x_starry": {
       "tag": "Starry",
       "name": "Starry",
-      "group": "default"
-    },
-    "A901_AAA": {
-      "tag": ".",
-      "name": ".",
       "group": "default"
     },
     "ysiu": {
@@ -4431,7 +4282,7 @@
     },
     "ApexUBC": {
       "tag": "Apex UBC",
-      "name": "Apex UBC",
+      "name": "Inky - $UBC",
       "group": "default"
     },
     "ed_roman": {
@@ -5646,7 +5497,7 @@
     },
     "degenharambe": {
       "tag": "PEPE 作者",
-      "name": "雅罗斯拉夫z",
+      "name": "z",
       "group": "default"
     },
     "billpeeb": {
@@ -5740,7 +5591,7 @@
       "group": "default"
     },
     "arcdotfun": {
-      "tag": "arc",
+      "tag": "arc 90M",
       "name": "arc",
       "group": "default"
     },
@@ -5748,7 +5599,362 @@
       "tag": "DAO Web3 社区建设领域具有一定的影响力",
       "name": "Cooper Midroni",
       "group": "default"
+    },
+    "KayTheDoc": {
+      "tag": "The Doc",
+      "name": "The Doc",
+      "group": "default"
+    },
+    "moneymaykah_": {
+      "tag": "小胖",
+      "name": "moneymaykah",
+      "group": "default"
+    },
+    "NewNikocado": {
+      "tag": "S",
+      "name": "Nikocado Avocado",
+      "group": "default"
+    },
+    "RowdyCrypto": {
+      "tag": "RWDY",
+      "name": "RWDY",
+      "group": "default"
+    },
+    "CryptoKobe92": {
+      "tag": "九条命 第一时间赛",
+      "name": "九条命",
+      "group": "default"
+    },
+    "_AnonDev": {
+      "tag": "MIZUKI  DEV  23M",
+      "name": "anonDev_",
+      "group": "default"
+    },
+    "naniXBT": {
+      "tag": "nani",
+      "name": "nani",
+      "group": "default"
+    },
+    "DeptofDefense": {
+      "tag": "美国国防部",
+      "name": "Department of Defense",
+      "group": "default"
+    },
+    "ropirito": {
+      "tag": "Ropirito (0commoDTE)",
+      "name": "∿ Ropirito (0commoDTE)",
+      "group": "default"
+    },
+    "levelsio": {
+      "tag": "PhotoAI.io 的新项目",
+      "name": "@levelsio",
+      "group": "default"
+    },
+    "ovachinsky": {
+      "tag": "艺术家 等代币！",
+      "name": "OVA",
+      "group": "default"
+    },
+    "AlvaApp": {
+      "tag": "Alva AI",
+      "name": "Alva",
+      "group": "default"
+    },
+    "pmairca": {
+      "tag": "AI16z  独家代理管理，独立监督投资。",
+      "name": "Marc AIndreessen  (Parody)",
+      "group": "default"
+    },
+    "RyzeLabs": {
+      "tag": "Ryze Labs",
+      "name": "Ryze Labs",
+      "group": "default"
+    },
+    "delta_sauce": {
+      "tag": "DeltaSauce 艺术家",
+      "name": "DeltaSauce",
+      "group": "default"
+    },
+    "degenspartanai": {
+      "tag": "degenai",
+      "name": "찌 G 跻 じ MBA, CFA, FRM, CFP, NGMI, HFSP, HENTAI",
+      "group": "default"
+    },
+    "nftpowerranking": {
+      "tag": "Brian",
+      "name": "Brian (NFT POWER RANKINGS)",
+      "group": "default"
+    },
+    "oneirocom": {
+      "tag": "大佬关注 等东西",
+      "name": "Oneirocom Systems",
+      "group": "default"
+    },
+    "project_89": {
+      "tag": "Project 89  30M",
+      "name": "Project 89",
+      "group": "default"
+    },
+    "VelodromeFi": {
+      "tag": "Velodrome  DEX  近期上Bianca",
+      "name": "Velodrome",
+      "group": "default"
+    },
+    "JimmyXKF": {
+      "tag": "Velodrome Finance 创始人+首席执行官",
+      "name": "Jimmy X",
+      "group": "default"
+    },
+    "LineaBuild": {
+      "tag": "Linea  L2",
+      "name": "Linea",
+      "group": "default"
+    },
+    "StaniKulechov": {
+      "tag": "Aave的创始人",
+      "name": "Stani",
+      "group": "default"
+    },
+    "calilyliu": {
+      "tag": "Solana 基金会主席",
+      "name": "Lily Liu",
+      "group": "default"
+    },
+    "bennybitcoins": {
+      "tag": "Solana BD主管",
+      "name": "BEN SPARANG◎",
+      "group": "default"
+    },
+    "tamgros": {
+      "tag": "Solana 技术副总裁",
+      "name": "Matt Sorg",
+      "group": "default"
+    },
+    "afkehaya": {
+      "tag": "Solana 网络基础设施主管",
+      "name": "kehaya",
+      "group": "default"
+    },
+    "sfrankel9": {
+      "tag": "BASE 生态主管",
+      "name": "Sam Frankel",
+      "group": "default"
+    },
+    "Nakamigos": {
+      "tag": "nakamigos(NFT)  创始人",
+      "name": "Nakamigos",
+      "group": "default"
+    },
+    "digg": {
+      "tag": "Digg",
+      "name": "Digg",
+      "group": "default"
+    },
+    "unusual_whales": {
+      "tag": "unusual_whales 新闻",
+      "name": "unusual_whales",
+      "group": "default"
+    },
+    "taowatts": {
+      "tag": "Velodrome Finance 核心贡献者",
+      "name": "Tao",
+      "group": "default"
+    },
+    "Ace_da_Book": {
+      "tag": "Velodrome Finance 核心贡献者",
+      "name": "Ace",
+      "group": "default"
+    },
+    "JoinTrenches": {
+      "tag": "Trenches",
+      "name": "Trenches",
+      "group": "default"
+    },
+    "sara21222122": {
+      "tag": "艺术家",
+      "name": "さらさら",
+      "group": "default"
+    },
+    "TheNBACentel": {
+      "tag": "NBA",
+      "name": "NBACentel",
+      "group": "default"
+    },
+    "rleshner": {
+      "tag": "Robot Ventures 创始人+合伙人",
+      "name": "Robert Leshner",
+      "group": "default"
+    },
+    "tarunchitra": {
+      "tag": "Robot Ventures 合伙人",
+      "name": "Tarun Chitra",
+      "group": "default"
+    },
+    "0xmadisonn": {
+      "tag": "Robot Ventures COO",
+      "name": "maddie",
+      "group": "default"
+    },
+    "hal2001": {
+      "tag": "Robot Ventures 合伙人",
+      "name": "Hart Lambur (,)",
+      "group": "default"
+    },
+    "kevinlee_gate": {
+      "tag": "GATE 首席商务官+执行官",
+      "name": "Kevin Lee",
+      "group": "default"
+    },
+    "deepfates": {
+      "tag": "思想家",
+      "name": "deepfates",
+      "group": "default"
+    },
+    "w1kke": {
+      "tag": "Brainstem 创始人 A16Z dao合作伙伴",
+      "name": "Robin Lehmann.eth  (acc/ai16z)",
+      "group": "default"
+    },
+    "moonmanlet": {
+      "tag": "Moon",
+      "name": "Moon",
+      "group": "default"
+    },
+    "mrkmcknz": {
+      "tag": "mrk",
+      "name": "mrk",
+      "group": "default"
+    },
+    "robertjcho": {
+      "tag": "CMS Holdings 创始合伙人",
+      "name": "Bobby Cho",
+      "group": "default"
+    },
+    "thejackheavy": {
+      "tag": "CMS Holdings COO 首席运营官",
+      "name": "Jack",
+      "group": "default"
+    },
+    "AriDavidPaul": {
+      "tag": "BlockTower Capital 创始人+CEO",
+      "name": "Ari Paul",
+      "group": "default"
+    },
+    "matthewgoetz": {
+      "tag": "BlockTower Capital 创始合伙人",
+      "name": "Matthew Goetz",
+      "group": "default"
+    },
+    "spvenino33": {
+      "tag": "BlockTower Capital 合伙人",
+      "name": "Steven P. Venino",
+      "group": "default"
+    },
+    "tklocanas": {
+      "tag": "BlockTower Capital 合伙人",
+      "name": "Thomas Klocanas",
+      "group": "default"
+    },
+    "kevinlichan": {
+      "tag": "BlockTower Capital 副总裁",
+      "name": "Kevin Li Chan",
+      "group": "default"
+    },
+    "cremanata_art": {
+      "tag": "crema 艺术家",
+      "name": "crema",
+      "group": "default"
+    },
+    "HaunVentures": {
+      "tag": "Haun Ventures  A级",
+      "name": "Haun Ventures",
+      "group": "default"
+    },
+    "arul_1111i": {
+      "tag": "Borderless Capital 创始管理合伙人",
+      "name": "Ⱥrul Murugan",
+      "group": "default"
+    },
+    "borderless_cap": {
+      "tag": "Borderless Capital  B级",
+      "name": "Borderless",
+      "group": "default"
+    },
+    "BainCapCrypto": {
+      "tag": "Bain Capital Crypto  B级",
+      "name": "Bain Capital Crypto",
+      "group": "default"
+    },
+    "alexhevans": {
+      "tag": "Bain Capital Crypto 合伙人",
+      "name": "Alex Evans",
+      "group": "default"
+    },
+    "BlockTower": {
+      "tag": "BlockTower Capital B级",
+      "name": "BlockTower Capital",
+      "group": "default"
+    },
+    "IreneWu27": {
+      "tag": "Bain Capital Crypto 风险合伙人",
+      "name": "Irene",
+      "group": "default"
+    },
+    "kevinzhang": {
+      "tag": "Bain Capital Crypto 投资合伙人",
+      "name": "Kevin Zhang",
+      "group": "default"
+    },
+    "theo_diamandis": {
+      "tag": "Bain Capital Crypto 研究合伙人",
+      "name": "Theo Diamandis",
+      "group": "default"
+    },
+    "mandyzcamp": {
+      "tag": "Bain Capital Crypto 合伙人+研究主管",
+      "name": "Mandy Campbell",
+      "group": "default"
+    },
+    "stefancoh": {
+      "tag": "Bain Capital Crypto 合伙人",
+      "name": "Stefan Cohen",
+      "group": "default"
+    },
+    "KhurramDara": {
+      "tag": "Bain Capital Crypto 监管+政策负责人",
+      "name": "Khurram Dara",
+      "group": "default"
+    },
+    "GuilleAngeris": {
+      "tag": "Bain Capital Crypto 研究主管",
+      "name": "guille",
+      "group": "default"
+    },
+    "eclecticcapital": {
+      "tag": "Bain Capital Crypto 助理投资者",
+      "name": "natalie",
+      "group": "default"
+    },
+    "LBank_Exchange": {
+      "tag": "LBank 交易所",
+      "name": "LBank.com",
+      "group": "default"
+    },
+    "basedevo": {
+      "tag": "based",
+      "name": "based",
+      "group": "default"
+    },
+    "LisaSu": {
+      "tag": "AMD 主席+首席执行官",
+      "name": "Lisa Su",
+      "group": "default"
+    },
+    "doodles": {
+      "tag": "doodles",
+      "name": "doodles",
+      "group": "default"
     }
   },
-  "$myTwitterNoteTime": 1733926854360
+  "$myTwitterNoteTime": 1734183100070
 }

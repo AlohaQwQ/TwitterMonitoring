@@ -172,7 +172,7 @@ public class TwitterMonitor {
                                                                         }
                                                                         //粉丝数大于3000
                                                                         if(fans>2000){
-                                                                            LogUtils.info("startMonitor-粉丝数大于2000: {}", DateUtils.getTimeSSS());
+                                                                            //LogUtils.info("startMonitor-粉丝数大于2000: {}", DateUtils.getTimeSSS());
                                                                             //LogUtils.info("解析推特列表-userResults: {}", userResults);
                                                                             String userID = userResults.getResult().getRest_id();
                                                                             //LogUtils.info("解析推特列表-用户restId: {}", userID);
@@ -181,12 +181,12 @@ public class TwitterMonitor {
                                                                             // 确保使用正确的字符编码
                                                                             String userNameUtf8 = new String(userName.getBytes(), StandardCharsets.UTF_8);
                                                                             String tweetUrl = String.format("https://x.com/%s/status/%s", userName, restId);
-                                                                            LogUtils.info("解析推特列表-推特链接", tweetUrl);
+                                                                            //LogUtils.info("解析推特列表-推特链接", tweetUrl);
                                                                             //认证状态
                                                                             boolean verified = userResults.getResult().getVerification().getIs_blue_verified();
                                                                             boolean isGreaterThanTwoDays;
                                                                             MonitorUser user;
-                                                                            LogUtils.info("startMonitor-更新用户信息和共同关注列表: {}", DateUtils.getTimeSSS());
+                                                                            //LogUtils.info("startMonitor-更新用户信息和共同关注列表: {}", DateUtils.getTimeSSS());
                                                                             //存储用户信息
                                                                             if (!redisCache.hasKey(userNameUtf8)) {
                                                                                 user = new MonitorUser();
@@ -237,7 +237,7 @@ public class TwitterMonitor {
                                                                                 }
                                                                             }
 
-                                                                            LogUtils.info("startMonitor-更新用户信息和共同关注列表完成: {}", DateUtils.getTimeSSS());
+                                                                            //LogUtils.info("startMonitor-更新用户信息和共同关注列表完成: {}", DateUtils.getTimeSSS());
                                                                             //解析合约，https://pump.fun/coin/ftGk9Ykt4tXRGRkpRgAbULSUzrj4idzd3PcBCNopump
                                                                             //短链接 https://t.co/ah6z7Rf7qv
                                                                             Legacy legacy = tweetTwitterResultResult.getLegacy();
@@ -261,7 +261,7 @@ public class TwitterMonitor {
                                                                                 }
                                                                             }
                                                                             if(hasPump){
-                                                                                LogUtils.info("startMonitor-推文数据中包含ca链接: {}", DateUtils.getTimeSSS());
+                                                                                //LogUtils.info("startMonitor-推文数据中包含ca链接: {}", DateUtils.getTimeSSS());
                                                                                 int parseResult = parsingTweets(user, tweetUrl, createdDate, nowTime, fullText);
                                                                                 if(parseResult<0){
                                                                                     LogUtils.error("legacy url包含ca发送推文异常: {}", legacy.getFull_text());
@@ -388,6 +388,7 @@ public class TwitterMonitor {
         String responseString = "";
         String url = null;
         try {
+            //monitorUser.setUserID("829482275318484993");
             if(!redisCache.hasKey("TwitterToken")){
                 LogUtils.error("获取推特共同关注者接口异常-推特token不存在");
                 return CompletableFuture.completedFuture(monitorUser);
@@ -402,7 +403,7 @@ public class TwitterMonitor {
                 LogUtils.error("获取推特共同关注者接口异常-userId为空");
                 return CompletableFuture.completedFuture(monitorUser);
             }
-            String variables = "{\"count\": 20, \"userId\": \"" + monitorUser.getUserID() + "\",\"includePromotedContent\": false}";
+            String variables = "{\"count\": 1000, \"userId\": \"" + monitorUser.getUserID() + "\",\"includePromotedContent\": false}";
             OkHttpClient client = new OkHttpClient().newBuilder().build();
 
             // 构建请求
@@ -446,7 +447,7 @@ public class TwitterMonitor {
                                     monitorUser.setFollowersYouKnowRemarkSet(new HashSet<>());
                                     return CompletableFuture.completedFuture(monitorUser);
                                 }
-                                LogUtils.info("updateUserFollowersYouKnow-FollowerEntries Bean数据解析完成: {}", DateUtils.getTimeSSS());
+                                //LogUtils.info("updateUserFollowersYouKnow-FollowerEntries Bean数据解析完成: {}", DateUtils.getTimeSSS());
                                 //提取列表中所有用户名
                                 List<String> followersYouKnowList = new ArrayList<>();
                                 for (FollowerInfo followerInfo : followerEntries.getEntries()) {
@@ -468,7 +469,7 @@ public class TwitterMonitor {
                                     monitorUser.setFollowersYouKnowRemarkSet(new HashSet<>());
                                     return CompletableFuture.completedFuture(monitorUser);
                                 }
-                                LogUtils.info("updateUserFollowersYouKnow-获取推特共同关注数据解析完成: {}", DateUtils.getTimeSSS());
+                                //LogUtils.info("updateUserFollowersYouKnow-获取推特共同关注数据解析完成: {}", DateUtils.getTimeSSS());
                                 //monitorUser.setFollowersYouKnowList(followersYouKnowList);
                                 Set<String> remarkUserKeySet = new HashSet<>(remarkUserKeyList); // 将 List 转换为 HashSet
 
@@ -529,7 +530,7 @@ public class TwitterMonitor {
                     LogUtils.error("解析ca异常: {}", fullText[0]);
                     return result;
                 }
-                LogUtils.info("parsingTweets-ca解析完成: {}", DateUtils.getTimeSSS());
+                //LogUtils.info("parsingTweets-ca解析完成: {}", DateUtils.getTimeSSS());
                 //存储ca信息
                 if(!redisCache.hasKey(pumpCa)){
                     coin = new MonitorCoin();
@@ -555,7 +556,7 @@ public class TwitterMonitor {
                     //添加用户提及ca记录
                     mentionUserList.add(user.getUserID());
                 }
-                LogUtils.info("parsingTweets-ca信息匹配并存储完成: {}", DateUtils.getTimeSSS());
+                //LogUtils.info("parsingTweets-ca信息匹配并存储完成: {}", DateUtils.getTimeSSS());
 
                 String coinJson = JSON.toJSONString(coin);
                 redisCache.setCacheObject(pumpCa, coinJson, 3, TimeUnit.DAYS);
@@ -627,26 +628,26 @@ public class TwitterMonitor {
                 //messageBuilder.append("ca创建时间: ").append(pumpCa).append("\n");
 
                 messageBuilder.append("┌ <b>twitter: </b>").append(tweetUrl).append("\n");
-                messageBuilder.append("├ <b>作者: </b>").append(user.getUserName()).append("\n");
+                messageBuilder.append("├ <b>作者: ").append(user.getUserName()).append("</b>").append("\n");
                 messageBuilder.append("├ <b>粉丝数: </b>").append(user.getFansNumber()).append("\n");
                 messageBuilder.append("└ <b>是否认证: </b>").append(user.getIsCertified()).append("\n");
                 messageBuilder.append("\n");
 
-                LogUtils.info("parsingTweets-判断用户备注并拼接: {}", DateUtils.getTimeSSS());
+                //LogUtils.info("parsingTweets-判断用户备注并拼接: {}", DateUtils.getTimeSSS());
                 if (StringUtils.isNotEmpty(user.getUserRemark())) {
                     JSONArray remarksArray = JSON.parseArray(user.getUserRemark());
                     messageBuilder.append(remarksArray.stream()
                             .map(remark -> {
-                                String symbol;
-                                int index = remarksArray.indexOf(remark);
-                                 if (index == remarksArray.size() - 1) {
-                                    symbol = "└ ";
-                                } else if (index == 0) {
-                                    symbol = "┌ ";
-                                }  else {
-                                    symbol = "├ ";
-                                }
-                                return symbol + "用户备注: " + remark;
+//                                String symbol;
+//                                int index = remarksArray.indexOf(remark);
+//                                if (index == remarksArray.size() - 1) {
+//                                    symbol = "└ ";
+//                                } else if (index == 0) {
+//                                    symbol = "┌ ";
+//                                }  else {
+//                                    symbol = "├ ";
+//                                }
+                                return "├ <b>用户备注: " + remark + "</b>";
                             })
                             .collect(Collectors.joining("\n")));
                     if(!remarksArray.isEmpty()){
@@ -654,22 +655,38 @@ public class TwitterMonitor {
                     }
                 }
 
-                LogUtils.info("parsingTweets-判断用户共同关注者备注并拼接: {}", DateUtils.getTimeSSS());
+                //LogUtils.info("parsingTweets-判断用户共同关注者备注并拼接: {}", DateUtils.getTimeSSS());
                 //拼接共同关注者命中备注列表信息
                 if (user.getFollowersYouKnowRemarkSet()!=null && !user.getFollowersYouKnowRemarkSet().isEmpty()) {
-                    user.getFollowersYouKnowRemarkSet().parallelStream()
-                            .filter(redisCache::hasKey) // 仅保留在缓存中的键
-                            .map(redisCache::getCacheObject) // 获取用户字符串
-                            .map(Object::toString) // 转换为字符串
-                            .map(userString -> JSON.parseObject(userString, MonitorUser.class)) // 转换为 MonitorUser 对象
-                            .filter(remarkUser -> !StringUtils.isEmpty(remarkUser.getUserRemark())) // 过滤掉没有备注的用户
-                            .flatMap(remarkUser -> {
-                                JSONArray remarksArray = JSON.parseArray(remarkUser.getUserRemark());
-                                return remarksArray.stream()
-                                        .map(userRemark -> "├ 关注者备注: " + remarkUser.getUserName() + " | <b>" +userRemark + "</b>\n");
-                            })
-                            .forEach(messageBuilder::append); // 将结果添加到 messageBuilder
-                    messageBuilder.append("\n");
+                    if (user.getFollowersYouKnowRemarkSet().size()>50){
+                        messageBuilder.append("├ 关注者备注列表总数: ").append(user.getFollowersYouKnowRemarkSet().size()).append("\n");
+                        user.getFollowersYouKnowRemarkSet().parallelStream()
+                                .filter(redisCache::hasKey) // 仅保留在缓存中的键
+                                .map(redisCache::getCacheObject) // 获取用户字符串
+                                .map(Object::toString) // 转换为字符串
+                                .map(userString -> JSON.parseObject(userString, MonitorUser.class)) // 转换为 MonitorUser 对象
+                                .filter(remarkUser -> !StringUtils.isEmpty(remarkUser.getUserRemark())) // 过滤掉没有备注的用户
+                                .flatMap(remarkUser -> {
+                                    JSONArray remarksArray = JSON.parseArray(remarkUser.getUserRemark());
+                                    return remarksArray.stream()
+                                            .map(userRemark -> "├ 关注者备注: " + remarkUser.getUserName() + " | <b>" +userRemark + "</b>\n");
+                                })
+                                .limit(50) // 只显示前 50 个结果
+                                .forEach(messageBuilder::append); // 将结果添加到 messageBuilder
+                    } else {
+                        user.getFollowersYouKnowRemarkSet().parallelStream()
+                                .filter(redisCache::hasKey) // 仅保留在缓存中的键
+                                .map(redisCache::getCacheObject) // 获取用户字符串
+                                .map(Object::toString) // 转换为字符串
+                                .map(userString -> JSON.parseObject(userString, MonitorUser.class)) // 转换为 MonitorUser 对象
+                                .filter(remarkUser -> !StringUtils.isEmpty(remarkUser.getUserRemark())) // 过滤掉没有备注的用户
+                                .flatMap(remarkUser -> {
+                                    JSONArray remarksArray = JSON.parseArray(remarkUser.getUserRemark());
+                                    return remarksArray.stream()
+                                            .map(userRemark -> "├ 关注者备注: " + remarkUser.getUserName() + " | <b>" +userRemark + "</b>\n");
+                                })
+                                .forEach(messageBuilder::append); // 将结果添加到 messageBuilder
+                    }
                     if(!user.getFollowersYouKnowRemarkSet().isEmpty()){
                         messageBuilder.append("\n");
                     }
