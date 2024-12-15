@@ -175,13 +175,13 @@ public class TwitterMonitor {
                                                                             //LogUtils.info("startMonitor-粉丝数大于2000: {}", DateUtils.getTimeSSS());
                                                                             //LogUtils.info("解析推特列表-userResults: {}", userResults);
                                                                             String userID = userResults.getResult().getRest_id();
-                                                                            //LogUtils.info("解析推特列表-用户restId: {}", userID);
+                                                                            LogUtils.info("解析推特列表-用户restId: {}", userID);
                                                                             //拼接推特链接 https://x.com/VT_BNB/status/1861334062021185655
                                                                             String userShowName = userResults.getResult().getCore().getName();
                                                                             // 确保使用正确的字符编码
                                                                             String userNameUtf8 = new String(userName.getBytes(), StandardCharsets.UTF_8);
                                                                             String tweetUrl = String.format("https://x.com/%s/status/%s", userName, restId);
-                                                                            //LogUtils.info("解析推特列表-推特链接", tweetUrl);
+                                                                            LogUtils.info("解析推特列表-推特链接", tweetUrl);
                                                                             //认证状态
                                                                             boolean verified = userResults.getResult().getVerification().getIs_blue_verified();
                                                                             boolean isGreaterThanTwoDays;
@@ -628,7 +628,8 @@ public class TwitterMonitor {
                 //messageBuilder.append("ca创建时间: ").append(pumpCa).append("\n");
 
                 messageBuilder.append("┌ <b>twitter: </b>").append(tweetUrl).append("\n");
-                messageBuilder.append("├ <b>作者: ").append(user.getUserName()).append("</b>").append("\n");
+                messageBuilder.append("├ <b>作者: ").append(user.getUserName())
+                        .append(" | ").append(user.getUserShowName()).append("</b>").append("\n");
                 messageBuilder.append("├ <b>粉丝数: </b>").append(user.getFansNumber()).append("\n");
                 messageBuilder.append("└ <b>是否认证: </b>").append(user.getIsCertified()).append("\n");
                 messageBuilder.append("\n");
