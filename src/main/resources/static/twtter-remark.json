@@ -83,6 +83,11 @@
     }
   },
   "$myTwitterNoteItems": {
+    "60711": {
+      "tag": "诈骗",
+      "name": "60711",
+      "group": "default"
+    },
     "bazingahappy": {
       "tag": "Happy哥",
       "name": "Bazinga铜锣湾happy哥",
@@ -1534,7 +1539,7 @@
     },
     "GenshinImpactOC": {
       "tag": "元神",
-      "name": "Gacha Memes",
+      "name": "Gacha Zone",
       "group": "default",
       "isExists": true,
       "isShow": true,
@@ -2892,7 +2897,7 @@
     },
     "nic__carter": {
       "tag": "Castle Island Ventures 联合创始人及 GP、评论家，曾担任富达投资的第一位加密资产分析师",
-      "name": "nicmas  cheerter",
+      "name": "nic  grinchter",
       "group": "default"
     },
     "LLuciano_BTC": {
@@ -3961,7 +3966,7 @@
       "group": "default"
     },
     "snowch4n": {
-      "tag": "关注很吊 等CA",
+      "tag": "傻逼割",
       "name": "🅢🅝🅞🅦🅒🅗🅐🅝",
       "group": "default"
     },
@@ -5954,7 +5959,202 @@
       "tag": "doodles",
       "name": "doodles",
       "group": "default"
+    },
+    "sol_doji": {
+      "tag": "诈骗",
+      "name": "Doji.sol",
+      "group": "default"
+    },
+    "astrofoliosol": {
+      "tag": "等龙头 CA",
+      "name": "ASTROFOLIO",
+      "group": "default"
+    },
+    "k3yv0id": {
+      "tag": "K3艺术家  畜生",
+      "name": "k3yv0id",
+      "group": "default"
+    },
+    "Kyroh": {
+      "tag": "YGG 创始人",
+      "name": "Kyroh",
+      "group": "default"
+    },
+    "TankussArt": {
+      "tag": "艺术家",
+      "name": "Player One",
+      "group": "default"
+    },
+    "SCMPNews": {
+      "tag": "新闻",
+      "name": "South China Morning Post",
+      "group": "default"
+    },
+    "snow949494": {
+      "tag": "lei.eth",
+      "name": "lei.eth",
+      "group": "default"
+    },
+    "notthreadguy": {
+      "tag": "threadguy（NFT神）",
+      "name": "threadguy",
+      "group": "default"
+    },
+    "Squirrel_Dad12": {
+      "tag": "松鼠主人",
+      "name": "Squirrel_Dad",
+      "group": "default"
+    },
+    "Bomebookofmemes": {
+      "tag": "BOME",
+      "name": "BOME",
+      "group": "default"
+    },
+    "SAIT112024": {
+      "tag": "Sai",
+      "name": "Sai",
+      "group": "default"
+    },
+    "WarRoomArchives": {
+      "tag": "诈骗",
+      "name": "WarRoom Archives",
+      "group": "default"
+    },
+    "Fiskantes": {
+      "tag": "Zee Prime Capital 的合伙人",
+      "name": "daddy fiskantes",
+      "group": "default"
+    },
+    "farokh": {
+      "tag": "Rug Radio 的创始人",
+      "name": "Farokh",
+      "group": "default"
+    },
+    "Christianeth": {
+      "tag": "NextGen Digital Venture 与 Weirdo Ghost Gang 合伙人",
+      "name": "Christian2022.eth",
+      "group": "default"
+    },
+    "ciaobelindazhou": {
+      "tag": "Sharding Capital 的创始合伙人",
+      "name": "Belinda",
+      "group": "default"
+    },
+    "ianwu2017": {
+      "tag": "Momentum Capital 管理合伙人",
+      "name": "Agent Ian",
+      "group": "default"
+    },
+    "SaulDataman": {
+      "tag": "CoinSummer Labs 联合创始人",
+      "name": "Saul Dataman",
+      "group": "default"
+    },
+    "Kakarot_F23": {
+      "tag": "Yogapetz 联合创始人",
+      "name": "Kakarot  WELL3",
+      "group": "default"
+    },
+    "NaturesLits": {
+      "tag": "删推狗",
+      "name": "AMAZING NATURES",
+      "group": "default"
+    },
+    "CryptosHeaven1": {
+      "tag": "诈骗",
+      "name": "DaCryptoGEMSonic",
+      "group": "default"
+    },
+    "valueandtime": {
+      "tag": "大V",
+      "name": "Value & Time",
+      "group": "default"
+    },
+    "ColeThereum": {
+      "tag": "Cole 胖企鹅之前团队成员",
+      "name": "Cole",
+      "group": "default"
+    },
+    "notsofast": {
+      "tag": "notsofast 老矿工 OG miner",
+      "name": "notsofast",
+      "group": "default"
+    },
+    "MemeDotLive": {
+      "tag": "Meme.Live",
+      "name": "Meme.Live",
+      "group": "default"
+    },
+    "federalreserve": {
+      "tag": "美联储 官方账号",
+      "name": "Federal Reserve",
+      "group": "default"
+    },
+    "Jihoz_Axie": {
+      "tag": "Axie 创始人",
+      "name": "Jihoz.ron",
+      "group": "default"
+    },
+    "ALCHDAO": {
+      "tag": "ACC",
+      "name": "Alchemist Accelerate",
+      "group": "default"
+    },
+    "AwakeningRubin": {
+      "tag": "新 AI 蹲",
+      "name": "RUBIN",
+      "group": "default"
+    },
+    "boneGPT": {
+      "tag": "bone 创始人",
+      "name": "bone",
+      "group": "default"
+    },
+    "talented_on_God": {
+      "tag": "诈骗",
+      "name": "talented",
+      "group": "default"
+    },
+    "el33th4xor": {
+      "tag": "Ava Labs 首席执行官、Avalanche 创始人",
+      "name": "egs9000",
+      "group": "default"
+    },
+    "solkcrow": {
+      "tag": "s",
+      "name": "s",
+      "group": "default"
+    },
+    "mastertingus": {
+      "tag": "艺术家  4M",
+      "name": "mastertingus",
+      "group": "default"
+    },
+    "ShouldHavAnimal": {
+      "tag": "诈骗",
+      "name": "why you should have an animal",
+      "group": "default"
+    },
+    "patty_fi": {
+      "tag": "PattyIce",
+      "name": "PattyIce",
+      "group": "default"
+    },
+    "SantaTerminalAI": {
+      "tag": "傻逼 死妈玩意",
+      "name": "Santa Terminal",
+      "group": "default"
+    },
+    "FidelEverywhere": {
+      "tag": "多次发盘子",
+      "name": "Fidel Amos",
+      "group": "default"
+    },
+    "swarms_corp": {
+      "tag": "SWARMS 40M",
+      "name": "SWARMS",
+      "group": "default"
     }
   },
-  "$myTwitterNoteTime": 1734183100070
+  "$myTwitterNoteTime": 1734678216328
 }
