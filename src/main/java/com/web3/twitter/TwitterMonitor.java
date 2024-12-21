@@ -571,7 +571,7 @@ public class TwitterMonitor {
                     messageBuilder.append("\n");
                 }
 
-                //历史发射次数统计
+                //历史发射次数统计并记录数据库
                 if(user.getPumpHistorySet()==null || user.getPumpHistorySet().isEmpty()){
                     Set<String> pumpSet = new HashSet<>();
                     pumpSet.add(coin.getCoinCa());
@@ -581,6 +581,10 @@ public class TwitterMonitor {
                     messageBuilder.append("\uD83D\uDCA5 发射次数: ").append(user.getPumpHistorySet().size()).append("\n");
                     messageBuilder.append("\n");
                 }
+                String userNameKey = new String(user.getUserName().getBytes(), StandardCharsets.UTF_8);
+                String jsonUser = JSON.toJSONString(user);
+                // 设置缓存对象, userName 为key
+                redisCache.setCacheObject(userNameKey, jsonUser);
 
                 //粉丝数阶梯提示
                 if(Long.parseLong(user.getFansNumber()) >10000){
