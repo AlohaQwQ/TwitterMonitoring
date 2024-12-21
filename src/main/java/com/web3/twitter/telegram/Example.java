@@ -49,8 +49,8 @@ public final class Example {
 			//
 			// var apiToken = new APIToken(your-api-id-here, "your-api-hash-here");
 			//
-			APIToken apiToken = APIToken.example();
-
+			//APIToken apiToken = APIToken.example();
+			APIToken apiToken = new APIToken(22986736, "c650552948aa6f2a4f34320e0ac4a69d");
 
 			// Configure the client
 			TDLibSettings settings = TDLibSettings.create(apiToken);
@@ -59,7 +59,7 @@ public final class Example {
 			// After you authenticate into a session, the authentication will be skipped from the next restart!
 			// If you want to ensure to match the authentication supplier user/bot with your session user/bot,
 			//   you can name your session directory after your user id, for example: "tdlib-session-id12345"
-			Path sessionPath = Paths.get("example-tdlight-session");
+			Path sessionPath = Paths.get("tdlight-session-22986736");
 			settings.setDatabaseDirectoryPath(sessionPath.resolve("data"));
 			settings.setDownloadedFilesDirectoryPath(sessionPath.resolve("downloads"));
 

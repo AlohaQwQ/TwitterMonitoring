@@ -70,6 +70,11 @@ public class MonitorUser {
     private Set<String> followersYouKnowRemarkSet;
 
     /**
+     * ca发布历史记录
+     */
+    private Set<String> pumpHistorySet;
+
+    /**
      * 黑名单
      */
     private String isBan;
@@ -178,6 +183,14 @@ public class MonitorUser {
 
     public void setFollowersYouKnowRemarkSet(Set<String> followersYouKnowRemarkSet) {
         this.followersYouKnowRemarkSet = followersYouKnowRemarkSet;
+    }
+
+    public Set<String> getPumpHistorySet() {
+        return pumpHistorySet;
+    }
+
+    public void setPumpHistorySet(Set<String> pumpHistorySet) {
+        this.pumpHistorySet = pumpHistorySet;
     }
 
     public String getUpdateTime() {

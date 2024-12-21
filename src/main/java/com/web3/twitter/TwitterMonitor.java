@@ -570,6 +570,18 @@ public class TwitterMonitor {
                     messageBuilder.append("⚡\uFE0F 命中备注列表: ").append(user.getUserShowName()).append("\n");
                     messageBuilder.append("\n");
                 }
+
+                //历史发射次数统计
+                if(user.getPumpHistorySet()==null || user.getPumpHistorySet().isEmpty()){
+                    Set<String> pumpSet = new HashSet<>();
+                    pumpSet.add(coin.getCoinCa());
+                    user.setPumpHistorySet(pumpSet);
+                } else {
+                    user.getPumpHistorySet().add(coin.getCoinCa());
+                    messageBuilder.append("\uD83D\uDCA5 发射次数: ").append(user.getPumpHistorySet().size()).append("\n");
+                    messageBuilder.append("\n");
+                }
+
                 //粉丝数阶梯提示
                 if(Long.parseLong(user.getFansNumber()) >10000){
                     messageBuilder.append("┌❗粉丝数大于1w");
