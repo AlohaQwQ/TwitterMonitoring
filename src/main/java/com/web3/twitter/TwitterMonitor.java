@@ -171,7 +171,7 @@ public class TwitterMonitor {
                                                                             fans = userResults.getResult().getRelationship_counts().getFollowers();
                                                                         }
                                                                         //粉丝数大于3000
-                                                                        if(fans>2000){
+                                                                        if(fans>500){
                                                                             //LogUtils.info("startMonitor-粉丝数大于2000: {}", DateUtils.getTimeSSS());
                                                                             //LogUtils.info("解析推特列表-userResults: {}", userResults);
                                                                             String userID = userResults.getResult().getRest_id();
@@ -214,6 +214,13 @@ public class TwitterMonitor {
                                                                                     LogUtils.info("跳过黑名单用户推文: {}", userName);
                                                                                     continue;
                                                                                 }
+                                                                                if(user.getPumpHistorySet()!=null && !user.getPumpHistorySet().isEmpty()){
+                                                                                    if(user.getPumpHistorySet().size()>3){
+                                                                                        LogUtils.info("跳过pump发射次数大于3次用户: {}", userName);
+                                                                                        continue;
+                                                                                    }
+                                                                                }
+
                                                                                 long currentTimeStamp = System.currentTimeMillis();
                                                                                 long updateTimeStamp = Long.parseLong(user.getUpdateTime());
                                                                                 long difference = currentTimeStamp - updateTimeStamp;
