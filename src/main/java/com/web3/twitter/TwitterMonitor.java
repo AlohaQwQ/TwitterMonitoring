@@ -607,7 +607,7 @@ public class TwitterMonitor {
                     }
                     messageBuilder.append("\n");
                 }
-                messageBuilder.append("\n");
+                //messageBuilder.append("\n");
 
                 if(coin.getMentionUserList().size()>1){
                     messageBuilder.append("\uD83D\uDD25 ca提及次数: ").append(coin.getMentionUserList().size()).append("\n");

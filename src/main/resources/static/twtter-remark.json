@@ -90,7 +90,7 @@
     },
     "bazingahappy": {
       "tag": "Happy哥",
-      "name": "Bazinga铜锣湾happy哥",
+      "name": "铜锣湾happy哥",
       "group": "default",
       "isExists": true,
       "isShow": true,
@@ -1006,15 +1006,6 @@
       "isSelected": true,
       "editable": false
     },
-    "angrybotX": {
-      "tag": "上币监控！",
-      "name": "AngryBot",
-      "group": "default",
-      "isExists": true,
-      "isShow": true,
-      "isSelected": true,
-      "editable": false
-    },
     "usemoonshot": {
       "tag": "加密世界中的罗宾汉 当年散户大战华尔街，就是咆哮小猫带领散户用罗宾汉买爆GME",
       "name": "Moonshot",
@@ -1404,7 +1395,7 @@
     },
     "4chanintern": {
       "tag": "A16Z合作伙伴",
-      "name": "4chan for Life - ai16z",
+      "name": "4chan for Life - ai16z (4,4)",
       "group": "default",
       "isExists": true,
       "isShow": true,
@@ -1592,7 +1583,7 @@
       "editable": false
     },
     "WatcherGuru": {
-      "tag": "新闻",
+      "tag": "新闻 很多关",
       "name": "Watcher.Guru",
       "group": "default",
       "isExists": true,
@@ -2140,15 +2131,6 @@
       "isSelected": true,
       "editable": false
     },
-    "jup_uplink": {
-      "tag": "jupiter 小号",
-      "name": "Jupiter Uplink",
-      "group": "default",
-      "isExists": true,
-      "isShow": true,
-      "isSelected": true,
-      "editable": false
-    },
     "MurrLincoln": {
       "tag": "创始人 0Xsun",
       "name": "lincoln.base.eth",
@@ -2396,18 +2378,13 @@
       "group": "default"
     },
     "mhudack": {
-      "tag": "toly  A16Z关注",
+      "tag": "Sling Money 创始人+CEO",
       "name": "Mike Hudack",
       "group": "default"
     },
     "FoxNews": {
       "tag": "新闻号",
       "name": "Fox News",
-      "group": "default"
-    },
-    "NintendoAmerica": {
-      "tag": "马里奥",
-      "name": "Nintendo of America",
       "group": "default"
     },
     "McDonalds": {
@@ -2486,7 +2463,7 @@
       "group": "default"
     },
     "MarioNawfal": {
-      "tag": "广告号",
+      "tag": "IBC Group 创始人兼CEO,X 上最具影响力的 Space 主持人",
       "name": "Mario Nawfal",
       "group": "default"
     },
@@ -2571,7 +2548,7 @@
       "group": "default"
     },
     "sama": {
-      "tag": "open AI 总裁 山姆奥特曼",
+      "tag": "OpenAI 创始人兼首席执行官、Worldcoin 联合创始人",
       "name": "Sam Altman",
       "group": "default"
     },
@@ -2702,7 +2679,7 @@
     },
     "slopfather": {
       "tag": "Slopfather  40M",
-      "name": "Slopfather (Season 1)",
+      "name": "Slopfather",
       "group": "default"
     },
     "lmrankhan": {
@@ -2897,7 +2874,7 @@
     },
     "nic__carter": {
       "tag": "Castle Island Ventures 联合创始人及 GP、评论家，曾担任富达投资的第一位加密资产分析师",
-      "name": "nic  grinchter",
+      "name": "nic  carter",
       "group": "default"
     },
     "LLuciano_BTC": {
@@ -3001,7 +2978,7 @@
       "group": "default"
     },
     "Matt_Furie": {
-      "tag": "PEPE创始人",
+      "tag": "PEPE 原创者",
       "name": "𝓜𝓪𝓽𝓽 𝓕𝓾𝓻𝓲𝓮",
       "group": "default"
     },
@@ -3033,11 +3010,6 @@
     "BitMartExchange": {
       "tag": "交易所",
       "name": "BitMart",
-      "group": "default"
-    },
-    "the_wild_kin": {
-      "tag": "速通",
-      "name": "KIN",
       "group": "default"
     },
     "Hyperintern": {
@@ -3407,7 +3379,7 @@
     },
     "CookerFlips": {
       "tag": "Cooker",
-      "name": "Cooker | Darn.eth | Kms.eth | How.eth",
+      "name": "Cooker.hl",
       "group": "default"
     },
     "roxinft": {
@@ -3527,7 +3499,7 @@
     },
     "Jesperish": {
       "tag": "Jesperish 16M",
-      "name": "Jesperish",
+      "name": "jesperish",
       "group": "default"
     },
     "Said46807236": {
@@ -5501,7 +5473,7 @@
       "group": "default"
     },
     "degenharambe": {
-      "tag": "PEPE 作者",
+      "tag": "PEPE 创始人",
       "name": "z",
       "group": "default"
     },
@@ -5671,7 +5643,7 @@
       "group": "default"
     },
     "RyzeLabs": {
-      "tag": "Ryze Labs",
+      "tag": "Ryze Labs C级",
       "name": "Ryze Labs",
       "group": "default"
     },
@@ -6152,9 +6124,424 @@
     },
     "swarms_corp": {
       "tag": "SWARMS 40M",
-      "name": "SWARMS",
+      "name": "$swarms",
+      "group": "default"
+    },
+    "KyeGomezB": {
+      "tag": "swarms 创始人",
+      "name": "Kye Gomez (Hiring)",
+      "group": "default"
+    },
+    "XShop": {
+      "tag": "X Shop",
+      "name": "X Shop",
+      "group": "default"
+    },
+    "DegenCapitalLLC": {
+      "tag": "CX 特别屌 直接上",
+      "name": "DegenCapitalLLC",
+      "group": "default"
+    },
+    "PeterSchiff": {
+      "tag": "首席经济学家兼全球战略家，主席 ，创始人 ，主持人",
+      "name": "Peter Schiff",
+      "group": "default"
+    },
+    "vvaifudotfun": {
+      "tag": "vvaifu.fun",
+      "name": "vvaifu.fun",
+      "group": "default"
+    },
+    "Snowden": {
+      "tag": "前美国中央情报局（CIA）技术专家和国家安全局（NSA）承包商",
+      "name": "Edward Snowden",
+      "group": "default"
+    },
+    "endrarediseases": {
+      "tag": "罕见疾病 重点关",
+      "name": "Curetopia",
+      "group": "default"
+    },
+    "blader": {
+      "tag": "Runway的创始人兼CEO（A16z投资）Sandbox VR的前CEO",
+      "name": "Siqi Chen",
+      "group": "default"
+    },
+    "0xrinegade": {
+      "tag": "SVMAI  2.5M",
+      "name": "rinegade",
+      "group": "default"
+    },
+    "avgshitcoiner": {
+      "tag": "鲸鱼 大户",
+      "name": "0xInvisiblemoon",
+      "group": "default"
+    },
+    "Windows": {
+      "tag": "Windows",
+      "name": "Windows",
+      "group": "default"
+    },
+    "BessemerVP": {
+      "tag": "Bessemer",
+      "name": "Bessemer",
+      "group": "default"
+    },
+    "riabhutoria": {
+      "tag": "Castle Island Ventures 合伙人",
+      "name": "ria bhutoria",
+      "group": "default"
+    },
+    "seanjudgeciv": {
+      "tag": "Castle Island Ventures 合伙人",
+      "name": "Sean Judge",
+      "group": "default"
+    },
+    "CastleIslandVC": {
+      "tag": "Castle Island Ventures",
+      "name": "Castle Island Ventures",
+      "group": "default"
+    },
+    "MattWalshInBos": {
+      "tag": "Castle Island Ventures 创始合伙人",
+      "name": "Matt Walsh",
+      "group": "default"
+    },
+    "ModdedQuad": {
+      "tag": "神经科学家，天网始祖",
+      "name": "Noland Arbaugh",
+      "group": "default"
+    },
+    "AshAEgan": {
+      "tag": "Archetype 创始人",
+      "name": "Ash Egan",
+      "group": "default"
+    },
+    "katherineykwu": {
+      "tag": "Archetype 风投合伙人",
+      "name": "Katherine Wu",
+      "group": "default"
+    },
+    "dberenzon": {
+      "tag": "Archetype 合伙人",
+      "name": "Dmitriy Berenzon",
+      "group": "default"
+    },
+    "willkantaros": {
+      "tag": "Archetype 研究合伙人",
+      "name": "Will Kantaros",
+      "group": "default"
+    },
+    "mountainwaterpi": {
+      "tag": "Archetype 风投合伙人",
+      "name": "nick",
+      "group": "default"
+    },
+    "tylerinternet": {
+      "tag": "Archetype 营销主管",
+      "name": "tylerinternet",
+      "group": "default"
+    },
+    "DannySursock": {
+      "tag": "Archetype 投资总监",
+      "name": "Danny Sursock",
+      "group": "default"
+    },
+    "katiewav": {
+      "tag": "Archetype 投资人",
+      "name": "katie",
+      "group": "default"
+    },
+    "archetypevc": {
+      "tag": "Archetype  C级",
+      "name": "Archetype",
+      "group": "default"
+    },
+    "ForestBai1": {
+      "tag": "Foresight Ventures 联合创始人",
+      "name": "WhiteForest",
+      "group": "default"
+    },
+    "immanencer": {
+      "tag": "ratimics",
+      "name": "ratimics",
+      "group": "default"
+    },
+    "1confirmation": {
+      "tag": "1confirmation C级",
+      "name": "1confirmation",
+      "group": "default"
+    },
+    "NTmoney": {
+      "tag": "1confirmation 创始人+合伙人",
+      "name": "Nick Tomaino",
+      "group": "default"
+    },
+    "yekiM_o": {
+      "tag": "1confirmation 合伙人",
+      "name": "Mike",
+      "group": "default"
+    },
+    "monamhamdy": {
+      "tag": "Ryze Labs 首席战略官",
+      "name": "Mona Hamdy",
+      "group": "default"
+    },
+    "HaruChen8413": {
+      "tag": "Ryze Labs 总监",
+      "name": "Haru Chen",
+      "group": "default"
+    },
+    "tiennatalie": {
+      "tag": "Foresight Ventures 公关总监",
+      "name": "Nat",
+      "group": "default"
+    },
+    "0xmaggie5": {
+      "tag": "Foresight Ventures 技术总监",
+      "name": "Maggie",
+      "group": "default"
+    },
+    "bella98255": {
+      "tag": "Foresight Ventures VP",
+      "name": "Stella88.eth",
+      "group": "default"
+    },
+    "Hippylism": {
+      "tag": "Foresight Ventures 合伙人",
+      "name": "Hippy",
+      "group": "default"
+    },
+    "azeemk_": {
+      "tag": "Foresight Ventures 投资合伙人",
+      "name": "azeem",
+      "group": "default"
+    },
+    "AliceL991": {
+      "tag": "Foresight Ventures 投资合伙人",
+      "name": "Alice",
+      "group": "default"
+    },
+    "ForesightVen": {
+      "tag": "Foresight Ventures C级",
+      "name": "Foresight Ventures",
+      "group": "default"
+    },
+    "JaschaSamadi": {
+      "tag": "Greenfield 创始合伙人",
+      "name": "Jascha",
+      "group": "default"
+    },
+    "LeBastif": {
+      "tag": "Greenfield 创始合伙人",
+      "name": "Sebastian Blum I",
+      "group": "default"
+    },
+    "felix_macht": {
+      "tag": "Greenfield 投资合伙人",
+      "name": "Felix Machart",
+      "group": "default"
+    },
+    "pokiethepanda": {
+      "tag": "Ascensive Assets 创始合伙人",
+      "name": "Ben Middleton",
+      "group": "default"
+    },
+    "unclesendit": {
+      "tag": "Ascensive Assets 合伙人",
+      "name": "Alex",
+      "group": "default"
+    },
+    "AscensiveAsset": {
+      "tag": "Ascensive Assets C级",
+      "name": "Ascensive Assets",
+      "group": "default"
+    },
+    "JasonSoraVC": {
+      "tag": "Sora Ventures 管理合伙人",
+      "name": "Jason Fang",
+      "group": "default"
+    },
+    "sora_ventures": {
+      "tag": "Sora Ventures C级",
+      "name": "Sora Ventures",
+      "group": "default"
+    },
+    "William_fng": {
+      "tag": "Sora Ventures 投资人",
+      "name": "Williamfcc",
+      "group": "default"
+    },
+    "AdrianUberto": {
+      "tag": "ParaFi Capital 合伙人+首席运营官",
+      "name": "Adrian Uberto",
+      "group": "default"
+    },
+    "paraficapital": {
+      "tag": "ParaFi Capital C级",
+      "name": "ParaFi Capital",
+      "group": "default"
+    },
+    "anjan_vinod": {
+      "tag": "ParaFi Capital 执行董事",
+      "name": "Anjan Vinod",
+      "group": "default"
+    },
+    "khoslaventures": {
+      "tag": "Khosla Ventures C级",
+      "name": "Khosla Ventures",
+      "group": "default"
+    },
+    "SamsungNext": {
+      "tag": "Samsung Next",
+      "name": "Samsung Next",
+      "group": "default"
+    },
+    "sandeepnailwal": {
+      "tag": "Polygon 的联合创始人",
+      "name": "Sandeep WILDER (※,※)",
+      "group": "default"
+    },
+    "reidhoffman": {
+      "tag": "领英（LinkedIn）的联合创始人兼执行主席",
+      "name": "Reid Hoffman",
+      "group": "default"
+    },
+    "ilblackdragon": {
+      "tag": "NEAR 联合创始人",
+      "name": "Illia (root.near) (, ⋈)",
+      "group": "default"
+    },
+    "mheinrich": {
+      "tag": "Zero Gravity 联合创始人兼首席执行官、Pioneer Fund 风险合伙人",
+      "name": "Michael Heinrich - deAIOS",
+      "group": "default"
+    },
+    "im_manderson": {
+      "tag": "Framework Ventures 联合创始人",
+      "name": "Michael Anderson",
+      "group": "default"
+    },
+    "pythianism": {
+      "tag": "Framework Ventures 联合创始人",
+      "name": "Vance Spencer",
+      "group": "default"
+    },
+    "RoyLearner": {
+      "tag": "Framework Ventures 合伙人",
+      "name": "Roy Learner",
+      "group": "default"
+    },
+    "adam_badrawi": {
+      "tag": "Framework Ventures 合伙人",
+      "name": "Adam Badrawi",
+      "group": "default"
+    },
+    "0x_tracy": {
+      "tag": "Framework Ventures 项目主管",
+      "name": "Tracy Wang",
+      "group": "default"
+    },
+    "b_potts23": {
+      "tag": "Framework Ventures 投资总监",
+      "name": "Brandon Potts",
+      "group": "default"
+    },
+    "hiFramework": {
+      "tag": "Framework Ventures S级 14亿",
+      "name": "Framework Ventures",
+      "group": "default"
+    },
+    "arkham": {
+      "tag": "Arkham 区块链情报平台",
+      "name": "Arkham",
+      "group": "default"
+    },
+    "MiguelMorel": {
+      "tag": "Arkham 创始人+CEO",
+      "name": "Miguel Morel",
+      "group": "default"
+    },
+    "prestonjbyrne": {
+      "tag": "Arkham 副总裁+法律顾问",
+      "name": "Preston Byrne",
+      "group": "default"
+    },
+    "GeoffLewisOrg": {
+      "tag": "Bedrock Capital 创始人兼执行合伙人",
+      "name": "Geoff Lewis",
+      "group": "default"
+    },
+    "TimDraper": {
+      "tag": "创始人，投资了50 多家加密公司，投资了 Coinbase、Ledger、 Tezos、Bancor",
+      "name": "Tim Draper",
+      "group": "default"
+    },
+    "peterthiel": {
+      "tag": "PayPal 联合创始人",
+      "name": "Peter Thiel",
+      "group": "default"
+    },
+    "0xdrej": {
+      "tag": "Grass 创始人",
+      "name": "Andrej",
+      "group": "default"
+    },
+    "neelsalami": {
+      "tag": "Eclipse 的创始人",
+      "name": "neel",
+      "group": "default"
+    },
+    "mynameiskyliaa": {
+      "tag": "kylia (ai)   看见无脑赛",
+      "name": "kylia (ai)",
+      "group": "default"
+    },
+    "foundation": {
+      "tag": "Foundation",
+      "name": "Foundation",
+      "group": "default"
+    },
+    "bitcoinPalmer": {
+      "tag": "Doge 联合创始人",
+      "name": "palmer",
+      "group": "default"
+    },
+    "MarshallHayner": {
+      "tag": "DOGE 董事会成员",
+      "name": "Marshall Hayner",
+      "group": "default"
+    },
+    "9gagceo": {
+      "tag": "Memeland 创始人",
+      "name": "9GAGCEO  Memecoin",
+      "group": "default"
+    },
+    "TheOnlyNom": {
+      "tag": "BONK 核心贡献值",
+      "name": "Nom",
+      "group": "default"
+    },
+    "Android": {
+      "tag": "Android",
+      "name": "Android",
+      "group": "default"
+    },
+    "cryptosmerkis": {
+      "tag": "Blum 的联合创始人,Binance 的CIS总经理",
+      "name": "Vladimir Smerkis",
+      "group": "default"
+    },
+    "chamath": {
+      "tag": "Social Capital 创始人兼首席执行官",
+      "name": "Chamath Palihapitiya",
+      "group": "default"
+    },
+    "CathieDWood": {
+      "tag": "Cathie Wood 是 ARK Invest 的创始人、首席执行官兼首席信息官",
+      "name": "Cathie Wood",
       "group": "default"
     }
   },
-  "$myTwitterNoteTime": 1734678216328
+  "$myTwitterNoteTime": 1735249777350
 }
