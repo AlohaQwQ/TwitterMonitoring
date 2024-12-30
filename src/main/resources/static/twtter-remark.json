@@ -1907,7 +1907,7 @@
       "editable": false
     },
     "shawmakesmagic": {
-      "tag": "A16Z合作伙伴 程序员",
+      "tag": "A16Z合作伙伴 创始人 程序员",
       "name": "Shaw  */acc",
       "group": "default",
       "isExists": true,
@@ -5784,7 +5784,7 @@
     },
     "deepfates": {
       "tag": "思想家",
-      "name": "deepfates",
+      "name": "web weaver",
       "group": "default"
     },
     "w1kke": {
@@ -6541,7 +6541,112 @@
       "tag": "Cathie Wood 是 ARK Invest 的创始人、首席执行官兼首席信息官",
       "name": "Cathie Wood",
       "group": "default"
+    },
+    "AvaDoesAI": {
+      "tag": "A16Z 合作伙伴 ELIZA",
+      "name": "Ava",
+      "group": "default"
+    },
+    "TechCrunch": {
+      "tag": "创始人和初创团队的技术新闻",
+      "name": "TechCrunch",
+      "group": "default"
+    },
+    "Nyenchenpepe": {
+      "tag": "ChenPepe 金蛙",
+      "name": "ChenPepe",
+      "group": "default"
+    },
+    "Sakuradaos": {
+      "tag": "明天启动",
+      "name": "Sakura",
+      "group": "default"
+    },
+    "GoldenPepeCabal": {
+      "tag": "Golden Pepe 金蛙",
+      "name": "Golden Pepe",
+      "group": "default"
+    },
+    "0xSLK": {
+      "tag": "集成Eliza",
+      "name": "SlKzᵍᵐ",
+      "group": "default"
+    },
+    "Scobleizer": {
+      "tag": "美国著名的博客作者、技术传播者和作家",
+      "name": "Robert Scoble",
+      "group": "default"
+    },
+    "_kaitoai": {
+      "tag": "Kaito AI",
+      "name": "Kaito AI",
+      "group": "default"
+    },
+    "aipool_tee": {
+      "tag": "aiPool",
+      "name": "aiPool",
+      "group": "default"
+    },
+    "haze0x": {
+      "tag": "gmgn 创始人",
+      "name": "Haze(,)",
+      "group": "default"
+    },
+    "Grimezsz": {
+      "tag": "𝖦𝗋𝗂𝗆𝖾𝗌 马斯克前女友",
+      "name": "𝖦𝗋𝗂𝗆𝖾𝗌",
+      "group": "default"
+    },
+    "ai16zNEWS": {
+      "tag": "ai16z NEWS",
+      "name": "ai16z NEWS",
+      "group": "default"
+    },
+    "XXAntiWar": {
+      "tag": "女王 BOME 8.5M",
+      "name": "XX",
+      "group": "default"
+    },
+    "joiceloo_art": {
+      "tag": "oddfellows 设计师",
+      "name": "Joyce Liu",
+      "group": "default"
+    },
+    "ClaiveAI": {
+      "tag": "Claive AI  等CA",
+      "name": "Claive AI",
+      "group": "default"
+    },
+    "0xstickmaneth": {
+      "tag": "StickMan  等Ca",
+      "name": "StickMan",
+      "group": "default"
+    },
+    "stevewilldoit": {
+      "tag": "美国的YouTuber、社交媒体名人和内容创作者",
+      "name": "Steve Will Do It",
+      "group": "default"
+    },
+    "RichardPtardio": {
+      "tag": "传奇交易员",
+      "name": "Richard E. Ptardio",
+      "group": "default"
+    },
+    "baturalpguvnc": {
+      "tag": "黑客马拉松 很叼",
+      "name": "virjiλakrum",
+      "group": "default"
+    },
+    "dantegpu": {
+      "tag": "Dante GPU  7M",
+      "name": "Dante GPU",
+      "group": "default"
+    },
+    "sendaifun": {
+      "tag": "SOL  SendAI",
+      "name": "SendAI",
+      "group": "default"
     }
   },
-  "$myTwitterNoteTime": 1735249777350
+  "$myTwitterNoteTime": 1735502768508
 }

@@ -214,12 +214,12 @@ public class TwitterMonitor {
                                                                                     LogUtils.info("跳过黑名单用户推文: {}", userName);
                                                                                     continue;
                                                                                 }
-                                                                                if(user.getPumpHistorySet()!=null && !user.getPumpHistorySet().isEmpty()){
-                                                                                    if(user.getPumpHistorySet().size()>3){
-                                                                                        LogUtils.info("跳过pump发射次数大于3次用户: {}", userName);
-                                                                                        continue;
-                                                                                    }
-                                                                                }
+                                                                                //if(user.getPumpHistorySet()!=null && !user.getPumpHistorySet().isEmpty()){
+                                                                                //    if(user.getPumpHistorySet().size()>3){
+                                                                                //        LogUtils.info("跳过pump发射次数大于3次用户: {}", userName);
+                                                                                //        continue;
+                                                                                //    }
+                                                                                //}
 
                                                                                 long currentTimeStamp = System.currentTimeMillis();
                                                                                 long updateTimeStamp = Long.parseLong(user.getUpdateTime());
@@ -636,9 +636,9 @@ public class TwitterMonitor {
 //                    messageBuilder.append("├ <b>进度: </b> ").append(monitorCoinInfo.getCoinLaunchpad()).append("\n");
 //                }
 
-                String gmgnStr = String.format("<a href=\"%s\" >%s</a>", gmgnUrl, "GmGn气泡图");
-                String pumpStr = String.format("<a href=\"%s\" >%s</a>", pumpUrl, "PumpK线");
-                String twitterStr = String.format("<a href=\"%s\" >%s</a>", tweetUrl, "推文链接");
+                //String gmgnStr = String.format("<a href=\"%s\" >%s</a>", gmgnUrl, "GmGn气泡图");
+                //String pumpStr = String.format("<a href=\"%s\" >%s</a>", pumpUrl, "PumpK线");
+                //String twitterStr = String.format("<a href=\"%s\" >%s</a>", tweetUrl, "推文链接");
 
                 // 将<a>标签追加到StringBuilder中
                 messageBuilder.append("├ gmgn: ").append(gmgnUrl).append("\n");
