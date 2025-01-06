@@ -71,6 +71,11 @@ public class TwitterMonitor {
     private static JSONArray banArray;
 
     /**
+     * ca预置黑名单
+     */
+    private static JSONArray caBanArray;
+
+    /**
      * Redis备注列表用户key缓存List
      */
     private static List<String> remarkUserKeyList;
@@ -82,6 +87,7 @@ public class TwitterMonitor {
     @PostConstruct
     public void init() {
         preParseUserBan();
+        preParseCaBan();
         //初始化预置解析用户备注列表信息
         preParseUserRemakes();
         //缓存所有备注用户key
@@ -554,6 +560,10 @@ public class TwitterMonitor {
                     LogUtils.error("解析ca异常: {}", fullText[0]);
                     return result;
                 }
+                if(caBanArray!=null && caBanArray.contains(pumpCa)){
+                    LogUtils.error("跳过预置ca黑名单推文", pumpCa);
+                    return result;
+                }
                 //LogUtils.info("parsingTweets-ca解析完成: {}", DateUtils.getTimeSSS());
                 //存储ca信息
                 if(!redisCache.hasKey(pumpCa)){
@@ -637,6 +647,10 @@ public class TwitterMonitor {
                     messageBuilder.append("\uD83D\uDD25 ca提及次数: ").append(coin.getMentionUserList().size()).append("\n");
                 }
 
+                if(coin.getMentionUserList().size()>10){
+                    LogUtils.info("该ca提及次数大于10自动过滤: {} ", pumpCa + " | "+user.getUserName());
+                    return result;
+                }
                 String gmgnUrl = "https://gmgn.ai/sol/token/" + coin.getCoinCa();
                 String pumpUrl = "https://pump.fun/coin/" + coin.getCoinCa();
                 //https://gmgn.ai/sol/token/3GD2FWYkG2QGXCkN1nEf9TB1jsvt2zvUUEKEmFfgpump
@@ -920,6 +934,40 @@ public class TwitterMonitor {
             e.printStackTrace();
         }
         LogUtils.info("初始化解析用户黑名单完成:{}", banArray.toJSONString());
+    }
+
+    /**
+     * @author Aloha
+     * @date 2024/11/30 19:05
+     * @description 解析ca黑名单
+     */
+    public void preParseCaBan() {
+        try {
+            String filePath = "classpath:static/ca-ban.json";
+            Resource resource = resourceLoader.getResource(filePath);
+            if (!resource.exists()) {
+                LogUtils.error("预置解析ca黑名单文件classpath:static/ca-ban.json不存在");
+                return;
+            }
+            BufferedReader reader = new BufferedReader(new InputStreamReader(resource.getInputStream()));
+            StringBuilder jsonContent = new StringBuilder();
+            String line;
+            while ((line = reader.readLine()) != null) {
+                jsonContent.append(line);
+            }
+            reader.close();
+            caBanArray = JSON.parseArray(jsonContent.toString());
+            //从redis中获取用户黑名单
+            if(redisCache.hasKey("CaBanList")){
+                String list = redisCache.getCacheObject("CaBanList");
+                JSONArray banArray = JSON.parseArray(list);
+                caBanArray.addAll(banArray);
+            }
+        } catch (Exception e) {
+            LogUtils.error("解析ca黑名单异常", e);
+            e.printStackTrace();
+        }
+        LogUtils.info("初始化解析ca黑名单完成:{}", caBanArray.toJSONString());
     }
 
     /**
