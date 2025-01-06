@@ -565,15 +565,6 @@
       "isSelected": true,
       "editable": false
     },
-    "MetaCeneGame": {
-      "tag": "第一次归零 第二次30w",
-      "name": "MetaCene | ServerFi",
-      "group": "default",
-      "isExists": true,
-      "isShow": true,
-      "isSelected": true,
-      "editable": false
-    },
     "cryptocom": {
       "tag": "Crypto 欧洲最大的交易所",
       "name": "Crypto.com",
@@ -1132,24 +1123,6 @@
       "isSelected": true,
       "editable": false
     },
-    "slop_bot": {
-      "tag": "Slop BOT  CTO",
-      "name": "Slop Bot",
-      "group": "default",
-      "isExists": true,
-      "isShow": true,
-      "isSelected": true,
-      "editable": false
-    },
-    "liminal_bardo": {
-      "tag": "找角度",
-      "name": "liminalbardo",
-      "group": "default",
-      "isExists": true,
-      "isShow": true,
-      "isSelected": true,
-      "editable": false
-    },
     "UwUDelve": {
       "tag": "回复的ca要冲上个外盘直接1M",
       "name": "Burzen  Delve",
@@ -1162,15 +1135,6 @@
     "RhizoNymph": {
       "tag": "盯监控！",
       "name": "Nymph",
-      "group": "default",
-      "isExists": true,
-      "isShow": true,
-      "isSelected": true,
-      "editable": false
-    },
-    "stoolpresidente": {
-      "tag": "上个盘子射了！",
-      "name": "Dave Portnoy",
       "group": "default",
       "isExists": true,
       "isShow": true,
@@ -1276,27 +1240,9 @@
       "isSelected": true,
       "editable": false
     },
-    "crypthoem": {
-      "tag": "镭射猫 关注",
-      "name": "hoeem",
-      "group": "default",
-      "isExists": true,
-      "isShow": true,
-      "isSelected": true,
-      "editable": false
-    },
     "infera_network": {
       "tag": "已发币  KIRA",
       "name": "Infera",
-      "group": "default",
-      "isExists": true,
-      "isShow": true,
-      "isSelected": true,
-      "editable": false
-    },
-    "kira_infera": {
-      "tag": "关注可以 已发币",
-      "name": "Kira",
       "group": "default",
       "isExists": true,
       "isShow": true,
@@ -1402,15 +1348,6 @@
       "isSelected": true,
       "editable": false
     },
-    "banksy": {
-      "tag": "镭射猫关注",
-      "name": "Banksy",
-      "group": "default",
-      "isExists": true,
-      "isShow": true,
-      "isSelected": true,
-      "editable": false
-    },
     "RikOostenbroek": {
       "tag": "艺术家 两个射了",
       "name": "Rik Oostenbroek",
@@ -1423,15 +1360,6 @@
     "arrogantkei": {
       "tag": "艺术家",
       "name": "kei",
-      "group": "default",
-      "isExists": true,
-      "isShow": true,
-      "isSelected": true,
-      "editable": false
-    },
-    "mustbeShubh": {
-      "tag": "狗妈矩阵的人",
-      "name": "Shubh",
       "group": "default",
       "isExists": true,
       "isShow": true,
@@ -1591,15 +1519,6 @@
       "isSelected": true,
       "editable": false
     },
-    "kryptobaby777": {
-      "tag": "sol 关注",
-      "name": "KB (lil florida)",
-      "group": "default",
-      "isExists": true,
-      "isShow": true,
-      "isSelected": true,
-      "editable": false
-    },
     "Sony": {
       "tag": "Sony",
       "name": "Sony",
@@ -1610,7 +1529,7 @@
       "editable": false
     },
     "DashaBurns": {
-      "tag": "A16Z关注",
+      "tag": "NBC 新闻通讯员",
       "name": "Dasha Burns",
       "group": "default",
       "isExists": true,
@@ -1645,27 +1564,9 @@
       "isSelected": true,
       "editable": false
     },
-    "FairFunSol": {
-      "tag": "新平台",
-      "name": "Fair Fun",
-      "group": "default",
-      "isExists": true,
-      "isShow": true,
-      "isSelected": true,
-      "editable": false
-    },
     "traderpow": {
       "tag": "pow",
       "name": "pow",
-      "group": "default",
-      "isExists": true,
-      "isShow": true,
-      "isSelected": true,
-      "editable": false
-    },
-    "Arin_Yumi": {
-      "tag": "A16Z关注",
-      "name": "由仁アリン Arin Yuni",
       "group": "default",
       "isExists": true,
       "isShow": true,
@@ -1799,7 +1700,7 @@
       "editable": false
     },
     "QwQiao": {
-      "tag": "关注有点强",
+      "tag": "大V",
       "name": "qw",
       "group": "default",
       "isExists": true,
@@ -1828,15 +1729,6 @@
     "moonkittyneo": {
       "tag": "盯CA",
       "name": "MoonKitty",
-      "group": "default",
-      "isExists": true,
-      "isShow": true,
-      "isSelected": true,
-      "editable": false
-    },
-    "MEFndn": {
-      "tag": "$ME",
-      "name": "$ME",
       "group": "default",
       "isExists": true,
       "isShow": true,
@@ -1897,18 +1789,9 @@
       "isSelected": true,
       "editable": false
     },
-    "bdguan": {
-      "tag": "上个盘子260K",
-      "name": "br1an.eth",
-      "group": "default",
-      "isExists": true,
-      "isShow": true,
-      "isSelected": true,
-      "editable": false
-    },
     "shawmakesmagic": {
       "tag": "A16Z合作伙伴 创始人 程序员",
-      "name": "Shaw  */acc",
+      "name": "Shaw",
       "group": "default",
       "isExists": true,
       "isShow": true,
@@ -2068,15 +1951,6 @@
       "isSelected": true,
       "editable": false
     },
-    "tee_hee_he": {
-      "tag": "关注有东西！",
-      "name": "error error ttyl",
-      "group": "default",
-      "isExists": true,
-      "isShow": true,
-      "isSelected": true,
-      "editable": false
-    },
     "RobertKennedyJr": {
       "tag": "美国 政府官员！",
       "name": "Robert F. Kennedy Jr",
@@ -2159,7 +2033,7 @@
       "editable": false
     },
     "BoredElonMusk": {
-      "tag": "鲸鱼 两个千万盘子",
+      "tag": "鲸鱼 两个千万盘子 海军18M",
       "name": "BORED",
       "group": "default",
       "isExists": true,
@@ -2557,11 +2431,6 @@
       "name": "LifeGPT on Solana",
       "group": "default"
     },
-    "BuildOnCyber": {
-      "tag": "L2",
-      "name": "Cyber",
-      "group": "default"
-    },
     "ai": {
       "tag": "Canonical 管理合伙人",
       "name": "anand iyer",
@@ -2750,16 +2619,6 @@
     "ratwell0x": {
       "tag": "艺术家",
       "name": "ratwell",
-      "group": "default"
-    },
-    "The__Solstice": {
-      "tag": "关注很牛",
-      "name": "TheS◎Lstice",
-      "group": "default"
-    },
-    "Dexlab_official": {
-      "tag": "关注可以",
-      "name": "Dexlab",
       "group": "default"
     },
     "MrBigWhaleREAL": {
@@ -3010,11 +2869,6 @@
     "BitMartExchange": {
       "tag": "交易所",
       "name": "BitMart",
-      "group": "default"
-    },
-    "Hyperintern": {
-      "tag": "重点",
-      "name": "Hypurr",
       "group": "default"
     },
     "joerogan": {
@@ -3440,11 +3294,6 @@
     "moonshot": {
       "tag": "Moonshot 小Bianca",
       "name": "Moonshot",
-      "group": "default"
-    },
-    "Kyrannio": {
-      "tag": "Kiri",
-      "name": "Kiri",
       "group": "default"
     },
     "lumpenspace": {
@@ -4162,16 +4011,6 @@
       "name": "Juniko",
       "group": "default"
     },
-    "orbitcryptoai": {
-      "tag": "等CA 很牛逼",
-      "name": "Orbit",
-      "group": "default"
-    },
-    "valley_dao": {
-      "tag": "ValleyDAO += 等发币",
-      "name": "ValleyDAO +=",
-      "group": "default"
-    },
     "zerohedge": {
       "tag": "zerohedge 新闻",
       "name": "zerohedge",
@@ -4204,7 +4043,7 @@
     },
     "Treylonn": {
       "tag": "911",
-      "name": "—Ⓣ ⓣrey911(up and to the right arc)",
+      "name": "—Ⓣ ⓣrey911(top of the ropes arc)",
       "group": "default"
     },
     "psykogem": {
@@ -5532,11 +5371,6 @@
       "name": "Michael Saylor",
       "group": "default"
     },
-    "churchofbald": {
-      "tag": "晚上20点 等CA",
-      "name": "Church of $bald",
-      "group": "default"
-    },
     "VincentDecod3rs": {
       "tag": "Decod3rs 主持人",
       "name": "Vincent Decod3rs",
@@ -5593,7 +5427,7 @@
       "group": "default"
     },
     "RowdyCrypto": {
-      "tag": "RWDY",
+      "tag": "RWDY  MEME 大V",
       "name": "RWDY",
       "group": "default"
     },
@@ -5722,11 +5556,6 @@
       "name": "Nakamigos",
       "group": "default"
     },
-    "digg": {
-      "tag": "Digg",
-      "name": "Digg",
-      "group": "default"
-    },
     "unusual_whales": {
       "tag": "unusual_whales 新闻",
       "name": "unusual_whales",
@@ -5780,11 +5609,6 @@
     "kevinlee_gate": {
       "tag": "GATE 首席商务官+执行官",
       "name": "Kevin Lee",
-      "group": "default"
-    },
-    "deepfates": {
-      "tag": "思想家",
-      "name": "web weaver",
       "group": "default"
     },
     "w1kke": {
@@ -5937,11 +5761,6 @@
       "name": "Doji.sol",
       "group": "default"
     },
-    "astrofoliosol": {
-      "tag": "等龙头 CA",
-      "name": "ASTROFOLIO",
-      "group": "default"
-    },
     "k3yv0id": {
       "tag": "K3艺术家  畜生",
       "name": "k3yv0id",
@@ -6067,16 +5886,6 @@
       "name": "Jihoz.ron",
       "group": "default"
     },
-    "ALCHDAO": {
-      "tag": "ACC",
-      "name": "Alchemist Accelerate",
-      "group": "default"
-    },
-    "AwakeningRubin": {
-      "tag": "新 AI 蹲",
-      "name": "RUBIN",
-      "group": "default"
-    },
     "boneGPT": {
       "tag": "bone 创始人",
       "name": "bone",
@@ -6155,11 +5964,6 @@
     "Snowden": {
       "tag": "前美国中央情报局（CIA）技术专家和国家安全局（NSA）承包商",
       "name": "Edward Snowden",
-      "group": "default"
-    },
-    "endrarediseases": {
-      "tag": "罕见疾病 重点关",
-      "name": "Curetopia",
       "group": "default"
     },
     "blader": {
@@ -6504,7 +6308,7 @@
     },
     "bitcoinPalmer": {
       "tag": "Doge 联合创始人",
-      "name": "palmer",
+      "name": "palmer // not for everyone",
       "group": "default"
     },
     "MarshallHayner": {
@@ -6557,16 +6361,6 @@
       "name": "ChenPepe",
       "group": "default"
     },
-    "Sakuradaos": {
-      "tag": "明天启动",
-      "name": "Sakura",
-      "group": "default"
-    },
-    "GoldenPepeCabal": {
-      "tag": "Golden Pepe 金蛙",
-      "name": "Golden Pepe",
-      "group": "default"
-    },
     "0xSLK": {
       "tag": "集成Eliza",
       "name": "SlKzᵍᵐ",
@@ -6612,16 +6406,6 @@
       "name": "Joyce Liu",
       "group": "default"
     },
-    "ClaiveAI": {
-      "tag": "Claive AI  等CA",
-      "name": "Claive AI",
-      "group": "default"
-    },
-    "0xstickmaneth": {
-      "tag": "StickMan  等Ca",
-      "name": "StickMan",
-      "group": "default"
-    },
     "stevewilldoit": {
       "tag": "美国的YouTuber、社交媒体名人和内容创作者",
       "name": "Steve Will Do It",
@@ -6646,7 +6430,67 @@
       "tag": "SOL  SendAI",
       "name": "SendAI",
       "group": "default"
+    },
+    "superteam": {
+      "tag": "sol 基金会 社区",
+      "name": "Superteam",
+      "group": "default"
+    },
+    "redpill_gpt": {
+      "tag": "Redpill 融资5M",
+      "name": "Redpill",
+      "group": "default"
+    },
+    "marvin_tong": {
+      "tag": "Phala Network 的联合创始人",
+      "name": "Marvin Tong (t/acc)",
+      "group": "default"
+    },
+    "alx": {
+      "tag": "马斯克头像制作者 经常互动",
+      "name": "ALX",
+      "group": "default"
+    },
+    "memedustry": {
+      "tag": "Murad 关注",
+      "name": "memedustry",
+      "group": "default"
+    },
+    "devour_crypto": {
+      "tag": "Phase Labs 创始人+CEO",
+      "name": "DEVOUR",
+      "group": "default"
+    },
+    "frankdegods": {
+      "tag": "Frank MEME大V",
+      "name": "Frank",
+      "group": "default"
+    },
+    "404flipped": {
+      "tag": "eq MEME大V",
+      "name": "eq",
+      "group": "default"
+    },
+    "TheMisterFrog": {
+      "tag": "青蛙 MEME 大V",
+      "name": "Mr. Frog, (Road to Redemption Arc)",
+      "group": "default"
+    },
+    "FlippingProfits": {
+      "tag": "profit  MEME大V",
+      "name": "profit | eca.eth",
+      "group": "default"
+    },
+    "Euris_JT": {
+      "tag": "Euris MEME大V",
+      "name": "Euris",
+      "group": "default"
+    },
+    "Hyperintern": {
+      "tag": "Hyperliquid 首席实习官",
+      "name": "Hypurr",
+      "group": "default"
     }
   },
-  "$myTwitterNoteTime": 1735502768508
+  "$myTwitterNoteTime": 1735817853068
 }

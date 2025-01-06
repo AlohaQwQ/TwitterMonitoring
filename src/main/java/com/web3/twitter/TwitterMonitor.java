@@ -171,11 +171,15 @@ public class TwitterMonitor {
                                                                             fans = userResults.getResult().getRelationship_counts().getFollowers();
                                                                         }
                                                                         //粉丝数大于3000
-                                                                        if(fans>500){
+                                                                        if(fans>200){
                                                                             //LogUtils.info("startMonitor-粉丝数大于2000: {}", DateUtils.getTimeSSS());
                                                                             //LogUtils.info("解析推特列表-userResults: {}", userResults);
                                                                             String userID = userResults.getResult().getRest_id();
                                                                             LogUtils.info("解析推特列表-用户restId: {}", userID);
+                                                                            if(StringUtils.isEmpty(userID)){
+                                                                                LogUtils.error("用户restId-userId为空");
+                                                                                continue;
+                                                                            }
                                                                             //拼接推特链接 https://x.com/VT_BNB/status/1861334062021185655
                                                                             String userShowName = userResults.getResult().getCore().getName();
                                                                             // 确保使用正确的字符编码
@@ -202,10 +206,10 @@ public class TwitterMonitor {
                                                                                     }
                                                                                 }).exceptionally(ex -> {
                                                                                     LogUtils.error("更新用户共同关注列表失败: {}", tweetUrl, ex);
-                                                                                    updateUserInfo(user, userID, userNameUtf8, userShowName, fans, verified);
+                                                                                    //updateUserInfo(user, userID, userNameUtf8, userShowName, fans, verified);
                                                                                     return null; // 可处理异常或返回默认值
                                                                                 });
-                                                                                updateUserInfo(user, userID, userNameUtf8, userShowName, fans, verified);
+                                                                                //updateUserInfo(user, userID, userNameUtf8, userShowName, fans, verified);
                                                                             } else {
                                                                                 String userString = redisCache.getCacheObject(userNameUtf8);
                                                                                 user = JSON.parseObject(userString, MonitorUser.class);
@@ -214,12 +218,12 @@ public class TwitterMonitor {
                                                                                     LogUtils.info("跳过黑名单用户推文: {}", userName);
                                                                                     continue;
                                                                                 }
-                                                                                //if(user.getPumpHistorySet()!=null && !user.getPumpHistorySet().isEmpty()){
-                                                                                //    if(user.getPumpHistorySet().size()>3){
-                                                                                //        LogUtils.info("跳过pump发射次数大于3次用户: {}", userName);
-                                                                                //        continue;
-                                                                                //    }
-                                                                                //}
+                                                                                if(user.getPumpHistorySet()!=null && !user.getPumpHistorySet().isEmpty()){
+                                                                                    if(user.getPumpHistorySet().size()>2){
+                                                                                        LogUtils.info("跳过pump发射次数大于3次用户: {}", userName);
+                                                                                        continue;
+                                                                                    }
+                                                                                }
 
                                                                                 long currentTimeStamp = System.currentTimeMillis();
                                                                                 long updateTimeStamp = Long.parseLong(user.getUpdateTime());
@@ -238,7 +242,7 @@ public class TwitterMonitor {
                                                                                         }
                                                                                     }).exceptionally(ex -> {
                                                                                         LogUtils.error("更新用户共同关注列表失败: {}", tweetUrl, ex);
-                                                                                        updateUserInfo(user, userID, userNameUtf8, userShowName, fans, verified);
+                                                                                        //updateUserInfo(user, userID, userNameUtf8, userShowName, fans, verified);
                                                                                         return null; // 可处理异常或返回默认值
                                                                                     });
                                                                                 }
@@ -380,7 +384,7 @@ public class TwitterMonitor {
                 LogUtils.error("response: {}", response.getBody(), e);
             }
         }
-        return CompletableFuture.completedFuture("");
+        return CompletableFuture.completedFuture(null);
     }
 
     /**
@@ -394,112 +398,125 @@ public class TwitterMonitor {
         Response response;
         String responseString = "";
         String url = null;
-        try {
-            //monitorUser.setUserID("829482275318484993");
-            if(!redisCache.hasKey("TwitterToken")){
-                LogUtils.error("获取推特共同关注者接口异常-推特token不存在");
-                return CompletableFuture.completedFuture(monitorUser);
-            }
-            String twitterToken = redisCache.getCacheObject("TwitterToken");
-            //twitterToken = "ed7f8aa5c2c0c6e8dad045db601955924c5a2d72";
-            if(StringUtils.isEmpty(twitterToken)){
-                LogUtils.error("获取推特共同关注者接口异常-推特token为空");
-                return CompletableFuture.completedFuture(monitorUser);
-            }
-            if(StringUtils.isEmpty(monitorUser.getUserID())){
-                LogUtils.error("获取推特共同关注者接口异常-userId为空");
-                return CompletableFuture.completedFuture(monitorUser);
-            }
-            String variables = "{\"count\": 1000, \"userId\": \"" + monitorUser.getUserID() + "\",\"includePromotedContent\": false}";
-            OkHttpClient client = new OkHttpClient().newBuilder().build();
+        int retryCount = 0;
+        //monitorUser.setUserID("829482275318484993");
+        if(!redisCache.hasKey("TwitterToken")){
+            LogUtils.error("获取推特共同关注者接口异常-推特token不存在");
+            return CompletableFuture.completedFuture(null);
+        }
+        String twitterToken = redisCache.getCacheObject("TwitterToken");
+        //twitterToken = "ed7f8aa5c2c0c6e8dad045db601955924c5a2d72";
+        if(StringUtils.isEmpty(twitterToken)){
+            LogUtils.error("获取推特共同关注者接口异常-推特token为空");
+            return CompletableFuture.completedFuture(null);
+        }
+        if(StringUtils.isEmpty(monitorUser.getUserID())){
+            LogUtils.error("获取推特共同关注者接口异常-userId为空");
+            return CompletableFuture.completedFuture(null);
+        }
+        String variables = "{\"count\": 1000, \"userId\": \"" + monitorUser.getUserID() + "\",\"includePromotedContent\": false}";
+        OkHttpClient client = new OkHttpClient().newBuilder().build();
 
-            // 构建请求
-            Request request = new Request.Builder()
-                    .url("https://api.apidance.pro/graphql/FollowersYouKnow?variables=" + variables)
-                    .addHeader("AuthToken", twitterToken) // 填入实际的 AuthToken
-                    .addHeader("apikey", "u8gkbegljnrd8f9bz3ncpn206l68xw") // 填入实际的 API key
-                    .get() // Post请求
-                    .build();
-            response = client.newCall(request).execute();
-            LogUtils.info("updateUserFollowersYouKnow-聚合api数据返回: {}", DateUtils.getTimeSSS());
-            if (response != null && response.isSuccessful()) {
-                // 解析响应数据
-                responseString = response.body().string();
-                JSONObject jsonObject = JSONObject.parseObject(responseString);
-                if (jsonObject == null) {
-                    LogUtils.error("获取推特共同关注者接口数据返回异常 | response:", responseString);
-                    return CompletableFuture.completedFuture(monitorUser);
-                }
-                // 获取应用列表
-                JSONObject data = jsonObject.getJSONObject("data");
-                if(data!=null) {
-                    JSONObject userJsonObject = data.getJSONObject("user");
-                    if (userJsonObject != null) {
-                        JSONObject timelineJsonObject = userJsonObject.getJSONObject("result").getJSONObject("timeline");
-                        if (timelineJsonObject.containsKey("timeline")) {
-                            //解析推特列表对象
-                            JSONObject timeline2JsonObject = timelineJsonObject.getJSONObject("timeline");
-                            if (timeline2JsonObject.containsKey("instructions")) {
-                                JSONArray instructionsArray = timeline2JsonObject.getJSONArray("instructions");
-                                FollowerEntries followerEntries = null;
-                                for (int i = 0; i < instructionsArray.size(); i++) {
-                                    JSONObject arrayJSONObject = instructionsArray.getJSONObject(i);
-                                    if(arrayJSONObject.containsKey("entries")){
-                                        followerEntries = JSON.parseObject(arrayJSONObject.toJSONString(), FollowerEntries.class);
-                                        break;
-                                    }
-                                }
-                                if(followerEntries == null || followerEntries.getEntries() == null || followerEntries.getEntries().isEmpty()){
-                                    LogUtils.info("获取推特共同关注者接口 FollowerEntries数据为空 | response:", responseString);
-                                    monitorUser.setFollowersYouKnowRemarkSet(new HashSet<>());
-                                    return CompletableFuture.completedFuture(monitorUser);
-                                }
-                                //LogUtils.info("updateUserFollowersYouKnow-FollowerEntries Bean数据解析完成: {}", DateUtils.getTimeSSS());
-                                //提取列表中所有用户名
-                                List<String> followersYouKnowList = new ArrayList<>();
-                                for (FollowerInfo followerInfo : followerEntries.getEntries()) {
-                                    FollowerItemContent followerItemContent = followerInfo.getContent().getItemContent();
-                                    if(followerItemContent==null) {
-                                        //LogUtils.error("获取推特共同关注者接口 解析itemContent为空 | followerEntries:", followerEntries.toString());
-                                        LogUtils.error("获取推特共同关注者接口 解析itemContent为空");
-                                        continue;
-                                    }
-                                    FollowerLegacy followerLegacy = followerItemContent.getUser_results().getResult().getLegacy();
-                                    if(followerLegacy!=null){
-                                        if(StringUtils.isNotEmpty(followerLegacy.getScreen_name())) {
-                                            followersYouKnowList.add(followerLegacy.getScreen_name());
+        // 重试次数超过 4 次，返回空的 MonitorUser
+        while (retryCount < 4) {
+            try {
+                // 构建请求
+                Request request = new Request.Builder()
+                        .url("https://api.apidance.pro/graphql/FollowersYouKnow?variables=" + variables)
+                        .addHeader("AuthToken", twitterToken) // 填入实际的 AuthToken
+                        .addHeader("apikey", "u8gkbegljnrd8f9bz3ncpn206l68xw") // 填入实际的 API key
+                        .get() // Post请求
+                        .build();
+                response = client.newCall(request).execute();
+                LogUtils.info("updateUserFollowersYouKnow-聚合api数据返回: {}", DateUtils.getTimeSSS());
+                if (response != null && response.isSuccessful()) {
+                    // 解析响应数据
+                    responseString = response.body().string();
+                    JSONObject jsonObject = JSONObject.parseObject(responseString);
+                    if (jsonObject == null) {
+                        LogUtils.error("获取推特共同关注者接口数据返回异常 | response:", responseString);
+                        return CompletableFuture.completedFuture(null);
+                    }
+                    // 获取应用列表
+                    JSONObject data = jsonObject.getJSONObject("data");
+                    if(data!=null) {
+                        JSONObject userJsonObject = data.getJSONObject("user");
+                        if (userJsonObject != null) {
+                            JSONObject timelineJsonObject = userJsonObject.getJSONObject("result").getJSONObject("timeline");
+                            if (timelineJsonObject.containsKey("timeline")) {
+                                //解析推特列表对象
+                                JSONObject timeline2JsonObject = timelineJsonObject.getJSONObject("timeline");
+                                if (timeline2JsonObject.containsKey("instructions")) {
+                                    JSONArray instructionsArray = timeline2JsonObject.getJSONArray("instructions");
+                                    FollowerEntries followerEntries = null;
+                                    for (int i = 0; i < instructionsArray.size(); i++) {
+                                        JSONObject arrayJSONObject = instructionsArray.getJSONObject(i);
+                                        if(arrayJSONObject.containsKey("entries")){
+                                            followerEntries = JSON.parseObject(arrayJSONObject.toJSONString(), FollowerEntries.class);
+                                            break;
                                         }
                                     }
-                                }
-                                if(followersYouKnowList.isEmpty()){
-                                    LogUtils.info("获取推特共同关注者接口 提取共同关注列表数据为空 | response:", responseString);
-                                    monitorUser.setFollowersYouKnowRemarkSet(new HashSet<>());
+                                    if(followerEntries == null || followerEntries.getEntries() == null || followerEntries.getEntries().isEmpty()){
+                                        LogUtils.info("获取推特共同关注者接口 FollowerEntries数据为空 | response:", responseString);
+                                        monitorUser.setFollowersYouKnowRemarkSet(new HashSet<>());
+                                        return CompletableFuture.completedFuture(monitorUser);
+                                    }
+                                    //LogUtils.info("updateUserFollowersYouKnow-FollowerEntries Bean数据解析完成: {}", DateUtils.getTimeSSS());
+                                    //提取列表中所有用户名
+                                    List<String> followersYouKnowList = new ArrayList<>();
+                                    for (FollowerInfo followerInfo : followerEntries.getEntries()) {
+                                        FollowerItemContent followerItemContent = followerInfo.getContent().getItemContent();
+                                        if(followerItemContent==null) {
+                                            //LogUtils.error("获取推特共同关注者接口 解析itemContent为空 | followerEntries:", followerEntries.toString());
+                                            LogUtils.error("获取推特共同关注者接口 解析itemContent为空");
+                                            continue;
+                                        }
+                                        FollowerLegacy followerLegacy = followerItemContent.getUser_results().getResult().getLegacy();
+                                        if(followerLegacy!=null){
+                                            if(StringUtils.isNotEmpty(followerLegacy.getScreen_name())) {
+                                                followersYouKnowList.add(followerLegacy.getScreen_name());
+                                            }
+                                        }
+                                    }
+                                    if(followersYouKnowList.isEmpty()){
+                                        LogUtils.info("获取推特共同关注者接口 提取共同关注列表数据为空 | response:", responseString);
+                                        monitorUser.setFollowersYouKnowRemarkSet(new HashSet<>());
+                                        return CompletableFuture.completedFuture(monitorUser);
+                                    }
+                                    //LogUtils.info("updateUserFollowersYouKnow-获取推特共同关注数据解析完成: {}", DateUtils.getTimeSSS());
+                                    //monitorUser.setFollowersYouKnowList(followersYouKnowList);
+                                    Set<String> remarkUserKeySet = new HashSet<>(remarkUserKeyList); // 将 List 转换为 HashSet
+
+                                    //取共同关注者和备注列表的交集
+                                    Set<String> matchedSet = followersYouKnowList.parallelStream()
+                                            .filter(remarkUserKeySet::contains)
+                                            .collect(Collectors.toSet());
+                                    monitorUser.setFollowersYouKnowRemarkSet(matchedSet);
+                                    LogUtils.info("updateUserFollowersYouKnow-推特共同关注取交集完成: {}", DateUtils.getTimeSSS());
                                     return CompletableFuture.completedFuture(monitorUser);
                                 }
-                                //LogUtils.info("updateUserFollowersYouKnow-获取推特共同关注数据解析完成: {}", DateUtils.getTimeSSS());
-                                //monitorUser.setFollowersYouKnowList(followersYouKnowList);
-                                Set<String> remarkUserKeySet = new HashSet<>(remarkUserKeyList); // 将 List 转换为 HashSet
-
-                                //取共同关注者和备注列表的交集
-                                Set<String> matchedSet = followersYouKnowList.parallelStream()
-                                        .filter(remarkUserKeySet::contains)
-                                        .collect(Collectors.toSet());
-                                monitorUser.setFollowersYouKnowRemarkSet(matchedSet);
-                                LogUtils.info("updateUserFollowersYouKnow-推特共同关注取交集完成: {}", DateUtils.getTimeSSS());
                             }
                         }
+                    } else {
+                        LogUtils.error("获取推特共同关注者接口数据返回异常: {}", jsonObject.toString());
+                        retryCount++; // 继续重试
+                        if (StringUtils.isNotEmpty(responseString)){
+                            LogUtils.error("response: {}", responseString);
+                        }
+                        responseString = ""; // 清空 responseString，以便重试
                     }
-                } else {
-                    LogUtils.error("获取推特共同关注者接口数据返回异常: {}", jsonObject.toString());
                 }
-            }
-        } catch (Exception e){
-            LogUtils.error("获取推特共同关注者接口异常-请求地址: {}", url, e);
-            if (StringUtils.isNotEmpty(responseString)){
-                LogUtils.error("response: {}", responseString, e);
+            } catch (Exception e){
+                LogUtils.error("获取推特共同关注者接口异常-请求地址: {}", url, e);
+                retryCount++; // 继续重试
+                if (StringUtils.isNotEmpty(responseString)){
+                    LogUtils.error("response: {}", responseString, e);
+                }
+                responseString = ""; // 清空 responseString，以便重试
+                LogUtils.info("获取推特共同关注者接口异常-重试次数:", retryCount);
             }
         }
-        return CompletableFuture.completedFuture(monitorUser);
+        return CompletableFuture.completedFuture(null);
     }
 
     /**
