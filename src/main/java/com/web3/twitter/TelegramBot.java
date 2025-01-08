@@ -35,6 +35,7 @@ public class TelegramBot implements SpringLongPollingBot, LongPollingSingleThrea
 
     static {
         CHAT_ID_LIST.add("-4655003313");
+        CHAT_ID_LIST.add("-1002250310542");
 //        CHAT_ID_LIST.add("-1002358331062");
 //        CHAT_ID_LIST.add("-1002190498173");
 //        CHAT_ID_LIST.add("7146351054");
@@ -95,7 +96,7 @@ public class TelegramBot implements SpringLongPollingBot, LongPollingSingleThrea
             try {
                 telegramClient.execute(method);
             } catch (TelegramApiException e) {
-                LogUtils.error("Shiyi发送消息异常: {}.", parsedMessage, e);
+                LogUtils.error("Shiyi-bot发送消息异常: {}.", parsedMessage, e);
                 e.printStackTrace();
             }
         });
@@ -137,8 +138,7 @@ public class TelegramBot implements SpringLongPollingBot, LongPollingSingleThrea
 //                    redisCache.setCacheList("chat_id", chatIdList);
 //                }
 //            }
-            LogUtils.info("收到消息....");
-            //LogUtils.info("message_text=" + message_text + " | chat_id=" + chat_id);
+            LogUtils.info("收到消息.... message_text=" + message_text + " | chat_id=" + chat_id);
             SendMessage message = SendMessage // Create a message object
                     .builder()
                     .chatId(chat_id)

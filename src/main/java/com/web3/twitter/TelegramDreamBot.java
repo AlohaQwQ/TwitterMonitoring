@@ -133,8 +133,7 @@ public class TelegramDreamBot implements SpringLongPollingBot, LongPollingSingle
 //                    redisCache.setCacheList("chat_id", chatIdList);
 //                }
 //            }
-            LogUtils.info("收到消息....");
-            //LogUtils.info("message_text=" + message_text + " | chat_id=" + chat_id);
+            LogUtils.info("收到消息.... message_text=" + message_text + " | chat_id=" + chat_id);
             SendMessage message = SendMessage // Create a message object
                     .builder()
                     .chatId(chat_id)
