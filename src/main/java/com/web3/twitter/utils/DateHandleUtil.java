@@ -255,7 +255,7 @@ public class DateHandleUtil {
         long between = ChronoUnit.SECONDS.between(startDateTime, endDateTime);
         long seconds = 0;
         if (between >= 5){
-            seconds = between - 3;
+            seconds = between - 5;
             startDateTime = startDateTime.plusSeconds(seconds);
             startTime = startDateTime.format(formatter);
         }
