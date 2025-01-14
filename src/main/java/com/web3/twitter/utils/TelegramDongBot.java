@@ -1,8 +1,6 @@
-package com.web3.twitter;
+package com.web3.twitter.utils;
 
 import com.web3.twitter.redis.RedisCache;
-import com.web3.twitter.utils.DateUtils;
-import com.web3.twitter.utils.LogUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,7 +16,6 @@ import org.telegram.telegrambots.meta.api.objects.Update;
 import org.telegram.telegrambots.meta.api.objects.User;
 import org.telegram.telegrambots.meta.api.objects.chat.Chat;
 import org.telegram.telegrambots.meta.api.objects.message.Message;
-import org.telegram.telegrambots.meta.api.objects.replykeyboard.InlineKeyboardMarkup;
 import org.telegram.telegrambots.meta.exceptions.TelegramApiException;
 import org.telegram.telegrambots.meta.generics.TelegramClient;
 
@@ -26,9 +23,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Component
-public class TelegramDreamBot implements SpringLongPollingBot, LongPollingSingleThreadUpdateConsumer {
+public class TelegramDongBot implements SpringLongPollingBot, LongPollingSingleThreadUpdateConsumer {
 
-    private static final Logger log = LoggerFactory.getLogger(TelegramDreamBot.class);
+    private static final Logger log = LoggerFactory.getLogger(TelegramDongBot.class);
 
     private static final List<String> CHAT_ID_LIST = new ArrayList<>();
 
@@ -66,7 +63,7 @@ public class TelegramDreamBot implements SpringLongPollingBot, LongPollingSingle
             false
     );
 
-    public TelegramDreamBot() {
+    public TelegramDongBot() {
         telegramClient = new OkHttpTelegramClient(getBotToken());
     }
 
@@ -92,7 +89,7 @@ public class TelegramDreamBot implements SpringLongPollingBot, LongPollingSingle
             try {
                 telegramClient.execute(method);
             } catch (TelegramApiException e) {
-                LogUtils.error("DreamBot发送消息异常: {}.", parsedMessage, e);
+                LogUtils.error("TestBot发送消息异常: {}.", parsedMessage, e);
                 e.printStackTrace();
             }
         });
@@ -101,7 +98,7 @@ public class TelegramDreamBot implements SpringLongPollingBot, LongPollingSingle
 
     @Override
     public String getBotToken() {
-        return "7816953388:AAFDf_a2OgsWIAWgPjWc54P8eHtZYMJdQb4";
+        return "7719750548:AAEqoOVqnOlShBRNsWvpyInjSCVnKkk9jNg";
     }
 
     @Override
@@ -134,7 +131,7 @@ public class TelegramDreamBot implements SpringLongPollingBot, LongPollingSingle
 //                    redisCache.setCacheList("chat_id", chatIdList);
 //                }
 //            }
-            LogUtils.info("收到消息....");
+            LogUtils.info("收到消息....",chat_id);
             //LogUtils.info("message_text=" + message_text + " | chat_id=" + chat_id);
             SendMessage message = SendMessage // Create a message object
                     .builder()
@@ -152,6 +149,6 @@ public class TelegramDreamBot implements SpringLongPollingBot, LongPollingSingle
 
     @AfterBotRegistration
     public void afterRegistration(BotSession botSession) {
-        LogUtils.info("Dream机器人注册成功: {}.", botSession.toString());
+        LogUtils.info("Test机器人注册成功: {}.", botSession.toString());
     }
 }

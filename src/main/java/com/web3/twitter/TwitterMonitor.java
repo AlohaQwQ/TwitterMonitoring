@@ -58,7 +58,7 @@ public class TwitterMonitor {
     private TelegramBot telegramBot;
 
     @Autowired
-    private TelegramDreamBot telegramDreamBot;
+    private TelegramDongBot telegramDongBot;
 
     @Autowired
     private ResourceLoader resourceLoader;
@@ -94,45 +94,75 @@ public class TwitterMonitor {
         remarkUserKeyList = redisCache.scanAllUserKeys();
     }
 
-    @Scheduled(fixedRate = 1800) // 每1.5秒执行一次,每天消耗约57600条
+    @Scheduled(fixedRate = 2000) // 每1.5秒执行一次,每天消耗约57600条
     public void scheduleMonitorTask() {
         //https://t.co/FxZZt9AZYf
         //resolveShortLink("https://t.co/FxZZt9AZYf");
         startMonitor();
     }
 
-    @Async("threadPoolTaskExecutor")
+    //@Async("threadPoolTaskExecutor")
     public void startMonitor(){
         String nowTime = DateUtils.getTime();
         LogUtils.info("startMonitor-异步执行: {}", DateUtils.getTimeSSS());
-        String url = "https://twitter283.p.rapidapi.com/Search?q=pump.fun&type=Latest&count=20&safe_search=true";
-        // 创建请求头
-        HttpHeaders headers = new HttpHeaders();
-        headers.setContentType(MediaType.APPLICATION_JSON);
-        headers.add("x-rapidapi-host", "twitter283.p.rapidapi.com");
-        headers.add("x-rapidapi-key", "c7d7d10b34msh8a76b09b95a1e87p1ff1dcjsn0d20ab44ecb6");
-        ResponseEntity<String> response = null;
-        // 创建请求实体
-        HttpEntity<String> entity = new HttpEntity<>(headers);
-        try {
-            // 发送 GET 请求
-            response = restTemplate.exchange(url, HttpMethod.GET, entity, String.class);
-        } catch (Exception e){
-            LogUtils.error("请求聚合api异常-请求地址: {}", url, e);
+
+        if (!redisCache.hasKey("TwitterCookie") || !redisCache.hasKey("TwitterTransactionId") || !redisCache.hasKey("TwitterSearchToken")) {
+            LogUtils.error("推特请求头参数缺失", DateUtils.getTimeSSS());
+            return;
         }
+        String twitterCookie;
+        String twitterTransactionId;
+        String twitterSearchToken;
+
+        String baseUrl = "https://x.com/i/api/graphql/BkkaU7QQGQBGnYgk4pKh4g/SearchTimeline";
+        String variables = "{\"rawQuery\":\"pump.fun\",\"count\":2000,\"querySource\":\"typed_query\",\"product\":\"Latest\"}";
+        String features = "{\"profile_label_improvements_pcf_label_in_post_enabled\":false,\"rweb_tipjar_consumption_enabled\":true,\"responsive_web_graphql_exclude_directive_enabled\":true,\"verified_phone_label_enabled\":false,\"creator_subscriptions_tweet_preview_api_enabled\":true,\"responsive_web_graphql_timeline_navigation_enabled\":true,\"responsive_web_graphql_skip_user_profile_image_extensions_enabled\":false,\"premium_content_api_read_enabled\":false,\"communities_web_enable_tweet_community_results_fetch\":true,\"c9s_tweet_anatomy_moderator_badge_enabled\":true,\"responsive_web_grok_analyze_button_fetch_trends_enabled\":false,\"responsive_web_grok_analyze_post_followups_enabled\":false,\"responsive_web_grok_share_attachment_enabled\":true,\"articles_preview_enabled\":true,\"responsive_web_edit_tweet_api_enabled\":true,\"graphql_is_translatable_rweb_tweet_is_translatable_enabled\":true,\"view_counts_everywhere_api_enabled\":true,\"longform_notetweets_consumption_enabled\":true,\"responsive_web_twitter_article_tweet_consumption_enabled\":true,\"tweet_awards_web_tipping_enabled\":false,\"creator_subscriptions_quote_tweet_preview_enabled\":false,\"freedom_of_speech_not_reach_fetch_enabled\":true,\"standardized_nudges_misinfo\":true,\"tweet_with_visibility_results_prefer_gql_limited_actions_policy_enabled\":true,\"rweb_video_timestamps_enabled\":true,\"longform_notetweets_rich_text_read_enabled\":true,\"longform_notetweets_inline_media_enabled\":true,\"responsive_web_enhance_cards_enabled\":false}";
+
+        // 编码查询参数
+        String url = String.format("%s?variables=%s&features=%s", baseUrl,
+                URLEncoder.encode(variables, StandardCharsets.UTF_8),
+                URLEncoder.encode(features, StandardCharsets.UTF_8));
+
+        OkHttpClient client = new OkHttpClient().newBuilder().build();
+        Response response = null;
+        try {
+            // 构建请求
+            twitterCookie = redisCache.getCacheObject("TwitterCookie");
+            twitterTransactionId = redisCache.getCacheObject("TwitterTransactionId");
+            twitterSearchToken = redisCache.getCacheObject("TwitterSearchToken");
+            LogUtils.info("cookie={}", twitterCookie);
+            Request request = new Request.Builder()
+                    .url(url)
+                    .addHeader("Cookie", twitterCookie)
+                    .addHeader("Authorization","Bearer AAAAAAAAAAAAAAAAAAAAANRILgAAAAAAnNwIzUejRCOuH5E6I8xnZz4puTs%3D1Zv7ttfk8LF81IUq16cHjhLTvJu4FA33AGWWjCpTnA")
+                    .addHeader("Content-Type", "Application/Json")
+                    .addHeader("X-Client-Transaction-Id", twitterTransactionId)
+                    .addHeader("X-Client-Uuid", "ed0e5acd-8490-4b76-9045-49ac0b5f6353")
+                    .addHeader("X-Csrf-Token", twitterSearchToken)
+                    .get() // Post请求
+                    .build();
+            response = client.newCall(request).execute();
+
+        } catch (Exception e) {
+            LogUtils.error("请求twitterApi异常: {}", url, e);
+        }
+
         final String[] fullText = {""};
-        LogUtils.info("startMonitor-聚合api数据返回: {}", DateUtils.getTimeSSS());
+        LogUtils.info("请求twitter: {}", DateUtils.getTimeSSS());
+        LogUtils.info("response{}", response);
         // 处理响应数据
-        if (response != null && response.getStatusCode() == HttpStatus.OK) {
+        if (response != null && response.isSuccessful()) {
             try {
                 // 解析响应数据
-                JSONObject jsonObject = JSONObject.parseObject(response.getBody());
+                JSONObject jsonObject = JSONObject.parseObject(response.body().string());
+                LogUtils.info("推特数据解析完成: {}", jsonObject);
                 if (jsonObject == null) {
                     LogUtils.error("推特数据返回异常 | url:", url);
                     return;
                 }
                 // 获取应用列表
                 JSONObject data = jsonObject.getJSONObject("data");
+                LogUtils.info("data:{}",data);
                 if(data!=null){
                     JSONObject searchByRawQuery = data.getJSONObject("search_by_raw_query");
                     if(searchByRawQuery!=null){
@@ -403,7 +433,6 @@ public class TwitterMonitor {
         LogUtils.info("updateUserFollowersYouKnow-异步执行: {}", DateUtils.getTimeSSS());
         Response response;
         String responseString = "";
-        String url = null;
         int retryCount = 0;
         //monitorUser.setUserID("829482275318484993");
         if(!redisCache.hasKey("TwitterToken")){
@@ -420,21 +449,34 @@ public class TwitterMonitor {
             LogUtils.error("获取推特共同关注者接口异常-userId为空");
             return CompletableFuture.completedFuture(null);
         }
-        String variables = "{\"count\": 1000, \"userId\": \"" + monitorUser.getUserID() + "\",\"includePromotedContent\": false}";
         OkHttpClient client = new OkHttpClient().newBuilder().build();
-
+        String twitterCookie;
+        String twitterTransactionId;
+        String url = "https://x.com/i/api/graphql/qJuLtV192xrB8Wftv6eXFw/FollowersYouKnow?variables={\"userId\":\"" + monitorUser.getUserID() + "\",\"count\":2000,\"includePromotedContent\":false}&features={\"profile_label_improvements_pcf_label_in_post_enabled\":false,\"rweb_tipjar_consumption_enabled\":true,\"responsive_web_graphql_exclude_directive_enabled\":true,\"verified_phone_label_enabled\":false,\"creator_subscriptions_tweet_preview_api_enabled\":true,\"responsive_web_graphql_timeline_navigation_enabled\":true,\"responsive_web_graphql_skip_user_profile_image_extensions_enabled\":false,\"premium_content_api_read_enabled\":false,\"communities_web_enable_tweet_community_results_fetch\":true,\"c9s_tweet_anatomy_moderator_badge_enabled\":true,\"responsive_web_grok_analyze_button_fetch_trends_enabled\":false,\"responsive_web_grok_analyze_post_followups_enabled\":false,\"responsive_web_grok_share_attachment_enabled\":true,\"articles_preview_enabled\":true,\"responsive_web_edit_tweet_api_enabled\":true,\"graphql_is_translatable_rweb_tweet_is_translatable_enabled\":true,\"view_counts_everywhere_api_enabled\":true,\"longform_notetweets_consumption_enabled\":true,\"responsive_web_twitter_article_tweet_consumption_enabled\":true,\"tweet_awards_web_tipping_enabled\":false,\"creator_subscriptions_quote_tweet_preview_enabled\":false,\"freedom_of_speech_not_reach_fetch_enabled\":true,\"standardized_nudges_misinfo\":true,\"tweet_with_visibility_results_prefer_gql_limited_actions_policy_enabled\":true,\"rweb_video_timestamps_enabled\":true,\"longform_notetweets_rich_text_read_enabled\":true,\"longform_notetweets_inline_media_enabled\":true,\"responsive_web_enhance_cards_enabled\":false}";
         // 重试次数超过 4 次，返回空的 MonitorUser
         while (retryCount < 4) {
             try {
                 // 构建请求
+                if (!redisCache.hasKey("TwitterCookie") || !redisCache.hasKey("TwitterTransactionId")) {
+                    LogUtils.error("推特请求头参数缺失", DateUtils.getTimeSSS());
+                    return CompletableFuture.completedFuture(null);
+                }
+                twitterCookie = redisCache.getCacheObject("TwitterCookie");
+                twitterTransactionId = redisCache.getCacheObject("TwitterTransactionId");
+
+                LogUtils.info("cookie | TransactionId | Token", twitterCookie, twitterTransactionId, twitterToken);
                 Request request = new Request.Builder()
-                        .url("https://api.apidance.pro/graphql/FollowersYouKnow?variables=" + variables)
-                        .addHeader("AuthToken", twitterToken) // 填入实际的 AuthToken
-                        .addHeader("apikey", "u8gkbegljnrd8f9bz3ncpn206l68xw") // 填入实际的 API key
+                        .url(url)
+                        .addHeader("Cookie", twitterCookie)
+                        .addHeader("Authorization","Bearer AAAAAAAAAAAAAAAAAAAAANRILgAAAAAAnNwIzUejRCOuH5E6I8xnZz4puTs%3D1Zv7ttfk8LF81IUq16cHjhLTvJu4FA33AGWWjCpTnA")
+                        .addHeader("Content-Type", "Application/Json")
+                        .addHeader("X-Client-Transaction-Id", twitterTransactionId)
+                        .addHeader("X-Client-Uuid", "ed0e5acd-8490-4b76-9045-49ac0b5f6353")
+                        .addHeader("X-Csrf-Token", twitterToken)
                         .get() // Post请求
                         .build();
                 response = client.newCall(request).execute();
-                LogUtils.info("updateUserFollowersYouKnow-聚合api数据返回: {}", DateUtils.getTimeSSS());
+                LogUtils.info("推特共同关注者接口数据返回: {}", DateUtils.getTimeSSS());
                 if (response != null && response.isSuccessful()) {
                     // 解析响应数据
                     responseString = response.body().string();
@@ -769,8 +811,9 @@ public class TwitterMonitor {
 
                 LogUtils.info("parsingTweets-调用bot发送消息: {}", DateUtils.getTimeSSS());
                 //增加dream-bot机器人
-                telegramBot.sendText(messageBuilder.toString());
-                telegramDreamBot.sendText(messageBuilder.toString());
+                //telegramBot.sendText(messageBuilder.toString());
+                //telegramDreamBot.sendText(messageBuilder.toString());
+                telegramDongBot.sendText(messageBuilder.toString());
                 result = 1;
             } else {
                 LogUtils.error("推文未包含pump代币信息: ", user, tweetUrl, fullText);

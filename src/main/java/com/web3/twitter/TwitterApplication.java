@@ -1,8 +1,7 @@
 package com.web3.twitter;
 
-import com.web3.twitter.bot.MyAmazingBot;
 import com.web3.twitter.utils.LogUtils;
-import org.springframework.beans.factory.annotation.Autowired;
+import com.web3.twitter.utils.TelegramDongBot;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.scheduling.annotation.EnableAsync;
@@ -20,13 +19,13 @@ public class TwitterApplication {
 
         TelegramBotsLongPollingApplication botsApplication = new TelegramBotsLongPollingApplication();
         try {
-            String botTokenShiyi = "7907041466:AAF3wj6mI5-XH00a2k75lfBIAEmLIdSNOeQ";
-            botsApplication.registerBot(botTokenShiyi, new TelegramBot());
-            LogUtils.info("注册机器人shiyi_bot.....");
+//            String botTokenShiyi = "7907041466:AAF3wj6mI5-XH00a2k75lfBIAEmLIdSNOeQ";
+//            botsApplication.registerBot(botTokenShiyi, new TelegramBot());
+//            LogUtils.info("注册机器人shiyi_bot.....");
 
-            String botToken = "7816953388:AAFDf_a2OgsWIAWgPjWc54P8eHtZYMJdQb4";
-            botsApplication.registerBot(botToken, new TelegramDreamBot());
-            LogUtils.info("注册机器人dream_gg_bot.....");
+            String botToken = "7719750548:AAEqoOVqnOlShBRNsWvpyInjSCVnKkk9jNg";
+            botsApplication.registerBot(botToken, new TelegramDongBot());
+            LogUtils.info("注册机器人dong_bot.....");
         } catch (TelegramApiException e) {
             throw new RuntimeException(e);
         }
