@@ -10,6 +10,7 @@ import java.time.ZoneId;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeFormatterBuilder;
 import java.time.format.DateTimeParseException;
+import java.time.temporal.ChronoUnit;
 import java.util.*;
 import java.time.ZonedDateTime;
 
@@ -235,5 +236,33 @@ public class DateHandleUtil {
         // 获取时间戳
         return yesterday.atStartOfDay(ZoneId.systemDefault()).toEpochSecond();
     }
+
+
+    /**
+     * 计算两个时间之间的秒数差
+     *
+     * @param startTime 开始时间（字符串格式）
+     * @param endTime   结束时间（字符串格式）
+     * @return 两个时间之间的秒数差
+     */
+    public static String calculateDifferenceInSeconds(String startTime, String endTime) {
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+        // 将时间字符串解析为 LocalDateTime
+        LocalDateTime startDateTime = LocalDateTime.parse(startTime, formatter);
+        LocalDateTime endDateTime = LocalDateTime.parse(endTime, formatter);
+
+        // 计算两个时间之间的秒数差
+        long between = ChronoUnit.SECONDS.between(startDateTime, endDateTime);
+        long seconds = 0;
+        if (between >= 5){
+            seconds = between - 3;
+            startDateTime = startDateTime.plusSeconds(seconds);
+            startTime = startDateTime.format(formatter);
+        }
+
+        return startTime;
+    }
+
+
 
 }

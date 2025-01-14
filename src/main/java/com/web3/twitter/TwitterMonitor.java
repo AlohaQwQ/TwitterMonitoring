@@ -746,8 +746,10 @@ public class TwitterMonitor {
                         messageBuilder.append("\n");
                     }
                 }
-
-                messageBuilder.append("┌ <b>发布时间: </b>").append(DateHandleUtil.formatDate(createdDate)).append("\n");
+                String releaseTime = DateHandleUtil.formatDate(createdDate);
+                String pushTime = DateUtils.getTime();
+                String newReleaseTime = DateHandleUtil.calculateDifferenceInSeconds(releaseTime, pushTime);
+                messageBuilder.append("┌ <b>发布时间: </b>").append(DateHandleUtil.formatDate(newReleaseTime)).append("\n");
                 //messageBuilder.append("搜索时间: ").append(nowTime).append("\n");
                 messageBuilder.append("└ <b>推送时间: </b>").append(DateUtils.getTime()).append("\n");
 
