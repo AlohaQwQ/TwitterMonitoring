@@ -36,6 +36,7 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.text.DecimalFormat;
+import java.text.SimpleDateFormat;
 import java.util.*;
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.ScheduledExecutorService;
@@ -655,31 +656,33 @@ public class TwitterMonitor {
                 String pumpUrl = "https://pump.fun/coin/" + coin.getCoinCa();
                 //https://gmgn.ai/sol/token/3GD2FWYkG2QGXCkN1nEf9TB1jsvt2zvUUEKEmFfgpump
                 messageBuilder.append("┌ ca: ").append("<code>").append(coin.getCoinCa()).append("</code>").append("\n");
-//                MonitorCoin monitorCoinInfo = getMonitorCoinInfo(coin);
-//                LogUtils.info("代币信息：{}",monitorCoinInfo);
-//                if (StringUtils.isNotEmpty(monitorCoinInfo.getCoinName())) {
-//                    messageBuilder.append("├ <b>名称: </b> ").append(monitorCoinInfo.getCoinName()).append("\n");
-//                }
-//                if (StringUtils.isNotEmpty(monitorCoinInfo.getMarketValue())){
-//                    messageBuilder.append("├ <b>市值: </b> ").append(monitorCoinInfo.getMarketValue()).append("\n");
-//                }
-//                if (StringUtils.isNotEmpty(monitorCoinInfo.getCoinLaunchpad())){
-//                    messageBuilder.append("├ <b>进度: </b> ").append(monitorCoinInfo.getCoinLaunchpad()).append("\n");
-//                }
 
-                //String gmgnStr = String.format("<a href=\"%s\" >%s</a>", gmgnUrl, "GmGn气泡图");
-                //String pumpStr = String.format("<a href=\"%s\" >%s</a>", pumpUrl, "PumpK线");
-                //String twitterStr = String.format("<a href=\"%s\" >%s</a>", tweetUrl, "推文链接");
+                //gmgn代币信息
+                MonitorCoin monitorCoinInfo = getMonitorCoinInfo(coin);
+                LogUtils.info("代币信息：{}",monitorCoinInfo);
+                if (StringUtils.isNotEmpty(monitorCoinInfo.getCoinName())) {
+                    messageBuilder.append("├ <b>名称: </b> ").append(monitorCoinInfo.getCoinName()).append("\n");
+                }
+                if (StringUtils.isNotEmpty(monitorCoinInfo.getMarketValue())){
+                    messageBuilder.append("├ <b>市值: </b> ").append(monitorCoinInfo.getMarketValue()).append("\n");
+                }
+                if (StringUtils.isNotEmpty(monitorCoinInfo.getCoinLaunchpad())){
+                    messageBuilder.append("├ <b>进度: </b> ").append(monitorCoinInfo.getCoinLaunchpad()).append("\n");
+                }
+                if (StringUtils.isNotEmpty(monitorCoinInfo.getCreateDate())){
+                    messageBuilder.append("├ <b>创建时间: </b> ").append(monitorCoinInfo.getCreateDate()).append("\n");
+                }
+
+                String gmgnStr = String.format("<a href=\"%s\" >%s</a>", gmgnUrl, "GmGn气泡图");
+                String pumpStr = String.format("<a href=\"%s\" >%s</a>", pumpUrl, "PumpK线");
+                String twitterStr = String.format("<a href=\"%s\" >%s</a>", tweetUrl, "推文链接");
 
                 // 将<a>标签追加到StringBuilder中
                 messageBuilder.append("├ gmgn: ").append(gmgnUrl).append("\n");
-                //messageBuilder.append("├ gmgn: ").append(gmgnUrl).append("\n");
-                //messageBuilder.append("└ pump: ").append(pumpUrl).append("\n");
+                //messageBuilder.append("├ gmgn: ").append(gmgnStr).append("\n");
                 messageBuilder.append("├ pump: ").append(pumpUrl).append("\n");
+                //messageBuilder.append("└ pump: ").append(pumpStr).append("\n");
                 messageBuilder.append("\n");
-
-                //messageBuilder.append("ca名称: ").append(pumpCa).append("\n");
-                //messageBuilder.append("ca创建时间: ").append(pumpCa).append("\n");
 
                 messageBuilder.append("┌ <b>twitter: </b>").append(tweetUrl).append("\n");
                 messageBuilder.append("├ <b>作者: ").append(user.getUserName())
@@ -813,6 +816,40 @@ public class TwitterMonitor {
         String coinNameUrl = "https://gmgn.ai/api/v1/token_info/sol/"+ca;
         String referer = "https://gmgn.ai/sol/token/"+ca;
         OkHttpClient client = new OkHttpClient().newBuilder().build();
+
+        try {
+            // 构建请求
+            Request request = new Request.Builder()
+                    .url(coinNameUrl)
+                    .addHeader("Referer", referer) // 填入实际的 AuthToken
+                    .addHeader("Cookie", cookie) // 填入实际的 API key
+                    .get() // Post请求
+                    .build();
+            Response response = client.newCall(request).execute();
+            if (response.isSuccessful()) {
+                if (response.body() != null) {
+                    responseString = response.body().string();
+                }
+                LogUtils.info("获取代币名称信息成功: {}", responseString);
+                org.json.JSONObject jsonObject = new org.json.JSONObject(responseString);
+                String name = jsonObject.getJSONObject("data").getString("name");
+                String symbol = jsonObject.getJSONObject("data").getString("symbol");
+                long creationTimestamp = jsonObject.getJSONObject("data").getLong("creation_timestamp");
+                Date date = new Date(creationTimestamp*1000);
+                SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+                String formattedDate = sdf.format(date);
+                coin.setCoinName(symbol + "(" +name + ")");
+                coin.setCreateDate(formattedDate);
+            } else {
+                LogUtils.error("获取代币名称信息失败: {}", ca);
+            }
+        } catch (Exception e) {
+            LogUtils.error("获取代币名称信息失败: {}", ca, e);
+            if (StringUtils.isNotEmpty(responseString)){
+                LogUtils.error("response: {}", responseString, e);
+            }
+        }
+
         try {
             // 构建请求
             Request request = new Request.Builder()
@@ -831,7 +868,7 @@ public class TwitterMonitor {
                 double aDouble = jsonObject.getJSONObject("data").getDouble("usd_price");
                 double convertedYuan = aDouble * 1000000;
                 // 设置格式化规则，保留两位小数
-                DecimalFormat df = new DecimalFormat("###0.0");
+                DecimalFormat df = new DecimalFormat("###0.00");
                 String formattedYuan = df.format(convertedYuan);
                 coin.setMarketValue("$"+formattedYuan+"K");
             } else {
@@ -860,43 +897,19 @@ public class TwitterMonitor {
                 LogUtils.info("获取代币进度信息成功: {}", responseString);
                 org.json.JSONObject jsonObject = new org.json.JSONObject(responseString);
                 String progress = jsonObject.getJSONObject("data").getString("launchpad_progress");
-                double value = Double.parseDouble(progress);
-                int percentage = (int) Math.round(value * 100);
-                String percentageStr = " "+percentage+"%";
-                String fillProgressBar = HtmlParserUtil.createFillProgressBar(percentageStr, 20);
+                String fillProgressBar = "已发射";
+                if(!progress.equals("1")){
+                    //内盘
+                    double value = Double.parseDouble(progress);
+                    int percentage = (int) Math.round(value * 100);
+                    fillProgressBar = HtmlParserUtil.createFillProgressBar(percentage, 20);
+                }
                 coin.setCoinLaunchpad(fillProgressBar);
             } else {
                 LogUtils.error("获取代币进度信息失败: {}", ca);
             }
         } catch (Exception e) {
             LogUtils.error("获取代币进度信息失败: {}", ca, e);
-            if (StringUtils.isNotEmpty(responseString)){
-                LogUtils.error("response: {}", responseString, e);
-            }
-        }
-
-        try {
-            // 构建请求
-            Request request = new Request.Builder()
-                    .url(coinNameUrl)
-                    .addHeader("Referer", referer) // 填入实际的 AuthToken
-                    .addHeader("Cookie", cookie) // 填入实际的 API key
-                    .get() // Post请求
-                    .build();
-            Response response = client.newCall(request).execute();
-            if (response.isSuccessful()) {
-                if (response.body() != null) {
-                    responseString = response.body().string();
-                }
-                LogUtils.info("获取代币名称信息成功: {}", responseString);
-                org.json.JSONObject jsonObject = new org.json.JSONObject(responseString);
-                String name = jsonObject.getJSONObject("data").getString("name");
-                coin.setCoinName(name);
-            } else {
-                LogUtils.error("获取代币名称信息失败: {}", ca);
-            }
-        } catch (Exception e) {
-            LogUtils.error("获取代币名称信息失败: {}", ca, e);
             if (StringUtils.isNotEmpty(responseString)){
                 LogUtils.error("response: {}", responseString, e);
             }

@@ -237,6 +237,13 @@ public class DateHandleUtil {
         return yesterday.atStartOfDay(ZoneId.systemDefault()).toEpochSecond();
     }
 
+//    public static void main(String[] args) throws InterruptedException {
+//        String releaseTime = DateUtils.getTime();
+//        Thread.sleep(6000);
+//        String pushTime = DateUtils.getTime();
+//        String newReleaseTime = DateHandleUtil.calculateDifferenceInSeconds(releaseTime, pushTime);
+//        LogUtils.info("pushTime:{} releaseTime:{} newReleaseTime:{} nowTime:{}", pushTime, releaseTime, newReleaseTime, DateUtils.getTime());
+//    }
 
     /**
      * 计算两个时间之间的秒数差
@@ -255,7 +262,10 @@ public class DateHandleUtil {
         long between = ChronoUnit.SECONDS.between(startDateTime, endDateTime);
         long seconds = 0;
         if (between >= 5){
-            seconds = between - 5;
+            //取值3-5之间整数的随机数，3 4 5
+            Random random = new Random();
+            int randomNumber = 3 + random.nextInt(3);
+            seconds = between - randomNumber;
             startDateTime = startDateTime.plusSeconds(seconds);
             startTime = startDateTime.format(formatter);
         }

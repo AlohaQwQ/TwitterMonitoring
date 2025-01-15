@@ -53,12 +53,11 @@ public class HtmlParserUtil {
 
     /**
      * 填充进度条
-     * @param percentageStr
+     * @param percentage
      * @param barLength
      * @return
      */
-    public static String createFillProgressBar(String percentageStr, int barLength) {
-        int percentage = Integer.parseInt(percentageStr.replace("%", ""));
+    public static String createFillProgressBar(int percentage, int barLength) {
         StringBuilder progressBar = new StringBuilder();
         int completeLength = (int) ((double) percentage / 100 * barLength);
         for (int i = 0; i < completeLength; i++) {
@@ -67,7 +66,7 @@ public class HtmlParserUtil {
         for (int i = completeLength; i < barLength; i++) {
             progressBar.append("░");
         }
-        progressBar.append(" ").append(percentageStr);
+        progressBar.append(" ").append(percentage).append("%");
         return progressBar.toString();
     }
 
