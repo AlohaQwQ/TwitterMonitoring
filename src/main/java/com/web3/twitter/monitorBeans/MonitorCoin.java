@@ -1,6 +1,7 @@
 package com.web3.twitter.monitorBeans;
 
 
+import java.math.BigDecimal;
 import java.util.List;
 
 /**
@@ -47,6 +48,16 @@ public class MonitorCoin {
      * 代币信息
      */
     private String coinDetail;
+
+    /**
+     * 代币价格
+     */
+    private BigDecimal coinPrice;
+
+    /**
+     * 代币流通供给
+     */
+    private String coinCirculatingSupply;
 
     public String getCoinName() {
         return coinName;
@@ -110,6 +121,22 @@ public class MonitorCoin {
 
     public void setCoinDetail(String coinDetail) {
         this.coinDetail = coinDetail;
+    }
+
+    public BigDecimal getCoinPrice() {
+        return coinPrice;
+    }
+
+    public void setCoinPrice(BigDecimal coinPrice) {
+        this.coinPrice = coinPrice;
+    }
+
+    public String getCoinCirculatingSupply() {
+        return coinCirculatingSupply;
+    }
+
+    public void setCoinCirculatingSupply(String coinCirculatingSupply) {
+        this.coinCirculatingSupply = coinCirculatingSupply;
     }
 
     @Override

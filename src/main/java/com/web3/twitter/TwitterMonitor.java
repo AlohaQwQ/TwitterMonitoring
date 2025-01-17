@@ -1,5 +1,6 @@
 package com.web3.twitter;
 
+import cn.hutool.core.util.NumberUtil;
 import com.alibaba.fastjson2.JSON;
 import com.alibaba.fastjson2.JSONArray;
 import com.alibaba.fastjson2.JSONObject;
@@ -30,6 +31,7 @@ import javax.annotation.PostConstruct;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.math.BigDecimal;
 import java.net.URLEncoder;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
@@ -663,6 +665,9 @@ public class TwitterMonitor {
                 if (StringUtils.isNotEmpty(monitorCoinInfo.getCoinName())) {
                     messageBuilder.append("├ <b>名称: </b> ").append(monitorCoinInfo.getCoinName()).append("\n");
                 }
+                if (monitorCoinInfo.getCoinPrice().doubleValue()>0){
+                    messageBuilder.append("├ <b>价格: </b> ").append("$").append(monitorCoinInfo.getCoinPrice()).append("\n");
+                }
                 if (StringUtils.isNotEmpty(monitorCoinInfo.getMarketValue())){
                     messageBuilder.append("├ <b>市值: </b> ").append(monitorCoinInfo.getMarketValue()).append("\n");
                 }
@@ -834,12 +839,14 @@ public class TwitterMonitor {
                 org.json.JSONObject jsonObject = new org.json.JSONObject(responseString);
                 String name = jsonObject.getJSONObject("data").getString("name");
                 String symbol = jsonObject.getJSONObject("data").getString("symbol");
+                String circulatingSupply = jsonObject.getJSONObject("data").getString("circulating_supply");
                 long creationTimestamp = jsonObject.getJSONObject("data").getLong("creation_timestamp");
                 Date date = new Date(creationTimestamp*1000);
                 SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
                 String formattedDate = sdf.format(date);
                 coin.setCoinName(symbol + "(" +name + ")");
                 coin.setCreateDate(formattedDate);
+                coin.setCoinCirculatingSupply(circulatingSupply);
             } else {
                 LogUtils.error("获取代币名称信息失败: {}", ca);
             }
@@ -865,12 +872,27 @@ public class TwitterMonitor {
                 }
                 LogUtils.info("获取代币市值信息成功: {}", responseString);
                 JSONObject jsonObject = JSONObject.parseObject(responseString);
-                double aDouble = jsonObject.getJSONObject("data").getDouble("usd_price");
-                double convertedYuan = aDouble * 1000000;
+                BigDecimal aDouble = jsonObject.getJSONObject("data").getBigDecimal("usd_price");
+                //double convertedYuan = aDouble * 1000000;
                 // 设置格式化规则，保留两位小数
-                DecimalFormat df = new DecimalFormat("###0.00");
-                String formattedYuan = df.format(convertedYuan);
-                coin.setMarketValue("$"+formattedYuan+"K");
+                //DecimalFormat df = new DecimalFormat("###0.00");
+                //String formattedYuan = df.format(convertedYuan);
+                //coin.setMarketValue("$"+formattedYuan+"K");
+                coin.setCoinPrice(aDouble);
+                //市值=价格*当前流通供给代币量
+                if(StringUtils.isNotEmpty(coin.getCoinCirculatingSupply())){
+                    BigDecimal supply = new BigDecimal(coin.getCoinCirculatingSupply());
+                    double marketValue = NumberUtil.mul(aDouble, supply).doubleValue();
+                    String formattedMarketValue;
+                    if (marketValue >= 1000000) { // 大于百万
+                        formattedMarketValue = String.format("%.2fM", marketValue / 1000000);
+                    } else if (marketValue >= 1000) { // 大于千
+                        formattedMarketValue = String.format("%.2fK", marketValue / 1000);
+                    } else { // 小于千
+                        formattedMarketValue = String.valueOf(marketValue);
+                    }
+                    coin.setMarketValue("$"+formattedMarketValue);
+                }
             } else {
                 LogUtils.error("获取代币信息失败: {}", ca);
             }
