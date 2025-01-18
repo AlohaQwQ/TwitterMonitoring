@@ -638,7 +638,7 @@
       "editable": false
     },
     "BitCloutCat": {
-      "tag": "外星猫",
+      "tag": "镭射猫",
       "name": "LaserCat397.eth",
       "group": "default",
       "isExists": true,
@@ -2276,11 +2276,6 @@
       "name": "Apple",
       "group": "default"
     },
-    "KLM": {
-      "tag": "荷兰航空",
-      "name": "KLM",
-      "group": "default"
-    },
     "MikeTyson": {
       "tag": "Mike Tyson",
       "name": "Mike Tyson",
@@ -2733,7 +2728,7 @@
     },
     "nic__carter": {
       "tag": "Castle Island Ventures 联合创始人及 GP、评论家，曾担任富达投资的第一位加密资产分析师",
-      "name": "nic  carter",
+      "name": "nic carter",
       "group": "default"
     },
     "LLuciano_BTC": {
@@ -2768,7 +2763,7 @@
     },
     "OTZGary": {
       "tag": "认知",
-      "name": "Gary",
+      "name": "otzgary.base.eth",
       "group": "default"
     },
     "sky_gpt": {
@@ -6490,7 +6485,197 @@
       "tag": "Hyperliquid 首席实习官",
       "name": "Hypurr",
       "group": "default"
+    },
+    "SyliconDreams": {
+      "tag": "看见就赛",
+      "name": "Sylicon Dreams",
+      "group": "default"
+    },
+    "geeknik": {
+      "tag": "SP00GE DEV  20M",
+      "name": "Geeknik’s ⍟ Lab | ∀x: (x ⊕ ¬x) ⇔ ∅",
+      "group": "default"
+    },
+    "TrustlessTooth": {
+      "tag": "A16Z 必赛",
+      "name": "Spyros",
+      "group": "default"
+    },
+    "0xJ_builder": {
+      "tag": "看见无脑赛",
+      "name": "Anthony | Nimble",
+      "group": "default"
+    },
+    "zen913": {
+      "tag": "ZEN 创始人 技术大佬",
+      "name": "ZEN",
+      "group": "default"
+    },
+    "mtndao": {
+      "tag": "mtndao",
+      "name": "mtndao",
+      "group": "default"
+    },
+    "Tsinghua_Uni": {
+      "tag": "清华大学",
+      "name": "Tsinghua University",
+      "group": "default"
+    },
+    "suji_yan": {
+      "tag": "Mask Network 创始人",
+      "name": "Suji Yan - Mask is BUIDLing",
+      "group": "default"
+    },
+    "xiaohongshu": {
+      "tag": "小红书",
+      "name": "Xiaohongshu 小红书",
+      "group": "default"
+    },
+    "XH_Lee23": {
+      "tag": "记者",
+      "name": "Li Zexin",
+      "group": "default"
+    },
+    "MrBeast": {
+      "tag": "美国内容创作者 贼牛逼",
+      "name": "MrBeast",
+      "group": "default"
+    },
+    "nancy_c813": {
+      "tag": "Ruiku Tech 联合创始人",
+      "name": "Nancy",
+      "group": "default"
+    },
+    "0x0funky": {
+      "tag": "0xFunky",
+      "name": "0xFunky",
+      "group": "default"
+    },
+    "JSeyff": {
+      "tag": "ETF 和加密货币领域的专家",
+      "name": "James Seyffart",
+      "group": "default"
+    },
+    "nayibbukele": {
+      "tag": "萨尔瓦多总统",
+      "name": "Nayib Bukele",
+      "group": "default"
+    },
+    "MeteoraAG": {
+      "tag": "Meteora",
+      "name": "Meteora",
+      "group": "default"
+    },
+    "hellochow": {
+      "tag": "Meteora 团队成员",
+      "name": "benchow.sol",
+      "group": "default"
+    },
+    "davido": {
+      "tag": "尼日利亚歌手、作曲家和制作人",
+      "name": "Davido",
+      "group": "default"
+    },
+    "AlboMP": {
+      "tag": "澳大利亚 总理",
+      "name": "Anthony Albanese",
+      "group": "default"
+    },
+    "WilliamsRuto": {
+      "tag": "肯尼亚 总统",
+      "name": "William Samoei Ruto, PhD",
+      "group": "default"
+    },
+    "CyrilRamaphosa": {
+      "tag": "南非 总统",
+      "name": "Cyril Ramaphosa",
+      "group": "default"
+    },
+    "alferdezprensa": {
+      "tag": "阿根廷 总统",
+      "name": "Alberto Fernández Prensa",
+      "group": "default"
+    },
+    "President_KR": {
+      "tag": "韩国 总统",
+      "name": "윤석열 Yoon Suk Yeol",
+      "group": "default"
+    },
+    "narendramodi": {
+      "tag": "印度 总统",
+      "name": "Narendra Modi",
+      "group": "default"
+    },
+    "kishida230": {
+      "tag": "日本 总理",
+      "name": "岸田文雄",
+      "group": "default"
+    },
+    "MFA_China": {
+      "tag": "中国外交部",
+      "name": "Spokesperson发言人办公室",
+      "group": "default"
+    },
+    "CGTNOfficial": {
+      "tag": "央视新闻",
+      "name": "CGTN",
+      "group": "default"
+    },
+    "ZelenskyyUa": {
+      "tag": "乌克兰 总统",
+      "name": "Volodymyr Zelenskyy / Володимир Зеленський",
+      "group": "default"
+    },
+    "KremlinRussia_E": {
+      "tag": "俄罗斯 官方政府号",
+      "name": "President of Russia",
+      "group": "default"
+    },
+    "Bundeskanzler": {
+      "tag": "联邦总理官方账号",
+      "name": "Bundeskanzler Olaf Scholz",
+      "group": "default"
+    },
+    "OlafScholz": {
+      "tag": "现任总理奥拉夫·朔尔茨",
+      "name": "Olaf Scholz",
+      "group": "default"
+    },
+    "EmmanuelMacron": {
+      "tag": "法国总统",
+      "name": "Emmanuel Macron",
+      "group": "default"
+    },
+    "Elysee": {
+      "tag": "爱丽舍宫官方账号",
+      "name": "Élysée",
+      "group": "default"
+    },
+    "10DowningStreet": {
+      "tag": "英国首相办公室官方账号",
+      "name": "UK Prime Minister",
+      "group": "default"
+    },
+    "lopezobrador_": {
+      "tag": "墨西哥  总统",
+      "name": "Andrés Manuel",
+      "group": "default"
+    },
+    "JustinTrudeau": {
+      "tag": "加拿大 总统",
+      "name": "Justin Trudeau",
+      "group": "default"
+    },
+    "POTUS": {
+      "tag": "拜登",
+      "name": "President Biden",
+      "group": "default"
+    },
+    "JoeBiden": {
+      "tag": "拜登 个人账号",
+      "name": "Joe Biden",
+      "group": "default"
     }
   },
-  "$myTwitterNoteTime": 1735817853068
+  "$myTwitterNoteTime": 1737200865452
 }
