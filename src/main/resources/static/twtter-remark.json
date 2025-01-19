@@ -6675,7 +6675,97 @@
       "tag": "拜登 个人账号",
       "name": "Joe Biden",
       "group": "default"
+    },
+    "jairbolsonaro": {
+      "tag": "前巴西总统",
+      "name": "Jair M. Bolsonaro",
+      "group": "default"
+    },
+    "ibusolih": {
+      "tag": "前马尔代夫总统",
+      "name": "Ibrahim Mohamed Solih",
+      "group": "default"
+    },
+    "CrashiusClay69": {
+      "tag": "Crash 大V",
+      "name": "Crash",
+      "group": "default"
+    },
+    "dogwiftools": {
+      "tag": "PUMP  直接梭哈",
+      "name": "DogWifTools",
+      "group": "default"
+    },
+    "GetTrumpMemes": {
+      "tag": "TrumpMeme",
+      "name": "TrumpMeme",
+      "group": "default"
+    },
+    "DekuKing1": {
+      "tag": "0x易经 7M",
+      "name": "0x易经",
+      "group": "default"
+    },
+    "yuyue_chris": {
+      "tag": "yuyue 1.1M",
+      "name": "Yuyue",
+      "group": "default"
+    },
+    "silverfang88": {
+      "tag": "子时",
+      "name": "子时",
+      "group": "default"
+    },
+    "Shanks_A9z": {
+      "tag": "Shanks",
+      "name": "Shanks",
+      "group": "default"
+    },
+    "alphawifhat": {
+      "tag": "Nachi",
+      "name": "Nachi",
+      "group": "default"
+    },
+    "RichardHanania": {
+      "tag": "CSPI 创始人主席",
+      "name": "Richard Hanania",
+      "group": "default"
+    },
+    "edchen_eth": {
+      "tag": "Clapper 创始人",
+      "name": "Edison Chen",
+      "group": "default"
+    },
+    "VivekGRamaswamy": {
+      "tag": "特朗普儿子",
+      "name": "Vivek Ramaswamy",
+      "group": "default"
+    },
+    "JMilei": {
+      "tag": "阿根廷 总统",
+      "name": "Javier Milei",
+      "group": "default"
+    },
+    "wallstreetbets": {
+      "tag": "华尔街",
+      "name": "wallstreetbets",
+      "group": "default"
+    },
+    "Alice_Weidel": {
+      "tag": "德国总理候选人",
+      "name": "Alice Weidel",
+      "group": "default"
+    },
+    "EnigmaFund": {
+      "tag": "Enigmafund VC 创始人",
+      "name": "EnigmaFunge",
+      "group": "default"
+    },
+    "RyanAFournier": {
+      "tag": "特朗普 学生主席",
+      "name": "Ryan Fournier",
+      "group": "default"
     }
   },
-  "$myTwitterNoteTime": 1737200865452
+  "$myTwitterNoteTime": 1737304791016
 }
