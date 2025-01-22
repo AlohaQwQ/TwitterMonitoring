@@ -503,7 +503,7 @@
       "editable": false
     },
     "MELANIATRUMP": {
-      "tag": "特朗普女儿",
+      "tag": "特朗普老婆",
       "name": "MELANIA TRUMP",
       "group": "default",
       "isExists": true,
@@ -1791,7 +1791,7 @@
     },
     "shawmakesmagic": {
       "tag": "A16Z合作伙伴 创始人 程序员",
-      "name": "Shaw",
+      "name": "Shaw (wartime arc)",
       "group": "default",
       "isExists": true,
       "isShow": true,
@@ -1925,7 +1925,7 @@
       "editable": false
     },
     "EasyEatsBodega": {
-      "tag": "关注挺牛！",
+      "tag": "EASY 关注很强",
       "name": "Easy",
       "group": "default",
       "isExists": true,
@@ -5427,7 +5427,7 @@
       "group": "default"
     },
     "CryptoKobe92": {
-      "tag": "九条命 第一时间赛",
+      "tag": "九条命",
       "name": "九条命",
       "group": "default"
     },
@@ -6486,23 +6486,13 @@
       "name": "Hypurr",
       "group": "default"
     },
-    "SyliconDreams": {
-      "tag": "看见就赛",
-      "name": "Sylicon Dreams",
-      "group": "default"
-    },
     "geeknik": {
       "tag": "SP00GE DEV  20M",
       "name": "Geeknik’s ⍟ Lab | ∀x: (x ⊕ ¬x) ⇔ ∅",
       "group": "default"
     },
-    "TrustlessTooth": {
-      "tag": "A16Z 必赛",
-      "name": "Spyros",
-      "group": "default"
-    },
     "0xJ_builder": {
-      "tag": "看见无脑赛",
+      "tag": "Nimble Network 的创始人兼 AI CEO",
       "name": "Anthony | Nimble",
       "group": "default"
     },
@@ -6667,8 +6657,8 @@
       "group": "default"
     },
     "POTUS": {
-      "tag": "拜登",
-      "name": "President Biden",
+      "tag": "特朗普",
+      "name": "President Donald J. Trump",
       "group": "default"
     },
     "JoeBiden": {
@@ -6765,7 +6755,112 @@
       "tag": "特朗普 学生主席",
       "name": "Ryan Fournier",
       "group": "default"
+    },
+    "pycui64": {
+      "tag": "RealCharAI 创造者 工程师",
+      "name": "piaoyang",
+      "group": "default"
+    },
+    "SolanaCrossroad": {
+      "tag": "Solana 社区的大型会议",
+      "name": "Solana Crossroads  ISTANBUL April 25-26, 2025",
+      "group": "default"
+    },
+    "ycombinator": {
+      "tag": "YC 顶级实验室",
+      "name": "Y Combinator",
+      "group": "default"
+    },
+    "tiktok_us": {
+      "tag": "TikTok US",
+      "name": "TikTok US",
+      "group": "default"
+    },
+    "Web3Adam": {
+      "tag": "adam  大V",
+      "name": "adam",
+      "group": "default"
+    },
+    "WSJ": {
+      "tag": "华尔街 日报",
+      "name": "The Wall Street Journal",
+      "group": "default"
+    },
+    "WSJmarkets": {
+      "tag": "华尔街新闻",
+      "name": "WSJ Markets",
+      "group": "default"
+    },
+    "CNBC": {
+      "tag": "华尔街的新闻和分析",
+      "name": "CNBC",
+      "group": "default"
+    },
+    "CNBCnow": {
+      "tag": "最新的市场动态和即时新闻",
+      "name": "CNBC Now",
+      "group": "default"
+    },
+    "business": {
+      "tag": "彭博社 涵盖全球经济和金融市场",
+      "name": "Bloomberg",
+      "group": "default"
+    },
+    "FinancialTimes": {
+      "tag": "金融时报",
+      "name": "Financial Times",
+      "group": "default"
+    },
+    "MarketWatch": {
+      "tag": "MarketWatch 新闻",
+      "name": "MarketWatch",
+      "group": "default"
+    },
+    "FedorovMykhailo": {
+      "tag": "乌克兰 部长",
+      "name": "Mykhailo Fedorov",
+      "group": "default"
+    },
+    "HyperFND": {
+      "tag": "Hyper 基金会  B级",
+      "name": "Hyper Foundation",
+      "group": "default"
+    },
+    "PatrickWorkman": {
+      "tag": "Google、Facebook、Instagram  Pinterest",
+      "name": "Patrick Workman",
+      "group": "default"
+    },
+    "imperooterxbt": {
+      "tag": "大V",
+      "name": "scooter",
+      "group": "default"
+    },
+    "News_Of_Alpha": {
+      "tag": "Tree News 新闻",
+      "name": "Tree News",
+      "group": "default"
+    },
+    "MicroStrategy": {
+      "tag": "MicroStrategy  持有46wBTC",
+      "name": "MicroStrategy",
+      "group": "default"
+    },
+    "USDS": {
+      "tag": "美国数字服务团队",
+      "name": "U.S. Digital Service",
+      "group": "default"
+    },
+    "GiganticRebirth": {
+      "tag": "GCR 预言家",
+      "name": "GCR",
+      "group": "default"
+    },
+    "carlosmarcialt": {
+      "tag": "赛博动画师",
+      "name": "Carlos Marcial",
+      "group": "default"
     }
   },
-  "$myTwitterNoteTime": 1737304791016
+  "$myTwitterNoteTime": 1737538405236
 }
