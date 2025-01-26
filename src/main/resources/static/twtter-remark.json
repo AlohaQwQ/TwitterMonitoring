@@ -990,7 +990,7 @@
     },
     "cdixon": {
       "tag": "A16z合伙人 负责投资",
-      "name": "cdixon.eth",
+      "name": "Chris Dixon",
       "group": "default",
       "isExists": true,
       "isShow": true,
@@ -1944,7 +1944,7 @@
     },
     "ai16zdao": {
       "tag": "AI 16Z 55m",
-      "name": "ai16z",
+      "name": "V2 Loading █████▒▒▒",
       "group": "default",
       "isExists": true,
       "isShow": true,
@@ -2192,7 +2192,7 @@
       "group": "default"
     },
     "lior_eth": {
-      "tag": "创始人",
+      "tag": "Eden Block 创始管理合伙人",
       "name": "lior.eth (Lior Messika)",
       "group": "default"
     },
@@ -4713,7 +4713,7 @@
     },
     "GordonGoner": {
       "tag": "无聊猿创始人",
-      "name": "GordonGoner.eth (Wylie Aronow)",
+      "name": "GordonGoner (Wylie Aronow)",
       "group": "default"
     },
     "KuCoinVentures": {
@@ -4998,7 +4998,7 @@
     },
     "ethereum": {
       "tag": "以太坊基金会",
-      "name": "Ethereum Foundation",
+      "name": "Ethereum.org",
       "group": "default"
     },
     "Polkadot": {
@@ -5424,11 +5424,6 @@
     "RowdyCrypto": {
       "tag": "RWDY  MEME 大V",
       "name": "RWDY",
-      "group": "default"
-    },
-    "CryptoKobe92": {
-      "tag": "九条命",
-      "name": "九条命",
       "group": "default"
     },
     "_AnonDev": {
@@ -6860,7 +6855,397 @@
       "tag": "赛博动画师",
       "name": "Carlos Marcial",
       "group": "default"
+    },
+    "9th": {
+      "tag": "Cosmos 首席执行官",
+      "name": "Andy McCune",
+      "group": "default"
+    },
+    "0xNoNo_1": {
+      "tag": "0xNoNo",
+      "name": "0xNoNo",
+      "group": "default"
+    },
+    "EleanorTerrett": {
+      "tag": "FoxBusiness 的记者兼制片人",
+      "name": "Eleanor Terrett",
+      "group": "default"
+    },
+    "ThankYouX": {
+      "tag": "艺术家 39E 大V",
+      "name": "ThankYouX",
+      "group": "default"
+    },
+    "BarackObama": {
+      "tag": "奥巴马 总统",
+      "name": "Barack Obama",
+      "group": "default"
+    },
+    "Pontifex": {
+      "tag": "罗马天主教的现任教宗和梵蒂冈城的国家元首",
+      "name": "Pope Francis",
+      "group": "default"
+    },
+    "RodrigoChavesR": {
+      "tag": "哥斯达黎加 总统",
+      "name": "Rodrigo Chaves",
+      "group": "default"
+    },
+    "bongbongmarcos": {
+      "tag": "菲律宾 总统",
+      "name": "Bongbong Marcos",
+      "group": "default"
+    },
+    "jamesgungun": {
+      "tag": "MetaCRM 联合创始人兼CEO",
+      "name": "James S.   MetaCRM",
+      "group": "default"
+    },
+    "ClayCollins": {
+      "tag": "Nomics 联合创始人兼首席执行官",
+      "name": "clay.c/",
+      "group": "default"
+    },
+    "jasonbadeaux": {
+      "tag": "Daylight 联合创始人兼 CEO",
+      "name": "jason badeaux",
+      "group": "default"
+    },
+    "jkong910": {
+      "tag": "iAgent 首席财务官",
+      "name": "jkong910  NFTARMY",
+      "group": "default"
+    },
+    "mateo_ventures": {
+      "tag": "Gaia 联合创始人兼CEO",
+      "name": "mattwright.eth | d/acc",
+      "group": "default"
+    },
+    "RupertLowe10": {
+      "tag": "英国政治家和商人 议员",
+      "name": "Rupert Lowe MP",
+      "group": "default"
+    },
+    "rus": {
+      "tag": "VINE  DEV  2亿",
+      "name": "Rus",
+      "group": "default"
+    },
+    "0xbcd_": {
+      "tag": "区块链的创意总监",
+      "name": "0xbcd",
+      "group": "default"
+    },
+    "CocaCola": {
+      "tag": "可口可乐",
+      "name": "Coca-Cola",
+      "group": "default"
+    },
+    "pepsi": {
+      "tag": "百事可乐",
+      "name": "Pepsi",
+      "group": "default"
+    },
+    "reneil1337": {
+      "tag": "POAP 创始成员",
+      "name": "reneil.eth",
+      "group": "default"
+    },
+    "shacheng": {
+      "tag": "ConsenSys Mesh 合伙人",
+      "name": "shawn.eth",
+      "group": "default"
+    },
+    "js_horne": {
+      "tag": "Zora 联合创始人",
+      "name": "jacob",
+      "group": "default"
+    },
+    "0xminion": {
+      "tag": "GBV Capital 投资经理",
+      "name": "Minion",
+      "group": "default"
+    },
+    "shanicucic96": {
+      "tag": "PG 创始人兼CEO",
+      "name": "shan",
+      "group": "default"
+    },
+    "LexSokolin": {
+      "tag": "Generative Ventures 管理合伙人兼联合创始人",
+      "name": "Lex Sokolin | Generative Ventures",
+      "group": "default"
+    },
+    "DAnconia_Crypto": {
+      "tag": "Escape Velocity 联合创始人",
+      "name": "EV3 Sal",
+      "group": "default"
+    },
+    "jmj": {
+      "tag": "Chapter One 创始管理合伙人",
+      "name": "Jeff Morris Jr.",
+      "group": "default"
+    },
+    "jonwu_": {
+      "tag": "Asylum Ventures 投资人",
+      "name": "jonathan(love)wu",
+      "group": "default"
+    },
+    "DavidNage": {
+      "tag": "Arca 投资组合经理",
+      "name": "David Nage",
+      "group": "default"
+    },
+    "btcnyc": {
+      "tag": "Galoy 联合创始人",
+      "name": "Hunter",
+      "group": "default"
+    },
+    "AtlantisPleb": {
+      "tag": "OpenAgents 创始人",
+      "name": "Christopher David",
+      "group": "default"
+    },
+    "abhimvyas": {
+      "tag": "Mem Protocol 联合创始人兼CEO",
+      "name": "Abhi Vyas",
+      "group": "default"
+    },
+    "DylanAbruscato": {
+      "tag": "Crypto: The Game 创始人",
+      "name": "Dylan Abruscato",
+      "group": "default"
+    },
+    "lsukernik": {
+      "tag": "Reverie 联合创始人",
+      "name": "Larry Sukernik",
+      "group": "default"
+    },
+    "HerbertRSim": {
+      "tag": "Websea 首席运营官",
+      "name": "Herbert R. Sim",
+      "group": "default"
+    },
+    "space_monk_": {
+      "tag": "iAgent 联合创始人兼首席产品官",
+      "name": "Space_Monk_",
+      "group": "default"
+    },
+    "mikelee205": {
+      "tag": "GoPlus Security 创始人",
+      "name": "Mike",
+      "group": "default"
+    },
+    "QiaoLiang3": {
+      "tag": "US3R 创始人",
+      "name": "Liang",
+      "group": "default"
+    },
+    "porounclemao": {
+      "tag": "Ready Player Club 创始人",
+      "name": "MaoGPT -- e/acc",
+      "group": "default"
+    },
+    "Loki_Zeng": {
+      "tag": "ABCDE Capital 研究员",
+      "name": "0xLoki",
+      "group": "default"
+    },
+    "jaydenw3i": {
+      "tag": "ScalingX 联合创始人兼管理合伙人",
+      "name": "Jayden Wei",
+      "group": "default"
+    },
+    "26x14eth": {
+      "tag": "7upDAO 联合创始人",
+      "name": "Nathan",
+      "group": "default"
+    },
+    "tongtongbee": {
+      "tag": "PANONY 联合创始人",
+      "name": "Tongtong Bee",
+      "group": "default"
+    },
+    "Punk9277": {
+      "tag": "Kaito 创始人/首席执行官",
+      "name": "Yu Hu",
+      "group": "default"
+    },
+    "justsayuluvjo": {
+      "tag": "SOON 联合创始人兼CEO",
+      "name": "Joanna Zeng@SOON (svm/acc) Mainnet Live!",
+      "group": "default"
+    },
+    "mrblocktw": {
+      "tag": "Mr. Block 创始人",
+      "name": "區塊先生   (rock #58)",
+      "group": "default"
+    },
+    "rubywxt1": {
+      "tag": "Web3Brand 联合创始人",
+      "name": "Rubywang.eth｜Day1Global.xyz & web3brand.io",
+      "group": "default"
+    },
+    "dogecoin": {
+      "tag": "Dogecoin",
+      "name": "Dogecoin",
+      "group": "default"
+    },
+    "DIMIDJ": {
+      "tag": "QuickNode 联合创始人",
+      "name": "Dmitry Shklovsky",
+      "group": "default"
+    },
+    "DTAPCAP": {
+      "tag": "10T Holdings 首席执行官兼管理合伙人",
+      "name": "Dan Tapiero",
+      "group": "default"
+    },
+    "keegan_selby": {
+      "tag": "Fourth Revolution Capital 联合创始人",
+      "name": "Keegan Selby",
+      "group": "default"
+    },
+    "thebitsian": {
+      "tag": "Juno 联合创始人",
+      "name": "Varun Deshpande",
+      "group": "default"
+    },
+    "BenPerszyk": {
+      "tag": "SHRAPNEL 首席战略官",
+      "name": "ben_perszyk",
+      "group": "default"
+    },
+    "cuysheffield": {
+      "tag": "Visa 加密业务负责人",
+      "name": "Cuy Sheffield",
+      "group": "default"
+    },
+    "varun_mathur": {
+      "tag": "Hyperspace 联合创始人兼CEO",
+      "name": "Varun",
+      "group": "default"
+    },
+    "binji_x": {
+      "tag": "Optimism NFT 负责人",
+      "name": "binji",
+      "group": "default"
+    },
+    "shan3v": {
+      "tag": "Stargaze 联合创始人",
+      "name": "shane.stars",
+      "group": "default"
+    },
+    "alxfal": {
+      "tag": "Rarible 联合创始人兼 CEO",
+      "name": "Alexei Falin",
+      "group": "default"
+    },
+    "esneider": {
+      "tag": "Muun 创始人",
+      "name": "Dario Sneidermanis",
+      "group": "default"
+    },
+    "jayapapaya": {
+      "tag": "NYM 首席战略官",
+      "name": "Jaya",
+      "group": "default"
+    },
+    "vijaymichalik": {
+      "tag": "Superfluid 产品主管",
+      "name": "vijay",
+      "group": "default"
+    },
+    "rmdmac": {
+      "tag": "xMoney 联合创始人",
+      "name": "Roberto Machado",
+      "group": "default"
+    },
+    "auryn_macmillan": {
+      "tag": "CLR.fund 创始人",
+      "name": "Auryn -- will be at ETHDenver",
+      "group": "default"
+    },
+    "BobSummerwill": {
+      "tag": "Ethereum Classic 执行董事",
+      "name": "Bob Summerwill",
+      "group": "default"
+    },
+    "GregusJakub": {
+      "tag": "Zee Prime Capital 投资合伙人",
+      "name": "Hydrated Jakub (,)",
+      "group": "default"
+    },
+    "SmokeyTheBera": {
+      "tag": "Berachain 联合创始人",
+      "name": "Smokey The Bera",
+      "group": "default"
+    },
+    "magdalenakala": {
+      "tag": "Double Down 创始人",
+      "name": "Mags",
+      "group": "default"
+    },
+    "smlevin11": {
+      "tag": "Flashbots 运营主管",
+      "name": "Stephen Levin",
+      "group": "default"
+    },
+    "ObadiaAlex": {
+      "tag": "Ikigai Fund 创始人",
+      "name": "alex",
+      "group": "default"
+    },
+    "valardragon": {
+      "tag": "Osmosis 贡献者",
+      "name": "Dev",
+      "group": "default"
+    },
+    "ameensol": {
+      "tag": "Moloch DAO 创始人",
+      "name": "Ameen Soleimani",
+      "group": "default"
+    },
+    "SamuelReidGEC": {
+      "tag": "GEC 首席执行官",
+      "name": "SΔMUΞL RΞIÐ (e/acc)",
+      "group": "default"
+    },
+    "petejkim": {
+      "tag": "Cipher Browser 创始人",
+      "name": "Pete Kim",
+      "group": "default"
+    },
+    "akash_khosla": {
+      "tag": "Evmos / Tharsis Labs 联合创始人",
+      "name": "Akash",
+      "group": "default"
+    },
+    "Dexaran": {
+      "tag": "Callisto Network 创始人",
+      "name": "Dexaran",
+      "group": "default"
+    },
+    "j_crypto_2015": {
+      "tag": "DAOBase 联合创始人",
+      "name": "J@Crypto (Hiring)",
+      "group": "default"
+    },
+    "CampbellJAustin": {
+      "tag": "WSPN US CEO",
+      "name": "Austin Campbell",
+      "group": "default"
+    },
+    "ercwl": {
+      "tag": "Taproot Wizards 联合创始人",
+      "name": "eric.eth",
+      "group": "default"
+    },
+    "ColeGotTweets": {
+      "tag": "volmex.finance 创始人兼CEO",
+      "name": "Cole Kennelly",
+      "group": "default"
     }
   },
-  "$myTwitterNoteTime": 1737538405236
+  "$myTwitterNoteTime": 1737797907301
 }

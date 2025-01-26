@@ -3,6 +3,9 @@ package com.web3.twitter.redis;
 import java.util.*;
 import java.util.concurrent.TimeUnit;
 
+import com.alibaba.fastjson2.JSON;
+import com.web3.twitter.monitorBeans.MonitorUser;
+import com.web3.twitter.utils.LogUtils;
 import com.web3.twitter.utils.SolanaContractValidator;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -277,8 +280,18 @@ public class RedisCache
                      // 检查这个键是否是一个 Solana 合约或以 "pump" 结尾
                      if (!StringUtils.isEmpty(key) &&
                              !SolanaContractValidator.isSolanaContract(key)) {
-                         //只筛选为用户名的key
-                         keysTmp.add(key);
+                         try {
+                             //尝试转化monitoruser
+                             String userString = getCacheObject(key);
+                             MonitorUser user  = JSON.parseObject(userString, MonitorUser.class);
+                             if(StringUtils.isNotEmpty(user.getUserRemark())){
+                                 //筛选有备注的key
+                                 keysTmp.add(key);
+                             }
+                         } catch (Exception e) {
+                             LogUtils.error("解析redis用户缓存异常: {}", key, e);
+                             e.printStackTrace();
+                         }
                      }
                  }
              return keysTmp;

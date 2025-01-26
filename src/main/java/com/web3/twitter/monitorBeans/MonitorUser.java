@@ -80,6 +80,20 @@ public class MonitorUser {
     private String isBan;
 
     /**
+     * 改名次数
+     */
+    private Integer numberNameChanges;
+
+    /**
+     * pump发推次数
+     */
+    private Integer numberPumpLaunch;
+
+    /**
+     * 删除推特次数
+     */
+    private Integer numberTwitterDelete;
+    /**
      * 更新用户信息时间-时间戳
      */
     private String updateTime;
@@ -193,6 +207,30 @@ public class MonitorUser {
         this.pumpHistorySet = pumpHistorySet;
     }
 
+    public Integer getNumberNameChanges() {
+        return numberNameChanges;
+    }
+
+    public void setNumberNameChanges(Integer numberNameChanges) {
+        this.numberNameChanges = numberNameChanges;
+    }
+
+    public Integer getNumberPumpLaunch() {
+        return numberPumpLaunch;
+    }
+
+    public void setNumberPumpLaunch(Integer numberPumpLaunch) {
+        this.numberPumpLaunch = numberPumpLaunch;
+    }
+
+    public Integer getNumberTwitterDelete() {
+        return numberTwitterDelete;
+    }
+
+    public void setNumberTwitterDelete(Integer numberTwitterDelete) {
+        this.numberTwitterDelete = numberTwitterDelete;
+    }
+
     public String getUpdateTime() {
         return updateTime;
     }
@@ -225,6 +263,9 @@ public class MonitorUser {
 //                ", followersYouKnowList=" + followersYouKnowList +
                 ", followersYouKnowRemarkSet=" + followersYouKnowRemarkSet +
                 ", isBan='" + isBan + '\'' +
+                ", numberNameChanges='" + numberNameChanges + '\'' +
+                ", numberPumpLaunch='" + numberPumpLaunch + '\'' +
+                ", numberTwitterDelete='" + numberTwitterDelete + '\'' +
                 ", updateTime='" + updateTime + '\'' +
                 ", createTime='" + createTime + '\'' +
                 '}';
