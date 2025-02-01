@@ -333,7 +333,7 @@
     },
     "Ga__ke": {
       "tag": "gake DNF",
-      "name": "gake (,)",
+      "name": "gake",
       "group": "default",
       "isExists": true,
       "isShow": true,
@@ -450,7 +450,7 @@
     },
     "weremeow": {
       "tag": "JUP 创始人",
-      "name": "meow",
+      "name": "meow (, )",
       "group": "default",
       "isExists": true,
       "isShow": true,
@@ -2112,7 +2112,7 @@
       "group": "default"
     },
     "himgajria": {
-      "tag": "AI MUARD 喊单很猛",
+      "tag": "Equation 创始人",
       "name": "him",
       "group": "default"
     },
@@ -2382,7 +2382,7 @@
       "group": "default"
     },
     "0xAA_Science": {
-      "tag": "神经科学博士",
+      "tag": "WTF Academy 创始人",
       "name": "0xAA (, )",
       "group": "default"
     },
@@ -4007,7 +4007,7 @@
       "group": "default"
     },
     "zerohedge": {
-      "tag": "zerohedge 新闻",
+      "tag": "zerohedge 新闻 市场分析师",
       "name": "zerohedge",
       "group": "default"
     },
@@ -5078,7 +5078,7 @@
     },
     "dfinzer": {
       "tag": "OpenSea 创始人+CEO",
-      "name": "Devin Finzer (dfinzer.eth)",
+      "name": "dfinzer.eth | opensea",
       "group": "default"
     },
     "xanderatallah": {
@@ -5357,7 +5357,7 @@
       "group": "default"
     },
     "GoldmanSachs": {
-      "tag": "高盛",
+      "tag": "高盛 全球领先投资银行，分享市场洞察",
       "name": "Goldman Sachs",
       "group": "default"
     },
@@ -7245,7 +7245,912 @@
       "tag": "volmex.finance 创始人兼CEO",
       "name": "Cole Kennelly",
       "group": "default"
+    },
+    "Fede_Brokate": {
+      "tag": "贝莱德 美国战略业务总管",
+      "name": "Federico Brokate",
+      "group": "default"
+    },
+    "zhusu": {
+      "tag": "OX.FUN 联合创始人",
+      "name": "Zhu Su",
+      "group": "default"
+    },
+    "_FORAB": {
+      "tag": "MeStar 创始人",
+      "name": "AB Kuai.Dong",
+      "group": "default"
+    },
+    "Brandon_M_Kumar": {
+      "tag": "Layer3 联合创始人",
+      "name": "Brandon",
+      "group": "default"
+    },
+    "yq_acc": {
+      "tag": "AltLayer 创始人兼CEO",
+      "name": "AgentQ",
+      "group": "default"
+    },
+    "0xjunkim": {
+      "tag": "Hashed 投资者关系经理",
+      "name": "Jun Kim",
+      "group": "default"
+    },
+    "henrylove0": {
+      "tag": "Composable Finance CEO",
+      "name": "Henry Love",
+      "group": "default"
+    },
+    "MatanField": {
+      "tag": "DAOstack 联合创始人",
+      "name": "matan.eth",
+      "group": "default"
+    },
+    "lukebelmar": {
+      "tag": "加密货币界的预言家",
+      "name": "Luke Belmar",
+      "group": "default"
+    },
+    "Lukex": {
+      "tag": "SatLayer 联合创始人",
+      "name": "Luke X",
+      "group": "default"
+    },
+    "lowesyang": {
+      "tag": "NFTGo 创始人",
+      "name": "Lowes  (d/acc)",
+      "group": "default"
+    },
+    "nake13": {
+      "tag": "ChainFeeds 创始人",
+      "name": "Zhixiong Pan",
+      "group": "default"
+    },
+    "jerome_wong99": {
+      "tag": "EVG 联合创始人兼CBO",
+      "name": "0xjerome",
+      "group": "default"
+    },
+    "0x_maggie": {
+      "tag": "Zypher Network 联合创始人兼COO",
+      "name": "Maggie's CoT",
+      "group": "default"
+    },
+    "CryptoXavierLee": {
+      "tag": "Tabi 创始人",
+      "name": "XavierL (abc.eth)",
+      "group": "default"
+    },
+    "sleepy0x13": {
+      "tag": "Weirdo Ghost Gang 创始人",
+      "name": "sleepy.mid",
+      "group": "default"
+    },
+    "hominh95": {
+      "tag": "Ninety Eight 业务拓展主管",
+      "name": "minh",
+      "group": "default"
+    },
+    "0xmaz_": {
+      "tag": "SolSniper 创始人",
+      "name": "Maz",
+      "group": "default"
+    },
+    "DB3045": {
+      "tag": "Hume 联合创始人兼首席执行官",
+      "name": "David Hume",
+      "group": "default"
+    },
+    "Banks": {
+      "tag": "FaZe Banks",
+      "name": "FaZe Banks",
+      "group": "default"
+    },
+    "Timccopeland": {
+      "tag": "The Block 主编",
+      "name": "Tim Copeland",
+      "group": "default"
+    },
+    "ddaltonbridges": {
+      "tag": "Cicero 创始人兼CEO",
+      "name": "Dion Dalton-Bridges",
+      "group": "default"
+    },
+    "scupytrooples": {
+      "tag": "Alchemix 联合创始人",
+      "name": "scoopy trooples",
+      "group": "default"
+    },
+    "AsafNadler": {
+      "tag": "Addressable 联合创始人兼首席科学家",
+      "name": "Asaf Nadler",
+      "group": "default"
+    },
+    "_theshash": {
+      "tag": "Builder Capital 营销主管",
+      "name": "Shash Singh",
+      "group": "default"
+    },
+    "bigdog_max": {
+      "tag": "Helika 商务拓展主管",
+      "name": "Max Kaufman",
+      "group": "default"
+    },
+    "0xSeanTao": {
+      "tag": "SoMon 联合创始人兼CEO",
+      "name": "Tao",
+      "group": "default"
+    },
+    "knowerofmarkets": {
+      "tag": "Berachain 写作者",
+      "name": "knower",
+      "group": "default"
+    },
+    "mattyTokenomics": {
+      "tag": "LEGION 联合创始人",
+      "name": "Matty",
+      "group": "default"
+    },
+    "0xEvieYang": {
+      "tag": "JE Labs 创始人",
+      "name": "Evie | JE Labs",
+      "group": "default"
+    },
+    "CalmanBTC": {
+      "tag": "SANYUAN Capital 研究合伙人",
+      "name": "Calman.eth卡门",
+      "group": "default"
+    },
+    "erickpinos": {
+      "tag": "Nibiru 生态系统主管",
+      "name": "Erick",
+      "group": "default"
+    },
+    "RachBLondon": {
+      "tag": "HaloFi 联合创始人",
+      "name": "Rachel",
+      "group": "default"
+    },
+    "m_ratsim": {
+      "tag": "Lita 密码学工程师",
+      "name": "Mamy Ratsimbazafy",
+      "group": "default"
+    },
+    "Iiterature": {
+      "tag": "Mirror 创始人",
+      "name": "nis.eth",
+      "group": "default"
+    },
+    "davidvfurlong": {
+      "tag": "Discove 创始人兼CEO",
+      "name": "David Furlong",
+      "group": "default"
+    },
+    "Melody_Taira": {
+      "tag": "Incuba Alpha 联合创始人",
+      "name": "MelT",
+      "group": "default"
+    },
+    "sungjae_han": {
+      "tag": "GBV Capital 分析师",
+      "name": "Sungjae",
+      "group": "default"
+    },
+    "packyM": {
+      "tag": "Not Boring Capital 创始人",
+      "name": "Packy McCormick",
+      "group": "default"
+    },
+    "Joethebeast1221": {
+      "tag": "Blocto 社区负责人",
+      "name": "joethebeast ꧁IP꧂ maybe  ETHDenver",
+      "group": "default"
+    },
+    "EledraNguyen": {
+      "tag": "Blocto 社区负责人",
+      "name": "Long Nguyen (꧁IP꧂)",
+      "group": "default"
+    },
+    "liamzebedee": {
+      "tag": "Dappnet 创始人",
+      "name": "Liam Zebedee",
+      "group": "default"
+    },
+    "ETazou": {
+      "tag": "Kakarot 联合创始人",
+      "name": "elias tazartes",
+      "group": "default"
+    },
+    "DCbuild3r": {
+      "tag": "Worldcoin 研究工程师",
+      "name": "dcbuilder.eth",
+      "group": "default"
+    },
+    "apram89": {
+      "tag": "Wormhole 首席运营官",
+      "name": "Anthony Ramirez",
+      "group": "default"
+    },
+    "huangkuan": {
+      "tag": "IOSG Ventures 董事总经理",
+      "name": "KUAN",
+      "group": "default"
+    },
+    "0xbodu": {
+      "tag": "Polymer 联合创始人",
+      "name": "Bo Du",
+      "group": "default"
+    },
+    "sina___v": {
+      "tag": "Babylon 战略主管",
+      "name": "sina",
+      "group": "default"
+    },
+    "PaikCapital": {
+      "tag": "LayerZero DeFi、游戏与 NFT 主管",
+      "name": "HDF humble defi farmer",
+      "group": "default"
+    },
+    "mrjasonchoi": {
+      "tag": "Tangent 联合创始人",
+      "name": "Jason Choi",
+      "group": "default"
+    },
+    "TABASCOweb3": {
+      "tag": "Particle Network 开发者关系主管",
+      "name": "TABASCOweb3",
+      "group": "default"
+    },
+    "fedesarquis": {
+      "tag": "Mode 开发者关系主管",
+      "name": "CryptoFede",
+      "group": "default"
+    },
+    "FurqanR": {
+      "tag": "thirdweb 创始人",
+      "name": "Furqan Rydhan",
+      "group": "default"
+    },
+    "ericnakagawa": {
+      "tag": "Celo 基金会 执行董事",
+      "name": "Eric Nakagawa ◘ ()",
+      "group": "default"
+    },
+    "dabit3": {
+      "tag": "EigenLayer 开发者关系总监",
+      "name": "nader dabit (bronze age arc)",
+      "group": "default"
+    },
+    "hany": {
+      "tag": "21.co 联合创始人兼CEO",
+      "name": "Hany Rashwan",
+      "group": "default"
+    },
+    "ARedbord": {
+      "tag": "TRM Labs 全球政策主管",
+      "name": "Ari Redbord",
+      "group": "default"
+    },
+    "msantoriESQ": {
+      "tag": "Kraken 首席法务官",
+      "name": "Marco Santori",
+      "group": "default"
+    },
+    "deepseek_ai": {
+      "tag": "DeepSeek 国产之光",
+      "name": "DeepSeek",
+      "group": "default"
+    },
+    "Zac_Pundi": {
+      "tag": "Pundi X CEO",
+      "name": "Pundi Maximus",
+      "group": "default"
+    },
+    "ShiliangTang": {
+      "tag": "Arbelos 联合创始人",
+      "name": "Shiliang Tang",
+      "group": "default"
+    },
+    "CryptoHayes": {
+      "tag": "BitMex 联合创始人",
+      "name": "Arthur Hayes",
+      "group": "default"
+    },
+    "derekedws": {
+      "tag": "collab currency  的管理合伙人",
+      "name": "Derek Edws",
+      "group": "default"
+    },
+    "Jtsong2": {
+      "tag": "Polarise 联合创始人",
+      "name": "Jtsong.eth",
+      "group": "default"
+    },
+    "poopie": {
+      "tag": "Doodles 创始人",
+      "name": "poopie",
+      "group": "default"
+    },
+    "CardilloSamuel": {
+      "tag": "RTFKT CTO",
+      "name": "Samuel Cardillo - RTFKT",
+      "group": "default"
+    },
+    "web3brett": {
+      "tag": "Palm Tree Crew Crypto 管理合伙人",
+      "name": "BlockchainBrett",
+      "group": "default"
+    },
+    "stephensullivan": {
+      "tag": "Ready Player DAO 创始成员",
+      "name": "Stephen Sullivan",
+      "group": "default"
+    },
+    "aleksijavujicic": {
+      "tag": "Tata Bazaar 创始人兼CEO",
+      "name": "Aleksija Vujicic",
+      "group": "default"
+    },
+    "spenceryang": {
+      "tag": "Hashtag Capital 创始人",
+      "name": "Spencer Yang Bitcoin Tech Carnival",
+      "group": "default"
+    },
+    "KristinaLCorner": {
+      "tag": "Cointelegraph 主编",
+      "name": "Kristina Lucrezia Cornèr",
+      "group": "default"
+    },
+    "arrington": {
+      "tag": "Arrington Capital 创始人",
+      "name": "Michael Arrington",
+      "group": "default"
+    },
+    "ayyyeandy": {
+      "tag": "The Rollup 联合创始人",
+      "name": "Andy",
+      "group": "default"
+    },
+    "AnnieFauv": {
+      "tag": "opensea 成员",
+      "name": "Anne Fauvre-Willis",
+      "group": "default"
+    },
+    "menzel_clayton": {
+      "tag": "Figment Capital 风险合伙人",
+      "name": "Clayton Menzel",
+      "group": "default"
+    },
+    "mhonkasalo": {
+      "tag": "Figment Capital 风险合伙人",
+      "name": "mhonkasalo",
+      "group": "default"
+    },
+    "wisekim_eth": {
+      "tag": "Delabs Games 营销总监",
+      "name": "wisekim.eth $GAME",
+      "group": "default"
+    },
+    "j_eth_id": {
+      "tag": "EthXY 创始人",
+      "name": "J.eth.id",
+      "group": "default"
+    },
+    "dennis_qian": {
+      "tag": "Definitive 联合创始人",
+      "name": "Δ 0xDQ Δ",
+      "group": "default"
+    },
+    "boxmining": {
+      "tag": "Boxmining 创始人",
+      "name": "Boxmining",
+      "group": "default"
+    },
+    "JordanLzG": {
+      "tag": "FlamingoDAO 创始成员",
+      "name": "Jordan",
+      "group": "default"
+    },
+    "SherryYanJiang": {
+      "tag": "Bluejay Finance 联合创始人兼CEO",
+      "name": "Sherry Jiang",
+      "group": "default"
+    },
+    "deeban_r": {
+      "tag": "GD10 Ventures 创始人兼CEO",
+      "name": "Dr Deeban",
+      "group": "default"
+    },
+    "MikeDulaimi": {
+      "tag": "Watcher.Guru 营销总监",
+      "name": "Mikey",
+      "group": "default"
+    },
+    "PhilHedayatnia": {
+      "tag": "Airfoil 联合创始人兼CEO",
+      "name": "Phil Hedayatnia",
+      "group": "default"
+    },
+    "Tristan0x": {
+      "tag": "Zeta Markets 创始人",
+      "name": "Tristan",
+      "group": "default"
+    },
+    "CallMeMatt": {
+      "tag": "Watcher.Guru 创始人",
+      "name": "Matt",
+      "group": "default"
+    },
+    "Loopifyyy": {
+      "tag": "Endless Clouds 创始人",
+      "name": "Loopify",
+      "group": "default"
+    },
+    "Hantao": {
+      "tag": "Moku 联合创始人",
+      "name": "Hantao",
+      "group": "default"
+    },
+    "m2jr": {
+      "tag": "投资过Twitter、Twitch和Okta这些超酷的初创公司",
+      "name": "Mike Maples, Jr",
+      "group": "default"
+    },
+    "HatoETH": {
+      "tag": "艺术家",
+      "name": "Hato",
+      "group": "default"
+    },
+    "baalazamon": {
+      "tag": "cubexch  的联合创始人兼CEO",
+      "name": "bartosz |",
+      "group": "default"
+    },
+    "AlexSaundersAU": {
+      "tag": "NuggetsNewsAU的CEO和创始人",
+      "name": "Alex Saunders",
+      "group": "default"
+    },
+    "Nasdaq": {
+      "tag": "NASDAQ 纳斯达克 全球知名的证券交易市场",
+      "name": "Nasdaq",
+      "group": "default"
+    },
+    "APompliano": {
+      "tag": "专业资本管理的创始人兼首席执行官 华尔街",
+      "name": "Anthony Pompliano",
+      "group": "default"
+    },
+    "jpmorgan": {
+      "tag": "市场分析和投资策略",
+      "name": "J.P. Morgan",
+      "group": "default"
+    },
+    "paulkrugman": {
+      "tag": "诺贝尔经济学奖得主",
+      "name": "Paul Krugman",
+      "group": "default"
+    },
+    "Nouriel": {
+      "tag": "经济学家，以预测金融危机闻名",
+      "name": "Nouriel Roubini",
+      "group": "default"
+    },
+    "ReutersBiz": {
+      "tag": "全球财经新闻和数据",
+      "name": "Reuters Business",
+      "group": "default"
+    },
+    "RayDalio": {
+      "tag": "桥水基金创始人",
+      "name": "Ray Dalio",
+      "group": "default"
+    },
+    "jimcramer": {
+      "tag": "CNBC《Mad Money》主持人",
+      "name": "Jim Cramer",
+      "group": "default"
+    },
+    "0xWangarian": {
+      "tag": "tangent xyz 的联合创始人",
+      "name": "Wangarian",
+      "group": "default"
+    },
+    "Arthur_0x": {
+      "tag": "DeFianceCapital 的创始人兼 CIO",
+      "name": "Arthur",
+      "group": "default"
+    },
+    "Darrenlautf": {
+      "tag": "Not3Lau Capital 创始人",
+      "name": "Darren Lau",
+      "group": "default"
+    },
+    "hasufl": {
+      "tag": "Flashbots 和 Lido 的策略大咖",
+      "name": "Hasu",
+      "group": "default"
+    },
+    "lawmaster": {
+      "tag": "The Block 的 CEO",
+      "name": "Larry Cermak",
+      "group": "default"
+    },
+    "TheBlock__": {
+      "tag": "The Block",
+      "name": "The Block",
+      "group": "default"
+    },
+    "CoinDesk": {
+      "tag": "CoinDesk",
+      "name": "CoinDesk",
+      "group": "default"
+    },
+    "MonetSupply": {
+      "tag": "BlockAnalitica  的工作人员",
+      "name": "monetsupply.eth",
+      "group": "default"
+    },
+    "0xtuba": {
+      "tag": "Psyops Capital的首席执行官•加密工程师，建造者",
+      "name": "tuba",
+      "group": "default"
+    },
+    "dcfgod": {
+      "tag": "DCF GOD 加密界的投资大神",
+      "name": "DCF GOD",
+      "group": "default"
+    },
+    "ohmzeus": {
+      "tag": "OlympusDAO  的幕后大佬",
+      "name": "Zeus Ω (3, 3)",
+      "group": "default"
+    },
+    "danielesesta": {
+      "tag": "Daniele DeFAI和AI 推动者",
+      "name": "Daniele",
+      "group": "default"
+    },
+    "AndreCronjeTech": {
+      "tag": "SonicLabs的联合创始人兼架构师，曾是Yearn.Finance和Keep3r的创始人",
+      "name": "Andre Cronje",
+      "group": "default"
+    },
+    "dgmason": {
+      "tag": "ANON 创始人",
+      "name": "Daniel Mason",
+      "group": "default"
+    },
+    "woonomic": {
+      "tag": "CH4 Capital基金 创办者 BTC 大咖",
+      "name": "Willy Woo",
+      "group": "default"
+    },
+    "fwielanier": {
+      "tag": "Cookie3 的联合创始人兼 CEO",
+      "name": "Filip  (cookie)",
+      "group": "default"
+    },
+    "CCTV": {
+      "tag": "CCTV",
+      "name": "CCTV",
+      "group": "default"
+    },
+    "myshell_ai": {
+      "tag": "MyShell.AI",
+      "name": "MyShell.AI",
+      "group": "default"
+    },
+    "travalacom": {
+      "tag": "全球性的旅游预订平台 加密支付",
+      "name": "Travala.com",
+      "group": "default"
+    },
+    "tribedotrun": {
+      "tag": "Solana 上的加密社交",
+      "name": "Tribe.run",
+      "group": "default"
+    },
+    "huggingface": {
+      "tag": "人工智能社区",
+      "name": "Hugging Face",
+      "group": "default"
+    },
+    "matt_levine": {
+      "tag": "金融界的幽默大师",
+      "name": "Matt Levine",
+      "group": "default"
+    },
+    "zizhpan": {
+      "tag": "deepseek ai 的研究员",
+      "name": "Zizheng Pan",
+      "group": "default"
+    },
+    "TheDeFinvestor": {
+      "tag": "加密货币分析师 专注于DeFi",
+      "name": "The DeFi Investor",
+      "group": "default"
+    },
+    "pepe": {
+      "tag": "pepe",
+      "name": "pepe",
+      "group": "default"
+    },
+    "IOHK_Charles": {
+      "tag": "IOG的CEO 卡尔达诺的创始人",
+      "name": "Charles Hoskinson",
+      "group": "default"
+    },
+    "TheSmarmyBum": {
+      "tag": "Striketoken 团队的市场顾问 大V",
+      "name": "Justin Taylor",
+      "group": "default"
+    },
+    "Securitize": {
+      "tag": "与inkonchain和Solana合作",
+      "name": "Securitize",
+      "group": "default"
+    },
+    "john_scianna": {
+      "tag": "Web3.com Ventures 风投合伙人",
+      "name": "John Scianna",
+      "group": "default"
+    },
+    "JedMcCaleb": {
+      "tag": "Stellar 发展基金会 创始人",
+      "name": "Jed McCaleb",
+      "group": "default"
+    },
+    "SagarVimal": {
+      "tag": "Coinswitch 联合创始人兼COO",
+      "name": "Vimal Sagar Tiwari",
+      "group": "default"
+    },
+    "brutoshi_": {
+      "tag": "Wizz Wallet CEO",
+      "name": "brutoshi  ₿ ⚛︎ ◎",
+      "group": "default"
+    },
+    "AlexShin": {
+      "tag": "Hashed 联合创始人兼合伙人",
+      "name": "Alex",
+      "group": "default"
+    },
+    "kempsterrrr": {
+      "tag": "Developer DAO 运营主管",
+      "name": "kempsterrrr.eth |",
+      "group": "default"
+    },
+    "SDLerner": {
+      "tag": "Fairgate 创始人",
+      "name": "Sergio Demian Lerner (sergio.lerner.rsk)",
+      "group": "default"
+    },
+    "mdomcahill": {
+      "tag": "Pyth Network CEO",
+      "name": "Mike Cahill | Pyth",
+      "group": "default"
+    },
+    "KMAZnoclip": {
+      "tag": "M55 Capital 联合创始人兼管理合伙人",
+      "name": "Khalid MAZOUZ M55",
+      "group": "default"
+    },
+    "Mason_Jappa": {
+      "tag": "Block Mining 首席执行官和创始人",
+      "name": "Mason Jappa",
+      "group": "default"
+    },
+    "JosephJacks_": {
+      "tag": "Open Source Software Capital 创始人兼普通合伙人",
+      "name": "JJ",
+      "group": "default"
+    },
+    "chiefbuidl": {
+      "tag": "Space and Time 联合创始人兼 CTO",
+      "name": "Scott Dykstra",
+      "group": "default"
+    },
+    "tomserres": {
+      "tag": "Warburg Serres 联合创始人",
+      "name": "Tom Serres",
+      "group": "default"
+    },
+    "ArtSabintsev": {
+      "tag": "Pocket Network 首席运营官",
+      "name": "Arthur Sabintsev",
+      "group": "default"
+    },
+    "icebergy_": {
+      "tag": "Whalebot 创始人",
+      "name": "icebergy",
+      "group": "default"
+    },
+    "jackzampolin": {
+      "tag": "Strangelove 创始人",
+      "name": "Jack Zampolin",
+      "group": "default"
+    },
+    "derek_hsue": {
+      "tag": "Reverie 联合创始人",
+      "name": "Derek Hsue",
+      "group": "default"
+    },
+    "eric_rsno": {
+      "tag": "MetaCartel Ventures 合伙人",
+      "name": "Ξric Arsenault",
+      "group": "default"
+    },
+    "sjdedic": {
+      "tag": "Moonrock Capital CEO & Partner",
+      "name": "Simon",
+      "group": "default"
+    },
+    "PaulRBerg": {
+      "tag": "Sablier Finance 创始人",
+      "name": "Paul Razvan Berg",
+      "group": "default"
+    },
+    "Ice_Frog666666": {
+      "tag": "33 DAO 成员",
+      "name": "冰蛙",
+      "group": "default"
+    },
+    "mraltantutar": {
+      "tag": "Nuffle Labs 联合创始人兼CEO",
+      "name": "altan tutar",
+      "group": "default"
+    },
+    "PandeyMikhil": {
+      "tag": "pSTAKE Finance 联合创始人",
+      "name": "Mikhil Pandey",
+      "group": "default"
+    },
+    "DiogenesCasares": {
+      "tag": "Stream Finance 创始人",
+      "name": "DC | In SF",
+      "group": "default"
+    },
+    "valeyo777": {
+      "tag": "Quasar Finance 联合创始人兼CEO",
+      "name": "valeyo",
+      "group": "default"
+    },
+    "redacted_j": {
+      "tag": "B+J Studios 首席执行官",
+      "name": "jprince.sol",
+      "group": "default"
+    },
+    "ScruFFuR": {
+      "tag": "加密货币 专家",
+      "name": "Crypto Max",
+      "group": "default"
+    },
+    "ki_young_ju": {
+      "tag": "CryptoQuant CEO",
+      "name": "Ki Young Ju",
+      "group": "default"
+    },
+    "ColdBloodShill": {
+      "tag": "BlackRock Meme Coin 的运营主管",
+      "name": "Cold Blooded Shiller",
+      "group": "default"
+    },
+    "meta_alchemist": {
+      "tag": "Seedify.fund 创始人兼 CEO",
+      "name": "Meta Alchemist",
+      "group": "default"
+    },
+    "VirtualBacon0x": {
+      "tag": "Momentum 6 普通合伙人",
+      "name": "VirtualBacon",
+      "group": "default"
+    },
+    "IAMRodOliveira": {
+      "tag": "Endgame 首席营销官",
+      "name": "𝙍𝙤𝙙 𝙊𝙡𝙞𝙫𝙚𝙞𝙧𝙖",
+      "group": "default"
+    },
+    "Sarut0biSasuke": {
+      "tag": "KAP Games 合作伙伴主管",
+      "name": "Sarutobi Sasuke",
+      "group": "default"
+    },
+    "christyhwchoi": {
+      "tag": "AO 联合创始人",
+      "name": "Christy Choi",
+      "group": "default"
+    },
+    "gmoneyNFT": {
+      "tag": "9dcc 创始人",
+      "name": "gmoney.9dcc.e τh",
+      "group": "default"
+    },
+    "pranksy": {
+      "tag": "NFT 界的圣诞老人",
+      "name": "Pranksy",
+      "group": "default"
+    },
+    "seedphrase": {
+      "tag": "NFT 社区大V",
+      "name": "恶作剧  seedphrase",
+      "group": "default"
+    },
+    "ArtOnBlockchain": {
+      "tag": "Art Blocks 的创始人",
+      "name": "Erick / Snowfro /  / LAO /  /",
+      "group": "default"
+    },
+    "CozomoMedici": {
+      "tag": "Cozomo de’ Medici   NFT 大V",
+      "name": "Cozomo de’ Medici",
+      "group": "default"
+    },
+    "HsakaTrades": {
+      "tag": "Hsaka 知名交易员和分析师",
+      "name": "Hsaka",
+      "group": "default"
+    },
+    "Tradermayne": {
+      "tag": "Breakout 创始人",
+      "name": "Mayne",
+      "group": "default"
+    },
+    "nikitabier": {
+      "tag": "TBS 创始人 GAS 创始人",
+      "name": "Nikita Bier",
+      "group": "default"
+    },
+    "bchesky": {
+      "tag": "Airbnb 的联合创始人兼首席执行官（CEO）",
+      "name": "尼基塔·比尔（Nikita Bier）Brian Chesky",
+      "group": "default"
+    },
+    "patrickc": {
+      "tag": "Stripe的CEO，ArcInstitute的联合创始人",
+      "name": "布莱恩·切斯基（Brian Chesky）Patrick Collison",
+      "group": "default"
+    },
+    "evabeylin": {
+      "tag": "The Graph 董事",
+      "name": "Eva Beylin",
+      "group": "default"
+    },
+    "cobie": {
+      "tag": "Cobie 大V",
+      "name": "Cobie",
+      "group": "default"
+    },
+    "NeerajKA": {
+      "tag": "Coin Center 的通讯总监",
+      "name": "发牢骚Neeraj K. Agrawal",
+      "group": "default"
+    },
+    "Melt_Dem": {
+      "tag": "CoinShares 的首席战略官（CSO）",
+      "name": "Meltem Demirors",
+      "group": "default"
+    },
+    "lopp": {
+      "tag": "Casa 的联合创始人兼首席技术官（CTO）",
+      "name": "Jameson Lopp",
+      "group": "default"
+    },
+    "rogerkver": {
+      "tag": "MemoryDealers 创始人  Bitcoin.com 创始人",
+      "name": "詹姆森·洛普（Jameson Lopp）Roger Ver",
+      "group": "default"
+    },
+    "SatoshiLite": {
+      "tag": "莱特币 创始人",
+      "name": "罗杰verCharlie Lee",
+      "group": "default"
+    },
+    "officialmcafee": {
+      "tag": "McAfee 杀毒软件 的创始人",
+      "name": "John McAfee",
+      "group": "default"
     }
   },
-  "$myTwitterNoteTime": 1737797907301
+  "$myTwitterNoteTime": 1738316592943
 }

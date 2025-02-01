@@ -63,6 +63,13 @@ public class DateHandleUtil {
         return formattedYesterday;
     }
 
+    public static String getTimeAfterOneSecond() {
+        LocalDateTime now = LocalDateTime.now(); // 当前时间
+        LocalDateTime oneSecondLater = now.plusSeconds(1); // 增加1秒
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"); // 格式化器
+        return oneSecondLater.format(formatter); // 返回格式化后的时间字符串
+    }
+
     /**
      * 将 yyyyMMdd 格式的日期字符串转换为 Date 对象
      *

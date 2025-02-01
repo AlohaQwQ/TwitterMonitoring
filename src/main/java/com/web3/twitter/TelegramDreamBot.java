@@ -69,7 +69,7 @@ public class TelegramDreamBot implements SpringLongPollingBot, LongPollingSingle
         telegramClient = new OkHttpTelegramClient(getBotToken());
     }
 
-    public void sendText(String text) {
+    public void sendText(String text, InlineKeyboardMarkup replyMarkup) {
 //        log.info("发送消息参数: {}.", text);
 //        if (!redisCache.hasKey("chat_id")){
 //            LogUtils.error("没有获取到chatID: {}.", text);
@@ -82,11 +82,12 @@ public class TelegramDreamBot implements SpringLongPollingBot, LongPollingSingle
         CHAT_ID_LIST.forEach(chatID -> {
             SendMessage method = new SendMessage(chatID, text);
             method.setParseMode("HTML");
+            method.setReplyMarkup(replyMarkup);
             Message responseMessage = new Message();
             responseMessage.setChat(GROUP_CHAT);
             responseMessage.setFrom(TEST_USER);
             responseMessage.setText(text);
-            //responseMessage.setReplyMarkup(replyMarkup);
+            responseMessage.setReplyMarkup(replyMarkup);
             Message parsedMessage = new Message();
             try {
                 telegramClient.execute(method);

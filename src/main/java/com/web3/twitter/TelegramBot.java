@@ -4,6 +4,7 @@ import com.alibaba.fastjson2.JSON;
 import com.web3.twitter.redis.RedisCache;
 import com.web3.twitter.utils.DateUtils;
 import com.web3.twitter.utils.LogUtils;
+import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -34,8 +35,9 @@ public class TelegramBot implements SpringLongPollingBot, LongPollingSingleThrea
     private static final List<String> CHAT_ID_LIST = new ArrayList<>();
 
     static {
-        CHAT_ID_LIST.add("-4655003313");
-        CHAT_ID_LIST.add("-1002250310542");
+//        CHAT_ID_LIST.add("-4694062162");//重点频道
+        CHAT_ID_LIST.add("-4655003313");//pump扫推监控
+        CHAT_ID_LIST.add("-1002250310542");//pump扫推监控备用
 //        CHAT_ID_LIST.add("-1002358331062");
 //        CHAT_ID_LIST.add("-1002190498173");
 //        CHAT_ID_LIST.add("7146351054");
@@ -74,7 +76,7 @@ public class TelegramBot implements SpringLongPollingBot, LongPollingSingleThrea
         telegramClient = new OkHttpTelegramClient(getBotToken());
     }
 
-    public void sendText(String text) {
+    public void sendText(String textImport, String text) {
 //        log.info("发送消息参数: {}.", text);
 //        if (!redisCache.hasKey("chat_id")){
 //            LogUtils.error("没有获取到chatID: {}.", text);
@@ -84,6 +86,32 @@ public class TelegramBot implements SpringLongPollingBot, LongPollingSingleThrea
 //            redisCache.setCacheList("chat_id", chatIds);
 //        }
         //List<String> chatIdList = redisCache.getCacheList("chat_id");
+
+        //重点频道
+        if(StringUtils.isNotEmpty(textImport) && textImport.length()>2){
+            SendMessage methodImport = new SendMessage("-4694062162", textImport);
+            methodImport.setParseMode("HTML");
+            Message responseMessageImport = new Message();
+            responseMessageImport.setChat(GROUP_CHAT);
+            responseMessageImport.setFrom(TEST_USER);
+            responseMessageImport.setText(textImport);
+            //responseMessage.setReplyMarkup(replyMarkup);
+            Message parsedMessageImport = new Message();
+            try {
+                telegramClient.execute(methodImport);
+            } catch (TelegramApiException e) {
+                LogUtils.error("Shiyi-bot重点频道发送消息异常: {}.", parsedMessageImport, e);
+                e.printStackTrace();
+            }
+            try {
+                //等待1.5s后发送其他频道
+                Thread.sleep(1000);
+            } catch (InterruptedException e) {
+                LogUtils.error("Shiyi-bot发送消息暂停异常: {}.", text, e);
+                e.printStackTrace();
+            }
+        }
+
         CHAT_ID_LIST.forEach(chatID -> {
             SendMessage method = new SendMessage(chatID, text);
             method.setParseMode("HTML");

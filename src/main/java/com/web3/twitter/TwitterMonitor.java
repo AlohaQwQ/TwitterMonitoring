@@ -195,6 +195,14 @@ public class TwitterMonitor {
                                                                             String userShowName = userResults.getResult().getCore().getName();
                                                                             // 确保使用正确的字符编码
                                                                             String userNameUtf8 = new String(userName.getBytes(), StandardCharsets.UTF_8);
+
+                                                                            //跳过名字包含pump用户
+                                                                            if(StringUtils.isNotEmpty(userNameUtf8) &&
+                                                                                    (userNameUtf8.contains("Pump") || userNameUtf8.contains("pump"))){
+                                                                                LogUtils.info("跳过名字包含pump推文: {}", userNameUtf8);
+                                                                                continue;
+                                                                            }
+
                                                                             String tweetUrl = String.format("https://x.com/%s/status/%s", userName, restId);
                                                                             LogUtils.info("解析推特列表-推特链接", tweetUrl);
                                                                             //认证状态
@@ -230,6 +238,7 @@ public class TwitterMonitor {
                                                                                     LogUtils.info("跳过黑名单用户推文: {}", userName);
                                                                                     continue;
                                                                                 }
+
                                                                                 //跳过pump发射次数大于3次用户
                                                                                 if(user.getPumpHistorySet()!=null && !user.getPumpHistorySet().isEmpty()){
                                                                                     if(user.getPumpHistorySet().size()>2){
@@ -238,26 +247,31 @@ public class TwitterMonitor {
                                                                                     }
                                                                                 }
 
+                                                                                if(StringUtils.isEmpty(user.getUserID())){
+                                                                                    user.setUserID(userID);
+                                                                                }
                                                                                 long currentTimeStamp = System.currentTimeMillis();
-                                                                                long updateTimeStamp = Long.parseLong(user.getUpdateTime());
-                                                                                long difference = currentTimeStamp - updateTimeStamp;
-                                                                                isGreaterThanTwoDays = difference > 1 * 24 * 60 * 60 * 1000;
-                                                                                //大于2天才需要更新用户信息和共同关注列表
-                                                                                //共同关注命中备注列表为空时更新
-                                                                                if (user.getFollowersYouKnowRemarkSet()==null || isGreaterThanTwoDays) {
-                                                                                    // 异步更新用户共同关注列表
-                                                                                    updateUserFollowersYouKnow(user).thenAccept(monitorUser -> {
-                                                                                        if(monitorUser == null || monitorUser.getFollowersYouKnowRemarkSet() == null) {
-                                                                                            LogUtils.error("更新用户共同关注列表异常: {}", tweetUrl);
-                                                                                        } else {
-                                                                                            //更新用户信息
-                                                                                            updateUserInfo(user, userID, userNameUtf8, userShowName, fans, verified);
-                                                                                        }
-                                                                                    }).exceptionally(ex -> {
-                                                                                        LogUtils.error("更新用户共同关注列表失败: {}", tweetUrl, ex);
-                                                                                        //updateUserInfo(user, userID, userNameUtf8, userShowName, fans, verified);
-                                                                                        return null; // 可处理异常或返回默认值
-                                                                                    });
+                                                                                if(StringUtils.isNotEmpty(user.getUpdateTime())){
+                                                                                    long updateTimeStamp = Long.parseLong(user.getUpdateTime());
+                                                                                    long difference = currentTimeStamp - updateTimeStamp;
+                                                                                    isGreaterThanTwoDays = difference > 2 * 24 * 60 * 60 * 1000;
+                                                                                    //大于2天才需要更新用户信息和共同关注列表
+                                                                                    //共同关注命中备注列表为空时更新
+                                                                                    if (user.getFollowersYouKnowRemarkSet()==null || isGreaterThanTwoDays) {
+                                                                                        // 异步更新用户共同关注列表
+                                                                                        updateUserFollowersYouKnow(user).thenAccept(monitorUser -> {
+                                                                                            if(monitorUser == null || monitorUser.getFollowersYouKnowRemarkSet() == null) {
+                                                                                                LogUtils.error("更新用户共同关注列表异常: {}", tweetUrl);
+                                                                                            } else {
+                                                                                                //更新用户信息
+                                                                                                updateUserInfo(user, userID, userNameUtf8, userShowName, fans, verified);
+                                                                                            }
+                                                                                        }).exceptionally(ex -> {
+                                                                                            LogUtils.error("更新用户共同关注列表失败: {}", tweetUrl, ex);
+                                                                                            //updateUserInfo(user, userID, userNameUtf8, userShowName, fans, verified);
+                                                                                            return null; // 可处理异常或返回默认值
+                                                                                        });
+                                                                                    }
                                                                                 }
                                                                             }
 
@@ -284,12 +298,23 @@ public class TwitterMonitor {
                                                                                         String match = "pump.fun/coin";
                                                                                         if(entitiesUrl.getExpanded_url().contains(match)){
                                                                                             fullText[0] = entitiesUrl.getExpanded_url();
+                                                                                            LogUtils.info("legacy url包含ca url: {}", fullText[0]);
                                                                                             hasPump = true;
                                                                                             break;
                                                                                         }
                                                                                     }
                                                                                 }
                                                                             }
+                                                                            if(!hasPump){
+                                                                                //全文匹配ca
+                                                                                MonitorCoin matchCoin = SolanaContractValidator.matchSolanaContractLineBreak(fullText[0]);
+                                                                                if(matchCoin!=null && StringUtils.isNotEmpty(matchCoin.getCoinCa())){
+                                                                                    fullText[0] = "https://pump.fun/coin/" + matchCoin.getCoinCa();
+                                                                                    LogUtils.info("全文匹配ca成功: {}", fullText[0]);
+                                                                                    hasPump = true;
+                                                                                }
+                                                                            }
+
                                                                             if(hasPump){
                                                                                 //LogUtils.info("startMonitor-推文数据中包含ca链接: {}", DateUtils.getTimeSSS());
                                                                                 int parseResult = parsingTweets(user, tweetUrl, createdDate, nowTime, fullText);
@@ -539,6 +564,10 @@ public class TwitterMonitor {
                                 LogUtils.error("response: {}", responseString);
                             }
                             responseString = ""; // 清空 responseString，以便重试
+                            //if(retryCount>3){
+                            //    LogUtils.error("获取推特共同关注者接口数据超过重试上限返回: {}", jsonObject.toString());
+                            //    return CompletableFuture.completedFuture(monitorUser);
+                            //}
                         }
                     }
                 }
@@ -550,13 +579,17 @@ public class TwitterMonitor {
                 }
                 responseString = ""; // 清空 responseString，以便重试
                 LogUtils.info("获取推特共同关注者接口异常-重试次数:", retryCount);
+                //if(retryCount>3){
+                //   LogUtils.error("获取推特共同关注者接口数据超过重试上限返回: {}", variables, e);
+                //    return CompletableFuture.completedFuture(monitorUser);
+                //}
             }
         }
 
-        retryCount = 0;
+        /*retryCount = 0;
         LogUtils.info("pumpscam-总数-异步执行: {}", DateUtils.getTimeSSS());
         // 重试次数超过 4 次，返回空的 MonitorUser
-        while (retryCount < 3) {
+        while (retryCount < 1) {
             try {
                 variables = "q=https://x.com/" + monitorUser.getUserName() + "&only_deleted=false&apikey=utmgqrtgbmw48hz03598ct9vhz4fxb";
                 // 构建请求
@@ -611,7 +644,7 @@ public class TwitterMonitor {
         retryCount = 0;
         LogUtils.info("pumpscam-删推-异步执行: {}", DateUtils.getTimeSSS());
         // 重试次数超过 4 次，返回空的 MonitorUser
-        while (retryCount < 3) {
+        while (retryCount < 1) {
             try {
                 variables = "q=https://x.com/" +monitorUser.getUserName() + "&only_deleted=true&apikey=utmgqrtgbmw48hz03598ct9vhz4fxb";
                 // 构建请求
@@ -661,9 +694,153 @@ public class TwitterMonitor {
                 responseString = ""; // 清空 responseString，以便重试
                 LogUtils.info("获取pumpscam接口数据删推-重试次数:", retryCount);
             }
-        }
+        }*/
 
         return CompletableFuture.completedFuture(monitorUser);
+    }
+
+    /**
+     * 获取光光推特数据
+     * @param monitorUser
+     * @return
+     */
+    public MonitorUser updateUserPumpscam(MonitorUser monitorUser) {
+        //LogUtils.info("updateUserFollowersYouKnow-异步执行: {}", DateUtils.getTimeSSS());
+        Response response;
+        String responseString = "";
+        //String url = null;
+        //int retryCount = 0;
+        //monitorUser.setUserID("829482275318484993");
+//        if(!redisCache.hasKey("TwitterToken")){
+//            LogUtils.error("获取推特共同关注者接口异常-推特token不存在");
+//            return CompletableFuture.completedFuture(null);
+//        }
+//        String twitterToken = redisCache.getCacheObject("TwitterToken");
+//        //twitterToken = "ed7f8aa5c2c0c6e8dad045db601955924c5a2d72";
+//        if(StringUtils.isEmpty(twitterToken)){
+//            LogUtils.error("获取推特共同关注者接口异常-推特token为空");
+//            return CompletableFuture.completedFuture(null);
+//        }
+//        if(StringUtils.isEmpty(monitorUser.getUserID())){
+//            LogUtils.error("获取推特共同关注者接口异常-userId为空");
+//            return CompletableFuture.completedFuture(null);
+//        }
+        String variables = "";
+        OkHttpClient client = new OkHttpClient().newBuilder()
+                .connectTimeout(10, TimeUnit.SECONDS)
+                .readTimeout(10, TimeUnit.SECONDS)
+                .writeTimeout(10, TimeUnit.SECONDS).build();
+
+        LogUtils.info("pumpscam-总数-异步执行: {}", DateUtils.getTimeSSS());
+        // 重试次数超过 4 次，返回空的 MonitorUser
+            try {
+                variables = "q=https://x.com/" + monitorUser.getUserName() + "&only_deleted=false&apikey=utmgqrtgbmw48hz03598ct9vhz4fxb";
+                // 构建请求
+                Request request = new Request.Builder()
+                        .url("https://pumpscam.com/api/v1/scam/search?" + variables)
+                        .get() // Post请求
+                        .build();
+                client = new OkHttpClient().newBuilder()
+                        .connectTimeout(10, TimeUnit.SECONDS)
+                        .readTimeout(10, TimeUnit.SECONDS)
+                        .writeTimeout(10, TimeUnit.SECONDS).build();
+                response = client.newCall(request).execute();
+                LogUtils.info("pumpscam-总数-聚合api数据返回: {}", DateUtils.getTimeSSS());
+                if (response != null && response.isSuccessful()) {
+                    // 解析响应数据
+                    responseString = response.body().string();
+                    JSONObject jsonObject = JSONObject.parseObject(responseString);
+                    if (jsonObject == null) {
+                        LogUtils.error("获取pumpscam总数-接口数据返回异常 | response:", responseString);
+                        //跳出循环
+                        //retryCount = 4;
+                        //return CompletableFuture.completedFuture(null);
+                    } else {
+                        if(jsonObject.containsKey("data")){
+                            // 获取应用列表
+                            JSONObject data = jsonObject.getJSONObject("data");
+                            if(data!=null) {
+                                if (data.containsKey("total")) {
+                                    //pump发推次数
+                                    Integer total = data.getInteger("total");
+                                    monitorUser.setNumberPumpLaunch(total);
+                                    //跳出循环
+                                    //retryCount = 4;
+                                }
+                            } else {
+                                LogUtils.error("获取pumpscam接口总数-数据返回异常: {}", jsonObject.toString());
+                                //retryCount++; // 继续重试
+                                if (StringUtils.isNotEmpty(responseString)){
+                                    LogUtils.error("response: {}", responseString);
+                                }
+                                //responseString = ""; // 清空 responseString，以便重试
+                            }
+                        } else {
+                            LogUtils.info("获取pumpscam接口总数-data为空: {}", jsonObject.toString());
+                        }
+                    }
+                }
+            } catch (Exception e){
+                LogUtils.error("获取pumpscam接口数据总数-返回异常-请求地址: {}", variables, e);
+                if (StringUtils.isNotEmpty(responseString)){
+                    LogUtils.error("response: {}", responseString, e);
+                }
+                //responseString = ""; // 清空 responseString，以便重试
+            }
+
+        LogUtils.info("pumpscam-删推-异步执行: {}", DateUtils.getTimeSSS());
+        try {
+            variables = "q=https://x.com/" +monitorUser.getUserName() + "&only_deleted=true&apikey=utmgqrtgbmw48hz03598ct9vhz4fxb";
+            // 构建请求
+            Request request = new Request.Builder()
+                    .url("https://pumpscam.com/api/v1/scam/search?" + variables)
+                    .get() // Post请求
+                    .build();
+            client = new OkHttpClient().newBuilder()
+                    .connectTimeout(10, TimeUnit.SECONDS)
+                    .readTimeout(10, TimeUnit.SECONDS)
+                    .writeTimeout(10, TimeUnit.SECONDS).build();
+            response = client.newCall(request).execute();
+            LogUtils.info("pumpscam-删推-聚合api数据返回: {}", DateUtils.getTimeSSS());
+            if (response != null && response.isSuccessful()) {
+                // 解析响应数据
+                responseString = response.body().string();
+                JSONObject jsonObject = JSONObject.parseObject(responseString);
+                if (jsonObject == null) {
+                    LogUtils.error("获取pumpscam删推-接口数据返回异常 | response:", responseString);
+                    //return CompletableFuture.completedFuture(null);
+                } else {
+                    if(jsonObject.containsKey("data")){
+                        // 获取应用列表
+                        JSONObject data = jsonObject.getJSONObject("data");
+                        if(data!=null) {
+                            if (data.containsKey("total")) {
+                                //删除推特次数
+                                Integer total = data.getInteger("total");
+                                monitorUser.setNumberTwitterDelete(total);
+                                //跳出循环
+                                //retryCount = 4;
+                            }
+                        } else {
+                            LogUtils.error("获取pumpscam接口删推-数据返回异常: {}", jsonObject.toString());
+                            //retryCount++; // 继续重试
+                            if (StringUtils.isNotEmpty(responseString)){
+                                LogUtils.error("response: {}", responseString);
+                            }
+                            //responseString = ""; // 清空 responseString，以便重试
+                        }
+                    } else {
+                        LogUtils.info("获取pumpscam接口删推-data为空: {}", jsonObject.toString());
+                    }
+                }
+            }
+        } catch (Exception e){
+            LogUtils.error("获取pumpscam接口数据删推-返回异常-请求地址: {}", variables, e);
+            if (StringUtils.isNotEmpty(responseString)){
+                LogUtils.error("response: {}", responseString, e);
+            }
+        }
+        return monitorUser;
     }
 
     /**
@@ -672,7 +849,7 @@ public class TwitterMonitor {
      * @return
      */
     private int parsingTweets(MonitorUser user, String tweetUrl, String createdDate, String nowTime, String[] fullText){
-        LogUtils.info("parsingTweets-开始解析推文数据: {}", DateUtils.getTimeSSS());
+        LogUtils.info("parsingTweets-开始解析推文数据: {}", DateUtils.getTimeSSS(), tweetUrl, fullText);
         //pump ca链接
         String pumpCa = "";
         int result = -1;
@@ -721,23 +898,34 @@ public class TwitterMonitor {
                     String coinString = redisCache.getCacheObject(pumpCa);
                     coin = JSON.parseObject(coinString, MonitorCoin.class);
                     List<String> mentionUserList = coin.getMentionUserList();
-                    for (String mentionUserId : mentionUserList) {
-                        //匹配ca提及用户
-                        if(mentionUserId.equals(user.getUserID())){
-                            LogUtils.info("该ca用户已提及: {} ", pumpCa + " | "+user.getUserName());
-                            return result;
+                    if (mentionUserList != null && !mentionUserList.isEmpty()) {
+                        for (String mentionUserId : mentionUserList) {
+                            //匹配ca提及用户
+                            if(StringUtils.isNotEmpty(mentionUserId)
+                                    && mentionUserId.equals(user.getUserID())){
+                                LogUtils.info("该ca用户已提及: {} ", pumpCa + " | "+user.getUserName());
+                                return result;
+                            }
                         }
+                        //添加用户提及ca记录
+                        mentionUserList.add(user.getUserID());
                     }
-                    //添加用户提及ca记录
-                    mentionUserList.add(user.getUserID());
                 }
                 //LogUtils.info("parsingTweets-ca信息匹配并存储完成: {}", DateUtils.getTimeSSS());
+
+                if(coin.getMentionUserList().size()>10){
+                    LogUtils.info("该ca提及次数大于10自动过滤: {} ", pumpCa + " | "+user.getUserName());
+                    return result;
+                }
+                //获取pumpscam数据
+                user = updateUserPumpscam(user);
 
                 String coinJson = JSON.toJSONString(coin);
                 redisCache.setCacheObject(pumpCa, coinJson, 3, TimeUnit.DAYS);
                 //拼接tg消息发送
 
                 StringBuilder messageBuilder = new StringBuilder(); // 使用 StringBuilder 进行拼接
+                StringBuilder messageBuilderImport = new StringBuilder();
                 //提及次数大于1
 
                 //命中备注列表
@@ -773,7 +961,7 @@ public class TwitterMonitor {
                 redisCache.setCacheObject(userNameKey, jsonUser);
 
                 //粉丝数阶梯提示
-                if(Long.parseLong(user.getFansNumber()) >10000){
+                if(StringUtils.isNotEmpty(user.getFansNumber()) && Long.parseLong(user.getFansNumber()) >10000){
                     messageBuilder.append("┌❗粉丝数大于1w");
                     if(Long.parseLong(user.getFansNumber()) >20000){
                         messageBuilder.append("->2w");
@@ -783,7 +971,7 @@ public class TwitterMonitor {
                     }
                     messageBuilder.append("\n");
                 }
-                if(Long.parseLong(user.getFansNumber()) >100000){
+                if(StringUtils.isNotEmpty(user.getFansNumber()) &&Long.parseLong(user.getFansNumber()) >100000){
                     messageBuilder.append("└❗粉丝数大于10w");
                     if(Long.parseLong(user.getFansNumber()) >150000){
                         messageBuilder.append("->15w");
@@ -799,10 +987,7 @@ public class TwitterMonitor {
                 //    messageBuilder.append("\uD83D\uDD25 ca提及次数: ").append(coin.getMentionUserList().size()).append("\n");
                 //}
 
-                if(coin.getMentionUserList().size()>10){
-                    LogUtils.info("该ca提及次数大于10自动过滤: {} ", pumpCa + " | "+user.getUserName());
-                    return result;
-                }
+
                 String gmgnUrl = "https://gmgn.ai/sol/token/" + coin.getCoinCa();
                 String pumpUrl = "https://pump.fun/coin/" + coin.getCoinCa();
                 //https://gmgn.ai/sol/token/3GD2FWYkG2QGXCkN1nEf9TB1jsvt2zvUUEKEmFfgpump
@@ -903,17 +1088,31 @@ public class TwitterMonitor {
                         messageBuilder.append("\n");
                     }
                 }
+
                 String releaseTime = DateHandleUtil.formatDate(createdDate);
                 String pushTime = DateUtils.getTime();
                 String newReleaseTime = DateHandleUtil.calculateDifferenceInSeconds(releaseTime, pushTime);
                 messageBuilder.append("┌ <b>发布时间: </b>").append(newReleaseTime).append("\n");
-                //messageBuilder.append("搜索时间: ").append(nowTime).append("\n");
-                messageBuilder.append("└ <b>推送时间: </b>").append(DateUtils.getTime()).append("\n");
 
-                /*List<InlineKeyboardButton> inlineKeyboardButtonList = new ArrayList<>();
+                //重点频道，推文用户大于8个共同关注， 并且光光数据库中发盘次数小于2的ca才会被推送到重点频道
+                if (!user.getFollowersYouKnowRemarkSet().isEmpty() && user.getFollowersYouKnowRemarkSet().size()>7){
+                    if(user.getNumberPumpLaunch()==null || user.getNumberPumpLaunch()<2){
+                        messageBuilderImport.append(messageBuilder);
+                        messageBuilderImport.append("└ <b>推送时间: </b>").append(DateUtils.getTime()).append("\n");
+                        messageBuilder.append("└ <b>推送时间: </b>").append(DateHandleUtil.getTimeAfterOneSecond()).append("\n");
+                    } else {
+                        //messageBuilder.append("搜索时间: ").append(nowTime).append("\n");
+                        messageBuilder.append("└ <b>推送时间: </b>").append(DateUtils.getTime()).append("\n");
+                    }
+                } else {
+                    //messageBuilder.append("搜索时间: ").append(nowTime).append("\n");
+                    messageBuilder.append("└ <b>推送时间: </b>").append(DateUtils.getTime()).append("\n");
+                }
+
+                List<InlineKeyboardButton> inlineKeyboardButtonList = new ArrayList<>();
                 InlineKeyboardButton twitter = InlineKeyboardButton.builder().text("Twitter").url(tweetUrl).build();
                 InlineKeyboardButton gmgn = InlineKeyboardButton.builder().text("Gmgn").url(gmgnUrl).build();
-                InlineKeyboardButton pump = InlineKeyboardButton.builder().text("Pump").url(pumpUrl).build();
+                InlineKeyboardButton pump = InlineKeyboardButton.builder().text("Bloom").url("https://t.me/BloomSolana_bot?start=ref_ShiYi").build();
                 inlineKeyboardButtonList.add(twitter);
                 inlineKeyboardButtonList.add(gmgn);
                 inlineKeyboardButtonList.add(pump);
@@ -924,12 +1123,19 @@ public class TwitterMonitor {
 
                 InlineKeyboardMarkup keyboard = InlineKeyboardMarkup.builder()
                         .keyboard(keyboardRows)
-                        .build();*/
+                        .build();
 
+
+                if(user.getUserName().contains("daxigua_qwq")){
+                    LogUtils.info("parsingTweets-keyboard: {}", keyboard.toString());
+                    LogUtils.info("parsingTweets-daxigua_qwq测试发送消息: {}", DateUtils.getTimeSSS());
+                    telegramDreamBot.sendText(messageBuilder.toString(), keyboard);
+                    return result;
+                }
                 LogUtils.info("parsingTweets-调用bot发送消息: {}", DateUtils.getTimeSSS());
                 //增加dream-bot机器人
-                telegramBot.sendText(messageBuilder.toString());
-                telegramDreamBot.sendText(messageBuilder.toString());
+                telegramBot.sendText(messageBuilderImport.toString(), messageBuilder.toString());
+                telegramDreamBot.sendText(messageBuilder.toString(), keyboard);
                 result = 1;
             } else {
                 LogUtils.error("推文未包含pump代币信息: ", user, tweetUrl, fullText);
