@@ -1109,32 +1109,38 @@ public class TwitterMonitor {
                     messageBuilder.append("└ <b>推送时间: </b>").append(DateUtils.getTime()).append("\n");
                 }
 
-                List<InlineKeyboardButton> inlineKeyboardButtonList = new ArrayList<>();
-                InlineKeyboardButton twitter = InlineKeyboardButton.builder().text("Twitter").url(tweetUrl).build();
-                InlineKeyboardButton gmgn = InlineKeyboardButton.builder().text("Gmgn").url(gmgnUrl).build();
-                InlineKeyboardButton pump = InlineKeyboardButton.builder().text("Bloom").url("https://t.me/BloomSolana_bot?start=ref_ShiYi").build();
-                inlineKeyboardButtonList.add(twitter);
-                inlineKeyboardButtonList.add(gmgn);
-                inlineKeyboardButtonList.add(pump);
+                //增加气泡按钮
+                List<InlineKeyboardButton> inlineKeyboardButtonList1 = new ArrayList<>();
+                List<InlineKeyboardButton> inlineKeyboardButtonList2 = new ArrayList<>();
+                InlineKeyboardButton gmgn = InlineKeyboardButton.builder().text("\uD83D\uDE4A Gmgn").url("https://t.me/GMGN_sol_bot?start=i_iwayH6at_c_" + coin.getCoinCa()).build();
+                InlineKeyboardButton pepe = InlineKeyboardButton.builder().text("\uD83D\uDC38 Pepe").url("https://t.me/pepeboost_sol_bot?start=ref_0kd7jo_ca_" + coin.getCoinCa()).build();
+                InlineKeyboardButton bloom = InlineKeyboardButton.builder().text("\uD83D\uDD25 Bloom").url("https://t.me/BloomSolana_bot?start=ref_ShiYi_ca_" + coin.getCoinCa()).build();
+                InlineKeyboardButton dogee = InlineKeyboardButton.builder().text("\uD83D\uDC36 Dogee").url("https://t.me/dogeebot_bot?start=rt_17351207888900_" + coin.getCoinCa()).build();
 
-                InlineKeyboardRow inlineKeyboardRow = new InlineKeyboardRow(inlineKeyboardButtonList);
+                inlineKeyboardButtonList1.add(gmgn);
+                inlineKeyboardButtonList1.add(pepe);
+                inlineKeyboardButtonList2.add(bloom);
+                inlineKeyboardButtonList2.add(dogee);
+
+                InlineKeyboardRow inlineKeyboardRow1 = new InlineKeyboardRow(inlineKeyboardButtonList1);
+                InlineKeyboardRow inlineKeyboardRow2 = new InlineKeyboardRow(inlineKeyboardButtonList2);
                 List<InlineKeyboardRow> keyboardRows = new ArrayList<>();
-                keyboardRows.add(inlineKeyboardRow);
+                keyboardRows.add(inlineKeyboardRow1);
+                keyboardRows.add(inlineKeyboardRow2);
 
                 InlineKeyboardMarkup keyboard = InlineKeyboardMarkup.builder()
                         .keyboard(keyboardRows)
                         .build();
 
-
-                if(user.getUserName().contains("daxigua_qwq")){
+                /*if(user.getUserName().contains("daxigua_qwq")){
                     LogUtils.info("parsingTweets-keyboard: {}", keyboard.toString());
                     LogUtils.info("parsingTweets-daxigua_qwq测试发送消息: {}", DateUtils.getTimeSSS());
                     telegramDreamBot.sendText(messageBuilder.toString(), keyboard);
                     return result;
-                }
+                }*/
                 LogUtils.info("parsingTweets-调用bot发送消息: {}", DateUtils.getTimeSSS());
                 //增加dream-bot机器人
-                telegramBot.sendText(messageBuilderImport.toString(), messageBuilder.toString());
+                telegramBot.sendText(messageBuilderImport.toString(), messageBuilder.toString(), keyboard);
                 telegramDreamBot.sendText(messageBuilder.toString(), keyboard);
                 result = 1;
             } else {

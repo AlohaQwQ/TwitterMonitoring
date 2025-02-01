@@ -76,7 +76,7 @@ public class TelegramBot implements SpringLongPollingBot, LongPollingSingleThrea
         telegramClient = new OkHttpTelegramClient(getBotToken());
     }
 
-    public void sendText(String textImport, String text) {
+    public void sendText(String textImport, String text, InlineKeyboardMarkup replyMarkup) {
 //        log.info("发送消息参数: {}.", text);
 //        if (!redisCache.hasKey("chat_id")){
 //            LogUtils.error("没有获取到chatID: {}.", text);
@@ -91,6 +91,7 @@ public class TelegramBot implements SpringLongPollingBot, LongPollingSingleThrea
         if(StringUtils.isNotEmpty(textImport) && textImport.length()>2){
             SendMessage methodImport = new SendMessage("-4694062162", textImport);
             methodImport.setParseMode("HTML");
+            methodImport.setReplyMarkup(replyMarkup);
             Message responseMessageImport = new Message();
             responseMessageImport.setChat(GROUP_CHAT);
             responseMessageImport.setFrom(TEST_USER);
@@ -115,6 +116,7 @@ public class TelegramBot implements SpringLongPollingBot, LongPollingSingleThrea
         CHAT_ID_LIST.forEach(chatID -> {
             SendMessage method = new SendMessage(chatID, text);
             method.setParseMode("HTML");
+            method.setReplyMarkup(replyMarkup);
             Message responseMessage = new Message();
             responseMessage.setChat(GROUP_CHAT);
             responseMessage.setFrom(TEST_USER);
