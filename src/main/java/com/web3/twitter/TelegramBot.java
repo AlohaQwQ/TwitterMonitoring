@@ -35,6 +35,8 @@ public class TelegramBot implements SpringLongPollingBot, LongPollingSingleThrea
     private static final List<String> CHAT_ID_LIST = new ArrayList<>();
 
     static {
+//        CHAT_ID_LIST.add(-1002429995604");//超级重点频道
+//        CHAT_ID_LIST.add(-1002472298104");//pump to the moon
 //        CHAT_ID_LIST.add("-4694062162");//重点频道
         CHAT_ID_LIST.add("-4655003313");//pump扫推监控
         CHAT_ID_LIST.add("-1002250310542");//pump扫推监控备用
@@ -76,7 +78,7 @@ public class TelegramBot implements SpringLongPollingBot, LongPollingSingleThrea
         telegramClient = new OkHttpTelegramClient(getBotToken());
     }
 
-    public void sendText(String textImport, String text, InlineKeyboardMarkup replyMarkup) {
+    public void sendText(String textMoreImport, String textImport, String text, InlineKeyboardMarkup replyMarkup) {
 //        log.info("发送消息参数: {}.", text);
 //        if (!redisCache.hasKey("chat_id")){
 //            LogUtils.error("没有获取到chatID: {}.", text);
@@ -87,10 +89,48 @@ public class TelegramBot implements SpringLongPollingBot, LongPollingSingleThrea
 //        }
         //List<String> chatIdList = redisCache.getCacheList("chat_id");
 
+        //超级重点频道
+        if(StringUtils.isNotEmpty(textMoreImport) && textMoreImport.length()>2){
+            SendMessage methodImport = new SendMessage("-1002472298104", textMoreImport);
+            methodImport.setParseMode("HTML");
+            methodImport.setDisableWebPagePreview(true);
+            methodImport.setReplyMarkup(replyMarkup);
+            Message responseMessageImport = new Message();
+            responseMessageImport.setChat(GROUP_CHAT);
+            responseMessageImport.setFrom(TEST_USER);
+            responseMessageImport.setText(textMoreImport);
+            //responseMessage.setReplyMarkup(replyMarkup);
+            Message parsedMessageImport = new Message();
+            try {
+                telegramClient.execute(methodImport);
+            } catch (TelegramApiException e) {
+                LogUtils.error("Shiyi-bot-pump to the moon频道发送消息异常: {}.", parsedMessageImport, e);
+                e.printStackTrace();
+            }
+
+            methodImport = new SendMessage("-1002429995604", textMoreImport);
+            methodImport.setParseMode("HTML");
+            methodImport.setDisableWebPagePreview(true);
+            methodImport.setReplyMarkup(replyMarkup);
+            responseMessageImport = new Message();
+            responseMessageImport.setChat(GROUP_CHAT);
+            responseMessageImport.setFrom(TEST_USER);
+            responseMessageImport.setText(textMoreImport);
+            //responseMessage.setReplyMarkup(replyMarkup);
+            parsedMessageImport = new Message();
+            try {
+                telegramClient.execute(methodImport);
+            } catch (TelegramApiException e) {
+                LogUtils.error("Shiyi-bot超级重点频道发送消息异常: {}.", parsedMessageImport, e);
+                e.printStackTrace();
+            }
+        }
+
         //重点频道
         if(StringUtils.isNotEmpty(textImport) && textImport.length()>2){
             SendMessage methodImport = new SendMessage("-4694062162", textImport);
             methodImport.setParseMode("HTML");
+            methodImport.setDisableWebPagePreview(true);
             methodImport.setReplyMarkup(replyMarkup);
             Message responseMessageImport = new Message();
             responseMessageImport.setChat(GROUP_CHAT);
@@ -104,6 +144,7 @@ public class TelegramBot implements SpringLongPollingBot, LongPollingSingleThrea
                 LogUtils.error("Shiyi-bot重点频道发送消息异常: {}.", parsedMessageImport, e);
                 e.printStackTrace();
             }
+
             try {
                 //等待1.5s后发送其他频道
                 Thread.sleep(1000);
@@ -116,6 +157,7 @@ public class TelegramBot implements SpringLongPollingBot, LongPollingSingleThrea
         CHAT_ID_LIST.forEach(chatID -> {
             SendMessage method = new SendMessage(chatID, text);
             method.setParseMode("HTML");
+            method.setDisableWebPagePreview(true);
             method.setReplyMarkup(replyMarkup);
             Message responseMessage = new Message();
             responseMessage.setChat(GROUP_CHAT);

@@ -59,6 +59,16 @@ public class MonitorCoin {
      */
     private String coinCirculatingSupply;
 
+    /**
+     * dev地址
+     */
+    private String devWallet;
+
+    /**
+     * dev历史发射详情
+     */
+    private String devPumpHistory;
+
     public String getCoinName() {
         return coinName;
     }
@@ -137,6 +147,22 @@ public class MonitorCoin {
 
     public void setCoinCirculatingSupply(String coinCirculatingSupply) {
         this.coinCirculatingSupply = coinCirculatingSupply;
+    }
+
+    public String getDevWallet() {
+        return devWallet;
+    }
+
+    public void setDevWallet(String devWallet) {
+        this.devWallet = devWallet;
+    }
+
+    public String getDevPumpHistory() {
+        return devPumpHistory;
+    }
+
+    public void setDevPumpHistory(String devPumpHistory) {
+        this.devPumpHistory = devPumpHistory;
     }
 
     @Override

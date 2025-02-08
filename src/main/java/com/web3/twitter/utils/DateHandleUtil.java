@@ -245,11 +245,12 @@ public class DateHandleUtil {
     }
 
 //    public static void main(String[] args) throws InterruptedException {
-//        String releaseTime = DateUtils.getTime();
-//        Thread.sleep(6000);
-//        String pushTime = DateUtils.getTime();
-//        String newReleaseTime = DateHandleUtil.calculateDifferenceInSeconds(releaseTime, pushTime);
-//        LogUtils.info("pushTime:{} releaseTime:{} newReleaseTime:{} nowTime:{}", pushTime, releaseTime, newReleaseTime, DateUtils.getTime());
+////        String releaseTime = DateUtils.getTime();
+////        Thread.sleep(6000);
+////        String pushTime = DateUtils.getTime();
+////        String newReleaseTime = DateHandleUtil.calculateDifferenceInSeconds(releaseTime, pushTime);
+////        LogUtils.info("pushTime:{} releaseTime:{} newReleaseTime:{} nowTime:{}", pushTime, releaseTime, newReleaseTime, DateUtils.getTime());
+//        calculateMinuteDifference("2025-02-06 16:20:36");
 //    }
 
     /**
@@ -280,6 +281,20 @@ public class DateHandleUtil {
         return startTime;
     }
 
-
+    /**
+     * 计算传入时间与当前时间的分钟差值
+     * @param inputTime
+     * @return
+     */
+    public static long calculateMinuteDifference(String inputTime) {
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+        // 将输入时间字符串解析为 LocalDateTime
+        LocalDateTime parsedTime = LocalDateTime.parse(inputTime, formatter);
+        // 获取当前时间
+        LocalDateTime now = LocalDateTime.now();
+        // 计算两个时间之间的分钟差
+        long minutesDifference = ChronoUnit.MINUTES.between(parsedTime, now);
+        return minutesDifference;
+    }
 
 }

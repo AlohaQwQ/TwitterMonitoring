@@ -13,7 +13,7 @@ import java.util.regex.Pattern;
 
 public class SolanaContractValidator {
 
-    private static final String SOLANA_ADDRESS_REGEX = "^[1-9A-HJ-NP-Za-km-z]{35,50}$";
+    private static final String SOLANA_ADDRESS_REGEX = "^[1-9A-HJ-NP-Za-km-z]{40}pump$";
     private static final Pattern SOLANA_ADDRESS_PATTERN = Pattern.compile(SOLANA_ADDRESS_REGEX);
 
     public static boolean isSolanaContract(String address) {
@@ -37,11 +37,12 @@ public class SolanaContractValidator {
             return coin;
         }
         // 按照空格、换行符、逗号分割并过滤空字符串
-        String rex = "[\\s,\\n:：]+";
+        String rex = "[\\s,:：.\\n]+";
         // 按照空格、换行符、逗号、中英文冒号分割
         String[] partsOne = text.split(rex, -50);
         for (String partText : partsOne) {
             //外层匹配成功
+            //匹配以 "pump" 结尾的文本
             match = SOLANA_ADDRESS_PATTERN.matcher(partText).matches();
             if(match) {
                 coin.setCoinCa(partText);
@@ -73,13 +74,11 @@ public class SolanaContractValidator {
                 "已置顶：69ErovVFi8iiu2AjG83sNMrW7cgBowmq5mz4NcHmpump快点冲\n";
 
         RedisCache redisCache = new RedisCache();
-        text = "Pump fun style prediction market app on @BASE. \n" +
+        text = "share about CA : \n" +
                 "\n" +
-                "CA: 0x4398c398e5ac747e6d51bf1db1dac346ca90fee0\n" +
+                "BbBqF5fzUSeJDjQJfXq66MFZKA3i7nXc5mRrRuCNpump\n" +
                 "\n" +
-                "Dex: https://t.co/Vvos8a0aTz\n" +
-                "\n" +
-                "App is going live next month https://t.co/WhYZYDP2FJ";
+                "people want a big pump for $simon !";
         matchSolanaContractLineBreak(text);
     }
 

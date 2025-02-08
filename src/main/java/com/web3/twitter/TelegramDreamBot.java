@@ -82,6 +82,7 @@ public class TelegramDreamBot implements SpringLongPollingBot, LongPollingSingle
         CHAT_ID_LIST.forEach(chatID -> {
             SendMessage method = new SendMessage(chatID, text);
             method.setParseMode("HTML");
+            method.setDisableWebPagePreview(true);
             method.setReplyMarkup(replyMarkup);
             Message responseMessage = new Message();
             responseMessage.setChat(GROUP_CHAT);
