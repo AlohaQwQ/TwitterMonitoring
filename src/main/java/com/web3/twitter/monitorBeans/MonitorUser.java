@@ -93,6 +93,12 @@ public class MonitorUser {
      * 删除推特次数
      */
     private Integer numberTwitterDelete;
+
+    /**
+     * 检索推特链接
+     */
+    private String twitterLinkUrl;
+
     /**
      * 更新用户信息时间-时间戳
      */
@@ -231,6 +237,14 @@ public class MonitorUser {
         this.numberTwitterDelete = numberTwitterDelete;
     }
 
+    public String getTwitterLinkUrl() {
+        return twitterLinkUrl;
+    }
+
+    public void setTwitterLinkUrl(String twitterLinkUrl) {
+        this.twitterLinkUrl = twitterLinkUrl;
+    }
+
     public String getUpdateTime() {
         return updateTime;
     }
@@ -266,6 +280,7 @@ public class MonitorUser {
                 ", numberNameChanges='" + numberNameChanges + '\'' +
                 ", numberPumpLaunch='" + numberPumpLaunch + '\'' +
                 ", numberTwitterDelete='" + numberTwitterDelete + '\'' +
+                ", twitterLinkUrl='" + twitterLinkUrl + '\'' +
                 ", updateTime='" + updateTime + '\'' +
                 ", createTime='" + createTime + '\'' +
                 '}';

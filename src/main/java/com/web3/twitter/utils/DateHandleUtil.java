@@ -272,7 +272,7 @@ public class DateHandleUtil {
         if (between >= 5){
             //取值3-5之间整数的随机数，3 4 5
             Random random = new Random();
-            int randomNumber = 3 + random.nextInt(3);
+            int randomNumber = 3 + random.nextInt(4);
             seconds = between - randomNumber;
             startDateTime = startDateTime.plusSeconds(seconds);
             startTime = startDateTime.format(formatter);

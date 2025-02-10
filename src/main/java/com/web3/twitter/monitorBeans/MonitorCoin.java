@@ -2,6 +2,8 @@ package com.web3.twitter.monitorBeans;
 
 
 import java.math.BigDecimal;
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 /**
@@ -68,6 +70,16 @@ public class MonitorCoin {
      * dev历史发射详情
      */
     private String devPumpHistory;
+
+    /**
+     * dev历史发射List
+     */
+    private List<MonitorCoinPump> devPumpHistoryList;
+
+    /**
+     * dev钱包推特检索结果
+     */
+    private HashMap<String, MonitorUser> devTwitterHistoryMap;
 
     public String getCoinName() {
         return coinName;
@@ -163,6 +175,22 @@ public class MonitorCoin {
 
     public void setDevPumpHistory(String devPumpHistory) {
         this.devPumpHistory = devPumpHistory;
+    }
+
+    public List<MonitorCoinPump> getDevPumpHistoryList() {
+        return devPumpHistoryList;
+    }
+
+    public void setDevPumpHistoryList(List<MonitorCoinPump> devPumpHistoryList) {
+        this.devPumpHistoryList = devPumpHistoryList;
+    }
+
+    public HashMap<String, MonitorUser> getDevTwitterHistoryMap() {
+        return devTwitterHistoryMap;
+    }
+
+    public void setDevTwitterHistoryMap(HashMap<String, MonitorUser> devTwitterHistoryMap) {
+        this.devTwitterHistoryMap = devTwitterHistoryMap;
     }
 
     @Override

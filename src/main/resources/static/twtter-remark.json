@@ -1664,7 +1664,7 @@
       "editable": false
     },
     "Cobratate": {
-      "tag": "他很牛逼",
+      "tag": "BBC 副总裁",
       "name": "Andrew Tate",
       "group": "default",
       "isExists": true,
@@ -2513,7 +2513,7 @@
     },
     "bioprotocol": {
       "tag": "生物学 推特",
-      "name": "BIO Protocol",
+      "name": "Bio Protocol",
       "group": "default"
     },
     "baoskee": {
@@ -3128,7 +3128,7 @@
     },
     "JupiterExchange": {
       "tag": "Jupiter",
-      "name": "Jupiter",
+      "name": "Jupiter (, )",
       "group": "default"
     },
     "phantom": {
@@ -3189,11 +3189,6 @@
     "0xmoles": {
       "tag": "公子常 Chang",
       "name": "公子常 Chang",
-      "group": "default"
-    },
-    "moonshotdotcc": {
-      "tag": "月亮盘",
-      "name": "Moonshot",
       "group": "default"
     },
     "ownthedoge": {
@@ -5568,7 +5563,7 @@
     },
     "sara21222122": {
       "tag": "艺术家",
-      "name": "さらさら",
+      "name": "さらさら AIart",
       "group": "default"
     },
     "TheNBACentel": {
@@ -5808,7 +5803,7 @@
     },
     "farokh": {
       "tag": "Rug Radio 的创始人",
-      "name": "Farokh",
+      "name": "Farokh (Perma/Bull)",
       "group": "default"
     },
     "Christianeth": {
@@ -6828,7 +6823,7 @@
     },
     "imperooterxbt": {
       "tag": "大V",
-      "name": "scooter",
+      "name": "mezoteric",
       "group": "default"
     },
     "News_Of_Alpha": {
@@ -9625,7 +9620,192 @@
       "tag": "33DAO 联合创始人",
       "name": "Restart",
       "group": "default"
+    },
+    "FalconStable": {
+      "tag": "DWF 新币",
+      "name": "Falcon Finance",
+      "group": "default"
+    },
+    "transitive_bs": {
+      "tag": "微软和亚马逊 前员工",
+      "name": "Travis Fischer",
+      "group": "default"
+    },
+    "Rainmaker1973": {
+      "tag": "工程师",
+      "name": "Massimo",
+      "group": "default"
+    },
+    "chooserich": {
+      "tag": "BoDoggosENT 的联合创始人兼 CEO",
+      "name": "Nick O’Neill",
+      "group": "default"
+    },
+    "stoolpresidente": {
+      "tag": "Barstool Sports 的创始人",
+      "name": "Dave Portnoy",
+      "group": "default"
+    },
+    "moonshotdotcc": {
+      "tag": "Moonshot",
+      "name": "Moonshot",
+      "group": "default"
+    },
+    "SamElfa0": {
+      "tag": "TRON 网络的推动者",
+      "name": "Sam",
+      "group": "default"
+    },
+    "thebillzh": {
+      "tag": "Tribe.run 创始人",
+      "name": "billzh",
+      "group": "default"
+    },
+    "prabowo": {
+      "tag": "印度尼西亚共和国第八总统的官方帐户",
+      "name": "Prabowo Subianto",
+      "group": "default"
+    },
+    "jamesfickel": {
+      "tag": "以太坊公益创作者",
+      "name": "James Fickel",
+      "group": "default"
+    },
+    "four_meme_": {
+      "tag": "Four.Meme",
+      "name": "Four.Meme",
+      "group": "default"
+    },
+    "coingecko": {
+      "tag": "全球最大的独立加密数据聚合器",
+      "name": "CoinGecko",
+      "group": "default"
+    },
+    "functi0nZer0": {
+      "tag": "曾在以太坊基金会担任财务协调员",
+      "name": "laurence",
+      "group": "default"
+    },
+    "BrunoRguezP": {
+      "tag": "古巴总理",
+      "name": "Bruno Rodríguez P",
+      "group": "default"
+    },
+    "LulaOficial": {
+      "tag": "巴西总统",
+      "name": "Lula",
+      "group": "default"
+    },
+    "kapursanat": {
+      "tag": "龙飞投资 成员",
+      "name": "Sanat",
+      "group": "default"
+    },
+    "_anishagnihotri": {
+      "tag": "Ritual 创始成员",
+      "name": "Anish Agnihotri",
+      "group": "default"
+    },
+    "shayonsengupta": {
+      "tag": "Multicoin Capital 的投资合伙人",
+      "name": "shayon",
+      "group": "default"
+    },
+    "jelena_noble": {
+      "tag": "noble_xyz  的创始人",
+      "name": "Jelena",
+      "group": "default"
+    },
+    "andy8052": {
+      "tag": "andy",
+      "name": "andy",
+      "group": "default"
+    },
+    "MegaApe_": {
+      "tag": "DJ(Ø,G)",
+      "name": "DJ(Ø,G)",
+      "group": "default"
+    },
+    "USTreasury": {
+      "tag": "美国财政部",
+      "name": "Treasury Department",
+      "group": "default"
+    },
+    "klarnaseb": {
+      "tag": "Klarna的联合创始人兼CEO",
+      "name": "Sebastian Siemiatkowski",
+      "group": "default"
+    },
+    "alifarhat79": {
+      "tag": "大V",
+      "name": "Not Jerome Powell",
+      "group": "default"
+    },
+    "marko_elez": {
+      "tag": "X 附属账号 大V关注",
+      "name": "Marko Elez",
+      "group": "default"
+    },
+    "RogerJStoneJr": {
+      "tag": "美国政治偶像和畅销书作家",
+      "name": "Roger Stone",
+      "group": "default"
+    },
+    "nftmufettisi": {
+      "tag": "Whale3 创始人",
+      "name": "mufettis",
+      "group": "default"
+    },
+    "nixxholas": {
+      "tag": "JupiterExchange  的开发者",
+      "name": "nicholas",
+      "group": "default"
+    },
+    "boogaav": {
+      "tag": "Zerion 合作伙伴",
+      "name": "booga.eth",
+      "group": "default"
+    },
+    "mitchellvii": {
+      "tag": "YourVoice™ Studios的CEO",
+      "name": "Bill Mitchell",
+      "group": "default"
+    },
+    "0xMughal": {
+      "tag": "IVX 营销与传播主管",
+      "name": "Wajahat Mughal",
+      "group": "default"
+    },
+    "HesterPeirce": {
+      "tag": "美国证券交易委员会（SEC）的委员  加密妈妈",
+      "name": "Hester Peirce",
+      "group": "default"
+    },
+    "SECGov": {
+      "tag": "SEC ！！！",
+      "name": "海丝特·皮尔斯（Hester Peirce）U.S. Securities and Exchange Commission",
+      "group": "default"
+    },
+    "IMFNews": {
+      "tag": "国际货币基金组织",
+      "name": "IMF",
+      "group": "default"
+    },
+    "IFC_org": {
+      "tag": "国际货币基金组织",
+      "name": "国际货币基金组织IFC",
+      "group": "default"
+    },
+    "kcryptoinvest": {
+      "tag": "asx_capital  联合创始人",
+      "name": "Yieldus Maximus (Ben)",
+      "group": "default"
+    },
+    "JamesOKeefeIII": {
+      "tag": "Project Veritas CEO",
+      "name": "James O'Keefe",
+      "group": "default"
     }
   },
-  "$myTwitterNoteTime": 1738809714930
+  "$myTwitterNoteTime": 1739127539872
 }
