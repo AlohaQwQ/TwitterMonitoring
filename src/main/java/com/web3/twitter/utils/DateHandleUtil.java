@@ -282,6 +282,28 @@ public class DateHandleUtil {
     }
 
     /**
+     *
+     * @param inputTime
+     * @return
+     */
+    public static long calculateSecondDifference(String inputTime) {
+        if (inputTime == null) {
+            throw new IllegalArgumentException("输入时间不能为空");
+        }
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+        try {
+            // 将输入时间字符串解析为 LocalDateTime
+            LocalDateTime parsedTime = LocalDateTime.parse(inputTime, formatter);
+            // 获取当前时间
+            LocalDateTime now = LocalDateTime.now();
+            // 计算两个时间之间的秒数差
+            return ChronoUnit.SECONDS.between(parsedTime, now);
+        } catch (DateTimeParseException e) {
+            throw new IllegalArgumentException("输入时间格式不正确", e);
+        }
+    }
+
+    /**
      * 计算传入时间与当前时间的分钟差值
      * @param inputTime
      * @return
@@ -295,6 +317,32 @@ public class DateHandleUtil {
         // 计算两个时间之间的分钟差
         long minutesDifference = ChronoUnit.MINUTES.between(parsedTime, now);
         return minutesDifference;
+    }
+
+    /**
+     * 获取2分钟后的时间戳
+     * @param inputTime
+     * @return
+     */
+    public static String getTimeAfterTwoMinutes(String inputTime) {
+        DateTimeFormatter inputFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+        LocalDateTime parsedTime = LocalDateTime.parse(inputTime, inputFormatter); // 解析输入时间
+        LocalDateTime twoMinutesLater = parsedTime.plusMinutes(2); // 增加2分钟
+        DateTimeFormatter outputFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"); // 格式化器
+        return twoMinutesLater.format(outputFormatter); // 返回格式化后的时间字符串
+    }
+
+    /**
+     *
+     * @param inputTime
+     * @return
+     */
+    public static String getTimeAfterSecond(String inputTime) {
+        DateTimeFormatter inputFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+        LocalDateTime parsedTime = LocalDateTime.parse(inputTime, inputFormatter); // 解析输入时间
+        LocalDateTime twoMinutesLater = parsedTime.plusSeconds(20); // 增加20秒
+        DateTimeFormatter outputFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"); // 格式化器
+        return twoMinutesLater.format(outputFormatter); // 返回格式化后的时间字符串
     }
 
 }

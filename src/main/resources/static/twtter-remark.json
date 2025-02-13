@@ -1510,15 +1510,6 @@
       "isSelected": true,
       "editable": false
     },
-    "WatcherGuru": {
-      "tag": "新闻 很多关",
-      "name": "Watcher.Guru",
-      "group": "default",
-      "isExists": true,
-      "isShow": true,
-      "isSelected": true,
-      "editable": false
-    },
     "Sony": {
       "tag": "Sony",
       "name": "Sony",
@@ -1880,7 +1871,7 @@
       "editable": false
     },
     "solana_devs": {
-      "tag": "Solana 关注",
+      "tag": "Solana 开发人员的新闻",
       "name": "Solana Developers",
       "group": "default",
       "isExists": true,
@@ -2237,7 +2228,7 @@
       "group": "default"
     },
     "DegenerateNews": {
-      "tag": "关注有东西",
+      "tag": "DEGEN  新闻",
       "name": "DEGEN NEWS",
       "group": "default"
     },
@@ -6203,7 +6194,7 @@
     },
     "mheinrich": {
       "tag": "Zero Gravity 联合创始人兼首席执行官、Pioneer Fund 风险合伙人",
-      "name": "Michael Heinrich - deAIOS",
+      "name": "Michael Heinrich -- We are (Ø,G)",
       "group": "default"
     },
     "im_manderson": {
@@ -8151,11 +8142,6 @@
       "name": "ChainGPT",
       "group": "default"
     },
-    "DexCheck_io": {
-      "tag": "新AI  附属账号贼强 刮刀！",
-      "name": "DexCheck AI",
-      "group": "default"
-    },
     "CubaMINREX": {
       "tag": "古巴共和国外交部",
       "name": "Cancillería de Cuba",
@@ -9805,7 +9791,177 @@
       "tag": "Project Veritas CEO",
       "name": "James O'Keefe",
       "group": "default"
+    },
+    "ethereumfndn": {
+      "tag": "以太坊基金会",
+      "name": "Ethereum Foundation",
+      "group": "default"
+    },
+    "TheDevanshMehta": {
+      "tag": "以太坊基金会 成员",
+      "name": "Devansh Mehta",
+      "group": "default"
+    },
+    "misterkevin_rs": {
+      "tag": "AI 的协议工程师",
+      "name": "misterkevin.sol",
+      "group": "default"
+    },
+    "osf_rekt": {
+      "tag": "OSF  大V",
+      "name": "Rekt饮料OSF",
+      "group": "default"
+    },
+    "justindross": {
+      "tag": "Opendoor 创始人",
+      "name": "JD Ross",
+      "group": "default"
+    },
+    "officialABAT": {
+      "tag": "尼日利亚现任总统",
+      "name": "Bola Ahmed Tinubu",
+      "group": "default"
+    },
+    "cptgrumpus": {
+      "tag": "工程师",
+      "name": "cpt.grumpus",
+      "group": "default"
+    },
+    "FA_Touadera": {
+      "tag": "中非共和国总统",
+      "name": "德劲新闻Faustin-Archange Touadéra",
+      "group": "default"
+    },
+    "SonicLabs": {
+      "tag": "Sonic Labs",
+      "name": "Sonic Labs",
+      "group": "default"
+    },
+    "wizardofsoho": {
+      "tag": "MEME  大V",
+      "name": "Wizard Of SoHo (,)",
+      "group": "default"
+    },
+    "SenJohnKennedy": {
+      "tag": "路易斯安那州参议员",
+      "name": "John Kennedy",
+      "group": "default"
+    },
+    "banksy": {
+      "tag": "Banksy",
+      "name": "Banksy",
+      "group": "default"
+    },
+    "WatcherGuru": {
+      "tag": "Watcher.Guru  新闻",
+      "name": "Watcher.Guru",
+      "group": "default"
+    },
+    "0xmidjet": {
+      "tag": "MEME  大V",
+      "name": "Midjet",
+      "group": "default"
+    },
+    "BarstoolBigCat": {
+      "tag": "大V",
+      "name": "Big Cat",
+      "group": "default"
+    },
+    "dillyxcooks": {
+      "tag": "MEME  大V",
+      "name": "$dilly",
+      "group": "default"
+    },
+    "EndWokeness": {
+      "tag": "新闻 媒体",
+      "name": "End Wokeness",
+      "group": "default"
+    },
+    "VP": {
+      "tag": "美国第50副总裁",
+      "name": "Vice President JD Vance",
+      "group": "default"
+    },
+    "lisamurkowski": {
+      "tag": "美国参议员",
+      "name": "Sen. Lisa Murkowski",
+      "group": "default"
+    },
+    "afink1015": {
+      "tag": "XAI 创始人",
+      "name": "Adam Finkelstein",
+      "group": "default"
+    },
+    "matiroy": {
+      "tag": "xAI 的 Grok 项目负责人",
+      "name": "Mati Roy",
+      "group": "default"
+    },
+    "herelle_jean": {
+      "tag": "crunchDAO 创始人",
+      "name": "jean herelle",
+      "group": "default"
+    },
+    "virtuals_io": {
+      "tag": "Virtuals Protocol",
+      "name": "Virtuals Protocol",
+      "group": "default"
+    },
+    "epaleezeldin": {
+      "tag": "环境保护局第17届管理员",
+      "name": "Lee Zeldin",
+      "group": "default"
+    },
+    "abrahamcr": {
+      "tag": "espaciocripto 创始人",
+      "name": "Ab",
+      "group": "default"
+    },
+    "TomCottonAR": {
+      "tag": "美国参议员",
+      "name": "Tom Cotton",
+      "group": "default"
+    },
+    "jijo_exe": {
+      "tag": "jijo MEME大V",
+      "name": "jijo",
+      "group": "default"
+    },
+    "0xMert_": {
+      "tag": "Helius CEO",
+      "name": "mert | helius.dev",
+      "group": "default"
+    },
+    "esa": {
+      "tag": "欧洲航天局",
+      "name": "European Space Agency",
+      "group": "default"
+    },
+    "FTI_US": {
+      "tag": "富兰克林·",
+      "name": "Franklin Templeton",
+      "group": "default"
+    },
+    "tsoding": {
+      "tag": "前东欧外包程序员",
+      "name": "Тsфdiиg",
+      "group": "default"
+    },
+    "brandon": {
+      "tag": "Meow  主席",
+      "name": "Brandon Arvanaghi",
+      "group": "default"
+    },
+    "nickducoff": {
+      "tag": "Solana 基金会的机构增长大佬",
+      "name": "Nick Ducoff",
+      "group": "default"
+    },
+    "SolanaCollectiv": {
+      "tag": "Solana 生态内容创作者团队",
+      "name": "Solana Collective",
+      "group": "default"
     }
   },
-  "$myTwitterNoteTime": 1739127539872
+  "$myTwitterNoteTime": 1739390242122
 }

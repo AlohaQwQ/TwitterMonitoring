@@ -40,7 +40,7 @@ public class TelegramBot implements SpringLongPollingBot, LongPollingSingleThrea
 //        CHAT_ID_LIST.add("-4694062162");//重点频道
         CHAT_ID_LIST.add("-4655003313");//pump扫推监控
         CHAT_ID_LIST.add("-1002250310542");//pump扫推监控备用
-//        CHAT_ID_LIST.add("-1002358331062");
+//        CHAT_ID_LIST.add("-1002358331062");//旧频道(免费公开)
 //        CHAT_ID_LIST.add("-1002190498173");
 //        CHAT_ID_LIST.add("7146351054");
 //        CHAT_ID_LIST.add("-4517558084");
@@ -89,9 +89,28 @@ public class TelegramBot implements SpringLongPollingBot, LongPollingSingleThrea
 //        }
         //List<String> chatIdList = redisCache.getCacheList("chat_id");
 
+        if(StringUtils.isNotEmpty(textImport) && textImport.length()>2) {
+            SendMessage methodImport = new SendMessage("-1002472298104", textImport);
+            methodImport.setParseMode("HTML");
+            methodImport.setDisableWebPagePreview(true);
+            methodImport.setReplyMarkup(replyMarkup);
+            Message responseMessageImport = new Message();
+            responseMessageImport.setChat(GROUP_CHAT);
+            responseMessageImport.setFrom(TEST_USER);
+            responseMessageImport.setText(textImport);
+            //responseMessage.setReplyMarkup(replyMarkup);
+            Message parsedMessageImport = new Message();
+            try {
+                telegramClient.execute(methodImport);
+            } catch (TelegramApiException e) {
+                LogUtils.error("Shiyi-bot重点频道发送消息异常: {}.", parsedMessageImport, e);
+                e.printStackTrace();
+            }
+        }
+
         //超级重点频道
         if(StringUtils.isNotEmpty(textMoreImport) && textMoreImport.length()>2){
-            SendMessage methodImport = new SendMessage("-1002472298104", textMoreImport);
+            SendMessage methodImport = new SendMessage("-1002429995604", textMoreImport);
             methodImport.setParseMode("HTML");
             methodImport.setDisableWebPagePreview(true);
             methodImport.setReplyMarkup(replyMarkup);
@@ -105,23 +124,6 @@ public class TelegramBot implements SpringLongPollingBot, LongPollingSingleThrea
                 telegramClient.execute(methodImport);
             } catch (TelegramApiException e) {
                 LogUtils.error("Shiyi-bot-pump to the moon频道发送消息异常: {}.", parsedMessageImport, e);
-                e.printStackTrace();
-            }
-
-            methodImport = new SendMessage("-1002429995604", textMoreImport);
-            methodImport.setParseMode("HTML");
-            methodImport.setDisableWebPagePreview(true);
-            methodImport.setReplyMarkup(replyMarkup);
-            responseMessageImport = new Message();
-            responseMessageImport.setChat(GROUP_CHAT);
-            responseMessageImport.setFrom(TEST_USER);
-            responseMessageImport.setText(textMoreImport);
-            //responseMessage.setReplyMarkup(replyMarkup);
-            parsedMessageImport = new Message();
-            try {
-                telegramClient.execute(methodImport);
-            } catch (TelegramApiException e) {
-                LogUtils.error("Shiyi-bot超级重点频道发送消息异常: {}.", parsedMessageImport, e);
                 e.printStackTrace();
             }
         }
@@ -172,6 +174,43 @@ public class TelegramBot implements SpringLongPollingBot, LongPollingSingleThrea
                 e.printStackTrace();
             }
         });
+        LogUtils.info("sendText-bot发送消息完成: {}", DateUtils.getTimeSSS());
+    }
+
+    /**
+     * 普通频道延迟推送消息
+     * @param text
+     * @param replyMarkup
+     */
+    public void sendPublicText(String text, InlineKeyboardMarkup replyMarkup) {
+//        log.info("发送消息参数: {}.", text);
+//        if (!redisCache.hasKey("chat_id")){
+//            LogUtils.error("没有获取到chatID: {}.", text);
+//            //设置默认聊天Id
+//            List<String> chatIds = new ArrayList<>();
+//            chatIds.add("-1002270508207");
+//            redisCache.setCacheList("chat_id", chatIds);
+//        }
+        //List<String> chatIdList = redisCache.getCacheList("chat_id");
+
+        if(StringUtils.isNotEmpty(text) && text.length()>2) {
+            SendMessage methodImport = new SendMessage("-1002358331062", text);
+            methodImport.setParseMode("HTML");
+            methodImport.setDisableWebPagePreview(true);
+            methodImport.setReplyMarkup(replyMarkup);
+            Message responseMessageImport = new Message();
+            responseMessageImport.setChat(GROUP_CHAT);
+            responseMessageImport.setFrom(TEST_USER);
+            responseMessageImport.setText(text);
+            //responseMessage.setReplyMarkup(replyMarkup);
+            Message parsedMessageImport = new Message();
+            try {
+                telegramClient.execute(methodImport);
+            } catch (TelegramApiException e) {
+                LogUtils.error("Shiyi-bot普通频道发送消息异常: {}.", parsedMessageImport, e);
+                e.printStackTrace();
+            }
+        }
         LogUtils.info("sendText-bot发送消息完成: {}", DateUtils.getTimeSSS());
     }
 
