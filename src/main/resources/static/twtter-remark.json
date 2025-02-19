@@ -1341,7 +1341,7 @@
     },
     "4chanintern": {
       "tag": "A16Z合作伙伴",
-      "name": "4chan for Life - ai16z (4,4)",
+      "name": "4chan ♱",
       "group": "default",
       "isExists": true,
       "isShow": true,
@@ -1566,7 +1566,7 @@
     },
     "kkk_ethe": {
       "tag": "Kkk.eth",
-      "name": "Kkk.eth",
+      "name": "Kkk（24小时TG语音扫链）",
       "group": "default",
       "isExists": true,
       "isShow": true,
@@ -1970,7 +1970,7 @@
       "editable": false
     },
     "elizamondegreen": {
-      "tag": "创始人关注！",
+      "tag": "研究员和自由撰稿人",
       "name": "Eliza Mondegreen",
       "group": "default",
       "isExists": true,
@@ -2609,7 +2609,7 @@
     },
     "MrBigWhaleREAL": {
       "tag": "新闻",
-      "name": "Mr. BIG WHALE",
+      "name": "Mr. WHALE  BNB SEASON",
       "group": "default"
     },
     "cookdotmeme": {
@@ -4689,7 +4689,7 @@
     },
     "maid_crypto": {
       "tag": "女仆alpha",
-      "name": "CryptoMaid加密女仆お嬢様 $oort $luag",
+      "name": "CryptoMaid加密女仆お嬢様 $luag",
       "group": "default"
     },
     "teslaownersSV": {
@@ -5383,7 +5383,7 @@
       "group": "default"
     },
     "arcdotfun": {
-      "tag": "arc 90M",
+      "tag": "arc 370m",
       "name": "arc",
       "group": "default"
     },
@@ -5799,7 +5799,7 @@
     },
     "Christianeth": {
       "tag": "NextGen Digital Venture 与 Weirdo Ghost Gang 合伙人",
-      "name": "Christian2022.eth",
+      "name": "Christian (Building @0xinfini)",
       "group": "default"
     },
     "ciaobelindazhou": {
@@ -5914,7 +5914,7 @@
     },
     "KyeGomezB": {
       "tag": "swarms 创始人",
-      "name": "Kye Gomez (Hiring)",
+      "name": "Kye Gomez (ultra/acc)",
       "group": "default"
     },
     "XShop": {
@@ -5954,7 +5954,7 @@
     },
     "avgshitcoiner": {
       "tag": "鲸鱼 大户",
-      "name": "0xInvisiblemoon",
+      "name": "0xInvisiblemoon  tode/acc",
       "group": "default"
     },
     "Windows": {
@@ -6814,7 +6814,7 @@
     },
     "imperooterxbt": {
       "tag": "大V",
-      "name": "mezoteric",
+      "name": "scooter",
       "group": "default"
     },
     "News_Of_Alpha": {
@@ -7614,7 +7614,7 @@
     },
     "wisekim_eth": {
       "tag": "Delabs Games 营销总监",
-      "name": "wisekim.eth $GAME",
+      "name": "wisekim.eth",
       "group": "default"
     },
     "j_eth_id": {
@@ -7994,7 +7994,7 @@
     },
     "DiogenesCasares": {
       "tag": "Stream Finance 创始人",
-      "name": "DC | In SF",
+      "name": "DC | En BA",
       "group": "default"
     },
     "valeyo777": {
@@ -9809,7 +9809,7 @@
     },
     "osf_rekt": {
       "tag": "OSF  大V",
-      "name": "Rekt饮料OSF",
+      "name": "OSF",
       "group": "default"
     },
     "justindross": {
@@ -9961,7 +9961,247 @@
       "tag": "Solana 生态内容创作者团队",
       "name": "Solana Collective",
       "group": "default"
+    },
+    "karlnehammer": {
+      "tag": "奥地利共和国大臣",
+      "name": "Karl Nehammer",
+      "group": "default"
+    },
+    "RaydiumProtocol": {
+      "tag": "Raydium",
+      "name": "Raydium",
+      "group": "default"
+    },
+    "SenAdamSchiff": {
+      "tag": "美国参议员",
+      "name": "Adam Schiff",
+      "group": "default"
+    },
+    "techleadhd": {
+      "tag": "前Google / Meta技术负责人",
+      "name": "TechLead",
+      "group": "default"
+    },
+    "themarcba": {
+      "tag": "自由职业的全栈工程师",
+      "name": "Marc Backes",
+      "group": "default"
+    },
+    "austin_rief": {
+      "tag": "Morning Brew的联合创始人",
+      "name": "Austin Rief",
+      "group": "default"
+    },
+    "dennishegstad": {
+      "tag": "IRU 联合创始人",
+      "name": "dennis hegstad",
+      "group": "default"
+    },
+    "SecKennedy": {
+      "tag": "HHS秘书",
+      "name": "Secretary Kennedy",
+      "group": "default"
+    },
+    "OdailyChina": {
+      "tag": "Odaily",
+      "name": "Odaily@ChinaCryptoNews",
+      "group": "default"
+    },
+    "BitRobotNetwork": {
+      "tag": "AI",
+      "name": "BitRobot Network",
+      "group": "default"
+    },
+    "SOLBigBrain": {
+      "tag": "Big Brain Holdings 创始人",
+      "name": "S◎L Big Brain",
+      "group": "default"
+    },
+    "Dan_Patterson_": {
+      "tag": "Sfermion 普通合伙人",
+      "name": "Dan Patterson",
+      "group": "default"
+    },
+    "amanda0x": {
+      "tag": "Collab+Currency 投资者",
+      "name": "amanda",
+      "group": "default"
+    },
+    "CryptoApe0": {
+      "tag": "MultiChain Advisors 创始人兼CEO",
+      "name": "CryptoApe",
+      "group": "default"
+    },
+    "TJ_Kawa": {
+      "tag": "Everyrealm 联合创始人",
+      "name": "TJ",
+      "group": "default"
+    },
+    "abhihereandnow": {
+      "tag": "goodable 的联合创始人",
+      "name": "Abhi Raheja",
+      "group": "default"
+    },
+    "g0naji": {
+      "tag": "AI艺术家",
+      "name": "g0naji",
+      "group": "default"
+    },
+    "aljaparis": {
+      "tag": "trilitech 艺术主管",
+      "name": "Aleksandra Art",
+      "group": "default"
+    },
+    "emilyxxie": {
+      "tag": "视觉艺术家",
+      "name": "Emily Xie",
+      "group": "default"
+    },
+    "flngr": {
+      "tag": "前端AI工程师",
+      "name": "Julian Bilcke",
+      "group": "default"
+    },
+    "Hackatao": {
+      "tag": "Hackatao  艺术家 A级",
+      "name": "Hackatao ♛",
+      "group": "default"
+    },
+    "ClaireSilver12": {
+      "tag": "AI 艺术先锋 A级",
+      "name": "Claire Silver",
+      "group": "default"
+    },
+    "fewocious": {
+      "tag": "FEWOCiOUS 艺术家 A级",
+      "name": "FEWOCiOUS",
+      "group": "default"
+    },
+    "muratpak": {
+      "tag": "Pak 艺术家 S级",
+      "name": "Pak",
+      "group": "default"
+    },
+    "womensart1": {
+      "tag": "土耳其 艺术家",
+      "name": "#WOMENSART",
+      "group": "default"
+    },
+    "inversebrah": {
+      "tag": "smolting (wassie, verse)",
+      "name": "smolting (wassie, verse)",
+      "group": "default"
+    },
+    "realJeffreyP": {
+      "tag": "前QP/MeetMe的创始人兼CEO",
+      "name": "Jeffrey Peterson",
+      "group": "default"
+    },
+    "_RichardTeng": {
+      "tag": "Binance  CEO",
+      "name": "Richard Teng",
+      "group": "default"
+    },
+    "ohareyoufat": {
+      "tag": "艺术家 A级",
+      "name": "Tony T.",
+      "group": "default"
+    },
+    "EthanEvansVP": {
+      "tag": "亚马逊前副总裁",
+      "name": "Ethan Evans",
+      "group": "default"
+    },
+    "bitgetglobal": {
+      "tag": "Bitget",
+      "name": "Bitget",
+      "group": "default"
+    },
+    "rohitdotmittal": {
+      "tag": "Stilt 联合创始人/首席执行官",
+      "name": "Rohit Mittal",
+      "group": "default"
+    },
+    "accelxr": {
+      "tag": "elizaOS  首席运营官",
+      "name": "Accelxr",
+      "group": "default"
+    },
+    "Amie_AI_One": {
+      "tag": "isaacx 顾问 研究与生态系统 @elizaos AI16Z",
+      "name": "Amie",
+      "group": "default"
+    },
+    "NFTDefiFutures": {
+      "tag": "NDF",
+      "name": "NDF",
+      "group": "default"
+    },
+    "shoucccc": {
+      "tag": "Solayer创始人",
+      "name": "Chaofan Shou (svm/acc)",
+      "group": "default"
+    },
+    "MikeSofaer": {
+      "tag": "Pylons 首席执行官",
+      "name": "Michael Sofaer",
+      "group": "default"
+    },
+    "prajitn": {
+      "tag": "Nium 联合创始人",
+      "name": "Prajit Nanu",
+      "group": "default"
+    },
+    "tejeshwi_sharma": {
+      "tag": "peakxvpartners 的合伙人",
+      "name": "Tejeshwi Sharma",
+      "group": "default"
+    },
+    "deepwormxyz": {
+      "tag": "DeepWorm  100M",
+      "name": "DeepWorm",
+      "group": "default"
+    },
+    "michaeljknowles": {
+      "tag": "美国保守派大V",
+      "name": "Michael Knowles",
+      "group": "default"
+    },
+    "PepeBoost888": {
+      "tag": "pepe boost",
+      "name": "pepe boost",
+      "group": "default"
+    },
+    "BasedMikeLee": {
+      "tag": "Mike Lee",
+      "name": "Mike Lee",
+      "group": "default"
+    },
+    "Cetipo": {
+      "tag": "solanamevbot的创造者",
+      "name": "Cetipo",
+      "group": "default"
+    },
+    "tonykebot": {
+      "tag": "Solayer 工程师",
+      "name": "Tony KΞ",
+      "group": "default"
+    },
+    "ViewsOfChris": {
+      "tag": "TKX的联合创始人",
+      "name": "Chris Lee",
+      "group": "default"
+    },
+    "ChandlerGuo": {
+      "tag": "宝二爷",
+      "name": "ChandlerGuo 郭宏才 宝二爷",
+      "group": "default"
+    },
+    "openseafdn": {
+      "tag": "Opensea基金会",
+      "name": "OpenSea Foundation",
+      "group": "default"
     }
   },
-  "$myTwitterNoteTime": 1739390242122
+  "$myTwitterNoteTime": 1739667469438
 }

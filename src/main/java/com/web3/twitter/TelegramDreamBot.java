@@ -83,17 +83,21 @@ public class TelegramDreamBot implements SpringLongPollingBot, LongPollingSingle
             SendMessage method = new SendMessage(chatID, text);
             method.setParseMode("HTML");
             method.setDisableWebPagePreview(true);
-            method.setReplyMarkup(replyMarkup);
+            if(replyMarkup!=null){
+                method.setReplyMarkup(replyMarkup);
+            }
             Message responseMessage = new Message();
             responseMessage.setChat(GROUP_CHAT);
             responseMessage.setFrom(TEST_USER);
             responseMessage.setText(text);
-            responseMessage.setReplyMarkup(replyMarkup);
+            if(replyMarkup!=null){
+                responseMessage.setReplyMarkup(replyMarkup);
+            }
             Message parsedMessage = new Message();
             try {
                 telegramClient.execute(method);
             } catch (TelegramApiException e) {
-                LogUtils.error("DreamBot发送消息异常: {}.", parsedMessage, e);
+                LogUtils.error("DreamBot发送消息异常: %s %s", parsedMessage, e);
                 e.printStackTrace();
             }
         });

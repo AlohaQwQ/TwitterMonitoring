@@ -67,6 +67,16 @@ public class MonitorCoin {
     private String devWallet;
 
     /**
+     * bsc Dev用户id
+     */
+    private String bscDevUserId;
+
+    /**
+     * bsc pancake交易链接
+     */
+    private String tradeUrl;
+
+    /**
      * dev历史发射详情
      */
     private String devPumpHistory;
@@ -167,6 +177,22 @@ public class MonitorCoin {
 
     public void setDevWallet(String devWallet) {
         this.devWallet = devWallet;
+    }
+
+    public String getBscDevUserId() {
+        return bscDevUserId;
+    }
+
+    public void setBscDevUserId(String bscDevUserId) {
+        this.bscDevUserId = bscDevUserId;
+    }
+
+    public String getTradeUrl() {
+        return tradeUrl;
+    }
+
+    public void setTradeUrl(String tradeUrl) {
+        this.tradeUrl = tradeUrl;
     }
 
     public String getDevPumpHistory() {

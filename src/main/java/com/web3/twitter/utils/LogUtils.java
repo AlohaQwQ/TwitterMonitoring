@@ -29,6 +29,12 @@ public class LogUtils {
         return String.format("[%s] [%s] [%s] [%s] %s", timestamp, level, getCallerInfo(), label, getBlock(msg));
     }
 
+    private static String getFormattedMessage(String level, String label, Object... arguments) {
+        String timestamp = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new Date());
+        String formattedMessage = String.format(label, arguments);  // Format the label with the arguments
+        return String.format("[%s] [%s] [%s] [%s] %s", timestamp, level, getCallerInfo(), label, formattedMessage);
+    }
+
     private static String getCallerInfo() {
         StackTraceElement[] stackTrace = Thread.currentThread().getStackTrace();
         return stackTrace[4].getClassName() + "." + stackTrace[4].getMethodName() + ":" + stackTrace[4].getLineNumber();
@@ -38,12 +44,13 @@ public class LogUtils {
         log.error(getFormattedMessage("ERROR", label, msg));
     }
 
+
     public static void error(String var1, Object var2, Object var3) {
-        log.error(var1, var2, var3);
+        log.error(getFormattedMessage("ERROR", var1, var2, var3));
     }
 
-    public static void error(String var1, Object... arguments) {
-        log.error(var1, arguments);
+    public static void error(String label, Object... arguments) {
+        log.error(getFormattedMessage("ERROR", label, arguments));
     }
 
     public static void info(String label,Object msg) {

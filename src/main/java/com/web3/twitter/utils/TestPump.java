@@ -35,7 +35,7 @@ public class TestPump {
         String tweetUrl = String.format("https://x.com/%s/status/%s", "qq", 1231231);
         boolean hasPump = false;
         //全文匹配ca
-        MonitorCoin matchCoin = SolanaContractValidator.matchSolanaContractLineBreak(twitterText);
+        /*MonitorCoin matchCoin = SolanaContractValidator.matchSolanaContractLineBreak(twitterText);
         if(matchCoin!=null && StringUtils.isNotEmpty(matchCoin.getCoinCa())){
             twitterText = "https://pump.fun/coin/" + matchCoin.getCoinCa();
             hasPump = true;
@@ -48,7 +48,7 @@ public class TestPump {
             if(parseResult<0){
                 LogUtils.error("legacy url包含ca发送推文异常: {}", twitterText);
             }
-        }
+        }*/
     }
 
     private static int parsingTweets(MonitorUser user, String tweetUrl, String createdDate, String nowTime, String[] fullText){

@@ -289,7 +289,7 @@ public class RedisCache
                                  keysTmp.add(key);
                              }
                          } catch (Exception e) {
-                             LogUtils.error("解析redis用户缓存异常: {}", key, e);
+                             LogUtils.error("解析redis用户缓存异常: %s %s", key, e);
                              e.printStackTrace();
                          }
                      }

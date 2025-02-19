@@ -9,11 +9,16 @@ import org.checkerframework.checker.units.qual.K;
 
 import java.util.Arrays;
 import java.util.concurrent.TimeUnit;
+import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class SolanaContractValidator {
 
-    private static final String SOLANA_ADDRESS_REGEX = "^[1-9A-HJ-NP-Za-km-z]{40}pump$";
+    // 修正正则表达式，匹配44位Base58编码的Solana地址
+    private static final String SOLANA_ADDRESS_REGEX =
+            "(?<![0-9A-HJ-NP-Za-km-z])" + // 前向断言，确保地址独立
+                    "[1-9A-HJ-NP-Za-km-z]{44}" +  // 包含小写o的Base58字符集
+                    "(?![0-9A-HJ-NP-Za-km-z])";   // 后向断言
     private static final Pattern SOLANA_ADDRESS_PATTERN = Pattern.compile(SOLANA_ADDRESS_REGEX);
 
     public static boolean isSolanaContract(String address) {
@@ -30,37 +35,53 @@ public class SolanaContractValidator {
         return result;
     }
 
-    public static MonitorCoin matchSolanaContractLineBreak(String text) {
-        MonitorCoin coin = new MonitorCoin();
-        boolean match;
-        if (StringUtils.isEmpty(text)) {
-            return coin;
+    public static String matchSolanaContractLineBreak2(String text) {
+        String wallet = "";
+        if (StringUtils.isEmpty(text)){
+            return wallet;
         }
-        // 按照空格、换行符、逗号分割并过滤空字符串
-        String rex = "[\\s,:：.\\n]+";
-        // 按照空格、换行符、逗号、中英文冒号分割
-        String[] partsOne = text.split(rex, -50);
-        for (String partText : partsOne) {
-            //外层匹配成功
-            //匹配以 "pump" 结尾的文本
-            match = SOLANA_ADDRESS_PATTERN.matcher(partText).matches();
-            if(match) {
-                coin.setCoinCa(partText);
-                break;
+
+        Matcher matcher = SOLANA_ADDRESS_PATTERN.matcher(text);
+        if (matcher.find()) {
+            wallet = matcher.group();
+        }
+        return wallet;
+    }
+
+    public static String matchSolanaWalletLineBreak(String text) {
+        String wallet = "";
+        if (StringUtils.isEmpty(text)) {
+            return wallet;
+        }
+
+        // 使用更精确的分割逻辑，确保分割后的部分尽可能包含独立地址
+        String[] parts = text.split("[\\s,:：.\\n]+");
+        for (String part : parts) {
+            part = part.toLowerCase();
+            // 直接检查每个分割后的部分是否为合法地址
+            if (SOLANA_ADDRESS_PATTERN.matcher(part).matches()) {
+                wallet = part;
+                return wallet; // 找到第一个匹配项后立即返回
             }
-            //按照 中文英文|英文中文|中文字符|字符中文的方式来切割
-            String[] partsTwo = partText.split("(?<=\\p{IsHan})(?=\\p{IsLatin})|(?<=\\p{IsLatin})(?=\\p{IsHan})" +
-                    "|(?<=\\p{IsHan})(?=[\\d]+)|(?<=[\\d]+)(?=\\p{IsHan})", -50);
-            String[] filteredParts = Arrays.stream(partsTwo).filter(part -> !part.isEmpty()).toArray(String[]::new);
-            for (String partMatch : filteredParts) {
-                match = SOLANA_ADDRESS_PATTERN.matcher(partMatch).matches();
-                if(match) {
-                    coin.setCoinCa(partMatch);
-                    break;
+
+            // 处理中英混合内容（例如："合约地址ABC123..." -> ["合约地址", "ABC123..."]）
+            String[] subParts = part.split("(?<=\\p{IsHan})(?=\\p{IsLatin})|(?<=\\p{IsLatin})(?=\\p{IsHan})");
+            for (String subPart : subParts) {
+                subPart = subPart.toLowerCase();
+                if (SOLANA_ADDRESS_PATTERN.matcher(subPart).matches()) {
+                    wallet = subPart;
+                    return wallet; // 找到第一个匹配项后立即返回
                 }
             }
         }
-        return coin;
+        if(StringUtils.isEmpty(wallet)) {
+            // 全局二次扫描（处理没有明显分隔符的情况）
+            java.util.regex.Matcher globalMatcher = SOLANA_ADDRESS_PATTERN.matcher(text);
+            if (globalMatcher.find()) {
+                wallet = globalMatcher.group();
+            }
+        }
+        return wallet;
     }
 
     public static void main(String[] args) {
@@ -74,12 +95,8 @@ public class SolanaContractValidator {
                 "已置顶：69ErovVFi8iiu2AjG83sNMrW7cgBowmq5mz4NcHmpump快点冲\n";
 
         RedisCache redisCache = new RedisCache();
-        text = "share about CA : \n" +
-                "\n" +
-                "BbBqF5fzUSeJDjQJfXq66MFZKA3i7nXc5mRrRuCNpump\n" +
-                "\n" +
-                "people want a big pump for $simon !";
-        matchSolanaContractLineBreak(text);
+        text = "23szsU1nR58nBMobUYBp7zz3YPdCs6ASaowEhafQe3o5";
+        matchSolanaWalletLineBreak(text);
     }
 
 }

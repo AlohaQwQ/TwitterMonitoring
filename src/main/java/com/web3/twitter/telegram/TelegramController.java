@@ -25,7 +25,7 @@ public class TelegramController {
 
     @GetMapping("/sendMessage")
     public String sendMessage() {
-        twitterMonitor.startMonitor();
+        twitterMonitor.startSolMonitor();
         return "0";
     }
 

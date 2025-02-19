@@ -30,6 +30,9 @@ import java.util.List;
 @Component
 public class TelegramBot implements SpringLongPollingBot, LongPollingSingleThreadUpdateConsumer {
 
+    @Autowired
+    private TwitterMonitor twitterMonitor;
+
     private static final Logger log = LoggerFactory.getLogger(TelegramBot.class);
 
     private static final List<String> CHAT_ID_LIST = new ArrayList<>();
@@ -93,7 +96,9 @@ public class TelegramBot implements SpringLongPollingBot, LongPollingSingleThrea
             SendMessage methodImport = new SendMessage("-1002472298104", textImport);
             methodImport.setParseMode("HTML");
             methodImport.setDisableWebPagePreview(true);
-            methodImport.setReplyMarkup(replyMarkup);
+            if(replyMarkup!=null){
+                methodImport.setReplyMarkup(replyMarkup);
+            }
             Message responseMessageImport = new Message();
             responseMessageImport.setChat(GROUP_CHAT);
             responseMessageImport.setFrom(TEST_USER);
@@ -103,7 +108,7 @@ public class TelegramBot implements SpringLongPollingBot, LongPollingSingleThrea
             try {
                 telegramClient.execute(methodImport);
             } catch (TelegramApiException e) {
-                LogUtils.error("Shiyi-bot重点频道发送消息异常: {}.", parsedMessageImport, e);
+                LogUtils.error("Shiyi-bot重点频道发送消息异常: %s %s", parsedMessageImport, e);
                 e.printStackTrace();
             }
         }
@@ -113,7 +118,9 @@ public class TelegramBot implements SpringLongPollingBot, LongPollingSingleThrea
             SendMessage methodImport = new SendMessage("-1002429995604", textMoreImport);
             methodImport.setParseMode("HTML");
             methodImport.setDisableWebPagePreview(true);
-            methodImport.setReplyMarkup(replyMarkup);
+            if(replyMarkup!=null){
+                methodImport.setReplyMarkup(replyMarkup);
+            }
             Message responseMessageImport = new Message();
             responseMessageImport.setChat(GROUP_CHAT);
             responseMessageImport.setFrom(TEST_USER);
@@ -123,7 +130,7 @@ public class TelegramBot implements SpringLongPollingBot, LongPollingSingleThrea
             try {
                 telegramClient.execute(methodImport);
             } catch (TelegramApiException e) {
-                LogUtils.error("Shiyi-bot-pump to the moon频道发送消息异常: {}.", parsedMessageImport, e);
+                LogUtils.error("Shiyi-bot-pump to the moon频道发送消息异常: %s %s.", parsedMessageImport, e);
                 e.printStackTrace();
             }
         }
@@ -133,7 +140,9 @@ public class TelegramBot implements SpringLongPollingBot, LongPollingSingleThrea
             SendMessage methodImport = new SendMessage("-4694062162", textImport);
             methodImport.setParseMode("HTML");
             methodImport.setDisableWebPagePreview(true);
-            methodImport.setReplyMarkup(replyMarkup);
+            if(replyMarkup!=null){
+                methodImport.setReplyMarkup(replyMarkup);
+            }
             Message responseMessageImport = new Message();
             responseMessageImport.setChat(GROUP_CHAT);
             responseMessageImport.setFrom(TEST_USER);
@@ -143,24 +152,26 @@ public class TelegramBot implements SpringLongPollingBot, LongPollingSingleThrea
             try {
                 telegramClient.execute(methodImport);
             } catch (TelegramApiException e) {
-                LogUtils.error("Shiyi-bot重点频道发送消息异常: {}.", parsedMessageImport, e);
+                LogUtils.error("Shiyi-bot重点频道发送消息异常: %s %s.", parsedMessageImport, e);
                 e.printStackTrace();
             }
 
-            try {
+            /*try {
                 //等待1.5s后发送其他频道
                 Thread.sleep(1000);
             } catch (InterruptedException e) {
                 LogUtils.error("Shiyi-bot发送消息暂停异常: {}.", text, e);
                 e.printStackTrace();
-            }
+            }*/
         }
 
         CHAT_ID_LIST.forEach(chatID -> {
             SendMessage method = new SendMessage(chatID, text);
             method.setParseMode("HTML");
             method.setDisableWebPagePreview(true);
-            method.setReplyMarkup(replyMarkup);
+            if(replyMarkup!=null){
+                method.setReplyMarkup(replyMarkup);
+            }
             Message responseMessage = new Message();
             responseMessage.setChat(GROUP_CHAT);
             responseMessage.setFrom(TEST_USER);
@@ -170,7 +181,7 @@ public class TelegramBot implements SpringLongPollingBot, LongPollingSingleThrea
             try {
                 telegramClient.execute(method);
             } catch (TelegramApiException e) {
-                LogUtils.error("Shiyi-bot发送消息异常: {}.", parsedMessage, e);
+                LogUtils.error("Shiyi-bot发送消息异常: %s %s", parsedMessage, e);
                 e.printStackTrace();
             }
         });
@@ -197,7 +208,9 @@ public class TelegramBot implements SpringLongPollingBot, LongPollingSingleThrea
             SendMessage methodImport = new SendMessage("-1002358331062", text);
             methodImport.setParseMode("HTML");
             methodImport.setDisableWebPagePreview(true);
-            methodImport.setReplyMarkup(replyMarkup);
+            if(replyMarkup!=null){
+                methodImport.setReplyMarkup(replyMarkup);
+            }
             Message responseMessageImport = new Message();
             responseMessageImport.setChat(GROUP_CHAT);
             responseMessageImport.setFrom(TEST_USER);

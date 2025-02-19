@@ -100,6 +100,11 @@ public class MonitorUser {
     private String twitterLinkUrl;
 
     /**
+     * 光光发盘数据更新时间戳
+     */
+    private String updateScamTime;
+
+    /**
      * 更新用户信息时间-时间戳
      */
     private String updateTime;
@@ -243,6 +248,14 @@ public class MonitorUser {
 
     public void setTwitterLinkUrl(String twitterLinkUrl) {
         this.twitterLinkUrl = twitterLinkUrl;
+    }
+
+    public String getUpdateScamTime() {
+        return updateScamTime;
+    }
+
+    public void setUpdateScamTime(String updateScamTime) {
+        this.updateScamTime = updateScamTime;
     }
 
     public String getUpdateTime() {

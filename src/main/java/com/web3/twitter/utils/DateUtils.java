@@ -59,6 +59,11 @@ public class DateUtils extends org.apache.commons.lang3.time.DateUtils
         return dateTimeNow(YYYY_MM);
     }
 
+    public static String timestampToStr(long timestamp) {
+        SimpleDateFormat sdf = new SimpleDateFormat(YYYY_MM_DD_HH_MM_SS);
+        return sdf.format(new Date(timestamp));
+    }
+
     public static final String getTime()
     {
         return dateTimeNow(YYYY_MM_DD_HH_MM_SS);
